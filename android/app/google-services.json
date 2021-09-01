@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "870876078379",
+    "project_id": "plantei-690e3",
+    "storage_bucket": "plantei-690e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870876078379:android:397c471cf93d84897aa56e",
+        "android_client_info": {
+          "package_name": "com.plantei"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "870876078379-7biopm6ic70sdoc49lgtibn9d80rfhjm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.plantei",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "870876078379-fbcve7jhhn9udg1e37vpn0olekmr9bau.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwJIWG0iStSBBvHI9rWihGpCNn-ije-Yo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "870876078379-fbcve7jhhn9udg1e37vpn0olekmr9bau.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

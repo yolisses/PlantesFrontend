@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Plantei.iml" filepath="$PROJECT_DIR$/.idea/modules/Plantei.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Plantei.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Plantei.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-511843208/Plantei.react-native-camera.iml" filepath="$PROJECT_DIR$/.idea/modules/-511843208/Plantei.react-native-camera.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1558047999/Plantei.react-native-camera-kit.iml" filepath="$PROJECT_DIR$/.idea/modules/-1558047999/Plantei.react-native-camera-kit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1806435459/Plantei.react-native-fast-image.iml" filepath="$PROJECT_DIR$/.idea/modules/-1806435459/Plantei.react-native-fast-image.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/551885366/Plantei.react-native-firebase_app.iml" filepath="$PROJECT_DIR$/.idea/modules/551885366/Plantei.react-native-firebase_app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-818347533/Plantei.react-native-firebase_auth.iml" filepath="$PROJECT_DIR$/.idea/modules/-818347533/Plantei.react-native-firebase_auth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1770240698/Plantei.react-native-firebase_database.iml" filepath="$PROJECT_DIR$/.idea/modules/-1770240698/Plantei.react-native-firebase_database.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1798680896/Plantei.react-native-firebase_firestore.iml" filepath="$PROJECT_DIR$/.idea/modules/-1798680896/Plantei.react-native-firebase_firestore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1612383760/Plantei.react-native-firebase_storage.iml" filepath="$PROJECT_DIR$/.idea/modules/1612383760/Plantei.react-native-firebase_storage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-114980205/Plantei.react-native-gesture-handler.iml" filepath="$PROJECT_DIR$/.idea/modules/-114980205/Plantei.react-native-gesture-handler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/961231967/Plantei.react-native-get-location.iml" filepath="$PROJECT_DIR$/.idea/modules/961231967/Plantei.react-native-get-location.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/2061486274/Plantei.react-native-get-random-values.iml" filepath="$PROJECT_DIR$/.idea/modules/2061486274/Plantei.react-native-get-random-values.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-977890272/Plantei.react-native-google-signin.iml" filepath="$PROJECT_DIR$/.idea/modules/-977890272/Plantei.react-native-google-signin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-977890272/Plantei.react-native-google-signin_google-signin.iml" filepath="$PROJECT_DIR$/.idea/modules/-977890272/Plantei.react-native-google-signin_google-signin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/314813344/Plantei.react-native-maps.iml" filepath="$PROJECT_DIR$/.idea/modules/314813344/Plantei.react-native-maps.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1628532594/Plantei.react-native-picker_picker.iml" filepath="$PROJECT_DIR$/.idea/modules/1628532594/Plantei.react-native-picker_picker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1824541244/Plantei.react-native-safe-area-context.iml" filepath="$PROJECT_DIR$/.idea/modules/1824541244/Plantei.react-native-safe-area-context.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1456732844/Plantei.react-native-screens.iml" filepath="$PROJECT_DIR$/.idea/modules/-1456732844/Plantei.react-native-screens.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1789392975/Plantei.react-native-svg.iml" filepath="$PROJECT_DIR$/.idea/modules/-1789392975/Plantei.react-native-svg.iml" />
+    </modules>
+  </component>
+</project>

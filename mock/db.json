@@ -1,0 +1,283 @@
+{
+    "plants": [
+        {
+            "id": 0,
+            "card": "http://192.168.10.23:5000/images/card/0.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/0.webp",
+                "http://192.168.10.23:5000/images/maxResolution/1.webp",
+                "http://192.168.10.23:5000/images/maxResolution/2.webp",
+                "http://192.168.10.23:5000/images/maxResolution/3.webp",
+                "http://192.168.10.23:5000/images/maxResolution/4.webp",
+                "http://192.168.10.23:5000/images/maxResolution/5.webp",
+                "http://192.168.10.23:5000/images/maxResolution/6.webp",
+                "http://192.168.10.23:5000/images/maxResolution/7.webp",
+                "http://192.168.10.23:5000/images/maxResolution/8.webp",
+                "http://192.168.10.23:5000/images/maxResolution/9.webp",
+                "http://192.168.10.23:5000/images/maxResolution/10.webp",
+                "http://192.168.10.23:5000/images/maxResolution/11.webp"
+            ]
+        },
+        {
+            "id": 1,
+            "card": "http://192.168.10.23:5000/images/card/1.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/1.webp",
+                "http://192.168.10.23:5000/images/maxResolution/2.webp",
+                "http://192.168.10.23:5000/images/maxResolution/3.webp",
+                "http://192.168.10.23:5000/images/maxResolution/4.webp",
+                "http://192.168.10.23:5000/images/maxResolution/5.webp",
+                "http://192.168.10.23:5000/images/maxResolution/6.webp",
+                "http://192.168.10.23:5000/images/maxResolution/7.webp",
+                "http://192.168.10.23:5000/images/maxResolution/8.webp",
+                "http://192.168.10.23:5000/images/maxResolution/9.webp",
+                "http://192.168.10.23:5000/images/maxResolution/10.webp",
+                "http://192.168.10.23:5000/images/maxResolution/11.webp"
+            ]
+        },
+        {
+            "id": 2,
+            "card": "http://192.168.10.23:5000/images/card/2.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/2.webp",
+                "http://192.168.10.23:5000/images/maxResolution/1.webp",
+                "http://192.168.10.23:5000/images/maxResolution/3.webp",
+                "http://192.168.10.23:5000/images/maxResolution/4.webp",
+                "http://192.168.10.23:5000/images/maxResolution/5.webp",
+                "http://192.168.10.23:5000/images/maxResolution/6.webp",
+                "http://192.168.10.23:5000/images/maxResolution/7.webp",
+                "http://192.168.10.23:5000/images/maxResolution/8.webp",
+                "http://192.168.10.23:5000/images/maxResolution/9.webp",
+                "http://192.168.10.23:5000/images/maxResolution/10.webp",
+                "http://192.168.10.23:5000/images/maxResolution/11.webp"
+            ]
+        },
+        {
+            "id": 3,
+            "card": "http://192.168.10.23:5000/images/card/3.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/3.webp"
+            ]
+        },
+        {
+            "id": 4,
+            "card": "http://192.168.10.23:5000/images/card/4.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/4.webp"
+            ]
+        },
+        {
+            "id": 5,
+            "card": "http://192.168.10.23:5000/images/card/5.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/5.webp"
+            ]
+        },
+        {
+            "id": 6,
+            "card": "http://192.168.10.23:5000/images/card/6.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/6.webp"
+            ]
+        },
+        {
+            "id": 7,
+            "card": "http://192.168.10.23:5000/images/card/7.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/7.webp"
+            ]
+        },
+        {
+            "id": 8,
+            "card": "http://192.168.10.23:5000/images/card/8.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/8.webp"
+            ]
+        },
+        {
+            "id": 9,
+            "card": "http://192.168.10.23:5000/images/card/9.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/9.webp"
+            ]
+        },
+        {
+            "id": 10,
+            "card": "http://192.168.10.23:5000/images/card/10.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/10.webp"
+            ]
+        },
+        {
+            "id": 11,
+            "card": "http://192.168.10.23:5000/images/card/11.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/11.webp"
+            ]
+        },
+        {
+            "id": 12,
+            "card": "http://192.168.10.23:5000/images/card/12.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/12.webp"
+            ]
+        },
+        {
+            "id": 13,
+            "card": "http://192.168.10.23:5000/images/card/13.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/13.webp"
+            ]
+        },
+        {
+            "id": 14,
+            "card": "http://192.168.10.23:5000/images/card/14.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/14.webp"
+            ]
+        },
+        {
+            "id": 15,
+            "card": "http://192.168.10.23:5000/images/card/15.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/15.webp"
+            ]
+        },
+        {
+            "id": 16,
+            "card": "http://192.168.10.23:5000/images/card/16.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/16.webp"
+            ]
+        },
+        {
+            "id": 17,
+            "card": "http://192.168.10.23:5000/images/card/17.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/17.webp"
+            ]
+        },
+        {
+            "id": 18,
+            "card": "http://192.168.10.23:5000/images/card/18.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/18.webp"
+            ]
+        },
+        {
+            "id": 19,
+            "card": "http://192.168.10.23:5000/images/card/19.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/19.webp"
+            ]
+        },
+        {
+            "id": 20,
+            "card": "http://192.168.10.23:5000/images/card/20.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/20.webp"
+            ]
+        },
+        {
+            "id": 21,
+            "card": "http://192.168.10.23:5000/images/card/21.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/21.webp"
+            ]
+        },
+        {
+            "id": 22,
+            "card": "http://192.168.10.23:5000/images/card/22.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/22.webp"
+            ]
+        },
+        {
+            "id": 23,
+            "card": "http://192.168.10.23:5000/images/card/23.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/23.webp"
+            ]
+        },
+        {
+            "id": 24,
+            "card": "http://192.168.10.23:5000/images/card/24.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/24.webp"
+            ]
+        },
+        {
+            "id": 25,
+            "card": "http://192.168.10.23:5000/images/card/25.webp",
+            "images": [
+                "http://192.168.10.23:5000/images/maxResolution/25.webp"
+            ]
+        }
+    ],
+    "comments": [
+        {
+            "id": 1,
+            "user": {
+                "name": "Ulisses Albuquerque"
+            },
+            "text": "kkkkkk muito bom",
+            "likes_count": 4
+        },
+        {
+            "id": 2,
+            "user": {
+                "name": "Ulisses Albuquerque"
+            },
+            "text": "kkkk né isso",
+            "likes_count": 0
+        },
+        {
+            "id": 3,
+            "user": {
+                "name": "UAlbuquerque"
+            },
+            "text": "massa",
+            "likes_count": 0
+        },
+        {
+            "id": 4,
+            "user": {
+                "name": "Ulisses"
+            },
+            "text": "eu n entendi direito",
+            "likes_count": 6
+        },
+        {
+            "id": 5,
+            "user": {
+                "name": "Ulisses_Albuquerque"
+            },
+            "text": "kkkkkk pois é, pra c v cm sao as coisas",
+            "likes_count": 4
+        },
+        {
+            "id": 6,
+            "user": {
+                "name": "Eu"
+            },
+            "text": "Agora eu vou mandar aquele textão que só serve mesmo pra o frontend developer se lascar tendo de colocar o butão mostrar mais, pq no final das contas nngm liga pra o q ta escrito. Tipo, se o cara escrever dou mil reais pra vc le até o final, so q so no final, ninguem ganha, ta ligado.",
+            "likes_count": 8
+        },
+        {
+            "id": 7,
+            "user": {
+                "name": "Albuquerque"
+            },
+            "text": "eu tmb, vo escrever um bocado aqui sem dizer nd q preste, so pra encher a tela do pessoal. mas tem um problema so: eu to sem idea de coisas para escrever aqui de forma que so tome espaço, sem dizer nada mesmo. n sei, se pelo menos me visse alguma ideia genial, ou o contrário, de coisa que possa escrever um bocado sem dizer nada, bem prolixo mesmo. Ah mano, desisto de escrever algo bem inutil, volto quando tiver alguma ideia. ou nao.",
+            "likes_count": 0
+        },
+        {
+            "id": 8,
+            "user": {
+                "name": "Ulisses"
+            },
+            "text": "kkkkkk eh so um teste cara",
+            "likes_count": 1
+        }
+    ]
+}
