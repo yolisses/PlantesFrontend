@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {FlatList} from 'react-native';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
-import {api} from '../api';
+import {api} from 'api/api';
 import {CardsListLoading} from './CardsListLoading';
 import {CardsListFooter} from './CardsListFooter';
 import {Card} from 'store/Card';
@@ -18,7 +18,7 @@ export function HomeScreen() {
   const pageInitialIndex = (page - 1) * limit;
   const remainItems = pageInitialIndex < totalCount;
 
-  const getPlants = async () => {
+  async function getPlants() {
     if (loading || !remainItems) {
       return;
     }
@@ -34,7 +34,7 @@ export function HomeScreen() {
     } catch (err) {
       console.error(err);
     }
-  };
+  }
 
   useEffect(() => {
     getPlants();

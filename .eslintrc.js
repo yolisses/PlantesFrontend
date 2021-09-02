@@ -5,6 +5,7 @@ module.exports = {
     'import/resolver': {
       alias: {
         map: [
+          ['api', './src/api'],
           ['map', './src/map'],
           ['auth', './src/auth'],
           ['chat', './src/chat'],

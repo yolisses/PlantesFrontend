@@ -18,6 +18,7 @@ module.exports = {
           '.json',
         ],
         alias: {
+          api: './src/api',
           map: './src/map',
           auth: './src/auth',
           chat: './src/chat',

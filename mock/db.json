@@ -279,5 +279,125 @@
             "text": "kkkkkk eh so um teste cara",
             "likes_count": 1
         }
+    ],
+    "chats":[
+        {
+            "id":0,
+            "name":"Inácio",
+            "image":"http://192.168.10.23:5000/images/users/thumbnail/0.webp",
+            "full_image":"http://192.168.10.23:5000/images/users/thumbnail/0.webp",
+            "last_activity":"então...",
+            "message_count":0,
+            "last_activity_time": "2016-05-02T00:00:00"
+        },
+        {
+            "id":11,
+            "name":"Samara",
+            "image":"http://192.168.10.23:5000/images/users/thumbnail/11.webp",
+            "full_image":"http://192.168.10.23:5000/images/users/thumbnail/11.webp",
+            "last_activity":"pois e, falow",
+            "message_count":1,
+            "last_activity_time": "2016-05-02T00:00:00"
+        },
+        {
+            "id":8,
+            "name":"Kelvin",
+            "image":"http://192.168.10.23:5000/images/users/thumbnail/8.webp",
+            "full_image":"http://192.168.10.23:5000/images/users/thumbnail/8.webp",
+            "last_activity":"ta certo",
+            "message_count":0,
+            "last_activity_time": "2016-05-02T00:00:00"
+        },
+        {
+            "id":3,
+            "name":"Riana",
+            "image":"http://192.168.10.23:5000/images/users/thumbnail/3.webp",
+            "full_image":"http://192.168.10.23:5000/images/users/thumbnail/3.webp",
+            "last_activity":"manda mensagem assim que visualizar",
+            "message_count":3,
+            "last_activity_time": "2016-05-02T00:00:00"
+        },
+        {
+            "id":4,
+            "name":"Lisa",
+            "image":"http://192.168.10.23:5000/images/users/thumbnail/4.webp",
+            "full_image":"http://192.168.10.23:5000/images/users/thumbnail/4.webp",
+            "last_activity":"até segunda entao",
+            "message_count":0,
+            "last_activity_time": "2016-05-02T00:00:00"
+        },
+
+        {
+            "id":12,
+            "name":"Abrão",
+            "image":"http://192.168.10.23:5000/images/users/thumbnail/12.webp",
+            "full_image":"http://192.168.10.23:5000/images/users/thumbnail/12.webp",
+            "last_activity":"Como é o nome mesmo daquela frutinha vermelha que tu ofereceu mesmo?",
+            "message_count":4,
+            "last_activity_time": "2016-05-02T00:00:00"
+        },
+        {
+            "id":6,
+            "name":"Grace",
+            "image":"http://192.168.10.23:5000/images/users/thumbnail/6.webp",
+            "full_image":"http://192.168.10.23:5000/images/users/thumbnail/6.webp",
+            "last_activity":"​🍃​",
+            "message_count":0,
+            "last_activity_time": "2016-05-02T00:00:00"
+        },
+        {
+            "id":7,
+            "name":"Fausto",
+            "image":"http://192.168.10.23:5000/images/users/thumbnail/7.webp",
+            "full_image":"http://192.168.10.23:5000/images/users/thumbnail/7.webp",
+            "last_activity":"vc tem pé de hortelã?",
+            "message_count":3,
+            "last_activity_time": "2016-05-02T00:00:00"
+        },
+        {
+            "id":9,
+            "name":"Álvaro",
+            "image":"http://192.168.10.23:5000/images/users/thumbnail/9.webp",
+            "full_image":"http://192.168.10.23:5000/images/users/thumbnail/9.webp",
+            "last_activity":"mas continua prestando?",
+            "message_count":3,
+            "last_activity_time": "2016-05-02T00:00:00"
+        },
+        {
+            "id":2,
+            "name":"Mônica",
+            "image":"http://192.168.10.23:5000/images/users/thumbnail/2.webp",
+            "full_image":"http://192.168.10.23:5000/images/users/thumbnail/2.webp",
+            "last_activity":"a minha sequoia morreu 😭",
+            "message_count":2,
+            "last_activity_time": "2016-05-02T00:00:00"
+        },
+        {
+            "id":10,
+            "name":"Nilton",
+            "image":"http://192.168.10.23:5000/images/users/thumbnail/10.webp",
+            "full_image":"http://192.168.10.23:5000/images/users/thumbnail/10.webp",
+            "last_activity":"tchau",
+            "message_count":0,
+            "last_activity_time": "2016-05-02T00:00:00"
+        },
+        {
+            "id":5,
+            "name":"Lucas",
+            "image":"http://192.168.10.23:5000/images/users/thumbnail/5.webp",
+            "full_image":"http://192.168.10.23:5000/images/users/thumbnail/5.webp",
+            "last_activity":"massa kkkkk",
+            "message_count":0,
+            "last_activity_time": "2016-05-02T00:00:00"
+        },
+        {
+            "id":1,
+            "name":"Santiago",
+            "image":"http://192.168.10.23:5000/images/users/thumbnail/1.webp",
+            "full_image":"http://192.168.10.23:5000/images/users/thumbnail/1.webp",
+            "last_activity":"sim",
+            "message_count":0,
+            "last_activity_time": "2016-05-02T00:00:00"
+        }
     ]
 }

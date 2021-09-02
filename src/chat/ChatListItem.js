@@ -1,12 +1,11 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-
-import {UserRoundImage} from 'common/UserRoundImage';
-
 import {ChatNumberIndicator} from 'chat/ChatNumberIndicator';
+import FastImage from 'react-native-fast-image';
 
-export function ChatListItem() {
+export function ChatListItem({item}) {
+  const {image, name, last_activity, message_count} = item;
   const {navigate} = useNavigation();
 
   const onPress = () => navigate('Chat');
@@ -16,17 +15,28 @@ export function ChatListItem() {
       style={styles.bigContainer}
       activeOpacity={0.8}
       onPress={onPress}>
-      <UserRoundImage size={50} />
+      <View style={styles.imageWrapper}>
+        <FastImage
+          source={{uri: image, priority: FastImage.priority.normal}}
+          style={styles.image}
+        />
+      </View>
       <View style={styles.lineSeparator}>
         <View style={styles.detailsWrapper}>
-          <Text style={styles.name}>Ulisses</Text>
-          <Text style={styles.lastMessage} numberOfLines={1}>
-            Eu disse que tinha falado alguma coisa depois da ultima coisa
+          <Text style={styles.name}>{name}</Text>
+          <Text style={styles.lastActivity} numberOfLines={1}>
+            {last_activity}
           </Text>
         </View>
         <View>
-          <Text style={styles.lastTime}>Ontem, 13:54</Text>
-          <ChatNumberIndicator />
+          <Text
+            style={[
+              styles.lastTime,
+              message_count > 0 ? styles.lastTimeActive : false,
+            ]}>
+            Ontem
+          </Text>
+          <ChatNumberIndicator count={message_count} />
         </View>
       </View>
     </TouchableOpacity>
@@ -52,7 +62,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 3,
   },
-  lastMessage: {
+  lastActivity: {
     fontSize: 16,
     color: '#888',
     overflow: 'hidden',
@@ -61,8 +71,22 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#bbb',
   },
+  lastTimeActive: {
+    color: '#0a3',
+  },
   detailsWrapper: {
     padding: 10,
     flex: 1,
+  },
+  image: {
+    width: 50,
+    height: 50,
+    borderRadius: 100,
+  },
+  imageWrapper: {
+    width: 50,
+    height: 50,
+    borderRadius: 100,
+    backgroundColor: '#ddd',
   },
 });

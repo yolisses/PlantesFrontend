@@ -3,7 +3,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {mockImageLink} from '../../mock/mockImageLink';
+import {mockImageLink} from './mock/mockImageLink';
 
 export function ChatItemReference() {
   return (
@@ -22,7 +22,7 @@ export function ChatItemReference() {
           </Text>
           <Text style={styles.subtitle} numberOfLines={2}>
             <Text>Doação</Text>,<Text> Trocar</Text> ou
-            <Text> R$100,01</Text>
+            <Text> R$100,00</Text>
           </Text>
         </View>
       </View>

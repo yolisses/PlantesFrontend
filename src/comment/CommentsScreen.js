@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
-import {api} from '../api';
+import {api} from 'api/api';
 import {Comment} from 'comment/Comment';
 import {MessageInput} from 'chat/MessageInput';
 
