@@ -11,7 +11,7 @@ export function PublishDetailScreen() {
 
   return (
     <PublishScreenLayout ratio={2 / 3} nextRoute="PublishPrice">
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false} style={{padding: 10}}>
         <TextInputSaved dataItem={name} autoFocus />
         <SingleOptionSelector dataItem={type} />
         <TagsSelector label="Marcar como" options={options} />

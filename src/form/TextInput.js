@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
   label: {
     position: 'absolute',
     zIndex: 10,
-    transform: [{translateY: -2}],
+    transform: [{translateY: 0}],
     backgroundColor: '#eee',
   },
 });

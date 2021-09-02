@@ -64,10 +64,9 @@ const styles = StyleSheet.create({
   itemText: {
     color: '#fff',
     position: 'absolute',
-    bottom: 0,
-    right: 0,
-    marginBottom: 4,
-    fontSize: 14,
+    bottom: 2,
+    right: 2,
+    fontSize: 16,
     paddingHorizontal: 4,
     borderTopLeftRadius: 8,
     backgroundColor: '#0006',

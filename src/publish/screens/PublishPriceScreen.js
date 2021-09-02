@@ -9,7 +9,7 @@ export function PublishPriceScreen() {
   const {amount} = publishData;
   return (
     <PublishScreenLayout ratio={3 / 3} nextRoute={'Home'}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false} style={{padding: 10}}>
         <AvailabilitySelector />
         <TextInputInt
           dataItem={amount}
