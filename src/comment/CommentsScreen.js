@@ -61,7 +61,7 @@ export function CommentsScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {padding: 10},
+  container: {padding: 8},
   screen: {
     height: '100%',
   },
