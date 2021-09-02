@@ -25,21 +25,16 @@ export function Fieldset({
 const styles = StyleSheet.create({
   container: {
     alignItems: 'flex-start',
+    marginBottom: 10,
   },
   input: {
     width: '100%',
     borderRadius: 10,
-    padding: 10,
     fontSize: 18,
   },
   border: {
     borderStyle: 'solid',
     borderWidth: 2,
     borderColor: '#aaa',
-  },
-  label: {
-    backgroundColor: '#eee',
-    transform: [{translateY: 10}],
-    zIndex: 10,
   },
 });

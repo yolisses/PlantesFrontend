@@ -37,8 +37,8 @@ export function TextInput({
     <Pressable onPress={press}>
       <Fieldset
         label={label}
-        style={focused && styles.focused}
-        styleLabel={focused && styles.focusedLabel}>
+        style={[styles.fieldset, focused && styles.focused]}
+        styleLabel={[styles.label, focused && styles.focusedLabel]}>
         <View style={styles.horizontalWrapper}>
           {leftChild}
           {optional &&
@@ -74,18 +74,32 @@ const styles = StyleSheet.create({
   input: {
     width: '100%',
     fontSize: 18,
-    padding: 0,
+  },
+  fieldset: {
+    marginTop: 20,
   },
   focused: {borderColor: '#000'},
   focusedLabel: {color: '#000'},
   horizontalWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
+    paddingHorizontal: 5,
   },
   optionalText: {
+    position: 'absolute',
+    left: 12,
+    top: 0,
+    bottom: 0,
+    textAlign: 'center',
     fontSize: 15,
     paddingTop: 3,
     color: 'gray',
     alignSelf: 'flex-start',
+  },
+  label: {
+    position: 'absolute',
+    zIndex: 10,
+    transform: [{translateY: -2}],
+    backgroundColor: '#eee',
   },
 });

@@ -8,7 +8,6 @@ export function TextInputInt({leftChild, ...rest}) {
     if (text === '') {
       resolve(null);
     }
-    console.error(typeof text);
     const result = text.match(getRegexInt);
     if (result?.length) {
       const numberValue = Number(result[0]);

@@ -14,7 +14,10 @@ export function PublishScreenLayout({
   return (
     <View style={{flex: 1}}>
       <ProgressBar ratio={ratio} />
-      <View style={{flex: 1, padding: padding ?? 10}}>{children}</View>
+      <View
+        style={{flex: 1, padding: padding ?? 10, paddingBottom: padding ?? 5}}>
+        {children}
+      </View>
       {showNextButton !== false && <NextButton route={nextRoute} />}
     </View>
   );

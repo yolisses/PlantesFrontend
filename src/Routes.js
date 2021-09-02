@@ -42,7 +42,9 @@ export function Routes() {
   return (
     <NavigationContainer>
       <StatusBar barStyle={'default'} hidden={true} />
+
       <Stack.Navigator>
+        <Stack.Screen name="development" component={PublishDetailScreen} />
         {user ? (
           <>
             {grantedLocation || grantedLocation === null ? (
