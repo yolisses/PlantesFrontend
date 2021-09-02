@@ -3,7 +3,9 @@ import {ScrollView, StyleSheet, View} from 'react-native';
 import {Message} from 'chat/Message';
 import {MessageInput} from 'chat/MessageInput';
 
-export function ChatScreen() {
+export function ChatScreen({route}) {
+  const {chatId} = route.params;
+
   return (
     <View style={styles.screen}>
       <ScrollView style={styles.scroll}>
@@ -32,7 +34,7 @@ export function ChatScreen() {
           />
         </View>
       </ScrollView>
-      <MessageInput />
+      <MessageInput chatId={chatId} />
     </View>
   );
 }

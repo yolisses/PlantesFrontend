@@ -1,13 +1,17 @@
 import React from 'react';
 import {StyleSheet, TextInput, View} from 'react-native';
 import {ChatItemReference} from './ChatItemReference';
+import {useChatReference} from './ChatReferenceContext';
 import {SendMessageButton} from './SendMessageButton';
 
-export function MessageInput({text}) {
+export function MessageInput({chatId}) {
+  const {chatReferences} = useChatReference();
+  const reference = chatReferences[chatId];
+
   return (
     <View style={styles.textButtonContainer}>
       <View style={styles.container}>
-        {/* <ChatItemReference /> */}
+        {reference && <ChatItemReference />}
         <View style={styles.horizontal}>
           <TextInput
             style={styles.input}

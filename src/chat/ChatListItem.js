@@ -6,10 +6,11 @@ import FastImage from 'react-native-fast-image';
 import {ChatDate} from './ChatDate';
 
 export function ChatListItem({item}) {
-  const {image, name, last_activity, message_count, last_activity_time} = item;
+  const {image, name, last_activity, message_count, last_activity_time, id} =
+    item;
   const {navigate} = useNavigation();
 
-  const onPress = () => navigate('Chat');
+  const onPress = () => navigate('Chat', {chatId: id});
 
   return (
     <TouchableOpacity

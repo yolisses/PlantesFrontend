@@ -9,13 +9,13 @@ export function Card({item, fraction}) {
 
   const onPress = () => {
     if (item) {
-      navigate('ShowItem', {item});
+      navigate('ShowItem', {item, itemId: item.id});
     }
   };
 
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.9}>
-      <SquareImage uri={item?.card} fraction={fraction || 2} offset={1} />
+      <SquareImage uri={item?.image} fraction={fraction || 2} offset={1} />
     </TouchableOpacity>
   );
 }

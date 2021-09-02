@@ -18,14 +18,14 @@ export function HomeScreen() {
   const pageInitialIndex = (page - 1) * limit;
   const remainItems = pageInitialIndex < totalCount;
 
-  async function getPlants() {
+  async function getCards() {
     if (loading || !remainItems) {
       return;
     }
     setLoading(true);
 
     try {
-      const res = await api.get(`/plants?_page=${page}&_limit=${limit}`);
+      const res = await api.get(`/cards?_page=${page}&_limit=${limit}`);
       setData([...data, ...res.data]);
       setLoading(false);
       setPage(page + 1);
@@ -37,7 +37,7 @@ export function HomeScreen() {
   }
 
   useEffect(() => {
-    getPlants();
+    getCards();
   }, []);
 
   const renderItem = ({item}) => <Card key={item.id} item={item} />;
@@ -57,7 +57,7 @@ export function HomeScreen() {
         numColumns={2}
         renderItem={renderItem}
         keyExtractor={item => item.id}
-        onEndReached={getPlants}
+        onEndReached={getCards}
         onEndReachedThreshold={0.9}
         ListFooterComponent={() => (remainItems ? <CardsListFooter /> : null)}
       />

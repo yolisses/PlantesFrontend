@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, ScrollView, StyleSheet} from 'react-native';
+import {FlatList, StyleSheet} from 'react-native';
 import {ChatListItem} from 'chat/ChatListItem';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import {api} from 'api';

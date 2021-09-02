@@ -5,6 +5,7 @@ import {PermissionsContextProvider} from 'permission/PermissionsContext';
 import {ImageGroupContextProvider} from 'camera/ImageGroupContext';
 import {AlertContextProvider} from 'alert/AlertContext';
 import {ModalContextProvider} from 'modal/ModalContext';
+import {ChatReferenceContextProvider} from './chat/ChatReferenceContext';
 
 const App = () => {
   return (
@@ -13,7 +14,9 @@ const App = () => {
         <ImageGroupContextProvider>
           <AlertContextProvider>
             <ModalContextProvider>
-              <Routes />
+              <ChatReferenceContextProvider>
+                <Routes />
+              </ChatReferenceContextProvider>
             </ModalContextProvider>
           </AlertContextProvider>
         </ImageGroupContextProvider>

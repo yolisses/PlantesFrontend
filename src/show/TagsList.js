@@ -2,11 +2,11 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Tag} from './Tag';
 
-export function TagsList() {
+export function TagsList({tags}) {
   return (
     <View style={sytles.container}>
-      {['de sombra', 'frutífera', 'medicinal', 'ornamental'].map(item => (
-        <Tag key={item} text={item} />
+      {tags.map(({key, label}) => (
+        <Tag key={key} text={label} />
       ))}
     </View>
   );

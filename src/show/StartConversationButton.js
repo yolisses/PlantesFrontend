@@ -6,11 +6,11 @@ import {faCommentAlt} from '@fortawesome/free-regular-svg-icons';
 
 import {LightButton} from 'common/LightButton';
 
-export function StartConversetionButton() {
+export function StartConversetionButton({item}) {
   const {navigate} = useNavigation();
 
   const onPress = () => {
-    navigate('Chat');
+    navigate('Chat', {chatId: 1});
   };
 
   return (

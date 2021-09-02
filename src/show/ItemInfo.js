@@ -6,11 +6,11 @@ import {TagsList} from './TagsList';
 
 const {width} = Dimensions.get('window');
 
-export function ItemInfo({scrollTo}) {
+export function ItemInfo({scrollTo, item}) {
   return (
     <View>
-      <Text style={styles.title}>Costela de Adão</Text>
-      <Text style={styles.distance}>10 quilômetros daqui</Text>
+      <Text style={styles.title}>{item?.name}</Text>
+      <Text style={styles.distance}>{item?.distance} quilômetros daqui</Text>
       <View style={styles.userWrapper}>
         <Pressable
           style={styles.aboutWrapper}
@@ -19,19 +19,15 @@ export function ItemInfo({scrollTo}) {
           <Text style={styles.about}>Detalhes</Text>
         </Pressable>
         <Text style={styles.about}>
-          pertence a <Text style={styles.userName}> Ulisses Albuquerque</Text>
+          pertence a{' '}
+          <Text style={styles.userName}>{item?.owner.name || ''}</Text>
         </Text>
-        <TagsList />
+        <TagsList tags={item?.tags || []} />
         <View style={styles.aboutWrapper}>
           <FontAwesomeIcon icon={faChevronDown} color={'gray'} />
           <Text style={styles.about}>Descrição</Text>
         </View>
-        <Text style={styles.about}>
-          Uma planta bem bonita que serve pra fazer marmita. Uma planta
-          ornamental pra embelezar o seu quintal. Uma planta da medicina pra
-          ajudar na dopamina. Uma planta de sombra pra... fiquei sem rimas,
-          brincadeira só tirando onda
-        </Text>
+        <Text style={styles.about}>{item?.description}</Text>
       </View>
     </View>
   );
