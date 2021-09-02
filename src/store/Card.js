@@ -6,15 +6,16 @@ import {useNavigation} from '@react-navigation/native';
 
 export function Card({item, fraction}) {
   const {navigate} = useNavigation();
-  const {card} = item;
 
   const onPress = () => {
-    navigate('ShowItem', {item});
+    if (item) {
+      navigate('ShowItem', {item});
+    }
   };
 
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.9}>
-      <SquareImage uri={card} fraction={fraction || 2} offset={1} />
+      <SquareImage uri={item?.card} fraction={fraction || 2} offset={1} />
     </TouchableOpacity>
   );
 }

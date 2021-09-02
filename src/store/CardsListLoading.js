@@ -7,7 +7,7 @@ export function CardsListLoading() {
     <FlatList
       data={Object.keys([...Array(8)])}
       numColumns={2}
-      renderItem={item => <Card key={item} item={{}} />}
+      renderItem={item => <Card key={item} />}
       keyExtractor={item => item}
     />
   );

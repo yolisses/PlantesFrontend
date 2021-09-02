@@ -5,8 +5,8 @@ import {Card} from 'store/Card';
 export function CardsListFooter() {
   return (
     <View style={styles.container}>
-      <Card item={{}} />
-      <Card item={{}} />
+      <Card />
+      <Card />
     </View>
   );
 }

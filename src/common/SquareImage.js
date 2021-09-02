@@ -42,7 +42,7 @@ export function SquareImage({
 
 const styles = StyleSheet.create({
   image: {
-    backgroundColor: '#ddd',
+    backgroundColor: '#dbdbdb',
     overflow: 'hidden',
     width,
     height: width,
