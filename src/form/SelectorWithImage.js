@@ -3,7 +3,7 @@ import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 
 const activeColor = '#0a0';
 
-export function SelectorWithImage({option, active, style, onChange, ...rest}) {
+export function SelectorWithImage({option, active, style, ...rest}) {
   return (
     <View style={styles.padding}>
       <Pressable

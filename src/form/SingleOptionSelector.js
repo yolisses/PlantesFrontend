@@ -2,8 +2,11 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Fieldset} from './Fieldset';
 import {SelectorWithImage} from './SelectorWithImage';
+import {useLocalStorage} from 'storage/useLocalStorage';
 
 export function SingleOptionSelector({dataItem, style, buttonStyle}) {
+  const [savedValue, setSavedValue] = useLocalStorage(dataItem);
+
   return (
     <Fieldset
       label={dataItem.label}
@@ -11,7 +14,8 @@ export function SingleOptionSelector({dataItem, style, buttonStyle}) {
       disableBorder>
       {dataItem.options.map(option => (
         <SelectorWithImage
-          active={option.key === 'clipping'}
+          onPress={() => setSavedValue(option.key)}
+          active={option.key === savedValue}
           key={option.key}
           option={option}
           style={buttonStyle}
