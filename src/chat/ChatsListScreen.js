@@ -40,6 +40,6 @@ export function ChatsListScreen() {
 const styles = StyleSheet.create({
   container: {
     paddingLeft: 2,
-    paddingRight: 6,
+    paddingRight: 8,
   },
 });

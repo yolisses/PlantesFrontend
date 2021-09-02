@@ -1,5 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {MessageHour} from './MessageHour';
+import {MessageStatus} from './MessageStatus';
 
 export function Message({text, fromUser, moreMargin}) {
   return (
@@ -9,7 +11,14 @@ export function Message({text, fromUser, moreMargin}) {
         fromUser && styles.fromUser,
         moreMargin && styles.moreMargin,
       ]}>
-      <Text style={[styles.text, fromUser && styles.fromUserText]}>{text}</Text>
+      <Text style={[styles.text, fromUser && styles.fromUserText]}>
+        {text}
+        <View style={{width: fromUser ? 45 : 28}} />
+      </Text>
+      <View style={styles.miniInfo}>
+        <MessageHour />
+        {fromUser && <MessageStatus />}
+      </View>
     </View>
   );
 }
@@ -25,6 +34,8 @@ const styles = StyleSheet.create({
     marginRight: 30,
     marginLeft: 0,
     elevation: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   text: {
     fontSize: 16,
@@ -40,5 +51,12 @@ const styles = StyleSheet.create({
   },
   moreMargin: {
     marginTop: 10,
+  },
+  miniInfo: {
+    position: 'absolute',
+    right: 5,
+    bottom: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
