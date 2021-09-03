@@ -12,7 +12,13 @@ export function StartConversetionButton({item}) {
   const {setOneChatReference} = useChatReference();
 
   const onPress = () => {
-    setOneChatReference(item.owner.id, {type: 'plant', plantId: item.id});
+    const {name, thumbnail} = item;
+    setOneChatReference(item.owner.id, {
+      type: 'plant',
+      plantId: item.id,
+      name,
+      thumbnail,
+    });
     navigate('Chat', {chatId: item.owner.id});
   };
 

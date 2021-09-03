@@ -1,9 +1,9 @@
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {useNavigation} from '@react-navigation/core';
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {mockImageLink} from './mock/mockImageLink';
 
 export function ChatItemReference({
   showCloseButton,
@@ -11,11 +11,20 @@ export function ChatItemReference({
   borderRadius = 9,
   onPressCloseButton,
 }) {
+  const {navigate} = useNavigation();
+
+  const onPress = () => {
+    navigate('ShowItem');
+  };
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={onPress}
+      activeOpacity={0.7}>
       <View style={[styles.inner, {borderRadius}]}>
         <FastImage
-          source={{uri: mockImageLink}}
+          source={{uri: reference.thumbnail}}
           style={[styles.image, {borderRadius}]}
         />
         <View style={styles.titleSubtitleContainer}>
@@ -30,7 +39,7 @@ export function ChatItemReference({
           <Text
             style={[styles.title, showCloseButton && {paddingRight: 20}]}
             numberOfLines={1}>
-            Costela de Adão Costela de Adão Costela de Adão
+            {reference.name}
           </Text>
           <Text style={styles.subtitle} numberOfLines={2}>
             <Text>Doação</Text>,<Text> Trocar</Text> ou
@@ -38,7 +47,7 @@ export function ChatItemReference({
           </Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 

@@ -158,6 +158,7 @@
                 "http://192.168.10.23:5000/images/maxResolution/10.webp",
                 "http://192.168.10.23:5000/images/maxResolution/11.webp"
             ],
+            "thumbnail": "http://192.168.10.23:5000/images/card/0.webp",
             "description": "Uma planta bem bonita que serve pra fazer marmita. Uma planta ornamental pra embelezar o seu quintal. Uma planta da medicina pra ajudar na dopamina. Uma planta de sombra pra... fiquei sem rimas, brincadeira só tirando onda"
         },
         {
@@ -211,6 +212,7 @@
                 "http://192.168.10.23:5000/images/maxResolution/10.webp",
                 "http://192.168.10.23:5000/images/maxResolution/11.webp"
             ],
+            "thumbnail": "http://192.168.10.23:5000/images/card/1.webp",
             "description": "Uma planta bem bonita que serve pra fazer marmita. Uma planta ornamental pra embelezar o seu quintal. Uma planta da medicina pra ajudar na dopamina. Uma planta de sombra pra... fiquei sem rimas, brincadeira só tirando onda"
         },
         {
@@ -264,6 +266,7 @@
                 "http://192.168.10.23:5000/images/maxResolution/10.webp",
                 "http://192.168.10.23:5000/images/maxResolution/11.webp"
             ],
+            "thumbnail": "http://192.168.10.23:5000/images/card/2.webp",
             "description": "Uma planta bem bonita que serve pra fazer marmita. Uma planta ornamental pra embelezar o seu quintal. Uma planta da medicina pra ajudar na dopamina. Uma planta de sombra pra... fiquei sem rimas, brincadeira só tirando onda"
         }
     ],
@@ -359,7 +362,9 @@
                     "time": "2021-09-02T04:15:00",
                     "reference": {
                         "type": "plant",
-                        "plantId": 2
+                        "plantId": 1,
+                        "name": "Juazeiro",
+                        "thumbnail": "http://192.168.10.23:5000/images/card/1.webp"
                     }
                 },
                 {
@@ -367,7 +372,7 @@
                     "userId": 100,
                     "text": "Quero!",
                     "time": "2021-09-02T04:15:30",
-                    "status":"visualized"
+                    "status": "visualized"
                 },
                 {
                     "id": 2,
@@ -386,7 +391,7 @@
                     "userId": 100,
                     "text": "Dexa eu ver aqui...!",
                     "time": "2021-09-02T04:16:35",
-                    "status":"visualized"
+                    "status": "visualized"
                 },
                 {
                     "id": 5,
@@ -394,16 +399,18 @@
                     "time": "2021-09-02T04:17:30",
                     "reference": {
                         "type": "plant",
-                        "plantId": 1
+                        "plantId": 0,
+                        "name": "Macambira",
+                        "thumbnail": "http://192.168.10.23:5000/images/card/0.webp"
                     },
-                    "status":"visualized"
+                    "status": "visualized"
                 },
                 {
                     "id": 6,
                     "userId": 100,
                     "text": "Nem sabia que dava pra plantar aqui",
                     "time": "2021-09-02T04:17:35",
-                    "status":"visualized"
+                    "status": "visualized"
                 },
                 {
                     "id": 7,
@@ -416,28 +423,28 @@
                     "userId": 100,
                     "text": "kkkk",
                     "time": "2021-09-02T04:18:00",
-                    "status":"visualized"
+                    "status": "visualized"
                 },
                 {
                     "id": 9,
                     "userId": 100,
                     "text": "uma perguntinha rápida",
                     "time": "2021-09-02T04:18:01",
-                    "status":"received"
+                    "status": "received"
                 },
                 {
                     "id": 10,
                     "userId": 100,
                     "text": "tá travando muito pra chegar mensagens ai?",
                     "time": "2021-09-02T04:18:02",
-                    "status":"sent"
+                    "status": "sent"
                 },
                 {
                     "id": 11,
                     "userId": 100,
                     "text": "a... internet, até então",
                     "time": "2021-09-02T04:18:02",
-                    "status":"sending"
+                    "status": "sending"
                 }
             ]
         },
