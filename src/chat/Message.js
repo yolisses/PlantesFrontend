@@ -3,7 +3,13 @@ import {StyleSheet, Text, View} from 'react-native';
 import {MessageHour} from './MessageHour';
 import {MessageStatus} from './MessageStatus';
 
-export function Message({text, fromUser, moreMargin}) {
+// development
+const USER_ID = 100;
+
+export function Message({item, moreMargin}) {
+  const {text, time, status} = item;
+  const fromUser = item.userId === USER_ID;
+
   return (
     <View
       style={[
@@ -16,8 +22,8 @@ export function Message({text, fromUser, moreMargin}) {
         <View style={{width: fromUser ? 45 : 28}} />
       </Text>
       <View style={styles.miniInfo}>
-        <MessageHour />
-        {fromUser && <MessageStatus />}
+        <MessageHour time={time} />
+        {fromUser && <MessageStatus status={status} />}
       </View>
     </View>
   );

@@ -158,7 +158,7 @@
                 "http://192.168.10.23:5000/images/maxResolution/10.webp",
                 "http://192.168.10.23:5000/images/maxResolution/11.webp"
             ],
-            "description":"Uma planta bem bonita que serve pra fazer marmita. Uma planta ornamental pra embelezar o seu quintal. Uma planta da medicina pra ajudar na dopamina. Uma planta de sombra pra... fiquei sem rimas, brincadeira só tirando onda"
+            "description": "Uma planta bem bonita que serve pra fazer marmita. Uma planta ornamental pra embelezar o seu quintal. Uma planta da medicina pra ajudar na dopamina. Uma planta de sombra pra... fiquei sem rimas, brincadeira só tirando onda"
         },
         {
             "id": 1,
@@ -211,7 +211,7 @@
                 "http://192.168.10.23:5000/images/maxResolution/10.webp",
                 "http://192.168.10.23:5000/images/maxResolution/11.webp"
             ],
-            "description":"Uma planta bem bonita que serve pra fazer marmita. Uma planta ornamental pra embelezar o seu quintal. Uma planta da medicina pra ajudar na dopamina. Uma planta de sombra pra... fiquei sem rimas, brincadeira só tirando onda"
+            "description": "Uma planta bem bonita que serve pra fazer marmita. Uma planta ornamental pra embelezar o seu quintal. Uma planta da medicina pra ajudar na dopamina. Uma planta de sombra pra... fiquei sem rimas, brincadeira só tirando onda"
         },
         {
             "id": 2,
@@ -264,7 +264,7 @@
                 "http://192.168.10.23:5000/images/maxResolution/10.webp",
                 "http://192.168.10.23:5000/images/maxResolution/11.webp"
             ],
-            "description":"Uma planta bem bonita que serve pra fazer marmita. Uma planta ornamental pra embelezar o seu quintal. Uma planta da medicina pra ajudar na dopamina. Uma planta de sombra pra... fiquei sem rimas, brincadeira só tirando onda"
+            "description": "Uma planta bem bonita que serve pra fazer marmita. Uma planta ornamental pra embelezar o seu quintal. Uma planta da medicina pra ajudar na dopamina. Uma planta de sombra pra... fiquei sem rimas, brincadeira só tirando onda"
         }
     ],
     "comments": [
@@ -349,8 +349,97 @@
             "image": "http://192.168.10.23:5000/images/users/thumbnail/11.webp",
             "full_image": "http://192.168.10.23:5000/images/users/thumbnail/11.webp",
             "last_activity": "pois e, falow",
-            "message_count": 1,
-            "last_activity_time": "2021-09-01T04:15:00"
+            "message_count": 4,
+            "last_activity_time": "2021-09-01T04:15:00",
+            "messages": [
+                {
+                    "id": 0,
+                    "userId": 11,
+                    "text": "Oi cara, como vai? Gostaria de trocar essa planta?",
+                    "time": "2021-09-02T04:15:00",
+                    "reference": {
+                        "type": "plant",
+                        "plantId": 2
+                    }
+                },
+                {
+                    "id": 1,
+                    "userId": 100,
+                    "text": "Quero!",
+                    "time": "2021-09-02T04:15:30",
+                    "status":"visualized"
+                },
+                {
+                    "id": 2,
+                    "userId": 11,
+                    "text": "Beleza então",
+                    "time": "2021-09-02T04:16:00"
+                },
+                {
+                    "id": 3,
+                    "userId": 11,
+                    "text": "Quer qual das minhas?",
+                    "time": "2021-09-02T04:16:05"
+                },
+                {
+                    "id": 4,
+                    "userId": 100,
+                    "text": "Dexa eu ver aqui...!",
+                    "time": "2021-09-02T04:16:35",
+                    "status":"visualized"
+                },
+                {
+                    "id": 5,
+                    "userId": 100,
+                    "time": "2021-09-02T04:17:30",
+                    "reference": {
+                        "type": "plant",
+                        "plantId": 1
+                    },
+                    "status":"visualized"
+                },
+                {
+                    "id": 6,
+                    "userId": 100,
+                    "text": "Nem sabia que dava pra plantar aqui",
+                    "time": "2021-09-02T04:17:35",
+                    "status":"visualized"
+                },
+                {
+                    "id": 7,
+                    "userId": 11,
+                    "text": "Eu tmb n kkkk",
+                    "time": "2021-09-02T04:17:55"
+                },
+                {
+                    "id": 8,
+                    "userId": 100,
+                    "text": "kkkk",
+                    "time": "2021-09-02T04:18:00",
+                    "status":"visualized"
+                },
+                {
+                    "id": 9,
+                    "userId": 100,
+                    "text": "uma perguntinha rápida",
+                    "time": "2021-09-02T04:18:01",
+                    "status":"received"
+                },
+                {
+                    "id": 10,
+                    "userId": 100,
+                    "text": "tá travando muito pra chegar mensagens ai?",
+                    "time": "2021-09-02T04:18:02",
+                    "status":"sent"
+                },
+                {
+                    "id": 11,
+                    "userId": 100,
+                    "text": "a... internet, até então",
+                    "time": "2021-09-02T04:18:02",
+                    "status":"sending"
+                }
+            ]
         },
         {
             "id": 8,
@@ -385,7 +474,7 @@
             "image": "http://192.168.10.23:5000/images/users/thumbnail/12.webp",
             "full_image": "http://192.168.10.23:5000/images/users/thumbnail/12.webp",
             "last_activity": "Como é o nome mesmo daquela frutinha vermelha que tu ofereceu mesmo?",
-            "message_count": 4,
+            "message_count": 2,
             "last_activity_time": "2021-09-30T04:15:00"
         },
         {

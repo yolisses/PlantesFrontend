@@ -44,7 +44,7 @@ export function Routes() {
       <StatusBar barStyle={'default'} hidden={true} />
 
       <Stack.Navigator>
-        {/* <Stack.Screen name="development" component={ChatScreen} /> */}
+        <Stack.Screen name="development" component={ChatsListScreen} />
         {user ? (
           <>
             {grantedLocation || grantedLocation === null ? (

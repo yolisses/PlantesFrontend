@@ -1,37 +1,42 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {Message} from 'chat/Message';
 import {MessageInput} from 'chat/MessageInput';
+import {api} from 'api';
 
 export function ChatScreen({route}) {
   const {chatId} = route.params;
+  const [messages, setMessages] = useState(null);
+
+  async function getMessages() {
+    try {
+      const res = await api.get('/chats/11');
+      setMessages(res.data.messages);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  useEffect(() => getMessages(), []);
+
+  let lastUserId = null;
 
   return (
     <View style={styles.screen}>
       <ScrollView style={styles.scroll}>
         <View style={styles.pad}>
-          <Message text="Oi cara, como vai?" />
-          <Message text="Gostaria de trocar essa planta?" />
-          <Message text="Sim, podes crer!" fromUser={true} moreMargin={true} />
-          <Message text="Beleza então" moreMargin={true} />
-          <Message text="Quer qual das minhas?" />
-          <Message
-            text="Eu vi aquele pé de pêssego, achei massa todo"
-            fromUser
-            moreMargin={true}
-          />
-          <Message text="Nem sabia que dava pra plantar dele aqui" fromUser />
-          <Message text="Pois é" moreMargin={true} />
-          <Message text="Eu tmb n kkkk" />
-          <Message
-            text="teste kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"
-            fromUser
-            moreMargin={true}
-          />
-          <Message
-            text="outro teste kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"
-            moreMargin={true}
-          />
+          {messages &&
+            messages.map(message => {
+              const actualLastUserId = lastUserId;
+              lastUserId = message.userId;
+              return (
+                <Message
+                  key={message.id}
+                  item={message}
+                  moreMargin={actualLastUserId !== message.userId}
+                />
+              );
+            })}
         </View>
       </ScrollView>
       <MessageInput chatId={chatId} />
