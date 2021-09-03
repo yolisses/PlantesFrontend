@@ -9,6 +9,7 @@ import {StartConversetionButton} from 'show/StartConversationButton';
 import {useState} from 'react/cjs/react.development';
 import {api} from 'api';
 import {useChatReference} from 'chat/ChatReferenceContext';
+import {LoadingStartConversetionButton} from './LoadingStartConversationButton';
 
 export function ShowItemScreen({route}) {
   const {itemId} = route.params;
@@ -33,6 +34,9 @@ export function ShowItemScreen({route}) {
   const {setOneChatReference} = useChatReference();
 
   const onPress = () => {
+    if (!item) {
+      return;
+    }
     const {name, thumbnail} = item;
     setOneChatReference(item.owner.id, {
       type: 'plant',
@@ -57,7 +61,11 @@ export function ShowItemScreen({route}) {
       <View style={styles.bottomWrapper}>
         <AvailabilityInfo item={item} onModalConfirmPress={onPress} />
         <View style={{flex: 1, justifyContent: 'center'}}>
-          <StartConversetionButton onPress={onPress} />
+          {item ? (
+            <StartConversetionButton onPress={onPress} />
+          ) : (
+            <LoadingStartConversetionButton />
+          )}
         </View>
       </View>
     </View>

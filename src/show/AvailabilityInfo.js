@@ -2,6 +2,7 @@ import React from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {useAlert} from 'alert/AlertContext';
 import {StartConversationAlert} from './StartConversationAlert';
+import {LoadingAvailabilityInfo} from './LoadingAvailabilityInfo';
 
 export function AvailabilityInfo({item, onModalConfirmPress}) {
   const {showAlert} = useAlert();
@@ -10,6 +11,10 @@ export function AvailabilityInfo({item, onModalConfirmPress}) {
       <StartConversationAlert item={item} onSendPress={onModalConfirmPress} />,
     );
   };
+
+  if (!item) {
+    return <LoadingAvailabilityInfo />;
+  }
 
   return (
     <Pressable style={styles.container} onPress={onPress}>
@@ -33,6 +38,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
     flex: 0.9,
+    color: 'green',
   },
   line: {
     flexDirection: 'row',

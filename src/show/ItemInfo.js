@@ -2,11 +2,16 @@ import {faChevronDown} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import React from 'react';
 import {StyleSheet, Text, View, Pressable, Dimensions} from 'react-native';
+import {LoadingItemInfo} from './LoadingItemInfo';
 import {TagsList} from './TagsList';
 
 const {width} = Dimensions.get('window');
 
 export function ItemInfo({scrollTo, item}) {
+  if (!item) {
+    return <LoadingItemInfo />;
+  }
+
   return (
     <View>
       <Text style={styles.title}>{item?.name}</Text>
