@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
-
+import {useNavigation} from '@react-navigation/native';
 import {ItemInfo} from 'show/ItemInfo';
 import {ImagesSwiper} from 'show/ImagesSwiper';
 import {FloatingButton} from 'show/FloatingButton';
@@ -8,10 +8,11 @@ import {AvailabilityInfo} from 'show/AvailabilityInfo';
 import {StartConversetionButton} from 'show/StartConversationButton';
 import {useState} from 'react/cjs/react.development';
 import {api} from 'api';
+import {useChatReference} from 'chat/ChatReferenceContext';
 
 export function ShowItemScreen({route}) {
-  const {item} = route.params;
-  const [data, setData] = useState(null);
+  const {itemId} = route.params;
+  const [item, setItem] = useState(null);
 
   const scrollRef = useRef();
 
@@ -21,12 +22,26 @@ export function ShowItemScreen({route}) {
 
   async function getItem() {
     try {
-      const res = await api.get('/plants/' + item.id);
-      setData(res.data);
+      const res = await api.get('/plants/' + itemId);
+      setItem(res.data);
     } catch (err) {
       console.error(err);
     }
   }
+
+  const {navigate} = useNavigation();
+  const {setOneChatReference} = useChatReference();
+
+  const onPress = () => {
+    const {name, thumbnail} = item;
+    setOneChatReference(item.owner.id, {
+      type: 'plant',
+      plantId: item.id,
+      name,
+      thumbnail,
+    });
+    navigate('Chat', {chatId: item.owner.id});
+  };
 
   useEffect(() => {
     getItem();
@@ -36,13 +51,13 @@ export function ShowItemScreen({route}) {
     <View style={styles.screen}>
       <FloatingButton />
       <ScrollView ref={scrollRef}>
-        <ImagesSwiper images={data?.images || []} />
-        <ItemInfo scrollTo={scrollTo} item={data} />
+        <ImagesSwiper images={item?.images || []} />
+        <ItemInfo scrollTo={scrollTo} item={item} />
       </ScrollView>
       <View style={styles.bottomWrapper}>
-        <AvailabilityInfo item={data} />
+        <AvailabilityInfo item={item} onModalConfirmPress={onPress} />
         <View style={{flex: 1, justifyContent: 'center'}}>
-          <StartConversetionButton item={data} />
+          <StartConversetionButton onPress={onPress} />
         </View>
       </View>
     </View>

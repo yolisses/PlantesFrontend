@@ -85,8 +85,8 @@ const styles = StyleSheet.create({
   },
   closeOption: {
     position: 'absolute',
-    padding: 4,
-    top: 0,
-    right: 0,
+    padding: 10,
+    top: -4,
+    right: -4,
   },
 });
