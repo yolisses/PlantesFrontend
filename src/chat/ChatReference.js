@@ -18,7 +18,7 @@ export function ChatReference({
     if (disableNavigation) {
       return;
     }
-    navigate('ShowItem');
+    navigate('ShowItem', {itemId: reference.plantId});
   };
 
   return (
