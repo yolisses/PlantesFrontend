@@ -11,7 +11,11 @@ export function MessageInput({chatId}) {
   return (
     <View style={styles.textButtonContainer}>
       <View style={styles.container}>
-        {reference && <ChatItemReference />}
+        <View style={styles.referenceWrapper}>
+          {reference && (
+            <ChatItemReference borderRadius={15} showCloseButton={true} />
+          )}
+        </View>
         <View style={styles.horizontal}>
           <TextInput
             style={styles.input}
@@ -35,11 +39,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     flex: 1,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    overflow: 'hidden',
+    borderRadius: 20,
     elevation: 2,
   },
   horizontal: {
@@ -55,5 +55,9 @@ const styles = StyleSheet.create({
     borderColor: '#aaa',
     flex: 1,
     fontSize: 18,
+  },
+  referenceWrapper: {
+    padding: 5,
+    paddingBottom: 0,
   },
 });
