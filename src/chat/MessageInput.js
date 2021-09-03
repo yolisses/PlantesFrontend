@@ -23,6 +23,7 @@ export function MessageInput({chatId}) {
               chatId={chatId}
               reference={reference}
               onPressCloseButton={onPressCloseButton}
+              disableNavigation
             />
           </View>
         )}

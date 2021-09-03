@@ -10,10 +10,14 @@ export function ChatItemReference({
   reference,
   borderRadius = 9,
   onPressCloseButton,
+  disableNavigation,
 }) {
   const {navigate} = useNavigation();
 
   const onPress = () => {
+    if (disableNavigation) {
+      return;
+    }
     navigate('ShowItem');
   };
 
@@ -21,7 +25,7 @@ export function ChatItemReference({
     <TouchableOpacity
       style={styles.container}
       onPress={onPress}
-      activeOpacity={0.7}>
+      activeOpacity={disableNavigation ? 1 : 0.7}>
       <View style={[styles.inner, {borderRadius}]}>
         <FastImage
           source={{uri: reference.thumbnail}}

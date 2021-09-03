@@ -23,7 +23,7 @@ export function ChatScreen({route}) {
 
   return (
     <View style={styles.screen}>
-      <ScrollView style={styles.scroll}>
+      <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
         <View style={styles.pad}>
           {messages &&
             messages.map(message => {
