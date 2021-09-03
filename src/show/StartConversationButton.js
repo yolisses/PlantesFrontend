@@ -5,12 +5,16 @@ import {useNavigation} from '@react-navigation/native';
 import {faCommentAlt} from '@fortawesome/free-regular-svg-icons';
 
 import {LightButton} from 'common/LightButton';
+import {useChatReference} from 'chat/ChatReferenceContext';
 
 export function StartConversetionButton({item}) {
   const {navigate} = useNavigation();
+  const {setOneChatReference} = useChatReference();
 
+  console.error(item);
   const onPress = () => {
-    navigate('Chat', {chatId: 1});
+    setOneChatReference(item.owner.id, {type: 'plant', plantId: item.id});
+    navigate('Chat', {chatId: item.owner.id});
   };
 
   return (

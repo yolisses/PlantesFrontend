@@ -10,7 +10,7 @@ import {useState} from 'react/cjs/react.development';
 import {api} from 'api';
 
 export function ShowItemScreen({route}) {
-  const {itemId} = route.params;
+  const {item} = route.params;
   const [data, setData] = useState(null);
 
   const scrollRef = useRef();
@@ -21,7 +21,7 @@ export function ShowItemScreen({route}) {
 
   async function getItem() {
     try {
-      const res = await api.get('/plants/' + itemId);
+      const res = await api.get('/plants/' + item.id);
       setData(res.data);
     } catch (err) {
       console.error(err);
@@ -42,7 +42,7 @@ export function ShowItemScreen({route}) {
       <View style={styles.bottomWrapper}>
         <AvailabilityInfo />
         <View style={{flex: 1, justifyContent: 'center'}}>
-          <StartConversetionButton item={itemId} />
+          <StartConversetionButton item={data} />
         </View>
       </View>
     </View>
