@@ -4,13 +4,17 @@ import React from 'react';
 import {Alert} from 'alert/Alert';
 import {useAlert} from 'alert/AlertContext';
 import {AlertButton} from 'alert/AlertButton';
+import {useChatReference} from '../chat/ChatReferenceContext';
 
-export function StartConversationAlert() {
+export function StartConversationAlert({item}) {
   const {closeAlert} = useAlert();
   const {navigate} = useNavigation();
 
+  const {setOneChatReference} = useChatReference();
+
   function onSendPress() {
-    navigate('Chat');
+    setOneChatReference(item.owner.id, {type: 'plant', plantId: item.id});
+    navigate('Chat', {chatId: item.owner.id});
     closeAlert();
   }
 

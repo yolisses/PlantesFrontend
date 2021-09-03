@@ -1,21 +1,31 @@
 import React from 'react';
 import {StyleSheet, TextInput, View} from 'react-native';
 import {ChatItemReference} from './ChatItemReference';
-import {useChatReference} from './ChatReferenceContext';
 import {SendMessageButton} from './SendMessageButton';
+import {useChatReference} from './ChatReferenceContext';
 
 export function MessageInput({chatId}) {
-  const {chatReferences} = useChatReference();
+  const {chatReferences, removeOneChatReference} = useChatReference();
   const reference = chatReferences[chatId];
+
+  const onPressCloseButton = () => {
+    removeOneChatReference(chatId);
+  };
 
   return (
     <View style={styles.textButtonContainer}>
       <View style={styles.container}>
-        <View style={styles.referenceWrapper}>
-          {reference && (
-            <ChatItemReference borderRadius={15} showCloseButton={true} />
-          )}
-        </View>
+        {reference && (
+          <View style={styles.referenceWrapper}>
+            <ChatItemReference
+              borderRadius={15}
+              showCloseButton={true}
+              chatId={chatId}
+              reference={reference}
+              onPressCloseButton={onPressCloseButton}
+            />
+          </View>
+        )}
         <View style={styles.horizontal}>
           <TextInput
             style={styles.input}

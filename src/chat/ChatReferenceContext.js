@@ -7,14 +7,25 @@ export function ChatReferenceContextProvider({children}) {
   const [chatReferences, setChatReferences] = useState({});
 
   const setOneChatReference = (key, value) => {
-    const copy = chatReferences;
+    const copy = {...chatReferences};
     copy[key] = value;
+    setChatReferences(copy);
+  };
+
+  const removeOneChatReference = key => {
+    const copy = {...chatReferences};
+    delete copy[key];
     setChatReferences(copy);
   };
 
   return (
     <ChatReferenceContext.Provider
-      value={{chatReferences, setChatReferences, setOneChatReference}}>
+      value={{
+        chatReferences,
+        setChatReferences,
+        setOneChatReference,
+        removeOneChatReference,
+      }}>
       {children}
     </ChatReferenceContext.Provider>
   );

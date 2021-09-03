@@ -3,10 +3,10 @@ import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {useAlert} from 'alert/AlertContext';
 import {StartConversationAlert} from './StartConversationAlert';
 
-export function AvailabilityInfo() {
+export function AvailabilityInfo({item}) {
   const {showAlert} = useAlert();
   const onPress = () => {
-    showAlert(<StartConversationAlert />);
+    showAlert(<StartConversationAlert item={item} />);
   };
 
   return (

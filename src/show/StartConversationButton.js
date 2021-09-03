@@ -11,7 +11,6 @@ export function StartConversetionButton({item}) {
   const {navigate} = useNavigation();
   const {setOneChatReference} = useChatReference();
 
-  console.error(item);
   const onPress = () => {
     setOneChatReference(item.owner.id, {type: 'plant', plantId: item.id});
     navigate('Chat', {chatId: item.owner.id});

@@ -1,11 +1,16 @@
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {mockImageLink} from './mock/mockImageLink';
 
-export function ChatItemReference({showCloseButton, borderRadius = 9}) {
+export function ChatItemReference({
+  showCloseButton,
+  reference,
+  borderRadius = 9,
+  onPressCloseButton,
+}) {
   return (
     <View style={styles.container}>
       <View style={[styles.inner, {borderRadius}]}>
@@ -15,12 +20,12 @@ export function ChatItemReference({showCloseButton, borderRadius = 9}) {
         />
         <View style={styles.titleSubtitleContainer}>
           {showCloseButton && (
-            <FontAwesomeIcon
-              size={20}
-              icon={faTimes}
+            <TouchableOpacity
               style={styles.closeOption}
-              color={'#aaa'}
-            />
+              activeOpacity={0.7}
+              onPress={onPressCloseButton}>
+              <FontAwesomeIcon size={21} icon={faTimes} color={'#aaa'} />
+            </TouchableOpacity>
           )}
           <Text
             style={[styles.title, showCloseButton && {paddingRight: 20}]}
@@ -67,10 +72,8 @@ const styles = StyleSheet.create({
   },
   closeOption: {
     position: 'absolute',
+    padding: 4,
     top: 0,
     right: 0,
-    margin: 4,
-    padding: 9,
-    borderRadius: 100,
   },
 });

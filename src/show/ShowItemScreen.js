@@ -40,7 +40,7 @@ export function ShowItemScreen({route}) {
         <ItemInfo scrollTo={scrollTo} item={data} />
       </ScrollView>
       <View style={styles.bottomWrapper}>
-        <AvailabilityInfo />
+        <AvailabilityInfo item={data} />
         <View style={{flex: 1, justifyContent: 'center'}}>
           <StartConversetionButton item={data} />
         </View>

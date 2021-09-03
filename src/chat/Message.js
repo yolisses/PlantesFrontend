@@ -18,7 +18,7 @@ export function Message({item, moreMargin}) {
         fromUser ? styles.fromUser : styles.fromOther,
         moreMargin && styles.moreMargin,
       ]}>
-      {reference && <ChatItemReference />}
+      {reference && <ChatItemReference reference={reference} />}
       <View style={[styles.message]}>
         <Text style={[styles.text]}>
           {text}
