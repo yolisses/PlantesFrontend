@@ -2,25 +2,29 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {MessageHour} from './MessageHour';
 import {MessageStatus} from './MessageStatus';
+import {ChatItemReference} from './ChatItemReference';
 
 // development
 const USER_ID = 100;
 
 export function Message({item, moreMargin}) {
-  const {text, time, status} = item;
+  const {text, time, status, reference} = item;
   const fromUser = item.userId === USER_ID;
 
   return (
     <View
       style={[
-        styles.message,
-        fromUser && styles.fromUser,
+        styles.colorArea,
+        fromUser ? styles.fromUser : styles.fromOther,
         moreMargin && styles.moreMargin,
       ]}>
-      <Text style={[styles.text, fromUser && styles.fromUserText]}>
-        {text}
-        <View style={{width: fromUser ? 45 : 28}} />
-      </Text>
+      {reference && <ChatItemReference />}
+      <View style={[styles.message]}>
+        <Text style={[styles.text]}>
+          {text}
+          <View style={{paddingRight: fromUser ? 48 : 30, paddingTop: 6}} />
+        </Text>
+      </View>
       <View style={styles.miniInfo}>
         <MessageHour time={time} />
         {fromUser && <MessageStatus status={status} />}
@@ -31,20 +35,19 @@ export function Message({item, moreMargin}) {
 
 const styles = StyleSheet.create({
   message: {
-    padding: 10,
-    marginTop: 2,
-    borderRadius: 10,
-
-    backgroundColor: '#fff',
     alignSelf: 'flex-start',
-    marginRight: 30,
-    marginLeft: 0,
-    elevation: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
+  colorArea: {
+    elevation: 1,
+    padding: 2,
+    borderRadius: 10,
+    marginBottom: 3,
+  },
   text: {
     fontSize: 16,
+    padding: 8,
   },
   fromUser: {
     backgroundColor: '#ccf8b6',
@@ -52,8 +55,11 @@ const styles = StyleSheet.create({
     marginRight: 0,
     marginLeft: 30,
   },
-  fromUserText: {
-    // color: '#fff',
+  fromOther: {
+    backgroundColor: '#fff',
+    alignSelf: 'flex-start',
+    marginRight: 30,
+    marginLeft: 0,
   },
   moreMargin: {
     marginTop: 10,
