@@ -51,7 +51,7 @@ export function ShowItemScreen({route}) {
     <View style={styles.screen}>
       <FloatingButton />
       <ScrollView ref={scrollRef}>
-        <ImagesSwiper images={item?.images || []} />
+        <ImagesSwiper images={item?.images || null} />
         <ItemInfo scrollTo={scrollTo} item={item} />
       </ScrollView>
       <View style={styles.bottomWrapper}>

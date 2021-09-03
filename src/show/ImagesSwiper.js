@@ -20,6 +20,10 @@ export function ImagesSwiper({images}) {
     scrollRef.current.scrollToIndex({index: pos});
   };
 
+  if (!images) {
+    return <SquareImage fraction={1} />;
+  }
+
   return (
     <View>
       <ScrollView
