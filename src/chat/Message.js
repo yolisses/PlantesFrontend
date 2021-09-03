@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {MessageHour} from './MessageHour';
 import {MessageStatus} from './MessageStatus';
-import {ChatItemReference} from './ChatItemReference';
+import {ChatReference} from './ChatReference';
 
 // development
 const USER_ID = 100;
@@ -18,7 +18,7 @@ export function Message({item, moreMargin}) {
         fromUser ? styles.fromUser : styles.fromOther,
         moreMargin && styles.moreMargin,
       ]}>
-      {reference && <ChatItemReference reference={reference} />}
+      {reference && <ChatReference reference={reference} />}
       <View style={[styles.message]}>
         <Text style={[styles.text]}>
           {text}

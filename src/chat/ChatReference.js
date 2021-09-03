@@ -5,7 +5,7 @@ import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
 
-export function ChatItemReference({
+export function ChatReference({
   showCloseButton,
   reference,
   borderRadius = 9,
