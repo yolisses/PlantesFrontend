@@ -7,7 +7,7 @@ import {SwipeIndicator} from './SwipeIndicator';
 
 const {width} = Dimensions.get('window');
 
-export function ImagesSwiper({images}) {
+export function ImagesSwiper({images, preImage}) {
   const [selected, setSelected] = useState(0);
 
   const scrollRef = useRef();
@@ -21,7 +21,7 @@ export function ImagesSwiper({images}) {
   };
 
   if (!images) {
-    return <SquareImage fraction={1} />;
+    return <SquareImage uri={preImage} fraction={1} />;
   }
 
   return (

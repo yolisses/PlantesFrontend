@@ -9,7 +9,7 @@ export function Card({item, fraction}) {
 
   const onPress = () => {
     if (item) {
-      navigate('ShowItem', {itemId: item.id});
+      navigate('ShowItem', {itemId: item.id, preImage: item?.image});
     }
   };
 

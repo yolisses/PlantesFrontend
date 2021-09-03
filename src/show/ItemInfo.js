@@ -41,7 +41,6 @@ export function ItemInfo({scrollTo, item}) {
 const styles = StyleSheet.create({
   title: {
     fontSize: 22,
-    marginTop: 10,
     marginHorizontal: 10,
   },
   distance: {

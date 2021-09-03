@@ -12,7 +12,7 @@ import {useChatReference} from 'chat/ChatReferenceContext';
 import {LoadingStartConversetionButton} from './LoadingStartConversationButton';
 
 export function ShowItemScreen({route}) {
-  const {itemId} = route.params;
+  const {itemId, preImage} = route.params;
   const [item, setItem] = useState(null);
 
   const scrollRef = useRef();
@@ -54,8 +54,8 @@ export function ShowItemScreen({route}) {
   return (
     <View style={styles.screen}>
       <FloatingButton />
-      <ScrollView ref={scrollRef}>
-        <ImagesSwiper images={item?.images || null} />
+      <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
+        <ImagesSwiper images={item?.images || null} preImage={preImage} />
         <ItemInfo scrollTo={scrollTo} item={item} />
       </ScrollView>
       <View style={styles.bottomWrapper}>
