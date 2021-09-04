@@ -11,10 +11,11 @@ export function LightButton({
   onPress,
   style,
   textStyle,
+  emphasis,
 }) {
   return (
     <TouchableOpacity
-      style={[styles.button, style]}
+      style={[styles.button, emphasis && styles.emphasisButton, style]}
       onPress={onPress}
       activeOpacity={0.8}>
       {icon ? (
@@ -35,7 +36,9 @@ export function LightButton({
         />
       ) : null}
       <View style={styles.textWrapper}>
-        <Text style={[styles.text, textStyle]}>{text}</Text>
+        <Text style={[styles.text, emphasis && styles.emphasisText, textStyle]}>
+          {text}
+        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -50,12 +53,18 @@ const styles = StyleSheet.create({
     elevation: 2,
     flexDirection: 'row',
   },
+  emphasisButton: {
+    backgroundColor: 'green',
+  },
   text: {
     fontSize: 16,
     width: '100%',
     textAlign: 'center',
     // backgroundColor: 'red',
     paddingHorizontal: 40,
+  },
+  emphasisText: {
+    color: '#fff',
   },
   icon: {},
   rightIcon: {},

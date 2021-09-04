@@ -9,7 +9,9 @@ export function UserRoundImage({size, style}) {
   size = size || 30;
 
   return (
-    <TouchableOpacity onPress={() => navigate('UserPage')} activeOpacity={0.8}>
+    <TouchableOpacity
+      onPress={() => navigate('UserScreen')}
+      activeOpacity={0.8}>
       <FastImage
         style={[styles.image, {width: size, height: size}, style]}
         source={{uri: 'https://avatars.githubusercontent.com/yowlisses'}}

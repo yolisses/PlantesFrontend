@@ -6,6 +6,7 @@ import {ImageGroupContextProvider} from 'camera/ImageGroupContext';
 import {AlertContextProvider} from 'alert/AlertContext';
 import {ModalContextProvider} from 'modal/ModalContext';
 import {ChatReferenceContextProvider} from './chat/ChatReferenceContext';
+import {StatusBar} from 'react-native';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <AlertContextProvider>
             <ModalContextProvider>
               <ChatReferenceContextProvider>
+                <StatusBar barStyle={'default'} hidden={true} />
                 <Routes />
               </ChatReferenceContextProvider>
             </ModalContextProvider>

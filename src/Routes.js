@@ -1,11 +1,10 @@
 import React from 'react';
-import {StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import {UserPage} from 'user/UserPage';
 import {MapScreen} from 'map/MapScreen';
 import {ChatScreen} from 'chat/ChatScreen';
+import {UserScreen} from 'user/UserScreen';
 import {LoginScreen} from 'auth/LoginScreen';
 import {StoreScreen} from 'store/StoreScreen';
 import {CameraScreen} from 'camera/CameraScreen';
@@ -41,10 +40,8 @@ export function Routes() {
 
   return (
     <NavigationContainer>
-      <StatusBar barStyle={'default'} hidden={true} />
-
       <Stack.Navigator>
-        {/* <Stack.Screen name="development" component={StoreScreen} /> */}
+        {/* <Stack.Screen name="development" component={UserScreen} /> */}
         {user ? (
           <>
             {grantedLocation || grantedLocation === null ? (
@@ -75,7 +72,11 @@ export function Routes() {
                 headerRight: () => <MapUserLocationButton />,
               }}
             />
-            <Stack.Screen name="UserPage" component={UserPage} />
+            <Stack.Screen
+              name="UserScreen"
+              component={UserScreen}
+              options={{headerTitle: ''}}
+            />
             <Stack.Screen
               name="Camera"
               component={CameraScreen}
