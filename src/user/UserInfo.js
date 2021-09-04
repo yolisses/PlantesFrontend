@@ -3,9 +3,8 @@ import {Dimensions, StyleSheet, Text, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {api} from 'api';
 import {LightButton} from '../common/LightButton';
-import {useNavigation} from '@react-navigation/core';
 
-export function UserInfo({userId}) {
+export function UserInfo({height}) {
   const [user, setUser] = useState(null);
 
   async function getUser() {
@@ -17,7 +16,7 @@ export function UserInfo({userId}) {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {height}]}>
       <View style={styles.imageNameWrapper}>
         <FastImage style={styles.image} source={{uri: user?.image}} />
         <Text style={styles.text}>{user?.name}</Text>

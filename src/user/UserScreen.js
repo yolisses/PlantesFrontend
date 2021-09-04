@@ -1,13 +1,17 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {Animated, FlatList, StyleSheet} from 'react-native';
+import {Animated, Dimensions} from 'react-native';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import {api} from 'api';
 import {CardsListLoading} from 'store/CardsListLoading';
 import {CardsListFooter} from 'store/CardsListFooter';
 import {Card} from 'store/Card';
-import {UserInfo} from './UserInfo';
-import {TabSelector} from './TabSelector';
 import {useNavigation} from '@react-navigation/core';
+import {ScrollView} from 'react-native';
+import {AnimatedUserInfo} from './AnimatedUserInfo';
+import {AnimatedTabSelector} from './AnimatedTabSelector';
+
+const userInfoHeight = 180;
+const {width} = Dimensions.get('window');
 
 export function UserScreen() {
   const [starting, setStarting] = useState(true);
@@ -53,11 +57,6 @@ export function UserScreen() {
 
   const scrollY = useRef(new Animated.Value(0));
 
-  const translateY = scrollY.current.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, -1],
-  });
-
   const handleScroll = Animated.event(
     [
       {
@@ -81,34 +80,53 @@ export function UserScreen() {
 
   return (
     <FooterNavigationLayout selected={'Home'}>
-      <Animated.View style={[styles.animatedView, {transform: [{translateY}]}]}>
-        <UserInfo />
-      </Animated.View>
-      <Animated.FlatList
-        data={data}
-        ListHeaderComponent={() => <TabSelector />}
-        stickyHeaderIndices={[0]}
-        numColumns={2}
-        contentContainerStyle={{paddingTop: 200}}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        nestedScrollEnabled
-        onScroll={handleScroll}
-        onEndReached={getCards}
-        showsVerticalScrollIndicator={false}
-        onEndReachedThreshold={0.9}
-        ListFooterComponent={() => (remainItems ? <CardsListFooter /> : null)}
-      />
+      <AnimatedUserInfo scrollY={scrollY} userInfoHeight={userInfoHeight} />
+      <AnimatedTabSelector scrollY={scrollY} userInfoHeight={userInfoHeight} />
+      <ScrollView
+        horizontal={true}
+        snapToInterval={width}
+        showsHorizontalScrollIndicator={false}
+        disableIntervalMomentum>
+        <Animated.FlatList
+          data={data}
+          numColumns={2}
+          contentContainerStyle={{paddingTop: userInfoHeight}}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          nestedScrollEnabled
+          onScroll={handleScroll}
+          onEndReached={getCards}
+          showsVerticalScrollIndicator={false}
+          onEndReachedThreshold={0.9}
+          ListFooterComponent={() => (remainItems ? <CardsListFooter /> : null)}
+        />
+        <Animated.FlatList
+          data={data}
+          numColumns={2}
+          contentContainerStyle={{paddingTop: userInfoHeight}}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          nestedScrollEnabled
+          onScroll={handleScroll}
+          onEndReached={getCards}
+          showsVerticalScrollIndicator={false}
+          onEndReachedThreshold={0.9}
+          ListFooterComponent={() => (remainItems ? <CardsListFooter /> : null)}
+        />
+        <Animated.FlatList
+          data={data}
+          numColumns={2}
+          contentContainerStyle={{paddingTop: userInfoHeight}}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          nestedScrollEnabled
+          onScroll={handleScroll}
+          onEndReached={getCards}
+          showsVerticalScrollIndicator={false}
+          onEndReachedThreshold={0.9}
+          ListFooterComponent={() => (remainItems ? <CardsListFooter /> : null)}
+        />
+      </ScrollView>
     </FooterNavigationLayout>
   );
 }
-
-const styles = StyleSheet.create({
-  animatedView: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    width: '100%',
-    zIndex: 1,
-  },
-});
