@@ -37,7 +37,7 @@ export function ChatReference({
               style={styles.closeOption}
               activeOpacity={0.7}
               onPress={onPressCloseButton}>
-              <FontAwesomeIcon size={21} icon={faTimes} color={'#aaa'} />
+              <FontAwesomeIcon size={23} icon={faTimes} color={'#aaa'} />
             </TouchableOpacity>
           )}
           <Text
@@ -85,8 +85,9 @@ const styles = StyleSheet.create({
   },
   closeOption: {
     position: 'absolute',
-    padding: 10,
-    top: -4,
-    right: -4,
+    padding: 20,
+    paddingBottom: 20,
+    top: -14,
+    right: -14,
   },
 });
