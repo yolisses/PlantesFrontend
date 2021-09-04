@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Dimensions, Pressable, StyleSheet, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 
-export function ExpandableImage() {
+export function ExpandableImage({rui}) {
   const [expand, setExpand] = useState(true);
   return (
     <View style={styles.container}>
