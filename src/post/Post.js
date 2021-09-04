@@ -1,28 +1,29 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {mockPostText} from './mock/mockPostText';
 
 import {LikeButton} from 'post/LikeButton';
 import {Description} from 'post/Description';
 import {CommentButton} from 'post/CommentButton';
 import {ShowMoreButton} from 'post/ShowMoreButton';
 import {UserIdentifier} from 'post/UserIdentifier';
-import {ExpandableImage} from 'post/ExpandableImage';
+import {ImagesSwiper} from '../show/ImagesSwiper';
 
-export function Post() {
+export function Post({item}) {
   const [expandText, setExpandText] = useState(false);
   const [showMoreButton, setShowMoreButton] = useState(false);
   const [numberOfLines, setNumberOfLines] = useState(undefined);
 
+  const {title, text, images, user} = item;
+
   return (
     <View style={styles.container}>
-      <UserIdentifier />
-      <Text style={styles.title}>Alguém sabe o nome dessa planta?</Text>
+      <UserIdentifier item={user} />
+      <Text style={styles.title}>{title}</Text>
       <View style={styles.center}>
-        <ExpandableImage />
+        <ImagesSwiper images={images} />
       </View>
       <Description
-        text={mockPostText}
+        text={text}
         numberOfLines={numberOfLines}
         setNumberOfLines={setNumberOfLines}
         showText={expandText}

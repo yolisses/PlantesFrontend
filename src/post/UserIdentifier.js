@@ -2,13 +2,13 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {UserRoundImage} from 'common/UserRoundImage';
 
-export function UserIdentifier() {
+export function UserIdentifier({item}) {
   return (
     <View style={styles.topWrapper}>
-      <UserRoundImage size={40} />
+      <UserRoundImage size={40} uri={item.image} />
       <View>
-        <Text style={styles.name}>Ulisses</Text>
-        <Text style={styles.subtitle}>dois dias atrás</Text>
+        <Text style={styles.name}>{item.name}</Text>
+        <Text style={styles.subtitle}>dois segundos atras</Text>
       </View>
     </View>
   );

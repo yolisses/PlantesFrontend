@@ -1,16 +1,20 @@
 import React from 'react';
-import {ScrollView} from 'react-native';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import {Post} from 'post/Post';
+import {InfiniteScroll} from '../common/InfiniteScroll';
+import {Text} from 'react-native';
 
 export function CommunityScreen() {
+  const renderItem = ({item}) => <Post key={item.id} item={item} />;
+
   return (
     <FooterNavigationLayout selected="Community">
-      <ScrollView>
-        {Object.keys([...Array(10)]).map(item => (
-          <Post key={item} />
-        ))}
-      </ScrollView>
+      <InfiniteScroll
+        renderItem={renderItem}
+        startingComponent={<Text>carregando</Text>}
+        getUrl={(page, limit) => `/posts?_page=${page}&_limit=${limit}`}
+        loadingFooter={<Text>carregando, mas no final</Text>}
+      />
     </FooterNavigationLayout>
   );
 }
