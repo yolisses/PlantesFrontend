@@ -1,17 +1,27 @@
+import {useNavigation} from '@react-navigation/core';
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import FastImage from 'react-native-fast-image';
 
-export function ChatHeader({imageUri, name}) {
+export function ChatHeader({item}) {
+  const {navigate} = useNavigation();
+  const onPress = () => {
+    navigate('UserScreen');
+  };
+
   return (
-    <View style={styles.container}>
-      <Image
+    <TouchableOpacity
+      style={styles.container}
+      activeOpacity={0.6}
+      onPress={onPress}>
+      <FastImage
         style={styles.image}
         source={{
-          uri: imageUri,
+          uri: item?.image,
         }}
       />
-      <Text style={styles.name}>{name}</Text>
-    </View>
+      <Text style={styles.name}>{item?.name}</Text>
+    </TouchableOpacity>
   );
 }
 
@@ -22,6 +32,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     height: 50,
+    paddingRight: 20,
   },
   image: {
     borderRadius: 100,

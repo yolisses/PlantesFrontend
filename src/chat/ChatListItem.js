@@ -10,7 +10,7 @@ export function ChatListItem({item}) {
     item;
   const {navigate} = useNavigation();
 
-  const onPress = () => navigate('Chat', {chatId: id});
+  const onPress = () => navigate('Chat', {item});
 
   return (
     <TouchableOpacity

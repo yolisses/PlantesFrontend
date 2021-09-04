@@ -8,7 +8,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {StyleSheet, View} from 'react-native';
 
 export function TabSelector() {
-  const size = 25;
+  const size = 22;
   return (
     <View style={styles.container}>
       <FontAwesomeIcon icon={faSeedling} size={size} color={'#bbb'} />

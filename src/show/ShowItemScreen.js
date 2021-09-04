@@ -44,7 +44,7 @@ export function ShowItemScreen({route}) {
       name,
       thumbnail,
     });
-    navigate('Chat', {chatId: item.owner.id});
+    navigate('Chat', {item: item.owner});
   };
 
   useEffect(() => {

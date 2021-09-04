@@ -3,9 +3,18 @@ import {ScrollView, StyleSheet, View} from 'react-native';
 import {Message} from 'chat/Message';
 import {MessageInput} from 'chat/MessageInput';
 import {api} from 'api';
+import {useNavigation} from '@react-navigation/core';
+import {ChatHeader} from './ChatHeader';
 
 export function ChatScreen({route}) {
-  const {chatId} = route.params;
+  const {item} = route.params;
+
+  const navigation = useNavigation();
+
+  navigation.setOptions({
+    headerTitle: () => <ChatHeader item={item} />,
+  });
+
   const [messages, setMessages] = useState(null);
 
   async function getMessages() {
@@ -39,7 +48,7 @@ export function ChatScreen({route}) {
             })}
         </View>
       </ScrollView>
-      <MessageInput chatId={chatId} />
+      <MessageInput chatId={item?.id} />
     </View>
   );
 }

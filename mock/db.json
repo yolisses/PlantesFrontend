@@ -111,8 +111,10 @@
             "name": "Macambira",
             "distance": 2,
             "owner": {
+                "id": 11,
                 "name": "Samara",
-                "id": 11
+                "thumbnail": "http://192.168.10.23:5000/images/users/thumbnail/11.webp",
+                "image": "http://192.168.10.23:5000/images/users/maxResolution/11.webp"
             },
             "tags": [
                 {
@@ -166,8 +168,10 @@
             "name": "Juazeiro",
             "distance": 3,
             "owner": {
+                "id": 7,
                 "name": "Fausto",
-                "id": 7
+                "thumbnail": "http://192.168.10.23:5000/images/users/thumbnail/7.webp",
+                "image": "http://192.168.10.23:5000/images/users/maxResolution/7.webp"
             },
             "tags": [
                 {
@@ -552,8 +556,16 @@
         {
             "id": 11,
             "name": "Samara Silva",
+            "thumbnail": "http://192.168.10.23:5000/images/users/thumbnail/11.webp",
             "image": "http://192.168.10.23:5000/images/users/maxResolution/11.webp",
             "bio": "Oi gente! Eu não sei muito bem o q escrever aqui -\\_(^-^)_/-"
+        },
+        {
+            "id": 7,
+            "name": "Fausto",
+            "thumbnail": "http://192.168.10.23:5000/images/users/thumbnail/7.webp",
+            "image": "http://192.168.10.23:5000/images/users/maxResolution/7.webp",
+            "bio": "buscando uma forma de conquistar Jerusalém✠⚔️🛡️"
         }
     ],
     "posts": [
@@ -616,7 +628,7 @@
             ]
         },
         {
-            "id":4,
+            "id": 4,
             "user": {
                 "id": 7,
                 "name": "Fausto",
@@ -630,7 +642,7 @@
             ]
         },
         {
-            "id":5,
+            "id": 5,
             "user": {
                 "id": 7,
                 "name": "Fausto",
@@ -644,7 +656,7 @@
             ]
         },
         {
-            "id":6,
+            "id": 6,
             "user": {
                 "id": 7,
                 "name": "Fausto",
@@ -658,7 +670,7 @@
             ]
         },
         {
-            "id":7,
+            "id": 7,
             "user": {
                 "id": 7,
                 "name": "Fausto",
