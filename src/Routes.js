@@ -6,8 +6,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {UserPage} from 'user/UserPage';
 import {MapScreen} from 'map/MapScreen';
 import {ChatScreen} from 'chat/ChatScreen';
-import {HomeScreen} from 'store/HomeScreen';
 import {LoginScreen} from 'auth/LoginScreen';
+import {StoreScreen} from 'store/StoreScreen';
 import {CameraScreen} from 'camera/CameraScreen';
 import {ShowItemScreen} from 'show/ShowItemScreen';
 import {ChatsListScreen} from 'chat/ChatsListScreen';
@@ -44,13 +44,13 @@ export function Routes() {
       <StatusBar barStyle={'default'} hidden={true} />
 
       <Stack.Navigator>
-        {/* <Stack.Screen name="development" component={HomeScreen} /> */}
+        {/* <Stack.Screen name="development" component={StoreScreen} /> */}
         {user ? (
           <>
             {grantedLocation || grantedLocation === null ? (
               <Stack.Screen
                 name="Home"
-                component={HomeScreen}
+                component={StoreScreen}
                 options={{
                   headerTitle: 'Plantei',
                   headerRight: () => <UserRoundImage size={38} />,

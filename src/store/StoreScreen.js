@@ -6,7 +6,7 @@ import {CardsListLoading} from './CardsListLoading';
 import {CardsListFooter} from './CardsListFooter';
 import {Card} from 'store/Card';
 
-export function HomeScreen() {
+export function StoreScreen() {
   const [starting, setStarting] = useState(true);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
