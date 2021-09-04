@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {useAlert} from 'alert/AlertContext';
 import {AlertOverlay} from './AlertOverlay';
@@ -19,14 +19,16 @@ export function Alert({title, description, children}) {
           </View>
           <View style={styles.horizontalWrapper}>
             {children &&
-              children.map((child, index) => (
-                <>
-                  {child}
-                  {index + 1 < children.length && (
-                    <View style={styles.verticalLine} key={index} />
-                  )}
-                </>
-              ))}
+              children.map((child, index) => {
+                return (
+                  <Fragment key={index}>
+                    {child}
+                    {index + 1 < children.length && (
+                      <View style={styles.verticalLine} />
+                    )}
+                  </Fragment>
+                );
+              })}
           </View>
         </Pressable>
       </View>
@@ -37,7 +39,7 @@ export function Alert({title, description, children}) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
-    borderRadius: 10,
+    borderRadius: 15,
     margin: 50,
   },
   title: {
