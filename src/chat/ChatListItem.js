@@ -1,9 +1,9 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {ChatNumberIndicator} from 'chat/ChatNumberIndicator';
-import FastImage from 'react-native-fast-image';
 import {ChatDate} from './ChatDate';
+import {ChatNumberIndicator} from 'chat/ChatNumberIndicator';
+import {UserRoundImage} from 'common/UserRoundImage';
 
 export function ChatListItem({item}) {
   const {image, name, last_activity, message_count, last_activity_time, id} =
@@ -18,10 +18,7 @@ export function ChatListItem({item}) {
       activeOpacity={0.8}
       onPress={onPress}>
       <View style={styles.imageWrapper}>
-        <FastImage
-          source={{uri: image, priority: FastImage.priority.normal}}
-          style={styles.image}
-        />
+        <UserRoundImage uri={image} size={50} />
       </View>
       <View style={styles.lineSeparator}>
         <View style={styles.detailsWrapper}>
@@ -66,11 +63,6 @@ const styles = StyleSheet.create({
   detailsWrapper: {
     padding: 10,
     flex: 1,
-  },
-  image: {
-    width: 50,
-    height: 50,
-    borderRadius: 100,
   },
   imageWrapper: {
     width: 50,
