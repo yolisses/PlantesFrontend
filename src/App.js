@@ -1,12 +1,14 @@
 import React from 'react';
+import {StatusBar} from 'react-native';
+
 import {Routes} from './Routes';
+
 import {UserContextProvider} from 'auth/userContext';
-import {PermissionsContextProvider} from 'permission/PermissionsContext';
-import {ImageGroupContextProvider} from 'camera/ImageGroupContext';
 import {AlertContextProvider} from 'alert/AlertContext';
 import {ModalContextProvider} from 'modal/ModalContext';
+import {ImageGroupContextProvider} from 'camera/ImageGroupContext';
+import {PermissionsContextProvider} from 'permission/PermissionsContext';
 import {ChatReferenceContextProvider} from './chat/ChatReferenceContext';
-import {StatusBar} from 'react-native';
 
 const App = () => {
   return (
