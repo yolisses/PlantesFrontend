@@ -34,10 +34,6 @@ const {width} = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    zIndex: 1,
     width,
   },
   imageNameWrapper: {
@@ -58,7 +54,6 @@ const styles = StyleSheet.create({
   },
   buttonEmphasis: {
     flex: 1,
-    margin: 2,
     padding: 25,
   },
   text: {

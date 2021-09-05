@@ -3,10 +3,12 @@ import {FlatList} from 'react-native';
 import {api} from 'api';
 
 export function InfiniteScroll({
-  renderItem,
-  startingComponent,
   getUrl,
+  selected,
+  renderItem,
+  forceScrollUp,
   loadingFooter,
+  startingComponent,
   ...rest
 }) {
   const [starting, setStarting] = useState(true);

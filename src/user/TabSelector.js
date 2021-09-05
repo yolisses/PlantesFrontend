@@ -1,19 +1,19 @@
 import React from 'react';
-import {
-  faImage,
-  faSeedling,
-  faThumbsUp,
-} from '@fortawesome/free-solid-svg-icons';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {StyleSheet, View} from 'react-native';
+import {TabButton} from './TabButton';
 
-export function TabSelector() {
-  const size = 22;
+export function TabSelector({selected, scrollTo, categories}) {
   return (
     <View style={styles.container}>
-      <FontAwesomeIcon icon={faSeedling} size={size} color={'#bbb'} />
-      <FontAwesomeIcon icon={faImage} size={size} color={'#bbb'} />
-      <FontAwesomeIcon icon={faThumbsUp} size={size} color={'#bbb'} />
+      {categories.map((category, index) => (
+        <TabButton
+          key={index}
+          index={index}
+          scrollTo={scrollTo}
+          icon={category.icon}
+          selected={selected === index}
+        />
+      ))}
     </View>
   );
 }
@@ -21,8 +21,14 @@ export function TabSelector() {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    padding: 15,
+    alignItems: 'stretch',
     backgroundColor: 'white',
-    justifyContent: 'space-around',
+    padding: 10,
+  },
+  pressArea: {
+    flex: 1,
+    margin: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

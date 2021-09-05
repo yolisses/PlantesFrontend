@@ -1,132 +1,124 @@
-import React, {useState, useEffect, useRef} from 'react';
-import {Animated, Dimensions} from 'react-native';
+import React, {useCallback, useRef, useState} from 'react';
+import {Dimensions, FlatList, SectionList, StyleSheet} from 'react-native';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
-import {api} from 'api';
 import {CardsListLoading} from 'store/CardsListLoading';
-import {CardsListFooter} from 'store/CardsListFooter';
 import {Card} from 'store/Card';
 import {useNavigation} from '@react-navigation/core';
-import {ScrollView} from 'react-native';
-import {AnimatedUserInfo} from './AnimatedUserInfo';
-import {AnimatedTabSelector} from './AnimatedTabSelector';
+import {InfiniteScroll} from '../common/InfiniteScroll';
+import {CardsListFooter} from '../store/CardsListFooter';
+import {UserInfo} from './UserInfo';
+import {TabSelector} from './TabSelector';
+import {
+  faImages,
+  faSeedling,
+  faThumbsUp,
+} from '@fortawesome/free-solid-svg-icons';
 
-const userInfoHeight = 180;
 const {width} = Dimensions.get('window');
 
 export function UserScreen() {
-  const [starting, setStarting] = useState(true);
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState([]);
-  const [page, setPage] = useState(1);
-  const [totalCount, setTotalCount] = useState(Infinity);
-
   const navigation = useNavigation();
+  const [selected, setSelected] = useState(0);
 
   navigation.setOptions({
     headerTitle: 'maria',
   });
 
-  const limit = 40;
-
-  const pageInitialIndex = (page - 1) * limit;
-  const remainItems = pageInitialIndex < totalCount;
-
-  async function getCards() {
-    if (loading || !remainItems) {
-      return;
-    }
-    setLoading(true);
-
-    try {
-      const res = await api.get(`/cards?_page=${page}&_limit=${limit}`);
-      setData([...data, ...res.data]);
-      setLoading(false);
-      setPage(page + 1);
-      setTotalCount(res.headers['x-total-count']);
-      setStarting(false);
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
-  useEffect(() => {
-    getCards();
-  }, []);
-
-  const renderItem = ({item}) => <Card key={item.id} item={item} />;
-
-  const scrollY = useRef(new Animated.Value(0));
-
-  const handleScroll = Animated.event(
-    [
-      {
-        nativeEvent: {
-          contentOffset: {y: scrollY.current},
-        },
-      },
-    ],
+  const categories = [
     {
-      useNativeDriver: true,
+      name: 'plants',
+      icon: faSeedling,
     },
-  );
+    {
+      name: 'posts',
+      icon: faImages,
+    },
+    {
+      name: 'likes',
+      icon: faThumbsUp,
+    },
+  ];
 
-  if (starting) {
-    return (
-      <FooterNavigationLayout selected={'Home'}>
-        <CardsListLoading />
-      </FooterNavigationLayout>
-    );
-  }
+  const scrollRef = useRef();
+
+  const onScroll = e => {
+    setSelected(Math.round(e.nativeEvent.contentOffset.x / width));
+  };
+
+  const scrollTo = useCallback(
+    index => {
+      scrollRef.current
+        .getNativeScrollRef()
+        .scrollTo({x: index * width, animated: true});
+    },
+    [scrollRef],
+  );
 
   return (
     <FooterNavigationLayout selected={'Home'}>
-      <AnimatedUserInfo scrollY={scrollY} userInfoHeight={userInfoHeight} />
-      <AnimatedTabSelector scrollY={scrollY} userInfoHeight={userInfoHeight} />
-      <ScrollView
-        horizontal={true}
-        snapToInterval={width}
-        showsHorizontalScrollIndicator={false}
-        disableIntervalMomentum>
-        <Animated.FlatList
-          data={data}
-          numColumns={2}
-          contentContainerStyle={{paddingTop: userInfoHeight}}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-          nestedScrollEnabled
-          onScroll={handleScroll}
-          onEndReached={getCards}
-          showsVerticalScrollIndicator={false}
-          onEndReachedThreshold={0.9}
-          ListFooterComponent={() => (remainItems ? <CardsListFooter /> : null)}
-        />
-        <Animated.FlatList
-          data={data}
-          numColumns={2}
-          contentContainerStyle={{paddingTop: userInfoHeight}}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-          nestedScrollEnabled
-          onScroll={handleScroll}
-          onEndReached={getCards}
-          showsVerticalScrollIndicator={false}
-          onEndReachedThreshold={0.9}
-          ListFooterComponent={() => (remainItems ? <CardsListFooter /> : null)}
-        />
-        <Animated.FlatList
-          data={data}
-          numColumns={2}
-          contentContainerStyle={{paddingTop: userInfoHeight}}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-          nestedScrollEnabled
-          onScroll={handleScroll}
-          onEndReached={getCards}
-          showsVerticalScrollIndicator={false}
-          onEndReachedThreshold={0.9}
-          ListFooterComponent={() => (remainItems ? <CardsListFooter /> : null)}
-        />
-      </ScrollView>
+      <SectionList
+        sections={[
+          {
+            id: 0,
+            data: [],
+          },
+          {
+            id: 1,
+            data: ['content'],
+          },
+        ]}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(item, index) => item + index}
+        renderItem={() => {
+          return (
+            <FlatList
+              horizontal
+              ref={scrollRef}
+              data={categories}
+              onScroll={onScroll}
+              snapToInterval={width}
+              disableIntervalMomentum
+              keyExtractor={category => category.name}
+              showsHorizontalScrollIndicator={false}
+              renderItem={({item: category, index}) => {
+                return (
+                  <InfiniteScroll
+                    numColumns={2}
+                    key={category.name}
+                    loadingFooter={<CardsListFooter />}
+                    selected={selected === index}
+                    startingComponent={<CardsListLoading />}
+                    contentContainerStyle={styles.contentContainer}
+                    renderItem={({item}) => <Card key={item.id} item={item} />}
+                    getUrl={(page, limit) =>
+                      `/cards?_page=${page}&_limit=${limit}`
+                    }
+                  />
+                );
+              }}
+            />
+          );
+        }}
+        renderSectionHeader={({section: {id}}) =>
+          id === 0 ? (
+            <UserInfo />
+          ) : (
+            <TabSelector
+              scrollTo={scrollTo}
+              selected={selected}
+              categories={categories}
+            />
+          )
+        }
+        stickyHeaderIndices={[1]}
+        stickySectionHeadersEnabled
+      />
     </FooterNavigationLayout>
   );
 }
+
+const styles = StyleSheet.create({
+  contentContainer: {
+    width,
+  },
+});

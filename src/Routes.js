@@ -41,7 +41,7 @@ export function Routes() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen name="development" component={UserScreen} /> */}
+        <Stack.Screen name="development" component={UserScreen} />
         {user ? (
           <>
             {grantedLocation || grantedLocation === null ? (
