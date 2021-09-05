@@ -5,7 +5,7 @@ import {UserRoundImage} from 'common/UserRoundImage';
 export function UserIdentifier({item}) {
   return (
     <View style={styles.topWrapper}>
-      <UserRoundImage size={40} uri={item.image} />
+      <UserRoundImage size={40} item={item} />
       <View>
         <Text style={styles.name}>{item.name}</Text>
         <Text style={styles.subtitle}>dois segundos atras</Text>

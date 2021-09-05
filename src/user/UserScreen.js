@@ -1,5 +1,11 @@
 import React, {useCallback, useRef, useState} from 'react';
-import {Dimensions, FlatList, SectionList, StyleSheet} from 'react-native';
+import {
+  Dimensions,
+  FlatList,
+  SectionList,
+  StyleSheet,
+  View,
+} from 'react-native';
 import {useNavigation} from '@react-navigation/core';
 import {
   faImages,
@@ -14,6 +20,7 @@ import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import {InfiniteScroll} from 'common/InfiniteScroll';
 import {UserInfo} from './UserInfo';
 import {TabSelector} from './TabSelector';
+import {UserButtons} from './UserButtons';
 
 const {width} = Dimensions.get('window');
 
@@ -102,7 +109,10 @@ export function UserScreen() {
         }}
         renderSectionHeader={({section: {id}}) =>
           id === 0 ? (
-            <UserInfo />
+            <View style={styles.container}>
+              <UserInfo />
+              <UserButtons />
+            </View>
           ) : (
             <TabSelector
               scrollTo={scrollTo}
@@ -119,6 +129,9 @@ export function UserScreen() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+  },
   contentContainer: {
     width,
   },

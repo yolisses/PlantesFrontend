@@ -6,7 +6,7 @@ import FastImage from 'react-native-fast-image';
 export function ChatHeader({item}) {
   const {navigate} = useNavigation();
   const onPress = () => {
-    navigate('UserScreen');
+    navigate('UserScreen', {item});
   };
 
   return (
