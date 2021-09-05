@@ -3,7 +3,7 @@ import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
 
-export function UserRoundImage({size, style, item}) {
+export function UserRoundImage({item, size, style, thumbnail}) {
   const {navigate} = useNavigation();
 
   size = size || 30;
@@ -14,7 +14,7 @@ export function UserRoundImage({size, style, item}) {
       activeOpacity={0.8}>
       <FastImage
         style={[styles.image, {width: size, height: size}, style]}
-        source={{uri: item?.image}}
+        source={{uri: thumbnail ? item?.thumbnail : item?.image}}
       />
     </TouchableOpacity>
   );
@@ -23,5 +23,6 @@ export function UserRoundImage({size, style, item}) {
 const styles = StyleSheet.create({
   image: {
     borderRadius: 100,
+    backgroundColor: '#ddd',
   },
 });

@@ -6,8 +6,7 @@ import {ChatNumberIndicator} from 'chat/ChatNumberIndicator';
 import {UserRoundImage} from 'common/UserRoundImage';
 
 export function ChatListItem({item}) {
-  const {image, name, last_activity, message_count, last_activity_time, id} =
-    item;
+  const {name, last_activity, message_count, last_activity_time} = item;
   const {navigate} = useNavigation();
 
   const onPress = () => navigate('Chat', {item});

@@ -224,8 +224,10 @@
             "name": "Cajazeira",
             "distance": 0,
             "owner": {
+                "id": 4,
                 "name": "Lisa",
-                "id": 4
+                "thumbnail": "http://192.168.10.23:5000/images/users/thumbnail/4.webp",
+                "image": "http://192.168.10.23:5000/images/users/maxResolution/4.webp"
             },
             "tags": [
                 {
