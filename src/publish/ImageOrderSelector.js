@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import DraggableGrid from 'react-native-draggable-grid';
 import {useImageGroup} from 'camera/ImageGroupContext';
-import {SquareImage} from '../common/SquareImage';
+import {SquareImage} from 'common/SquareImage';
 
 export function ImageOrderSelect() {
   const {images, setImages} = useImageGroup();

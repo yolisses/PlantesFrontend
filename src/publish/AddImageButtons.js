@@ -1,8 +1,9 @@
 import React from 'react';
-import {faCamera, faImages} from '@fortawesome/free-solid-svg-icons';
-import {useNavigation} from '@react-navigation/native';
 import {StyleSheet, View} from 'react-native';
-import {LightButton} from '../common/LightButton';
+import {useNavigation} from '@react-navigation/native';
+import {faCamera, faImages} from '@fortawesome/free-solid-svg-icons';
+
+import {LightButton} from 'common/LightButton';
 
 const emphasisColor = '#090';
 

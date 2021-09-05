@@ -2,7 +2,7 @@ import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import {LightButton} from '../common/LightButton';
+import {LightButton} from 'common/LightButton';
 
 export function NextButton({route}) {
   const {navigate} = useNavigation();

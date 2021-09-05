@@ -2,9 +2,9 @@ import React from 'react';
 import {ScrollView} from 'react-native';
 import {TagsSelector} from 'form/TagsSelector';
 import {TextInputSaved} from 'form/TextInputSaved';
-import {publishData} from 'publish/publishData';
+import {SingleOptionSelector} from 'form/SingleOptionSelector';
 import {PublishScreenLayout} from './PublishScreenLayout';
-import {SingleOptionSelector} from '../../form/SingleOptionSelector';
+import {publishData} from 'publish/publishData';
 
 export function PublishDetailScreen() {
   const {name, options, description, type} = publishData;

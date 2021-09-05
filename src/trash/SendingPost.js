@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {useEffect, useState} from 'react';
-import {SquareImage} from '../common/SquareImage';
+import {SquareImage} from 'common/SquareImage';
 
 export function SendingPost({sending}) {
   const {task, imageURI} = sending;

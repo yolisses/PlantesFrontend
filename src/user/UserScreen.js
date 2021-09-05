@@ -1,18 +1,19 @@
 import React, {useCallback, useRef, useState} from 'react';
 import {Dimensions, FlatList, SectionList, StyleSheet} from 'react-native';
-import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
-import {CardsListLoading} from 'store/CardsListLoading';
-import {Card} from 'store/Card';
 import {useNavigation} from '@react-navigation/core';
-import {InfiniteScroll} from '../common/InfiniteScroll';
-import {CardsListFooter} from '../store/CardsListFooter';
-import {UserInfo} from './UserInfo';
-import {TabSelector} from './TabSelector';
 import {
   faImages,
   faSeedling,
   faThumbsUp,
 } from '@fortawesome/free-solid-svg-icons';
+
+import {Card} from 'store/Card';
+import {CardsListFooter} from 'store/CardsListFooter';
+import {CardsListLoading} from 'store/CardsListLoading';
+import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
+import {InfiniteScroll} from 'common/InfiniteScroll';
+import {UserInfo} from './UserInfo';
+import {TabSelector} from './TabSelector';
 
 const {width} = Dimensions.get('window');
 

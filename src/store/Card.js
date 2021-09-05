@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {SquareImage} from '../common/SquareImage';
+import {SquareImage} from 'common/SquareImage';
 import {TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import {Post} from 'post/Post';
-import {InfiniteScroll} from '../common/InfiniteScroll';
+import {InfiniteScroll} from 'common/InfiniteScroll';
 import {Text} from 'react-native';
 
 export function CommunityScreen() {

@@ -6,7 +6,7 @@ import {Description} from 'post/Description';
 import {CommentButton} from 'post/CommentButton';
 import {ShowMoreButton} from 'post/ShowMoreButton';
 import {UserIdentifier} from 'post/UserIdentifier';
-import {ImagesSwiper} from '../show/ImagesSwiper';
+import {ImagesSwiper} from 'show/ImagesSwiper';
 
 export function Post({item}) {
   const [expandText, setExpandText] = useState(false);

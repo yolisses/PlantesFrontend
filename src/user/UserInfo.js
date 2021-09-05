@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Dimensions, StyleSheet, Text, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {api} from 'api';
-import {LightButton} from '../common/LightButton';
+import {LightButton} from 'common/LightButton';
 
 export function UserInfo({height}) {
   const [user, setUser] = useState(null);

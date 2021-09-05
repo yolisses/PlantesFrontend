@@ -1,7 +1,8 @@
-import {faCheck, faTimes} from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {LightButton} from '../common/LightButton';
+import {faCheck, faTimes} from '@fortawesome/free-solid-svg-icons';
+
+import {LightButton} from 'common/LightButton';
 
 export function PictureConfirmButtons({onDiscardPress, onApprovePress}) {
   return (
