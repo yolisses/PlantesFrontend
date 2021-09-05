@@ -41,7 +41,7 @@ export function Routes() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="development" component={ChatsListScreen} />
+        <Stack.Screen name="development" component={PublishImagesScreen} />
         {user ? (
           <>
             {grantedLocation || grantedLocation === null ? (

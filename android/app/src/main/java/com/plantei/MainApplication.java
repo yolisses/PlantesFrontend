@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.cameraroll.CameraRollPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import org.reactnative.camera.RNCameraPackage;
 import com.horcrux.svg.SvgPackage;
@@ -32,7 +33,8 @@ public class MainApplication extends Application implements ReactApplication {
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
           
-          // packages.add(new MainReactPackage());
+          // packages.add(new MainReactPackage(),
+            // new CameraRollPackage());
           // packages.add(new RNGoogleSigninPackage());
           return packages;
         }

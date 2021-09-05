@@ -18,6 +18,8 @@ target 'Plantei' do
 
   pod 'RNGoogleSignin', :path => '../node_modules/react-native-google-signin'
 
+  pod 'react-native-cameraroll', :path => '../node_modules/@react-native-community/cameraroll'
+
   target 'PlanteiTests' do
     inherit! :complete
     # Pods for testing
