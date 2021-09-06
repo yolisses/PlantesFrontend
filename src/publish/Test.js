@@ -48,42 +48,51 @@ export function Test() {
 
   function endedPan(e) {
     Animated.timing(xAnim, {
-      toValue: clamp(e.nativeEvent.absoluteX - initial.x, -width, 0),
+      toValue: clamp(e.nativeEvent.absoluteX - initial.x, width, 0),
       duration: 200,
       useNativeDriver: false,
     }).start();
 
     Animated.timing(yAnim, {
-      toValue: clamp(e.nativeEvent.absoluteY - initial.y, -width, 0),
+      toValue: clamp(e.nativeEvent.absoluteY - initial.y, width, 0),
       duration: 200,
       useNativeDriver: false,
     }).start();
   }
+
+  const pinchRef = useRef();
+  const panRef = useRef();
 
   return (
     <View style={{width, height: width, overflow: 'hidden'}}>
       <GestureHandlerRootView>
         <Animated.View>
           <PinchGestureHandler
+            ref={pinchRef}
             onEnded={beganPinch}
+            simultaneousHandlers={panRef}
             onGestureEvent={onGestureEventPinch}>
-            {/*<PanGestureHandler*/}
-            {/*  onBegan={began}*/}
-            {/*  onEnded={ended}*/}
-            {/*  onGestureEvent={onGestureEvent}>*/}
-            <Animated.Image
-              source={require('../doge.jpg')}
-              style={{
-                width,
-                height: width,
-                backgroundColor: '#008',
-                borderRadius: 10,
-                transform: [{scale: scaleAnim}],
-                // left: xAnim,
-                // top: yAnim,
-              }}
-            />
-            {/*</PanGestureHandler>*/}
+            <PanGestureHandler
+              ref={panRef}
+              onBegan={beganPan}
+              onEnded={endedPan}
+              simultaneousHandlers={pinchRef}
+              onGestureEvent={onGestureEvent}>
+              <Animated.Image
+                source={require('../doge.jpg')}
+                style={{
+                  width,
+                  height: width,
+                  backgroundColor: '#008',
+                  borderRadius: 10,
+                  transform: [
+                    {scale: scaleAnim},
+                    {translateX: xAnim},
+                    {translateY: yAnim},
+                  ],
+                }}
+              />
+            </PanGestureHandler>
           </PinchGestureHandler>
         </Animated.View>
       </GestureHandlerRootView>
