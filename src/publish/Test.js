@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import {Animated, Dimensions, View} from 'react-native';
+import {Animated, Dimensions, Image} from 'react-native';
 import {
   GestureHandlerRootView,
   PanGestureHandler,
@@ -8,94 +8,89 @@ import {
 
 const {width} = Dimensions.get('window');
 
-function clamp(value, min, max) {
-  return Math.min(Math.max(value, min), max);
-}
-
 export function Test() {
-  const x = new Animated.Value(0);
-  const y = new Animated.Value(0);
+  let x = new Animated.Value(0);
   const scale = new Animated.Value(1);
 
-  const xAnim = useRef(x).current;
-  const yAnim = useRef(y).current;
-  const scaleAnim = useRef(scale).current;
-  const initial = {x: 0, y: 0, scale: 1};
+  const scaleAnim = useRef(scale);
 
-  function onGestureEvent(e) {
-    x.setValue(e.nativeEvent.absoluteX - initial.x);
-    y.setValue(e.nativeEvent.absoluteY - initial.y);
+  const initial = {x: 0, scale: 1};
+  const current = {scale: 1};
+
+  function handleGesture(e) {
+    const {absoluteX} = e.nativeEvent;
+    const normalizedX = absoluteX / current.scale / width;
+    // x = new Animated.Value(1).interpolate({
+    //   inputRange: [0, 1],
+    //   outputRange: [0, 1],
+    // });
+    x.setValue(normalizedX - initial.x);
   }
 
-  function onGestureEventPinch(e) {
-    scale.setValue(e.nativeEvent.scale * initial.scale);
+  function onBegan(e) {
+    initial.x = e.nativeEvent.x / width;
+    // initial.x = 0;
+    // console.error(initial.x);
   }
 
-  function beganPan(e) {
-    initial.x = e.nativeEvent.x;
-    initial.y = e.nativeEvent.y;
+  function handlePinch(e) {
+    const newScale = e.nativeEvent.scale;
+    current.scale = initial.scale * newScale;
+    scale.setValue(initial.scale * newScale);
   }
 
-  function beganPinch(e) {
-    Animated.timing(scaleAnim, {
-      toValue: clamp(e.nativeEvent.scale * initial.scale, 1, 4),
-      duration: 200,
-      useNativeDriver: false,
-    }).start();
-
-    initial.scale = clamp(e.nativeEvent.scale * initial.scale, 1, 4);
+  function onEndedPinch(e) {
+    const newScale = e.nativeEvent.scale;
+    initial.scale = initial.scale * newScale;
   }
-
-  function endedPan(e) {
-    Animated.timing(xAnim, {
-      toValue: clamp(e.nativeEvent.absoluteX - initial.x, width, 0),
-      duration: 200,
-      useNativeDriver: false,
-    }).start();
-
-    Animated.timing(yAnim, {
-      toValue: clamp(e.nativeEvent.absoluteY - initial.y, width, 0),
-      duration: 200,
-      useNativeDriver: false,
-    }).start();
-  }
-
-  const pinchRef = useRef();
-  const panRef = useRef();
 
   return (
-    <View style={{width, height: width, overflow: 'hidden'}}>
-      <GestureHandlerRootView>
-        <Animated.View>
-          <PinchGestureHandler
-            ref={pinchRef}
-            onEnded={beganPinch}
-            simultaneousHandlers={panRef}
-            onGestureEvent={onGestureEventPinch}>
-            <PanGestureHandler
-              ref={panRef}
-              onBegan={beganPan}
-              onEnded={endedPan}
-              simultaneousHandlers={pinchRef}
-              onGestureEvent={onGestureEvent}>
-              <Animated.Image
+    <GestureHandlerRootView>
+      <Animated.View
+        style={{
+          height: '100%',
+          transform: [
+            {
+              translateX: Animated.multiply(
+                x,
+                Animated.multiply(new Animated.Value(width), scale),
+              ),
+            },
+          ],
+        }}>
+        <PinchGestureHandler
+          onGestureEvent={handlePinch}
+          onEnded={onEndedPinch}>
+          <PanGestureHandler onGestureEvent={handleGesture} onBegan={onBegan}>
+            <Animated.View
+              style={{
+                transform: [
+                  {
+                    scale: scale,
+                  },
+                  {
+                    translateX: Animated.divide(
+                      Animated.multiply(
+                        new Animated.Value(width),
+                        Animated.subtract(scale, new Animated.Value(1)),
+                      ),
+                      Animated.multiply(new Animated.Value(2), scale),
+                    ),
+                    // (width * (current.scale - 1)) / (2 * current.scale),
+                  },
+                ],
+              }}>
+              <Image
                 source={require('../doge.jpg')}
                 style={{
                   width,
                   height: width,
-                  backgroundColor: '#008',
-                  borderRadius: 10,
-                  transform: [
-                    {scale: scaleAnim},
-                    {translateX: xAnim},
-                    {translateY: yAnim},
-                  ],
                 }}
               />
-            </PanGestureHandler>
-          </PinchGestureHandler>
-        </Animated.View>
-      </GestureHandlerRootView>
-    </View>
+            </Animated.View>
+          </PanGestureHandler>
+        </PinchGestureHandler>
+      </Animated.View>
+    </GestureHandlerRootView>
   );
 }
