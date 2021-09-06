@@ -1,77 +1,92 @@
 import React, {useRef} from 'react';
-import {View, Animated, StyleSheet, Dimensions} from 'react-native';
+import {Animated, Dimensions, View} from 'react-native';
 import {
   GestureHandlerRootView,
   PanGestureHandler,
-  State,
+  PinchGestureHandler,
 } from 'react-native-gesture-handler';
 
+const {width} = Dimensions.get('window');
+
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
+}
+
 export function Test() {
-  const translateX = new Animated.Value(0);
-  const translateXAnim = useRef(translateX);
+  const x = new Animated.Value(0);
+  const y = new Animated.Value(0);
+  const scale = new Animated.Value(1);
 
-  const lastOffset = {x: 0, y: 0};
+  const xAnim = useRef(x).current;
+  const yAnim = useRef(y).current;
+  const scaleAnim = useRef(scale).current;
+  const initial = {x: 0, y: 0, scale: 1};
 
-  const handlePan = Animated.event(
-    [{nativeEvent: {translationX: translateX}}],
-    {
-      useNativeDriver: false,
-    },
-  );
+  function onGestureEvent(e) {
+    x.setValue(e.nativeEvent.absoluteX - initial.x);
+    y.setValue(e.nativeEvent.absoluteY - initial.y);
+  }
 
-  const moveTo = pos => {
-    lastOffset.x = pos;
-    translateX.setOffset(pos);
-    Animated.timing(translateXAnim.current, {
-      toValue: 0,
-      duration: 500,
+  function onGestureEventPinch(e) {
+    scale.setValue(e.nativeEvent.scale * initial.scale);
+  }
+
+  function beganPan(e) {
+    initial.x = e.nativeEvent.x;
+    initial.y = e.nativeEvent.y;
+  }
+
+  function beganPinch(e) {
+    Animated.timing(scaleAnim, {
+      toValue: clamp(e.nativeEvent.scale * initial.scale, 1, 4),
+      duration: 200,
       useNativeDriver: false,
     }).start();
-  };
 
-  const handlerStateChange = event => {
-    if (event.nativeEvent.oldState === State.ACTIVE) {
-      lastOffset.x += event.nativeEvent.translationX;
-      if (lastOffset.x > 0) {
-        moveTo(0);
-      } else if (lastOffset.x < -width) {
-        moveTo(-width);
-      } else {
-        translateX.setOffset(lastOffset.x);
-        translateX.setValue(0);
-      }
-    }
-  };
+    initial.scale = clamp(e.nativeEvent.scale * initial.scale, 1, 4);
+  }
+
+  function endedPan(e) {
+    Animated.timing(xAnim, {
+      toValue: clamp(e.nativeEvent.absoluteX - initial.x, -width, 0),
+      duration: 200,
+      useNativeDriver: false,
+    }).start();
+
+    Animated.timing(yAnim, {
+      toValue: clamp(e.nativeEvent.absoluteY - initial.y, -width, 0),
+      duration: 200,
+      useNativeDriver: false,
+    }).start();
+  }
 
   return (
-    <View>
+    <View style={{width, height: width, overflow: 'hidden'}}>
       <GestureHandlerRootView>
-        <PanGestureHandler
-          onGestureEvent={handlePan}
-          onHandlerStateChange={handlerStateChange}>
-          <Animated.View
-            style={{
-              //   backgroundColor: 'red',
-              width: width * 2,
-              transform: [{translateX: translateXAnim.current}],
-            }}>
+        <Animated.View>
+          <PinchGestureHandler
+            onEnded={beganPinch}
+            onGestureEvent={onGestureEventPinch}>
+            {/*<PanGestureHandler*/}
+            {/*  onBegan={began}*/}
+            {/*  onEnded={ended}*/}
+            {/*  onGestureEvent={onGestureEvent}>*/}
             <Animated.Image
-              style={[styles.image]}
               source={require('../doge.jpg')}
+              style={{
+                width,
+                height: width,
+                backgroundColor: '#008',
+                borderRadius: 10,
+                transform: [{scale: scaleAnim}],
+                // left: xAnim,
+                // top: yAnim,
+              }}
             />
-          </Animated.View>
-        </PanGestureHandler>
+            {/*</PanGestureHandler>*/}
+          </PinchGestureHandler>
+        </Animated.View>
       </GestureHandlerRootView>
     </View>
   );
 }
-
-const {width} = Dimensions.get('window');
-
-const styles = StyleSheet.create({
-  image: {
-    // opacity: 0.5,
-    width: width * 2,
-    height: width,
-  },
-});
