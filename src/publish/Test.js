@@ -19,27 +19,23 @@ export function Test() {
     },
   );
 
+  const moveTo = pos => {
+    lastOffset.x = pos;
+    translateX.setOffset(pos);
+    Animated.timing(translateXAnim.current, {
+      toValue: 0,
+      duration: 500,
+      useNativeDriver: false,
+    }).start();
+  };
+
   const handlerStateChange = event => {
     if (event.nativeEvent.oldState === State.ACTIVE) {
       lastOffset.x += event.nativeEvent.translationX;
-      //   translateX.setOffset(lastOffset.x);
-      //   translateX.setValue(0);
       if (lastOffset.x > 0) {
-        lastOffset.x = 0;
-        translateX.setOffset(0);
-        Animated.timing(translateXAnim.current, {
-          toValue: 0,
-          duration: 500,
-          useNativeDriver: false,
-        }).start(() => {});
+        moveTo(0);
       } else if (lastOffset.x < -width) {
-        lastOffset.x = -width;
-        translateX.setOffset(-width);
-        Animated.timing(translateXAnim.current, {
-          toValue: 0,
-          duration: 500,
-          useNativeDriver: false,
-        }).start(() => {});
+        moveTo(-width);
       } else {
         translateX.setOffset(lastOffset.x);
         translateX.setValue(0);
