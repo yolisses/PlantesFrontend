@@ -28,6 +28,7 @@ import {CommentsScreen} from 'comment/CommentsScreen';
 import {useImageGroup} from 'camera/ImageGroupContext';
 import {usePermissions} from 'permission/PermissionsContext';
 import {MapUserLocationButton} from 'map/MapUserLocationButton';
+import {Test} from 'publish/Test';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,7 +42,7 @@ export function Routes() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="development" component={PublishImagesScreen} />
+        <Stack.Screen name="development" component={Test} />
         {user ? (
           <>
             {grantedLocation || grantedLocation === null ? (
