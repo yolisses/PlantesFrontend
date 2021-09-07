@@ -75,6 +75,8 @@ export function UserScreen() {
             data: ['content'],
           },
         ]}
+        stickyHeaderIndices={[1]}
+        stickySectionHeadersEnabled
         showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) => item + index}
         renderItem={() => {
@@ -121,8 +123,6 @@ export function UserScreen() {
             />
           )
         }
-        stickyHeaderIndices={[1]}
-        stickySectionHeadersEnabled
       />
     </FooterNavigationLayout>
   );

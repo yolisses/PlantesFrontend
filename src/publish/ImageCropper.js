@@ -10,7 +10,7 @@ const {width} = Dimensions.get('window');
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
 export function ImageCropper() {
-  const animationTime = 1000;
+  const animationTime = 10;
 
   const x = new Animated.Value(0);
   const xAnim = useRef(x).current;
@@ -36,6 +36,16 @@ export function ImageCropper() {
   }
 
   function handlePan(e) {
+    Animated.timing(xAnim, {
+      toValue: getLocalXWithOffset(e),
+      useNativeDriver: false,
+      duration: animationTime,
+    }).start();
+    Animated.timing(yAnim, {
+      toValue: getLocalYWithOffset(e),
+      useNativeDriver: false,
+      duration: animationTime,
+    }).start();
     x.setValue(getLocalXWithOffset(e));
     y.setValue(getLocalYWithOffset(e));
   }
@@ -59,9 +69,15 @@ export function ImageCropper() {
   }
 
   function handlePinch(e) {
-    const newScale = e.nativeEvent.scale;
-    current.scale = initial.scale * newScale;
-    scale.setValue(initial.scale * newScale);
+    const newScale = e.nativeEvent.scale * initial.scale;
+    current.scale = newScale;
+    scale.setValue(newScale);
+
+    Animated.timing(scaleAnim, {
+      toValue: newScale,
+      useNativeDriver: false,
+      duration: animationTime,
+    }).start();
   }
 
   function onPinchEnd(e) {
