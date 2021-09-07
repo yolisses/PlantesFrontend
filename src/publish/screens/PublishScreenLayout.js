@@ -8,11 +8,12 @@ export function PublishScreenLayout({
   children,
   ratio,
   nextRoute,
+  hideBar = false,
   showNextButton,
 }) {
   return (
     <View style={{flex: 1}}>
-      <ProgressBar ratio={ratio} />
+      {!hideBar && <ProgressBar ratio={ratio} />}
       <View style={{flex: 1}}>{children}</View>
       {showNextButton !== false && <NextButton route={nextRoute} />}
     </View>
