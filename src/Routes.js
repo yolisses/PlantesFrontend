@@ -42,11 +42,11 @@ export function Routes() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name="development"
-          component={PublishImagesScreen}
-          options={{headerShown: false}}
-        />
+        {/*<Stack.Screen*/}
+        {/*  name="development"*/}
+        {/*  component={}*/}
+        {/*  options={{headerShown: false}}*/}
+        {/*/>*/}
         {user ? (
           <>
             {grantedLocation || grantedLocation === null ? (

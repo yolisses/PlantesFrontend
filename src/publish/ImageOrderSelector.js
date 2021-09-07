@@ -7,7 +7,7 @@ import {SquareImage} from 'common/SquareImage';
 export function ImageOrderSelect() {
   const {images, setImages} = useImageGroup();
   const [scrollEnabled, setScrollEnabled] = useState(true);
-  const columnsNumber = 2;
+  const columnsNumber = 3;
 
   function render_item(item, index) {
     return (
