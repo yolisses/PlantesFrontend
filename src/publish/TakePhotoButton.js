@@ -1,28 +1,18 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {faCamera} from '@fortawesome/free-solid-svg-icons';
 
 import {LightButton} from 'common/LightButton';
 
-const emphasisColor = '#090';
-
-export function TakePhotoButton() {
+export function TakePhotoButton({...res}) {
   const {navigate} = useNavigation();
   return (
     <LightButton
       icon={faCamera}
       text="Tirar foto"
-      style={styles.button}
-      iconColor={emphasisColor}
+      iconColor={'#090'}
       onPress={() => navigate('Camera')}
+      {...res}
     />
   );
 }
-
-const styles = StyleSheet.create({
-  button: {
-    paddingHorizontal: 30,
-    paddingVertical: 15,
-  },
-});

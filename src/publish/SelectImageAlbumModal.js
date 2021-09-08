@@ -1,6 +1,6 @@
 import CameraRoll from '@react-native-community/cameraroll';
 import React, {useEffect, useState} from 'react';
-import {ScrollView, Text, View} from 'react-native';
+import {ScrollView, Text} from 'react-native';
 import {TouchableOpacity} from 'react-native';
 import {Modalize} from 'react-native-modalize';
 

@@ -13,7 +13,6 @@ import {ChatsListScreen} from 'chat/ChatsListScreen';
 import {CommunityScreen} from 'post/CommunityScreen';
 import {PublishScreen} from 'publish/screens/PublishScreen';
 import {PublishPriceScreen} from 'publish/screens/PublishPriceScreen';
-import {PublishImagesScreen} from 'publish/screens/PublishImagesScreen';
 import {PublishDetailScreen} from 'publish/screens/PublishDetailScreen';
 import {RequestLocationPermissionScreen} from 'permission/RequestLocationPermissionScreen';
 
@@ -41,11 +40,11 @@ export function Routes() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen
+        <Stack.Screen
           name="development"
-          component={Test}
+          component={PublishScreen}
           options={{headerShown: false}}
-        /> */}
+        />
         {user ? (
           <>
             {grantedLocation || grantedLocation === null ? (
@@ -86,25 +85,9 @@ export function Routes() {
               component={CameraScreen}
               options={{headerShown: false}}
             />
-            {!thereIsSomeImage ? (
-              <Stack.Screen
-                name="Publish"
-                component={PublishScreen}
-                options={{headerTitle: 'Publicar', animation: 'none'}}
-              />
-            ) : (
-              <Stack.Screen
-                name="Publish"
-                component={PublishImagesScreen}
-                options={{
-                  headerTitle: 'Publicar',
-                  headerLeft: () => <DiscardButton />,
-                }}
-              />
-            )}
             <Stack.Screen
-              name="PublishImages"
-              component={PublishImagesScreen}
+              name="Publish"
+              component={PublishScreen}
               options={{
                 headerTitle: 'Publicar',
                 headerRight: () => <DiscardButton />,
