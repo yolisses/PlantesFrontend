@@ -13,7 +13,7 @@ import {ChatsListScreen} from 'chat/ChatsListScreen';
 import {CommunityScreen} from 'post/CommunityScreen';
 import {PublishScreen} from 'publish/screens/PublishScreen';
 import {PublishPriceScreen} from 'publish/screens/PublishPriceScreen';
-import {PublishImagesScreen} from 'src/publish/screens/PublishImagesScreen';
+import {PublishImagesScreen} from 'publish/screens/PublishImagesScreen';
 import {PublishDetailScreen} from 'publish/screens/PublishDetailScreen';
 import {RequestLocationPermissionScreen} from 'permission/RequestLocationPermissionScreen';
 
@@ -28,7 +28,6 @@ import {CommentsScreen} from 'comment/CommentsScreen';
 import {useImageGroup} from 'camera/ImageGroupContext';
 import {usePermissions} from 'permission/PermissionsContext';
 import {MapUserLocationButton} from 'map/MapUserLocationButton';
-import {Test} from 'src/publish/ImageCropper';
 
 const Stack = createNativeStackNavigator();
 
@@ -42,11 +41,11 @@ export function Routes() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {/*<Stack.Screen*/}
-        {/*  name="development"*/}
-        {/*  component={PublishImagesScreen2}*/}
-        {/*  options={{headerShown: false}}*/}
-        {/*/>*/}
+        {/* <Stack.Screen
+          name="development"
+          component={Test}
+          options={{headerShown: false}}
+        /> */}
         {user ? (
           <>
             {grantedLocation || grantedLocation === null ? (
@@ -99,7 +98,7 @@ export function Routes() {
                 component={PublishImagesScreen}
                 options={{
                   headerTitle: 'Publicar',
-                  headerRight: () => <DiscardButton />,
+                  headerLeft: () => <DiscardButton />,
                 }}
               />
             )}
@@ -119,7 +118,10 @@ export function Routes() {
             <Stack.Screen
               name="PublishPrice"
               component={PublishPriceScreen}
-              options={{headerTitle: 'Publicar'}}
+              options={{
+                headerLeft: () => <></>,
+                headerTitle: 'Publicar',
+              }}
             />
             <Stack.Screen
               name="Chat"
@@ -137,7 +139,7 @@ export function Routes() {
             <Stack.Screen
               name="ChatsList"
               component={ChatsListScreen}
-              options={{title: 'Conversas'}}
+              options={{title: 'Conversas', headerLeft: () => <></>}}
             />
             <Stack.Screen
               name="ShowItem"
