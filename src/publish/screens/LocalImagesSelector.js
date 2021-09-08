@@ -6,6 +6,7 @@ import FastImage from 'react-native-fast-image';
 const {width} = Dimensions.get('window');
 
 export function LocalImagesSelector() {
+  const numberOfCollums = 4;
   const [images, setImages] = useState([]);
 
   async function getImages() {
@@ -22,17 +23,21 @@ export function LocalImagesSelector() {
 
   return (
     <FlatList
-      numColumns={3}
+      numColumns={numberOfCollums}
       data={images}
       getItemLayout={(data, index) => {
-        return {length: width / 3, offset: ((width / 3) * index) % 3, index};
+        return {
+          length: width / numberOfCollums,
+          offset: ((width / numberOfCollums) * index) % numberOfCollums,
+          index,
+        };
       }}
       keyExtractor={item => item.node.image.uri}
       renderItem={({item}) => (
         <FastImage
           key={item.node.image.uri}
           style={{
-            width: width / 3 - 1 / 3,
+            width: width / numberOfCollums - 1 / numberOfCollums,
             aspectRatio: 1,
             marginRight: 1,
             marginBottom: 1,

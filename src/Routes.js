@@ -13,7 +13,7 @@ import {ChatsListScreen} from 'chat/ChatsListScreen';
 import {CommunityScreen} from 'post/CommunityScreen';
 import {PublishScreen} from 'publish/screens/PublishScreen';
 import {PublishPriceScreen} from 'publish/screens/PublishPriceScreen';
-import {PublishImagesScreen} from 'publish/screens/PublishImagesScreen';
+import {PublishImagesScreen} from 'src/publish/screens/PublishImagesScreen';
 import {PublishDetailScreen} from 'publish/screens/PublishDetailScreen';
 import {RequestLocationPermissionScreen} from 'permission/RequestLocationPermissionScreen';
 
@@ -44,7 +44,7 @@ export function Routes() {
       <Stack.Navigator>
         {/*<Stack.Screen*/}
         {/*  name="development"*/}
-        {/*  component={}*/}
+        {/*  component={PublishImagesScreen2}*/}
         {/*  options={{headerShown: false}}*/}
         {/*/>*/}
         {user ? (

@@ -20,24 +20,24 @@ export function FooterNavigation({selected}) {
         selected={selected}
       />
       <FooterButton
+        route="Publish"
+        icon={faCamera}
+        selected={selected}
+        // doubleClickRoute={'Camera'}
+      />
+      <FooterButton
         route="ChatsList"
         text="Conversas"
         icon={faComments}
         selected={selected}
       />
-      <FooterMainButton
-        route="Publish"
-        icon={faCamera}
-        selected={selected}
-        doubleClickRoute={'Camera'}
-      />
-      <FooterButton
-        route="Community"
-        text="Postagens"
-        icon={faUserFriends}
-        selected={selected}
-      />
-      <FooterButton route="Map" text="Mapa" icon={faMap} selected={selected} />
+      {/*<FooterButton*/}
+      {/*  route="Community"*/}
+      {/*  text="Postagens"*/}
+      {/*  icon={faUserFriends}*/}
+      {/*  selected={selected}*/}
+      {/*/>*/}
+      {/*<FooterButton route="Map" text="Mapa" icon={faMap} selected={selected} />*/}
     </View>
   );
 }
@@ -45,7 +45,7 @@ export function FooterNavigation({selected}) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    padding: 2,
+    paddingVertical: 12,
     width: '100%',
     backgroundColor: 'white',
     alignItems: 'center',
