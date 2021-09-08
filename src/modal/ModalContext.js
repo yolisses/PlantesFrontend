@@ -1,5 +1,5 @@
-import {createContext, useContext, useEffect, useState} from 'react';
 import React from 'react';
+import {createContext, useContext, useEffect, useState} from 'react';
 
 const ModalContext = createContext();
 
@@ -22,11 +22,11 @@ export function ModalContextProvider({children}) {
   return (
     <ModalContext.Provider
       value={{
-        modalActive,
-        setModalActive,
         showModal,
-        currentModal,
         closeModal,
+        modalActive,
+        currentModal,
+        setModalActive,
       }}>
       {children}
     </ModalContext.Provider>

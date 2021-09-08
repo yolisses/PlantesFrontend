@@ -1,15 +1,14 @@
 import React, {useEffect, useRef} from 'react';
 import {useModal} from 'modal/ModalContext';
 import {Modalize} from 'react-native-modalize';
-import {Text} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 
-export function ModalDisplay({children}) {
+export function ModalDisplay() {
   const {currentModal, modalActive} = useModal();
 
   const ref = useRef();
 
   useEffect(() => {
-    console.error('oi');
     if (modalActive && currentModal) {
       ref.current.open();
     }
@@ -17,12 +16,21 @@ export function ModalDisplay({children}) {
 
   return (
     <>
-      {modalActive ? (
-        <Modalize ref={ref}>
-          <Text>oi</Text>
+      {modalActive && currentModal ? (
+        <Modalize
+          ref={ref}
+          snapPoint={200}
+          handlePosition={'inside'}
+          handleStyle={styles.handle}>
+          {currentModal}
         </Modalize>
       ) : null}
-      {children}
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  handle: {
+    backgroundColor: '#bbb',
+  },
+});
