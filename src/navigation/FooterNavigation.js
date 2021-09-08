@@ -1,15 +1,7 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {
-  faHome,
-  faMap,
-  faComments,
-  faUserFriends,
-  faCamera,
-} from '@fortawesome/free-solid-svg-icons';
+import {faHome, faComments, faCamera} from '@fortawesome/free-solid-svg-icons';
 import {FooterButton} from './FooterButton';
-import {FooterMainButton} from './FooterMainButton';
-
 export function FooterNavigation({selected}) {
   return (
     <View style={styles.container}>
@@ -19,12 +11,7 @@ export function FooterNavigation({selected}) {
         icon={faHome}
         selected={selected}
       />
-      <FooterButton
-        route="Publish"
-        icon={faCamera}
-        selected={selected}
-        // doubleClickRoute={'Camera'}
-      />
+      <FooterButton route="Publish" icon={faCamera} selected={selected} />
       <FooterButton
         route="ChatsList"
         text="Conversas"

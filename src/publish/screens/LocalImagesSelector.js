@@ -6,7 +6,7 @@ import FastImage from 'react-native-fast-image';
 const {width} = Dimensions.get('window');
 
 export function LocalImagesSelector() {
-  const numberOfCollums = 4;
+  const numberOfCollums = 3;
   const [images, setImages] = useState([]);
 
   async function getImages() {
