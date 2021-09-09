@@ -23,7 +23,6 @@ import {useUserContext} from 'auth/userContext';
 import {CommentsScreen} from 'comment/CommentsScreen';
 import {usePermissions} from 'permission/PermissionsContext';
 import {MapUserLocationButton} from 'map/MapUserLocationButton';
-import {Dev} from './Dev';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,11 +33,11 @@ export function Routes() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="development"
           component={Dev}
           options={{headerShown: false}}
-        />
+        /> */}
         {user ? (
           <>
             {grantedLocation || grantedLocation === null ? (

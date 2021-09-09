@@ -11,22 +11,30 @@ import {ImageGroupContextProvider} from 'camera/ImageGroupContext';
 import {PermissionsContextProvider} from 'permission/PermissionsContext';
 import {ChatReferenceContextProvider} from './chat/ChatReferenceContext';
 
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/lib/integration/react';
+import {store, persistor} from 'storage/configureStore';
+
 const App = () => {
   return (
-    <UserContextProvider>
-      <PermissionsContextProvider>
-        <ImageGroupContextProvider>
-          <AlertContextProvider>
-            <ModalContextProvider>
-              <ChatReferenceContextProvider>
-                <StatusBar barStyle={'default'} hidden={true} />
-                <Routes />
-              </ChatReferenceContextProvider>
-            </ModalContextProvider>
-          </AlertContextProvider>
-        </ImageGroupContextProvider>
-      </PermissionsContextProvider>
-    </UserContextProvider>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <UserContextProvider>
+          <PermissionsContextProvider>
+            <ImageGroupContextProvider>
+              <AlertContextProvider>
+                <ModalContextProvider>
+                  <ChatReferenceContextProvider>
+                    <StatusBar barStyle={'default'} hidden={true} />
+                    <Routes />
+                  </ChatReferenceContextProvider>
+                </ModalContextProvider>
+              </AlertContextProvider>
+            </ImageGroupContextProvider>
+          </PermissionsContextProvider>
+        </UserContextProvider>
+      </PersistGate>
+    </Provider>
   );
 };
 
