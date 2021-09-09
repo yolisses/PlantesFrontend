@@ -10,6 +10,7 @@ import {ChooseImagesPlaceholder} from 'publish/ChooseImagesPlaceholder';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import {PublishScreenLayout} from './PublishScreenLayout';
 import {DiscardButton} from 'publish/DiscardButton';
+import {NextButton} from 'publish/NextButton';
 
 export function PublishImagesScreen() {
   const {images, thereIsSomeImage} = useImageGroup();
@@ -23,7 +24,8 @@ export function PublishImagesScreen() {
   return (
     <PublishScreenLayout
       hideBar
-      headerLeft={thereIsSomeImage ? <DiscardButton /> : null}>
+      headerLeft={thereIsSomeImage ? <DiscardButton /> : null}
+      headerRight={thereIsSomeImage ? <NextButton route="Detail" /> : null}>
       <FooterNavigationLayout selected="Publish">
         <View>
           <SectionList
