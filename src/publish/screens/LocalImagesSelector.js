@@ -1,25 +1,30 @@
 import React, {useEffect, useState} from 'react';
 import CameraRoll from '@react-native-community/cameraroll';
-import {Dimensions, FlatList} from 'react-native';
+import {FlatList} from 'react-native';
 import FastImage from 'react-native-fast-image';
+import {StyleSheet} from 'react-native';
+import {width} from 'utils/width';
+const numberOfCollums = 3;
 
-const {width} = Dimensions.get('window');
-
-export function LocalImagesSelector() {
-  const numberOfCollums = 3;
+export function LocalImagesSelector({album}) {
   const [images, setImages] = useState([]);
 
-  async function getImages() {
-    CameraRoll.getPhotos({first: 50})
+  function getImages() {
+    CameraRoll.getPhotos({
+      first: 20,
+      groupTypes: album.type,
+      groupName: album.type !== 'All' ? album.title : undefined,
+      include: ['location'],
+    })
       .then(a => {
-        return setImages(a.edges);
+        setImages(a.edges);
       })
       .catch(err => console.error(err));
   }
 
   useEffect(() => {
     getImages();
-  }, []);
+  }, [album]);
 
   return (
     <FlatList
@@ -36,15 +41,19 @@ export function LocalImagesSelector() {
       renderItem={({item}) => (
         <FastImage
           key={item.node.image.uri}
-          style={{
-            width: width / numberOfCollums - 1 / numberOfCollums,
-            aspectRatio: 1,
-            marginRight: 1,
-            marginBottom: 1,
-          }}
+          style={style.image}
           source={{uri: item.node.image.uri}}
         />
       )}
     />
   );
 }
+
+const style = StyleSheet.create({
+  image: {
+    width: width / numberOfCollums - 1 / numberOfCollums,
+    aspectRatio: 1,
+    marginRight: 1,
+    marginBottom: 1,
+  },
+});

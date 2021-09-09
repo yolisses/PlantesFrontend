@@ -5,14 +5,19 @@ import {useModal} from 'modal/ModalContext';
 import {LightButton} from 'common/LightButton';
 import {SelectLocalImageAlbumModal} from './SelectImageAlbumModal';
 
-export function SelectImageAlbumButton({...res}) {
+export function SelectImageAlbumButton({album, setAlbum, ...res}) {
   const {showModal} = useModal();
 
   const onPress = () => {
-    showModal(<SelectLocalImageAlbumModal />);
+    showModal(<SelectLocalImageAlbumModal setAlbum={setAlbum} />);
   };
 
   return (
-    <LightButton {...res} text="Galeria" icon={faAngleDown} onPress={onPress} />
+    <LightButton
+      {...res}
+      onPress={onPress}
+      text={album.title}
+      icon={faAngleDown}
+    />
   );
 }

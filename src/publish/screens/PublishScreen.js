@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {SectionList, StyleSheet, View} from 'react-native';
 import {LocalImagesSelector} from './LocalImagesSelector';
 
@@ -15,6 +15,8 @@ export function PublishScreen() {
     {id: 0, data: []},
     {id: 1, data: ['images']},
   ];
+
+  const [album, setAlbum] = useState({title: 'Galeria', type: 'All'});
 
   return (
     <FooterNavigationLayout selected="Publish">
@@ -37,13 +39,17 @@ export function PublishScreen() {
             } else {
               return (
                 <View style={styles.wrapper}>
-                  <SelectImageAlbumButton style={styles.button} />
+                  <SelectImageAlbumButton
+                    album={album}
+                    setAlbum={setAlbum}
+                    style={styles.button}
+                  />
                   <TakePhotoButton style={styles.button} />
                 </View>
               );
             }
           }}
-          renderItem={() => <LocalImagesSelector />}
+          renderItem={() => <LocalImagesSelector album={album} />}
         />
         <ImagesSwiper />
       </View>
