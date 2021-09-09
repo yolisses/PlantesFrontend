@@ -1,11 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {Fieldset} from './Fieldset';
 import {SelectorWithImage} from './SelectorWithImage';
-import {useLocalStorage} from 'storage/useLocalStorage';
 
 export function SingleOptionSelector({dataItem, style, buttonStyle}) {
-  const [savedValue, setSavedValue] = useLocalStorage(dataItem);
+  const [savedValue, setSavedValue] = useState();
 
   return (
     <Fieldset
