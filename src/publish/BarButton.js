@@ -19,7 +19,7 @@ export function BarButton({
       <FontAwesomeIcon
         {...rest}
         icon={icon}
-        style={[styles.icon, {...iconStyle}]}
+        style={iconStyle}
         size={iconSize || 24}
         color={iconColor || 'gray'}
       />
@@ -36,8 +36,5 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
-  },
-  icon: {
-    marginRight: 0,
   },
 });

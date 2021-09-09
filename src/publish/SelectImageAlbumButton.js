@@ -19,6 +19,7 @@ export function SelectImageAlbumButton({album, setAlbum, ...res}) {
       onPress={onPress}
       text={album.title}
       icon={faAngleDown}
+      iconStyle={{marginRight: 2}}
     />
   );
 }
