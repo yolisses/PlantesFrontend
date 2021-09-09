@@ -2,7 +2,8 @@ import React from 'react';
 import {faAngleDown} from '@fortawesome/free-solid-svg-icons';
 
 import {useModal} from 'modal/ModalContext';
-import {LightButton} from 'common/LightButton';
+
+import {BarButton} from './BarButton';
 import {SelectLocalImageAlbumModal} from './SelectImageAlbumModal';
 
 export function SelectImageAlbumButton({album, setAlbum, ...res}) {
@@ -13,7 +14,7 @@ export function SelectImageAlbumButton({album, setAlbum, ...res}) {
   };
 
   return (
-    <LightButton
+    <BarButton
       {...res}
       onPress={onPress}
       text={album.title}

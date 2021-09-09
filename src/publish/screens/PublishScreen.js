@@ -62,11 +62,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     flexDirection: 'row',
-  },
-  button: {
-    flex: 1,
-    elevation: 0,
-    paddingHorizontal: 30,
-    paddingVertical: 15,
+    justifyContent: 'space-around',
   },
 });
