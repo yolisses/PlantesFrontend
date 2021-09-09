@@ -1,15 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {useLocalStorage} from 'storage/useLocalStorage';
 import {TextInput} from './TextInput';
 
 export function TextInputSaved({
-  dataItem,
+  label,
   validate,
   allowRegex,
   formatSavedText,
   ...rest
 }) {
-  const [savedValue, setSavedValue] = useLocalStorage(dataItem);
   const [currentText, setCurrentText] = useState('');
 
   const onEndEditing = () => {
@@ -51,7 +49,7 @@ export function TextInputSaved({
   return (
     <TextInput
       {...rest}
-      label={dataItem.label}
+      label={label}
       onChangeText={onChangeText}
       onEndEditing={onEndEditing}
       value={currentText}

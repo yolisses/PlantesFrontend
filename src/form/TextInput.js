@@ -1,31 +1,20 @@
-import React, {useEffect, useRef, useState} from 'react';
-import react_native, {
-  Keyboard,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import React, {useEffect, useRef} from 'react';
+import react_native, {Keyboard, StyleSheet, Text, View} from 'react-native';
 import {Fieldset} from './Fieldset';
 
 export function TextInput({
+  error,
+  input,
   label,
   style,
-  leftChild,
-  onFocus,
-  onBlur,
-  optional,
   value,
+  active,
+  optional,
+  multiline,
+  leftChild,
   ...rest
 }) {
-  const [focused, setFocused] = useState(false);
   const inputRef = useRef();
-
-  const press = () => {
-    if (rest.editable !== false) {
-      inputRef?.current?.focus();
-    }
-  };
   const keyboardDidHide = () => {
     inputRef?.current?.blur();
   };
@@ -34,39 +23,28 @@ export function TextInput({
   }, []);
 
   return (
-    <Pressable onPress={press}>
+    <View>
       <Fieldset
         label={label}
-        style={[styles.fieldset, focused && styles.focused]}
-        styleLabel={[styles.label, focused && styles.focusedLabel]}>
+        style={[styles.fieldset, active && styles.focused]}
+        styleLabel={[styles.label, active && styles.focusedLabel]}>
         <View style={styles.horizontalWrapper}>
           {leftChild}
-          {optional &&
-            !focused &&
-            (value === undefined || value === null || value === '') && (
-              <Text style={styles.optionalText}>Opcional </Text>
-            )}
+          {optional && !active && !value && (
+            <Text style={styles.optionalText}>Opcional </Text>
+          )}
           <react_native.TextInput
-            style={[styles.input, style]}
-            {...rest}
-            value={value !== null ? '' + value : ''}
+            style={[styles.input, multiline && styles.multiline, style]}
+            value={value}
             ref={inputRef}
-            onFocus={e => {
-              setFocused(true);
-              if (onFocus) {
-                onFocus(e);
-              }
-            }}
-            onBlur={e => {
-              setFocused(false);
-              if (onBlur) {
-                onBlur(e);
-              }
-            }}
+            multiline={multiline}
+            {...rest}
+            {...input}
           />
         </View>
       </Fieldset>
-    </Pressable>
+      {error && <Text style={styles.error}>{error}</Text>}
+    </View>
   );
 }
 
@@ -101,5 +79,11 @@ const styles = StyleSheet.create({
     zIndex: 10,
     transform: [{translateY: 0}],
     backgroundColor: '#eee',
+  },
+  error: {
+    color: '#900',
+    fontSize: 18,
+    marginHorizontal: 20,
+    marginBottom: 20,
   },
 });

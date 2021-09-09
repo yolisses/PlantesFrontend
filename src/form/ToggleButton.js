@@ -1,16 +1,14 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Pressable, StyleSheet, Text} from 'react-native';
 
 import {faCheck} from '@fortawesome/free-solid-svg-icons';
 import {faCircle} from '@fortawesome/free-regular-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 
-import {useLocalStorage} from 'storage/useLocalStorage';
-
 const activeColor = '#0a0';
 
 export function ToggleButton({option, style, onChange, ...rest}) {
-  const [active, setActive] = useLocalStorage(option);
+  const [active, setActive] = useState(false);
 
   useEffect(() => {
     if (onChange) {
