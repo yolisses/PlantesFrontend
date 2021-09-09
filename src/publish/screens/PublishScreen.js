@@ -1,14 +1,16 @@
 import React from 'react';
 import {SectionList, StyleSheet, View} from 'react-native';
 import {LocalImagesSelector} from './LocalImagesSelector';
-import {ImagesSwiper} from '../../show/ImagesSwiper';
-import {FooterNavigationLayout} from '../../navigation/FooterNavigationLayout';
-import {useImageGroup} from '../../camera/ImageGroupContext';
+
+import {ImagesSwiper} from 'show/ImagesSwiper';
+import {useImageGroup} from 'camera/ImageGroupContext';
 import {TakePhotoButton} from 'publish/TakePhotoButton';
 import {SelectImageAlbumButton} from 'publish/SelectImageAlbumButton';
+import {ChooseImagesPlaceholder} from 'publish/ChooseImagesPlaceholder';
+import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 
 export function PublishScreen() {
-  const {images} = useImageGroup();
+  const {images, thereIsSomeImage} = useImageGroup();
   const layout = [
     {id: 0, data: []},
     {id: 1, data: ['images']},
@@ -25,7 +27,11 @@ export function PublishScreen() {
             if (section.id === 0) {
               return (
                 <View style={{backgroundColor: 'white'}}>
-                  <ImagesSwiper images={images} />
+                  {thereIsSomeImage ? (
+                    <ImagesSwiper images={images} />
+                  ) : (
+                    <ChooseImagesPlaceholder />
+                  )}
                 </View>
               );
             } else {
