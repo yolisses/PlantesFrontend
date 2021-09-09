@@ -5,9 +5,8 @@ import {ProgressBar} from 'publish/ProgressBar';
 import {CustomHeader} from 'publish/CustomHeader';
 import {BackButton} from 'publish/BackButton';
 
-export function PublishScreenLayout({
+export function PublishScreenTop({
   ratio,
-  children,
   headerLeft,
   headerRight,
   hideBar = false,
@@ -20,7 +19,6 @@ export function PublishScreenLayout({
         right={headerRight}
       />
       {!hideBar && <ProgressBar ratio={ratio} />}
-      <View style={{flex: 1}}>{children}</View>
     </View>
   );
 }

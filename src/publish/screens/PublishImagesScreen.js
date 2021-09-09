@@ -5,12 +5,11 @@ import {NextButton} from 'publish/NextButton';
 import {ImagesSwiper} from 'show/ImagesSwiper';
 import {DiscardButton} from 'publish/DiscardButton';
 import {TakePhotoButton} from 'publish/TakePhotoButton';
+import {PublishScreenTop} from 'publish/PublishScreenTop';
 import {LocalImagesSelector} from 'publish/LocalImagesSelector';
 import {SelectImageAlbumButton} from 'publish/SelectImageAlbumButton';
 import {ChooseImagesPlaceholder} from 'publish/ChooseImagesPlaceholder';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
-
-import {PublishScreenLayout} from './PublishScreenLayout';
 
 import {useSelector} from 'react-redux';
 
@@ -25,10 +24,12 @@ export function PublishImagesScreen() {
   const [album, setAlbum] = useState({title: 'Galeria', type: 'All'});
 
   return (
-    <PublishScreenLayout
-      hideBar
-      headerLeft={thereIsSomeImage ? <DiscardButton /> : null}
-      headerRight={thereIsSomeImage ? <NextButton route="Detail" /> : null}>
+    <>
+      <PublishScreenTop
+        hideBar
+        headerLeft={thereIsSomeImage ? <DiscardButton /> : null}
+        headerRight={thereIsSomeImage ? <NextButton route="Detail" /> : null}
+      />
       <FooterNavigationLayout selected="Publish">
         <View>
           <SectionList
@@ -64,7 +65,7 @@ export function PublishImagesScreen() {
           <ImagesSwiper />
         </View>
       </FooterNavigationLayout>
-    </PublishScreenLayout>
+    </>
   );
 }
 

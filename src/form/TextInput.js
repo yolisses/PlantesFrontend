@@ -4,12 +4,13 @@ import {Fieldset} from './Fieldset';
 
 export function TextInput({
   error,
+  input,
   label,
   style,
   value,
   active,
   optional,
-  input,
+  multiline,
   leftChild,
   ...rest
 }) {
@@ -33,10 +34,11 @@ export function TextInput({
             <Text style={styles.optionalText}>Opcional </Text>
           )}
           <react_native.TextInput
-            style={[styles.input, style]}
-            {...rest}
+            style={[styles.input, multiline && styles.multiline, style]}
             value={value}
             ref={inputRef}
+            multiline={multiline}
+            {...rest}
             {...input}
           />
         </View>
