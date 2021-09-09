@@ -2,19 +2,17 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
 export function SwipeIndicator({images, selected}) {
-  return (
+  return images.length > 1 ? (
     <View style={styles.container}>
-      {images.length > 1
-        ? images.map((item, index) =>
-            selected === index ? (
-              <View style={styles.active} key={index} />
-            ) : (
-              <View style={styles.inactive} key={index} />
-            ),
-          )
-        : null}
+      {images.map((item, index) =>
+        selected === index ? (
+          <View style={styles.active} key={index} />
+        ) : (
+          <View style={styles.inactive} key={index} />
+        ),
+      )}
     </View>
-  );
+  ) : null;
 }
 
 const styles = StyleSheet.create({

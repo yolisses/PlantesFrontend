@@ -16,7 +16,7 @@ export function DiscardButton() {
       <FontAwesomeIcon
         icon={faTimes}
         size={25}
-        style={{marginRight: 20}}
+        style={{marginRight: 15}}
         color="gray"
       />
     </TouchableOpacity>

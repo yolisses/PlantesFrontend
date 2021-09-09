@@ -22,6 +22,7 @@ import {ModalDisplay} from 'modal/ModalDisplay';
 import {DiscardButton} from 'publish/DiscardButton';
 import {UserRoundImage} from 'common/UserRoundImage';
 
+import {NextButton} from 'publish/NextButton';
 import {useUserContext} from 'auth/userContext';
 import {CommentsScreen} from 'comment/CommentsScreen';
 import {useImageGroup} from 'camera/ImageGroupContext';
@@ -34,17 +35,16 @@ export function Routes() {
   const {user} = useUserContext();
   const {grantedLocation} = usePermissions();
 
-  const {images} = useImageGroup();
-  const thereIsSomeImage = images?.length > 0;
+  const {thereIsSomeImage} = useImageGroup();
 
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="development"
           component={PublishScreen}
           options={{headerShown: false}}
-        />
+        /> */}
         {user ? (
           <>
             {grantedLocation || grantedLocation === null ? (
@@ -90,7 +90,10 @@ export function Routes() {
               component={PublishScreen}
               options={{
                 headerTitle: 'Publicar',
-                headerRight: () => <DiscardButton />,
+                headerLeft: thereIsSomeImage ? () => <DiscardButton /> : null,
+                headerRight: thereIsSomeImage
+                  ? () => <NextButton route="PublishDetail" />
+                  : null,
               }}
             />
             <Stack.Screen
@@ -101,10 +104,7 @@ export function Routes() {
             <Stack.Screen
               name="PublishPrice"
               component={PublishPriceScreen}
-              options={{
-                headerLeft: () => <></>,
-                headerTitle: 'Publicar',
-              }}
+              options={{headerTitle: 'Publicar'}}
             />
             <Stack.Screen
               name="Chat"
