@@ -30,6 +30,7 @@ module.exports = {
           modal: './src/modal',
           store: './src/store',
           trash: './src/trash',
+          utils: './src/utils',
           camera: './src/camera',
           common: './src/common',
           comment: './src/comment',
