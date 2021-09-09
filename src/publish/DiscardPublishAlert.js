@@ -1,5 +1,4 @@
 import React from 'react';
-import {useImageGroup} from 'camera/ImageGroupContext';
 import {discardDataCollection} from 'storage/discardDataCollection';
 import {publishData} from 'publish/publishData';
 import {Alert} from 'alert/Alert';

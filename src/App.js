@@ -7,13 +7,12 @@ import {Routes} from './Routes';
 import {UserContextProvider} from 'auth/userContext';
 import {AlertContextProvider} from 'alert/AlertContext';
 import {ModalContextProvider} from 'modal/ModalContext';
-import {ImageGroupContextProvider} from 'camera/ImageGroupContext';
 import {PermissionsContextProvider} from 'permission/PermissionsContext';
 import {ChatReferenceContextProvider} from './chat/ChatReferenceContext';
 
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/lib/integration/react';
-import {store, persistor} from 'storage/configureStore';
+import {store, persistor} from 'global/configureStore';
 
 const App = () => {
   return (
@@ -21,16 +20,14 @@ const App = () => {
       <PersistGate loading={null} persistor={persistor}>
         <UserContextProvider>
           <PermissionsContextProvider>
-            <ImageGroupContextProvider>
-              <AlertContextProvider>
-                <ModalContextProvider>
-                  <ChatReferenceContextProvider>
-                    <StatusBar barStyle={'default'} hidden={true} />
-                    <Routes />
-                  </ChatReferenceContextProvider>
-                </ModalContextProvider>
-              </AlertContextProvider>
-            </ImageGroupContextProvider>
+            <AlertContextProvider>
+              <ModalContextProvider>
+                <ChatReferenceContextProvider>
+                  <StatusBar barStyle={'default'} hidden={true} />
+                  <Routes />
+                </ChatReferenceContextProvider>
+              </ModalContextProvider>
+            </AlertContextProvider>
           </PermissionsContextProvider>
         </UserContextProvider>
       </PersistGate>

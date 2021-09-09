@@ -33,6 +33,7 @@ module.exports = {
           utils: './src/utils',
           camera: './src/camera',
           common: './src/common',
+          global: './src/global',
           comment: './src/comment',
           publish: './src/publish',
           storage: './src/storage',

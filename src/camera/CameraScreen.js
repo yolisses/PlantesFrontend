@@ -8,21 +8,22 @@ import {Dimensions, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {faArrowLeft, faUndo} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 
-import {useImageGroup} from 'camera/ImageGroupContext';
 import {CameraSnapButton} from 'camera/CameraSnapButton';
 import {CameraCentralWrapper} from 'camera/CameraCentralWrapper';
 import {PictureConfirmButtons} from 'camera/PictureConfirmButtons';
+import {useDispatch} from 'react-redux';
 
 const optionButtonSize = 25;
 
 export function CameraScreen() {
+  const dispatch = useDispatch();
+
   const {navigate} = useNavigation();
   const [type, setType] = useState(RNCamera.Constants.Type.back);
   const cameraRef = useRef();
 
   const [pictureTook, setPictureTook] = useState(false);
   const [uri, setUri] = useState();
-  const {addImage} = useImageGroup();
 
   const turnCameraDirection = () => {
     setType(
@@ -47,7 +48,7 @@ export function CameraScreen() {
   }
 
   function approve() {
-    addImage(uri);
+    dispatch({type: 'ADD_IMAGE', uri});
     navigate('Publish');
 
     resume();

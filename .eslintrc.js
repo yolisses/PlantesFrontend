@@ -21,6 +21,7 @@ module.exports = {
           ['camera', './src/camera'],
           ['common', './src/common'],
           ['comment', './src/comment'],
+          ['global', './src/global'],
           ['publish', './src/publish'],
           ['navigation', './src/navigation'],
         ],
