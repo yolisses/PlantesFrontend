@@ -1,67 +1,29 @@
-import React, {useState} from 'react';
-import {SectionList, StyleSheet, View} from 'react-native';
-import {LocalImagesSelector} from './LocalImagesSelector';
+import React from 'react';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {PublishImagesScreen} from './PublishImagesScreen';
+import {PublishDetailScreen} from './PublishDetailScreen';
+import {PublishPriceScreen} from './PublishPriceScreen';
 
-import {ImagesSwiper} from 'show/ImagesSwiper';
-import {useImageGroup} from 'camera/ImageGroupContext';
-import {TakePhotoButton} from 'publish/TakePhotoButton';
-import {SelectImageAlbumButton} from 'publish/SelectImageAlbumButton';
-import {ChooseImagesPlaceholder} from 'publish/ChooseImagesPlaceholder';
-import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
+const Publish = createNativeStackNavigator();
 
 export function PublishScreen() {
-  const {images, thereIsSomeImage} = useImageGroup();
-  const layout = [
-    {id: 0, data: []},
-    {id: 1, data: ['images']},
-  ];
-
-  const [album, setAlbum] = useState({title: 'Galeria', type: 'All'});
-
   return (
-    <FooterNavigationLayout selected="Publish">
-      <View>
-        <SectionList
-          sections={layout}
-          stickyHeaderIndices={[1]}
-          stickySectionHeadersEnabled
-          renderSectionHeader={({section}) => {
-            if (section.id === 0) {
-              return (
-                <View style={{backgroundColor: 'white'}}>
-                  {thereIsSomeImage ? (
-                    <ImagesSwiper images={images} />
-                  ) : (
-                    <ChooseImagesPlaceholder />
-                  )}
-                </View>
-              );
-            } else {
-              return (
-                <View style={styles.wrapper}>
-                  <SelectImageAlbumButton
-                    album={album}
-                    setAlbum={setAlbum}
-                    style={styles.button}
-                  />
-                  <TakePhotoButton style={styles.button} />
-                </View>
-              );
-            }
-          }}
-          renderItem={() => <LocalImagesSelector album={album} />}
-        />
-        <ImagesSwiper />
-      </View>
-    </FooterNavigationLayout>
+    <Publish.Navigator>
+      <Publish.Screen
+        name="Images"
+        component={PublishImagesScreen}
+        options={{headerShown: false}}
+      />
+      <Publish.Screen
+        name="Detail"
+        component={PublishDetailScreen}
+        options={{headerShown: false}}
+      />
+      <Publish.Screen
+        name="Price"
+        component={PublishPriceScreen}
+        options={{headerShown: false}}
+      />
+    </Publish.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  wrapper: {
-    backgroundColor: 'white',
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
-});

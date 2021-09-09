@@ -12,20 +12,15 @@ import {ShowItemScreen} from 'show/ShowItemScreen';
 import {ChatsListScreen} from 'chat/ChatsListScreen';
 import {CommunityScreen} from 'post/CommunityScreen';
 import {PublishScreen} from 'publish/screens/PublishScreen';
-import {PublishPriceScreen} from 'publish/screens/PublishPriceScreen';
-import {PublishDetailScreen} from 'publish/screens/PublishDetailScreen';
 import {RequestLocationPermissionScreen} from 'permission/RequestLocationPermissionScreen';
 
 import {ChatHeader} from 'chat/ChatHeader';
 import {AlertDisplay} from 'alert/AlertDisplay';
 import {ModalDisplay} from 'modal/ModalDisplay';
-import {DiscardButton} from 'publish/DiscardButton';
 import {UserRoundImage} from 'common/UserRoundImage';
 
-import {NextButton} from 'publish/NextButton';
 import {useUserContext} from 'auth/userContext';
 import {CommentsScreen} from 'comment/CommentsScreen';
-import {useImageGroup} from 'camera/ImageGroupContext';
 import {usePermissions} from 'permission/PermissionsContext';
 import {MapUserLocationButton} from 'map/MapUserLocationButton';
 
@@ -34,8 +29,6 @@ const Stack = createNativeStackNavigator();
 export function Routes() {
   const {user} = useUserContext();
   const {grantedLocation} = usePermissions();
-
-  const {thereIsSomeImage} = useImageGroup();
 
   return (
     <NavigationContainer>
@@ -88,24 +81,7 @@ export function Routes() {
             <Stack.Screen
               name="Publish"
               component={PublishScreen}
-              options={{
-                headerTitle: 'Publicar',
-                headerLeft: () =>
-                  thereIsSomeImage ? <DiscardButton /> : <></>,
-                headerRight: thereIsSomeImage
-                  ? () => <NextButton route="PublishDetail" />
-                  : null,
-              }}
-            />
-            <Stack.Screen
-              name="PublishDetail"
-              component={PublishDetailScreen}
-              options={{headerTitle: 'Publicar'}}
-            />
-            <Stack.Screen
-              name="PublishPrice"
-              component={PublishPriceScreen}
-              options={{headerTitle: 'Publicar'}}
+              options={{headerShown: false}}
             />
             <Stack.Screen
               name="Chat"
