@@ -90,7 +90,8 @@ export function Routes() {
               component={PublishScreen}
               options={{
                 headerTitle: 'Publicar',
-                headerLeft: thereIsSomeImage ? () => <DiscardButton /> : null,
+                headerLeft: () =>
+                  thereIsSomeImage ? <DiscardButton /> : <></>,
                 headerRight: thereIsSomeImage
                   ? () => <NextButton route="PublishDetail" />
                   : null,
