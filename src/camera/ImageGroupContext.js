@@ -10,6 +10,8 @@ export function ImageGroupContextProvider({children}) {
   const [images, setImages] = useLocalStorage(publishData.images);
   const [lastImageUri, setLastImageUri] = useState('');
 
+  const thereIsSomeImage = images && images.length > 0;
+
   function addImage(imageUri) {
     if (imageUri && imageUri !== lastImageUri) {
       const copy = [...images];
@@ -20,7 +22,8 @@ export function ImageGroupContextProvider({children}) {
   }
 
   return (
-    <ImageGroupContext.Provider value={{images, addImage, setImages}}>
+    <ImageGroupContext.Provider
+      value={{images, addImage, setImages, thereIsSomeImage}}>
       {children}
     </ImageGroupContext.Provider>
   );
