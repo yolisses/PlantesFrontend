@@ -18,6 +18,8 @@ module.exports = {
           '.json',
         ],
         alias: {
+          assets: './assets',
+
           api: './src/api',
           map: './src/map',
           auth: './src/auth',

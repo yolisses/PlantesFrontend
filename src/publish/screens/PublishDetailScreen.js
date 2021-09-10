@@ -1,17 +1,18 @@
 import React from 'react';
+import {Field, useField} from 'react-final-form';
 import {ScrollView, StyleSheet} from 'react-native';
 
 import {TextInput} from 'form/TextInput';
+import {TagsSelector} from 'form/TagsSelector';
 import {SingleOptionSelector} from 'form/SingleOptionSelector';
 
+import {tags} from 'publish/data/tags';
 import {BackButton} from 'publish/BackButton';
 import {NextButton} from 'publish/NextButton';
 import {publishData} from 'publish/publishData';
 import {ProgressBar} from 'publish/ProgressBar';
 import {CustomHeader} from 'publish/CustomHeader';
-
-import {Field, useField} from 'react-final-form';
-import {plantTypes} from 'publish/plantTypes';
+import {plantTypes} from 'publish/data/plantTypes';
 
 function ValidatedHeader() {
   const {meta: name} = useField('name');
@@ -46,8 +47,9 @@ export function PublishDetailScreen() {
             );
           }}
         </Field>
-        <Field name="type">
-          {({input}) => (
+        <Field
+          name="type"
+          render={({input}) => (
             <SingleOptionSelector
               {...input}
               dataItem={type}
@@ -55,8 +57,13 @@ export function PublishDetailScreen() {
               options={plantTypes}
             />
           )}
-        </Field>
-        {/* <TagsSelector label="Marcar como"  /> */}
+        />
+        <Field
+          name="tags"
+          render={({input}) => (
+            <TagsSelector {...input} options={tags} label="Marcar como" />
+          )}
+        />
         <TextInput optional multiline label="Descrição" />
       </ScrollView>
     </>

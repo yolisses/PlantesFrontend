@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {Pressable, StyleSheet, Text} from 'react-native';
 
 import {faCheck} from '@fortawesome/free-solid-svg-icons';
@@ -7,52 +7,50 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 
 const activeColor = '#0a0';
 
-export function ToggleButton({label, style, onChange, ...rest}) {
-  const [active, setActive] = useState(false);
-
-  useEffect(() => {
+export function ToggleButton({label, style, onChange, value, ...rest}) {
+  const onPress = () => {
     if (onChange) {
-      onChange(active);
+      onChange(!value);
     }
-  }, [active, onChange]);
+  };
 
   return (
     <Pressable
-      onPress={() => setActive(!active)}
-      style={[styles.input, style, active && styles.active]}
-      {...rest}>
-      {active ? (
+      {...rest}
+      onPress={onPress}
+      style={[styles.input, style, value && styles.active]}>
+      {value ? (
         <FontAwesomeIcon
+          size={15}
           icon={faCheck}
           style={styles.icon}
           color={activeColor}
-          size={15}
         />
       ) : (
         <FontAwesomeIcon
+          size={15}
+          color={'#ccc'}
           icon={faCircle}
           style={styles.icon}
-          color={'#ccc'}
-          size={15}
         />
       )}
-      <Text style={[styles.text, active && styles.activeText]}>{label}</Text>
+      <Text style={[styles.text, value && styles.activeText]}>{label}</Text>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   input: {
-    borderStyle: 'solid',
-    borderWidth: 2,
-    borderColor: '#ccc',
-    borderRadius: 10,
-    paddingHorizontal: 5,
-    paddingVertical: 8,
-    alignSelf: 'flex-start',
-    flexDirection: 'row',
-    alignItems: 'center',
     margin: 2,
+    borderWidth: 2,
+    borderRadius: 10,
+    paddingVertical: 8,
+    borderColor: '#ccc',
+    flexDirection: 'row',
+    paddingHorizontal: 5,
+    alignItems: 'center',
+    borderStyle: 'solid',
+    alignSelf: 'flex-start',
   },
   text: {
     fontSize: 17.5,

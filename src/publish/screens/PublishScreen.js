@@ -4,6 +4,7 @@ import {PublishImagesScreen} from './PublishImagesScreen';
 import {PublishDetailScreen} from './PublishDetailScreen';
 import {PublishPriceScreen} from './PublishPriceScreen';
 import {Form} from 'react-final-form';
+import {Text} from 'react-native';
 
 const Publish = createNativeStackNavigator();
 
@@ -18,7 +19,7 @@ export function PublishScreen() {
         }
         return errors;
       }}
-      render={() => (
+      render={({values}) => (
         <>
           <Publish.Navigator>
             <Publish.Screen
@@ -37,6 +38,8 @@ export function PublishScreen() {
               options={{headerShown: false}}
             />
           </Publish.Navigator>
+
+          <Text>{JSON.stringify(values)}</Text>
         </>
       )}
     />
