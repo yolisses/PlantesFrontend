@@ -11,6 +11,8 @@ import {NextButton} from 'publish/NextButton';
 import {ProgressBar} from 'publish/ProgressBar';
 import {CustomHeader} from 'publish/CustomHeader';
 import {AvailabilitySelector} from 'publish/AvailabilitySelector';
+import {TagsSelector} from 'form/TagsSelector';
+import {tags} from 'publish/data/tags';
 
 function ValidatedHeader({thereIsSomeImage}) {
   return (
@@ -29,6 +31,7 @@ export function PublishPriceScreen() {
       <ProgressBar ratio={3 / 3} />
       <ScrollView showsVerticalScrollIndicator={false} style={{padding: 10}}>
         <AvailabilitySelector />
+
         <Field
           name="price"
           type="number"
@@ -49,7 +52,7 @@ export function PublishPriceScreen() {
                 }}
                 autoCompleteType={'off'}
                 leftChild={<MoneySign />}
-                // keyboardType="decimal-pad"
+                keyboardType="decimal-pad"
               />
             );
           }}

@@ -1,42 +1,30 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 
-import {Fieldset} from 'form/Fieldset';
-import {ToggleButton} from 'form/ToggleButton';
+import {Field} from 'react-final-form';
+import {TagsSelector} from 'form/TagsSelector';
+import {availabilities} from './data/availiabilities';
 
 export function AvailabilitySelector() {
   return (
-    <View>
-      <Fieldset label="Disponível para" style={styles.fieldset} disableBorder>
-        <ToggleButton
-          label="Doação"
-          style={styles.button}
+    <Field
+      name="availabilities"
+      render={({input}) => (
+        <TagsSelector
+          {...input}
+          options={availabilities}
           buttonStyle={styles.button}
+          label="Disponível para"
         />
-        <ToggleButton
-          label="Troca"
-          style={styles.button}
-          buttonStyle={styles.button}
-        />
-        <ToggleButton
-          label="Venda"
-          style={styles.button}
-          buttonStyle={styles.button}
-        />
-      </Fieldset>
-    </View>
+      )}
+    />
   );
 }
 
 const styles = StyleSheet.create({
-  fieldset: {
-    flexDirection: 'row',
-    paddingHorizontal: 0,
-    paddingBottom: 0,
-  },
   button: {
     flex: 1,
-    justifyContent: 'center',
     paddingVertical: 15,
+    justifyContent: 'center',
   },
 });
