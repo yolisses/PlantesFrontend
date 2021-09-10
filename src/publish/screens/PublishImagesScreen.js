@@ -18,7 +18,7 @@ function ValidatedHeader({thereIsSomeImage}) {
     <CustomHeader
       title="Publicar"
       left={thereIsSomeImage && <DiscardButton />}
-      right={thereIsSomeImage && <NextButton route="Price" />}
+      right={thereIsSomeImage && <NextButton route="Detail" />}
     />
   );
 }

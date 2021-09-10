@@ -3,9 +3,9 @@ import {StyleSheet, View} from 'react-native';
 
 import {Fieldset} from 'form/Fieldset';
 import {ToggleButton} from 'form/ToggleButton';
-import {TextInputMoney} from 'form/TextInputMoney';
 
 import {publishData} from 'publish/publishData';
+import {TextInput} from 'form/TextInput';
 
 export function AvailabilitySelector() {
   const [sell, setSell] = useState(false);
@@ -33,7 +33,7 @@ export function AvailabilitySelector() {
         />
       </Fieldset>
       <View opacity={sell ? 1 : 0}>
-        <TextInputMoney dataItem={price} editable={sell} />
+        <TextInput label="Preço" editable={sell} keyboardType="decimal-pad" />
       </View>
     </View>
   );
