@@ -15,7 +15,6 @@ function ValidatedHeader() {
   const {
     input: {value: images},
   } = useField('images');
-  console.error(images);
   const thereIsSomeImage = Object.values(images).length > 0;
 
   return (
