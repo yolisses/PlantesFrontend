@@ -19,7 +19,7 @@ export function LocalImagesSelector({album}) {
       include: ['location'],
     })
       .then(a => {
-        setImages(a.edges);
+        setImages(a.edges.map(item => item.node.image));
       })
       .catch(err => console.error(err));
   }
@@ -42,18 +42,14 @@ export function LocalImagesSelector({album}) {
               index,
             };
           }}
-          keyExtractor={item => item.node.image.uri}
+          keyExtractor={item => item.uri}
           renderItem={({item}) => {
-            const {uri} = item.node.image;
+            const {uri} = item;
             return (
               <Field
-                name={input.name + '.' + uri}
+                name={input.name + '.' + uri.replace('.', ':&#%')}
                 render={({input}) => (
-                  <SelectableImage
-                    {...item}
-                    {...input}
-                    uri={item.node.image.uri}
-                  />
+                  <SelectableImage {...item} {...input} uri={item.uri} />
                 )}
               />
             );

@@ -38,7 +38,11 @@ export function PublishImagesScreen() {
           stickySectionHeadersEnabled
           renderSectionHeader={({section}) => {
             if (section.id === 0) {
-              return <PublishImagesPreview />;
+              return (
+                <View style={{backgroundColor: 'white'}}>
+                  <PublishImagesPreview />
+                </View>
+              );
             } else {
               return (
                 <View style={styles.wrapper}>

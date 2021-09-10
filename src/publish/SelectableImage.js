@@ -12,7 +12,7 @@ export function SelectableImage({value, onChange, uri}) {
   return (
     <Pressable
       onPress={() => {
-        onChange(!value);
+        onChange(value ? undefined : true);
       }}>
       <FastImage
         style={[styles.image, value && styles.selected]}
