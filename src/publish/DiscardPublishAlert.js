@@ -11,10 +11,7 @@ export function DiscardPublishAlert() {
   };
 
   return (
-    <Alert
-      title="Descartar publicação?"
-      // description="As imagens continuarão salvas na memória"
-    >
+    <Alert title="Descartar publicação?">
       <AlertButton text="Cancelar" />
       <AlertButton text="Descartar" onPress={discard} destructive />
     </Alert>

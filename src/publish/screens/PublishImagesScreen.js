@@ -11,15 +11,14 @@ import {ChooseImagesPlaceholder} from 'publish/ChooseImagesPlaceholder';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 
 import {useSelector} from 'react-redux';
-import {BackButton} from 'publish/BackButton';
 import {CustomHeader} from 'publish/CustomHeader';
 
 function ValidatedHeader({thereIsSomeImage}) {
   return (
     <CustomHeader
       title="Publicar"
+      left={thereIsSomeImage && <DiscardButton />}
       right={thereIsSomeImage && <NextButton route="Price" />}
-      left={thereIsSomeImage ? <DiscardButton /> : <BackButton />}
     />
   );
 }
