@@ -1,14 +1,20 @@
 import React from 'react';
 import FastImage from 'react-native-fast-image';
 
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, View} from 'react-native';
 
 import {width} from 'utils/width';
 import {SelectableImageNumber} from './SelectableImageNumber';
+import {useField} from 'react-final-form';
 
 const numberOfCollums = 3;
 
 export function SelectableImage({value, onChange, uri}) {
+  const {input} = useField('images');
+  const images = Object.keys(input.value)?.map(image =>
+    image.replace(':&#%', '.'),
+  );
+
   return (
     <Pressable
       onPress={() => {
@@ -20,7 +26,7 @@ export function SelectableImage({value, onChange, uri}) {
       />
       {value ? (
         <View style={styles.numberWrapper}>
-          <SelectableImageNumber number={999} />
+          <SelectableImageNumber number={images.indexOf(uri) + 1} />
         </View>
       ) : null}
     </Pressable>
