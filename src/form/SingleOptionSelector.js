@@ -1,23 +1,30 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Fieldset} from './Fieldset';
 import {SelectorWithImage} from './SelectorWithImage';
 
-export function SingleOptionSelector({dataItem, style, buttonStyle}) {
-  const [savedValue, setSavedValue] = useState();
-
+export function SingleOptionSelector({
+  label,
+  value,
+  style,
+  options,
+  onChange,
+  buttonStyle,
+}) {
   return (
-    <Fieldset
-      label={dataItem.label}
-      style={[styles.fieldset, style]}
-      disableBorder>
-      {dataItem.options.map(option => (
+    <Fieldset label={label} style={[styles.fieldset, style]} disableBorder>
+      {options.map(option => (
         <SelectorWithImage
-          onPress={() => setSavedValue(option.key)}
-          active={option.key === savedValue}
           key={option.key}
-          option={option}
           style={buttonStyle}
+          label={option.label}
+          image={option.image}
+          active={option.key === value}
+          onPress={() => {
+            if (onChange) {
+              onChange(option.key);
+            }
+          }}
         />
       ))}
     </Fieldset>

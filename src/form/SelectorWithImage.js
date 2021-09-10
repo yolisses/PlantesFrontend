@@ -3,23 +3,18 @@ import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 
 const activeColor = '#0a0';
 
-export function SelectorWithImage({option, active, style, ...rest}) {
+export function SelectorWithImage({image, label, style, active, ...rest}) {
   return (
     <View style={styles.padding}>
       <Pressable
         style={[styles.input, style, active && styles.active]}
         {...rest}>
         {active ? (
-          <Image
-            source={option.image}
-            style={[styles.image, styles.activeImage]}
-          />
+          <Image source={image} style={[styles.image, styles.activeImage]} />
         ) : (
-          <Image source={option.image} style={styles.image} />
+          <Image source={image} style={styles.image} />
         )}
-        <Text style={[styles.text, active && styles.activeText]}>
-          {option.label}
-        </Text>
+        <Text style={[styles.text, active && styles.activeText]}>{label}</Text>
       </Pressable>
     </View>
   );

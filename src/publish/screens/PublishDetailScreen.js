@@ -2,7 +2,6 @@ import React from 'react';
 import {ScrollView, StyleSheet} from 'react-native';
 
 import {TextInput} from 'form/TextInput';
-import {TagsSelector} from 'form/TagsSelector';
 import {SingleOptionSelector} from 'form/SingleOptionSelector';
 
 import {BackButton} from 'publish/BackButton';
@@ -11,7 +10,8 @@ import {publishData} from 'publish/publishData';
 import {ProgressBar} from 'publish/ProgressBar';
 import {CustomHeader} from 'publish/CustomHeader';
 
-import {Field, Form, useField} from 'react-final-form';
+import {Field, useField} from 'react-final-form';
+import {plantTypes} from 'publish/plantTypes';
 
 function ValidatedHeader() {
   const {meta: name} = useField('name');
@@ -26,7 +26,7 @@ function ValidatedHeader() {
 }
 
 export function PublishDetailScreen() {
-  const {name, options, description, type} = publishData;
+  const {type} = publishData;
 
   return (
     <>
@@ -40,21 +40,24 @@ export function PublishDetailScreen() {
                 autoFocus
                 label="Nome"
                 input={input}
-                dataItem={name}
                 error={meta.error}
                 active={meta.active}
               />
             );
           }}
         </Field>
-        <SingleOptionSelector dataItem={type} />
-        <TagsSelector label="Marcar como" options={options} />
-        <TextInput
-          optional
-          multiline
-          label="Descrição"
-          dataItem={description}
-        />
+        <Field name="type">
+          {({input}) => (
+            <SingleOptionSelector
+              {...input}
+              dataItem={type}
+              label="Marcar como"
+              options={plantTypes}
+            />
+          )}
+        </Field>
+        {/* <TagsSelector label="Marcar como"  /> */}
+        <TextInput optional multiline label="Descrição" />
       </ScrollView>
     </>
   );
