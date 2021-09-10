@@ -1,8 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Dimensions, ScrollView, View} from 'react-native';
+import {Dimensions, ScrollView, StyleSheet, View} from 'react-native';
 
-import {SquareImage} from 'common/SquareImage';
 import {SwipeIndicator} from './SwipeIndicator';
+import FastImage from 'react-native-fast-image';
 
 const {width} = Dimensions.get('window');
 
@@ -22,7 +22,7 @@ export function ImagesSwiper({images, preImage}) {
   }, [images]);
 
   if (!images) {
-    return <SquareImage uri={preImage} fraction={1} />;
+    return <FastImage style={styles.image} source={{uri: preImage}} />;
   }
 
   return (
@@ -35,10 +35,14 @@ export function ImagesSwiper({images, preImage}) {
         disableIntervalMomentum
         showsHorizontalScrollIndicator={false}>
         {images.map((image, index) => (
-          <SquareImage key={index} uri={image} fraction={1} />
+          <FastImage key={index} style={styles.image} source={{uri: image}} />
         ))}
       </ScrollView>
       <SwipeIndicator images={images} selected={selected} />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  image: {width, height: width, backgroundColor: '#ddd'},
+});

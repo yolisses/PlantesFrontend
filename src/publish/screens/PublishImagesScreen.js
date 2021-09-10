@@ -21,42 +21,27 @@ function ValidatedHeader({thereIsSomeImage}) {
 }
 
 export function PublishImagesScreen() {
-  const layout = [
-    {id: 0, data: []},
-    {id: 1, data: ['images']},
-  ];
-
   const [album, setAlbum] = useState({title: 'Galeria', type: 'All'});
 
   return (
     <>
       <FooterNavigationLayout selected="Publish">
         <ValidatedHeader />
-        <SectionList
-          sections={layout}
-          stickyHeaderIndices={[1]}
-          stickySectionHeadersEnabled
-          renderSectionHeader={({section}) => {
-            if (section.id === 0) {
-              return (
-                <View style={{backgroundColor: 'white'}}>
-                  <PublishImagesPreview />
-                </View>
-              );
-            } else {
-              return (
-                <View style={styles.wrapper}>
-                  <SelectImageAlbumButton
-                    album={album}
-                    setAlbum={setAlbum}
-                    style={styles.button}
-                  />
-                  <TakePhotoButton style={styles.button} />
-                </View>
-              );
-            }
-          }}
-          renderItem={() => <LocalImagesSelector album={album} />}
+        <LocalImagesSelector
+          album={album}
+          flatListHeader={() => (
+            <View style={{backgroundColor: 'white'}}>
+              <PublishImagesPreview />
+              <View style={styles.wrapper}>
+                <SelectImageAlbumButton
+                  album={album}
+                  setAlbum={setAlbum}
+                  style={styles.button}
+                />
+                <TakePhotoButton style={styles.button} />
+              </View>
+            </View>
+          )}
         />
       </FooterNavigationLayout>
     </>

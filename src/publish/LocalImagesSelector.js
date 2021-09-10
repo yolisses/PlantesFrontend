@@ -8,7 +8,7 @@ import {SelectableImage} from './SelectableImage';
 
 const numberOfCollums = 3;
 
-export function LocalImagesSelector({album}) {
+export function LocalImagesSelector({album, flatListHeader}) {
   const [images, setImages] = useState([]);
 
   function getImages() {
@@ -42,6 +42,7 @@ export function LocalImagesSelector({album}) {
               index,
             };
           }}
+          ListHeaderComponent={flatListHeader}
           keyExtractor={item => item.uri}
           renderItem={({item}) => {
             const {uri} = item;
