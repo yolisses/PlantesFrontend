@@ -1,5 +1,5 @@
 import React from 'react';
-import {Field} from 'react-final-form';
+import {Field, useField} from 'react-final-form';
 import {ScrollView} from 'react-native';
 
 import {TextInput} from 'form/TextInput';
@@ -11,12 +11,23 @@ import {CustomHeader} from 'publish/CustomHeader';
 import {AvailabilitySelector} from 'publish/AvailabilitySelector';
 import {PriceInput} from 'publish/PriceInput';
 
-function ValidatedHeader({thereIsSomeImage}) {
+function ValidatedHeader() {
+  const {
+    meta: availabilities,
+    input: {
+      value: {sell},
+    },
+  } = useField('availabilities');
+  const {meta: price} = useField('price');
+
   return (
     <CustomHeader
       title="Publicar"
       left={<BackButton />}
-      right={thereIsSomeImage && <NextButton route="Detail" />}
+      right={
+        !availabilities.invalid &&
+        !(sell && price.invalid) && <NextButton route="Price" />
+      }
     />
   );
 }

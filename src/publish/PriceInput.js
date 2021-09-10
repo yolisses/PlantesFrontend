@@ -23,15 +23,12 @@ export function PriceInput() {
           <TextInput
             {...input}
             label="Preço"
-            error={meta.error}
             autoCorrect={false}
             active={meta.active}
-            onBlur={e => {
-              input.onBlur(e);
-            }}
             autoCompleteType={'off'}
             leftChild={<MoneySign />}
             keyboardType="decimal-pad"
+            error={meta.touched && meta.error}
           />
         );
       }}

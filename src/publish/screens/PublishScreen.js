@@ -21,6 +21,16 @@ export function PublishScreen() {
         if (!values.type) {
           errors.type = 'Por favor, selecione um destes';
         }
+        if (
+          !values.availabilities ||
+          !Object.values(values.availabilities).some(item => item)
+        ) {
+          errors.availabilities = 'Por favor, selecione um destes';
+        }
+        if (!values.price) {
+          errors.price =
+            'Por favor, escreva um preço ou desmarque a opção venda';
+        }
         return errors;
       }}
       render={({values}) => (
