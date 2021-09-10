@@ -1,13 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import {Fieldset} from 'form/Fieldset';
-import {TextInput} from 'form/TextInput';
 import {ToggleButton} from 'form/ToggleButton';
 
 export function AvailabilitySelector() {
-  const [sell, setSell] = useState(false);
-
   return (
     <View>
       <Fieldset label="Disponível para" style={styles.fieldset} disableBorder>
@@ -23,14 +20,10 @@ export function AvailabilitySelector() {
         />
         <ToggleButton
           label="Venda"
-          onChange={setSell}
           style={styles.button}
           buttonStyle={styles.button}
         />
       </Fieldset>
-      <View opacity={sell ? 1 : 0}>
-        <TextInput label="Preço" editable={sell} keyboardType="decimal-pad" />
-      </View>
     </View>
   );
 }
