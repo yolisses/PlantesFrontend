@@ -27,10 +27,7 @@ export function SquareImage({
   return uri ? (
     <View style={[styles.image, sizeStyle, style]} onPress={onPress}>
       <FastImage
-        source={{
-          uri,
-          priority: FastImage.priority.normal,
-        }}
+        source={{uri}}
         resizeMode={FastImage.resizeMode.cover}
         style={[styles.previewImage, transformStyle]}
       />

@@ -1,15 +1,13 @@
 import React, {useState} from 'react';
-import {useSelector} from 'react-redux';
 import {SectionList, StyleSheet, View} from 'react-native';
 
 import {NextButton} from 'publish/NextButton';
-import {ImagesSwiper} from 'show/ImagesSwiper';
 import {CustomHeader} from 'publish/CustomHeader';
 import {DiscardButton} from 'publish/DiscardButton';
 import {TakePhotoButton} from 'publish/TakePhotoButton';
 import {LocalImagesSelector} from 'publish/LocalImagesSelector';
+import {PublishImagesPreview} from 'publish/PublishImagesPreview';
 import {SelectImageAlbumButton} from 'publish/SelectImageAlbumButton';
-import {ChooseImagesPlaceholder} from 'publish/ChooseImagesPlaceholder';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 
 function ValidatedHeader({thereIsSomeImage}) {
@@ -23,8 +21,6 @@ function ValidatedHeader({thereIsSomeImage}) {
 }
 
 export function PublishImagesScreen() {
-  const images = useSelector(state => state.images);
-  const thereIsSomeImage = images && images.length > 0;
   const layout = [
     {id: 0, data: []},
     {id: 1, data: ['images']},
@@ -35,22 +31,14 @@ export function PublishImagesScreen() {
   return (
     <>
       <FooterNavigationLayout selected="Publish">
-        <ValidatedHeader thereIsSomeImage={thereIsSomeImage} />
+        <ValidatedHeader />
         <SectionList
           sections={layout}
           stickyHeaderIndices={[1]}
           stickySectionHeadersEnabled
           renderSectionHeader={({section}) => {
             if (section.id === 0) {
-              return (
-                <View style={{backgroundColor: 'white'}}>
-                  {thereIsSomeImage ? (
-                    <ImagesSwiper images={images} />
-                  ) : (
-                    <ChooseImagesPlaceholder />
-                  )}
-                </View>
-              );
+              return <PublishImagesPreview />;
             } else {
               return (
                 <View style={styles.wrapper}>

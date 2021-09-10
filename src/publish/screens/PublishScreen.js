@@ -5,7 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {PublishImagesScreen} from './PublishImagesScreen';
 import {PublishDetailScreen} from './PublishDetailScreen';
 import {PublishPriceScreen} from './PublishPriceScreen';
-import {Text} from 'react-native';
+import {CameraScreen} from 'camera/CameraScreen';
 
 const Publish = createNativeStackNavigator();
 
@@ -48,6 +48,11 @@ export function PublishScreen() {
           <Publish.Screen
             name="Price"
             component={PublishPriceScreen}
+            options={{headerShown: false}}
+          />
+          <Publish.Screen
+            name="Camera"
+            component={CameraScreen}
             options={{headerShown: false}}
           />
         </Publish.Navigator>

@@ -9,7 +9,6 @@ import {ChatScreen} from 'chat/ChatScreen';
 import {UserScreen} from 'user/UserScreen';
 import {LoginScreen} from 'auth/LoginScreen';
 import {StoreScreen} from 'store/StoreScreen';
-import {CameraScreen} from 'camera/CameraScreen';
 import {ShowItemScreen} from 'show/ShowItemScreen';
 import {ChatsListScreen} from 'chat/ChatsListScreen';
 import {CommunityScreen} from 'post/CommunityScreen';
@@ -25,8 +24,6 @@ import {useUserContext} from 'auth/userContext';
 import {CommentsScreen} from 'comment/CommentsScreen';
 import {usePermissions} from 'permission/PermissionsContext';
 import {MapUserLocationButton} from 'map/MapUserLocationButton';
-
-import {PublishImagesScreen} from 'publish/screens/PublishImagesScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -76,11 +73,6 @@ export function Routes() {
               name="UserScreen"
               component={UserScreen}
               options={{headerTitle: ''}}
-            />
-            <Stack.Screen
-              name="Camera"
-              component={CameraScreen}
-              options={{headerShown: false}}
             />
             <Stack.Screen
               name="Publish"

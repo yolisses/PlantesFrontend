@@ -19,7 +19,7 @@ const optionButtonSize = 25;
 export function CameraScreen() {
   const dispatch = useDispatch();
 
-  const {navigate} = useNavigation();
+  const {goBack} = useNavigation();
   const [type, setType] = useState(RNCamera.Constants.Type.back);
   const cameraRef = useRef();
 
@@ -52,7 +52,7 @@ export function CameraScreen() {
     CameraRoll.save(uri, {type: 'photo', album: 'Plantei'})
       .then(uri => dispatch({type: 'ADD_IMAGE', uri}))
       .catch(console.error);
-    navigate('Publish');
+    goBack();
 
     resume();
   }
@@ -81,9 +81,7 @@ export function CameraScreen() {
       <View style={styles.topLayer}>
         <View style={[styles.optionsWrapper, {alignItems: 'flex-start'}]}>
           {!pictureTook ? (
-            <TouchableOpacity
-              onPress={() => navigate('Publish')}
-              style={styles.goBackOption}>
+            <TouchableOpacity onPress={goBack} style={styles.goBackOption}>
               <FontAwesomeIcon
                 icon={faArrowLeft}
                 color="white"
