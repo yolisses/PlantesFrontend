@@ -36,12 +36,12 @@ export function TextInput({
             <Text style={styles.optionalText}>Opcional </Text>
           )}
           <react_native.TextInput
-            style={[styles.input, multiline && styles.multiline, style]}
+            {...rest}
+            {...input}
             value={value}
             ref={inputRef}
             multiline={multiline}
-            {...rest}
-            {...input}
+            style={[styles.input, multiline && styles.multiline, style]}
           />
         </View>
       </Fieldset>

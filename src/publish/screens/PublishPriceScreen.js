@@ -7,6 +7,7 @@ import {NextButton} from 'publish/NextButton';
 import {ProgressBar} from 'publish/ProgressBar';
 import {CustomHeader} from 'publish/CustomHeader';
 import {AvailabilitySelector} from 'publish/AvailabilitySelector';
+import {Field} from 'react-final-form';
 
 function ValidatedHeader({thereIsSomeImage}) {
   return (
@@ -25,13 +26,25 @@ export function PublishPriceScreen() {
       <ProgressBar ratio={3 / 3} />
       <ScrollView showsVerticalScrollIndicator={false} style={{padding: 10}}>
         <AvailabilitySelector />
-        <TextInput
-          optional
-          label="Quantidade"
-          autoCorrect={false}
-          autoCompleteType={'off'}
-          keyboardType="decimal-pad"
-        />
+        <Field
+          name="amount"
+          type="number"
+          format={value => value?.replace(/[^0-9]/g, '')}>
+          {({input, meta}) => {
+            return (
+              <TextInput
+                optional
+                {...input}
+                label="Quantidade"
+                error={meta.error}
+                autoCorrect={false}
+                active={meta.active}
+                autoCompleteType={'off'}
+                keyboardType="decimal-pad"
+              />
+            );
+          }}
+        </Field>
       </ScrollView>
     </>
   );
