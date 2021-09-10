@@ -34,11 +34,11 @@ export function Routes() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="development"
           component={PublishPriceScreen}
           options={{headerShown: false}}
-        />
+        /> */}
         {user ? (
           <>
             {grantedLocation || grantedLocation === null ? (

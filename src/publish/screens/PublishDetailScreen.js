@@ -29,49 +29,34 @@ export function PublishDetailScreen() {
   const {name, options, description, type} = publishData;
 
   return (
-    <Form
-      onSubmit={() => console.error('coisa')}
-      validate={values => {
-        const errors = {};
-        if (!(values.name && values.name.trim())) {
-          errors.name = 'Por favor, escreva o nome da planta';
-        }
-        return errors;
-      }}
-      subscription="name">
-      {() => (
-        <>
-          <ValidatedHeader />
-          <ProgressBar ratio={2 / 3} />
-          <ScrollView
-            showsVerticalScrollIndicator={false}
-            style={styles.container}>
-            <Field name="name">
-              {({input, meta}) => {
-                return (
-                  <TextInput
-                    autoFocus
-                    label="Nome"
-                    input={input}
-                    dataItem={name}
-                    error={meta.error}
-                    active={meta.active}
-                  />
-                );
-              }}
-            </Field>
-            <SingleOptionSelector dataItem={type} />
-            <TagsSelector label="Marcar como" options={options} />
-            <TextInput
-              optional
-              multiline
-              label="Descrição"
-              dataItem={description}
-            />
-          </ScrollView>
-        </>
-      )}
-    </Form>
+    <>
+      <ValidatedHeader />
+      <ProgressBar ratio={2 / 3} />
+      <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
+        <Field name="name">
+          {({input, meta}) => {
+            return (
+              <TextInput
+                autoFocus
+                label="Nome"
+                input={input}
+                dataItem={name}
+                error={meta.error}
+                active={meta.active}
+              />
+            );
+          }}
+        </Field>
+        <SingleOptionSelector dataItem={type} />
+        <TagsSelector label="Marcar como" options={options} />
+        <TextInput
+          optional
+          multiline
+          label="Descrição"
+          dataItem={description}
+        />
+      </ScrollView>
+    </>
   );
 }
 
