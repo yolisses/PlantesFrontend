@@ -1,12 +1,13 @@
+import {FlatList} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import CameraRoll from '@react-native-community/cameraroll';
-import {FlatList} from 'react-native';
-import FastImage from 'react-native-fast-image';
-import {StyleSheet} from 'react-native';
+
 import {width} from 'utils/width';
+import {SelectableImage} from './SelectableImage';
+
 const numberOfCollums = 3;
 
-export function LocalImagesSelector({album}) {
+export function LocalImagesSelector({album, value, name}) {
   const [images, setImages] = useState([]);
 
   function getImages() {
@@ -39,21 +40,8 @@ export function LocalImagesSelector({album}) {
       }}
       keyExtractor={item => item.node.image.uri}
       renderItem={({item}) => (
-        <FastImage
-          key={item.node.image.uri}
-          style={style.image}
-          source={{uri: item.node.image.uri}}
-        />
+        <SelectableImage name={name} uri={item.node.image.uri} />
       )}
     />
   );
 }
-
-const style = StyleSheet.create({
-  image: {
-    width: width / numberOfCollums - 1 / numberOfCollums,
-    aspectRatio: 1,
-    marginRight: 1,
-    marginBottom: 1,
-  },
-});

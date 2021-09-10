@@ -34,26 +34,23 @@ export function PublishScreen() {
         return errors;
       }}
       render={({values}) => (
-        <>
-          <Publish.Navigator>
-            <Publish.Screen
-              name="Images"
-              component={PublishImagesScreen}
-              options={{headerShown: false}}
-            />
-            <Publish.Screen
-              name="Detail"
-              component={PublishDetailScreen}
-              options={{headerShown: false}}
-            />
-            <Publish.Screen
-              name="Price"
-              component={PublishPriceScreen}
-              options={{headerShown: false}}
-            />
-          </Publish.Navigator>
-          {/* <Text>{JSON.stringify(values)}</Text> */}
-        </>
+        <Publish.Navigator>
+          <Publish.Screen
+            name="Images"
+            component={PublishImagesScreen}
+            options={{headerShown: false}}
+          />
+          <Publish.Screen
+            name="Detail"
+            component={PublishDetailScreen}
+            options={{headerShown: false}}
+          />
+          <Publish.Screen
+            name="Price"
+            component={PublishPriceScreen}
+            options={{headerShown: false}}
+          />
+        </Publish.Navigator>
       )}
     />
   );

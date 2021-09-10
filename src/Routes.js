@@ -26,6 +26,8 @@ import {CommentsScreen} from 'comment/CommentsScreen';
 import {usePermissions} from 'permission/PermissionsContext';
 import {MapUserLocationButton} from 'map/MapUserLocationButton';
 
+import {PublishImagesScreen} from 'publish/screens/PublishImagesScreen';
+
 const Stack = createNativeStackNavigator();
 
 export function Routes() {
@@ -35,11 +37,11 @@ export function Routes() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen
+        <Stack.Screen
           name="development"
-          component={Dev}
+          component={PublishScreen}
           options={{headerShown: false}}
-        /> */}
+        />
         {user ? (
           <>
             {grantedLocation || grantedLocation === null ? (

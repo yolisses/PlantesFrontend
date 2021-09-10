@@ -1,17 +1,17 @@
 import React, {useState} from 'react';
+import {Field} from 'react-final-form';
+import {useSelector} from 'react-redux';
 import {SectionList, StyleSheet, View} from 'react-native';
 
 import {NextButton} from 'publish/NextButton';
 import {ImagesSwiper} from 'show/ImagesSwiper';
+import {CustomHeader} from 'publish/CustomHeader';
 import {DiscardButton} from 'publish/DiscardButton';
 import {TakePhotoButton} from 'publish/TakePhotoButton';
 import {LocalImagesSelector} from 'publish/LocalImagesSelector';
 import {SelectImageAlbumButton} from 'publish/SelectImageAlbumButton';
 import {ChooseImagesPlaceholder} from 'publish/ChooseImagesPlaceholder';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
-
-import {useSelector} from 'react-redux';
-import {CustomHeader} from 'publish/CustomHeader';
 
 function ValidatedHeader({thereIsSomeImage}) {
   return (
@@ -65,7 +65,16 @@ export function PublishImagesScreen() {
               );
             }
           }}
-          renderItem={() => <LocalImagesSelector album={album} />}
+          renderItem={() => {
+            return (
+              <Field
+                name={'images'}
+                render={({input}) => (
+                  <LocalImagesSelector {...input} album={album} />
+                )}
+              />
+            );
+          }}
         />
       </FooterNavigationLayout>
     </>
