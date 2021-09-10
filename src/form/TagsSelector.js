@@ -7,7 +7,11 @@ export function TagsSelector({options, label, style, buttonStyle}) {
   return (
     <Fieldset label={label} style={[styles.fieldset, style]} disableBorder>
       {options.map(option => (
-        <ToggleButton key={option.key} option={option} style={buttonStyle} />
+        <ToggleButton
+          key={option.key}
+          label={option.label}
+          style={buttonStyle}
+        />
       ))}
     </Fieldset>
   );

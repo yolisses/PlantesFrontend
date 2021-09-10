@@ -2,34 +2,30 @@ import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import {Fieldset} from 'form/Fieldset';
-import {ToggleButton} from 'form/ToggleButton';
-
-import {publishData} from 'publish/publishData';
 import {TextInput} from 'form/TextInput';
+import {ToggleButton} from 'form/ToggleButton';
 
 export function AvailabilitySelector() {
   const [sell, setSell] = useState(false);
-
-  const {availabilities, price} = publishData;
 
   return (
     <View>
       <Fieldset label="Disponível para" style={styles.fieldset} disableBorder>
         <ToggleButton
-          option={availabilities.donate}
-          buttonStyle={styles.button}
+          label="Doação"
           style={styles.button}
+          buttonStyle={styles.button}
         />
         <ToggleButton
-          option={availabilities.swap}
-          buttonStyle={styles.button}
+          label="Troca"
           style={styles.button}
+          buttonStyle={styles.button}
         />
         <ToggleButton
-          option={availabilities.sell}
-          buttonStyle={styles.button}
-          style={styles.button}
+          label="Venda"
           onChange={setSell}
+          style={styles.button}
+          buttonStyle={styles.button}
         />
       </Fieldset>
       <View opacity={sell ? 1 : 0}>

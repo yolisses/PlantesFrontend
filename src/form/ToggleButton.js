@@ -7,7 +7,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 
 const activeColor = '#0a0';
 
-export function ToggleButton({option, style, onChange, ...rest}) {
+export function ToggleButton({label, style, onChange, ...rest}) {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
@@ -36,9 +36,7 @@ export function ToggleButton({option, style, onChange, ...rest}) {
           size={15}
         />
       )}
-      <Text style={[styles.text, active && styles.activeText]}>
-        {option.label}
-      </Text>
+      <Text style={[styles.text, active && styles.activeText]}>{label}</Text>
     </Pressable>
   );
 }
