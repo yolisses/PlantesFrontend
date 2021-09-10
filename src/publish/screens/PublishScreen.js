@@ -17,6 +17,9 @@ export function PublishScreen() {
         if (!(values.name && values.name.trim())) {
           errors.name = 'Por favor, escreva o nome da planta';
         }
+        if (!values.type) {
+          errors.type = 'Por favor, selecione um destes';
+        }
         return errors;
       }}
       render={({values}) => (

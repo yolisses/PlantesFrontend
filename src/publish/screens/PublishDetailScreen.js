@@ -16,12 +16,13 @@ import {plantTypes} from 'publish/data/plantTypes';
 
 function ValidatedHeader() {
   const {meta: name} = useField('name');
+  const {meta: type} = useField('type');
 
   return (
     <CustomHeader
       title="Publicar"
       left={<BackButton />}
-      right={!name.invalid && <NextButton route="Price" />}
+      right={!name.invalid && !type.invalid && <NextButton route="Price" />}
     />
   );
 }
