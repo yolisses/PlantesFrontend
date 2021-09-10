@@ -9,8 +9,15 @@ import {LocalImagesSelector} from 'publish/LocalImagesSelector';
 import {PublishImagesPreview} from 'publish/PublishImagesPreview';
 import {SelectImageAlbumButton} from 'publish/SelectImageAlbumButton';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
+import {useField} from 'react-final-form';
 
-function ValidatedHeader({thereIsSomeImage}) {
+function ValidatedHeader() {
+  const {
+    input: {value: images},
+  } = useField('images');
+  console.error(images);
+  const thereIsSomeImage = Object.values(images).length > 0;
+
   return (
     <CustomHeader
       title="Publicar"
@@ -24,27 +31,25 @@ export function PublishImagesScreen() {
   const [album, setAlbum] = useState({title: 'Galeria', type: 'All'});
 
   return (
-    <>
-      <FooterNavigationLayout selected="Publish">
-        <ValidatedHeader />
-        <LocalImagesSelector
-          album={album}
-          flatListHeader={() => (
-            <View style={{backgroundColor: 'white'}}>
-              <PublishImagesPreview />
-              <View style={styles.wrapper}>
-                <SelectImageAlbumButton
-                  album={album}
-                  setAlbum={setAlbum}
-                  style={styles.button}
-                />
-                <TakePhotoButton style={styles.button} />
-              </View>
+    <FooterNavigationLayout selected="Publish">
+      <ValidatedHeader />
+      <LocalImagesSelector
+        album={album}
+        flatListHeader={() => (
+          <View style={{backgroundColor: 'white'}}>
+            <PublishImagesPreview />
+            <View style={styles.wrapper}>
+              <SelectImageAlbumButton
+                album={album}
+                setAlbum={setAlbum}
+                style={styles.button}
+              />
+              <TakePhotoButton style={styles.button} />
             </View>
-          )}
-        />
-      </FooterNavigationLayout>
-    </>
+          </View>
+        )}
+      />
+    </FooterNavigationLayout>
   );
 }
 

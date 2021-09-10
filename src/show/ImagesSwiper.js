@@ -44,5 +44,9 @@ export function ImagesSwiper({images, preImage}) {
 }
 
 const styles = StyleSheet.create({
-  image: {width, height: width, backgroundColor: '#ddd'},
+  image: {
+    width,
+    height: width,
+    backgroundColor: '#ddd',
+  },
 });
