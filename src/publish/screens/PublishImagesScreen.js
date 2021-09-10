@@ -37,39 +37,36 @@ export function PublishImagesScreen() {
     <>
       <FooterNavigationLayout selected="Publish">
         <ValidatedHeader thereIsSomeImage={thereIsSomeImage} />
-        <View>
-          <SectionList
-            sections={layout}
-            stickyHeaderIndices={[1]}
-            stickySectionHeadersEnabled
-            renderSectionHeader={({section}) => {
-              if (section.id === 0) {
-                return (
-                  <View style={{backgroundColor: 'white'}}>
-                    {thereIsSomeImage ? (
-                      <ImagesSwiper images={images} />
-                    ) : (
-                      <ChooseImagesPlaceholder />
-                    )}
-                  </View>
-                );
-              } else {
-                return (
-                  <View style={styles.wrapper}>
-                    <SelectImageAlbumButton
-                      album={album}
-                      setAlbum={setAlbum}
-                      style={styles.button}
-                    />
-                    <TakePhotoButton style={styles.button} />
-                  </View>
-                );
-              }
-            }}
-            renderItem={() => <LocalImagesSelector album={album} />}
-          />
-          <ImagesSwiper />
-        </View>
+        <SectionList
+          sections={layout}
+          stickyHeaderIndices={[1]}
+          stickySectionHeadersEnabled
+          renderSectionHeader={({section}) => {
+            if (section.id === 0) {
+              return (
+                <View style={{backgroundColor: 'white'}}>
+                  {thereIsSomeImage ? (
+                    <ImagesSwiper images={images} />
+                  ) : (
+                    <ChooseImagesPlaceholder />
+                  )}
+                </View>
+              );
+            } else {
+              return (
+                <View style={styles.wrapper}>
+                  <SelectImageAlbumButton
+                    album={album}
+                    setAlbum={setAlbum}
+                    style={styles.button}
+                  />
+                  <TakePhotoButton style={styles.button} />
+                </View>
+              );
+            }
+          }}
+          renderItem={() => <LocalImagesSelector album={album} />}
+        />
       </FooterNavigationLayout>
     </>
   );
