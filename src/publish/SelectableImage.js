@@ -1,24 +1,21 @@
 import React from 'react';
-import {Field} from 'react-final-form';
 import FastImage from 'react-native-fast-image';
 
-import {Pressable, StyleSheet} from 'react-native';
+import {Pressable, StyleSheet, Text} from 'react-native';
 
 import {width} from 'utils/width';
 
 const numberOfCollums = 3;
 
-export function SelectableImage({value, name, uri}) {
+export function SelectableImage({value, onChange, uri}) {
   return (
-    <Field
-      name={name + '.' + uri}
-      subscription={name + '.' + uri}
-      render={({input}) => (
-        <Pressable>
-          <FastImage style={style.image} source={{uri}} />
-        </Pressable>
-      )}
-    />
+    <Pressable
+      onPress={() => {
+        onChange(!value);
+      }}>
+      <Text>{'' + value}</Text>
+      <FastImage style={style.image} source={{uri}} />
+    </Pressable>
   );
 }
 

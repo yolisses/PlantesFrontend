@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {Field} from 'react-final-form';
 import {useSelector} from 'react-redux';
 import {SectionList, StyleSheet, View} from 'react-native';
 
@@ -65,16 +64,7 @@ export function PublishImagesScreen() {
               );
             }
           }}
-          renderItem={() => {
-            return (
-              <Field
-                name={'images'}
-                render={({input}) => (
-                  <LocalImagesSelector {...input} album={album} />
-                )}
-              />
-            );
-          }}
+          renderItem={() => <LocalImagesSelector album={album} />}
         />
       </FooterNavigationLayout>
     </>

@@ -1,4 +1,5 @@
 import {FlatList} from 'react-native';
+import {Field} from 'react-final-form';
 import React, {useEffect, useState} from 'react';
 import CameraRoll from '@react-native-community/cameraroll';
 
@@ -7,7 +8,7 @@ import {SelectableImage} from './SelectableImage';
 
 const numberOfCollums = 3;
 
-export function LocalImagesSelector({album, value, name}) {
+export function LocalImagesSelector({album}) {
   const [images, setImages] = useState([]);
 
   function getImages() {
@@ -28,19 +29,36 @@ export function LocalImagesSelector({album, value, name}) {
   }, [album]);
 
   return (
-    <FlatList
-      numColumns={numberOfCollums}
-      data={images}
-      getItemLayout={(data, index) => {
-        return {
-          length: width / numberOfCollums,
-          offset: ((width / numberOfCollums) * index) % numberOfCollums,
-          index,
-        };
-      }}
-      keyExtractor={item => item.node.image.uri}
-      renderItem={({item}) => (
-        <SelectableImage name={name} uri={item.node.image.uri} />
+    <Field
+      name="images"
+      render={({input}) => (
+        <FlatList
+          numColumns={numberOfCollums}
+          data={images}
+          getItemLayout={(data, index) => {
+            return {
+              length: width / numberOfCollums,
+              offset: ((width / numberOfCollums) * index) % numberOfCollums,
+              index,
+            };
+          }}
+          keyExtractor={item => item.node.image.uri}
+          renderItem={({item}) => {
+            const {uri} = item.node.image;
+            return (
+              <Field
+                name={input.name + '.' + uri}
+                render={({input}) => (
+                  <SelectableImage
+                    {...item}
+                    {...input}
+                    uri={item.node.image.uri}
+                  />
+                )}
+              />
+            );
+          }}
+        />
       )}
     />
   );
