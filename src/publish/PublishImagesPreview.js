@@ -1,10 +1,13 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
+import {useField} from 'react-final-form';
 import {ImagesSwiper} from 'show/ImagesSwiper';
 import {ChooseImagesPlaceholder} from './ChooseImagesPlaceholder';
 
 export function PublishImagesPreview() {
-  const images = useSelector(state => state.images);
+  const {input} = useField('images');
+  const images = Object.keys(input.value)?.map(image =>
+    image.replace(':&#%', '.'),
+  );
 
   if (!images?.length) {
     return <ChooseImagesPlaceholder />;
