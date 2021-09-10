@@ -1,9 +1,10 @@
 import React from 'react';
+import {Form} from 'react-final-form';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
 import {PublishImagesScreen} from './PublishImagesScreen';
 import {PublishDetailScreen} from './PublishDetailScreen';
 import {PublishPriceScreen} from './PublishPriceScreen';
-import {Form} from 'react-final-form';
 import {Text} from 'react-native';
 
 const Publish = createNativeStackNavigator();

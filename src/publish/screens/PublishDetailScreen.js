@@ -9,7 +9,6 @@ import {SingleOptionSelector} from 'form/SingleOptionSelector';
 import {tags} from 'publish/data/tags';
 import {BackButton} from 'publish/BackButton';
 import {NextButton} from 'publish/NextButton';
-import {publishData} from 'publish/publishData';
 import {ProgressBar} from 'publish/ProgressBar';
 import {CustomHeader} from 'publish/CustomHeader';
 import {plantTypes} from 'publish/data/plantTypes';
@@ -28,8 +27,6 @@ function ValidatedHeader() {
 }
 
 export function PublishDetailScreen() {
-  const {type} = publishData;
-
   return (
     <>
       <ValidatedHeader />
@@ -40,8 +37,8 @@ export function PublishDetailScreen() {
             return (
               <TextInput
                 autoFocus
+                {...input}
                 label="Nome"
-                input={input}
                 error={meta.error}
                 active={meta.active}
               />
@@ -53,7 +50,6 @@ export function PublishDetailScreen() {
           render={({input}) => (
             <SingleOptionSelector
               {...input}
-              dataItem={type}
               label="Marcar como"
               options={plantTypes}
             />
@@ -65,7 +61,20 @@ export function PublishDetailScreen() {
             <TagsSelector {...input} options={tags} label="Marcar como" />
           )}
         />
-        <TextInput optional multiline label="Descrição" />
+        <Field name="description">
+          {({input, meta}) => {
+            return (
+              <TextInput
+                optional
+                multiline
+                {...input}
+                label="Descrição"
+                error={meta.error}
+                active={meta.active}
+              />
+            );
+          }}
+        </Field>
       </ScrollView>
     </>
   );
