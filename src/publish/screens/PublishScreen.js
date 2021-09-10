@@ -37,11 +37,6 @@ export function PublishScreen() {
         <>
           <Publish.Navigator>
             <Publish.Screen
-              name="Price"
-              component={PublishPriceScreen}
-              options={{headerShown: false}}
-            />
-            <Publish.Screen
               name="Images"
               component={PublishImagesScreen}
               options={{headerShown: false}}
@@ -51,11 +46,11 @@ export function PublishScreen() {
               component={PublishDetailScreen}
               options={{headerShown: false}}
             />
-            {/* <Publish.Screen
+            <Publish.Screen
               name="Price"
               component={PublishPriceScreen}
               options={{headerShown: false}}
-            /> */}
+            />
           </Publish.Navigator>
 
           <Text>{JSON.stringify(values)}</Text>
