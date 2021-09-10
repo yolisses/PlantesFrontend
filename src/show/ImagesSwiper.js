@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Dimensions, ScrollView, View} from 'react-native';
 
 import {SquareImage} from 'common/SquareImage';
@@ -13,6 +13,14 @@ export function ImagesSwiper({images, preImage}) {
     setSelected(Math.round(e.nativeEvent.contentOffset.x / width));
   };
 
+  const ref = useRef();
+
+  useEffect(() => {
+    if (images) {
+      ref?.current?.scrollToEnd();
+    }
+  }, [images]);
+
   if (!images) {
     return <SquareImage uri={preImage} fraction={1} />;
   }
@@ -20,6 +28,7 @@ export function ImagesSwiper({images, preImage}) {
   return (
     <View>
       <ScrollView
+        ref={ref}
         horizontal={true}
         onScroll={onScroll}
         snapToInterval={width}
