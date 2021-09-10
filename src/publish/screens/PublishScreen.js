@@ -52,8 +52,7 @@ export function PublishScreen() {
               options={{headerShown: false}}
             />
           </Publish.Navigator>
-
-          <Text>{JSON.stringify(values)}</Text>
+          {/* <Text>{JSON.stringify(values)}</Text> */}
         </>
       )}
     />

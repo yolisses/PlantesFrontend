@@ -5,6 +5,7 @@ import {useModal} from 'modal/ModalContext';
 
 import {BarButton} from './BarButton';
 import {SelectLocalImageAlbumModal} from './SelectImageAlbumModal';
+import {displayAlbumTitle} from './displayAlbumName';
 
 export function SelectImageAlbumButton({album, setAlbum, ...res}) {
   const {showModal} = useModal();
@@ -17,9 +18,9 @@ export function SelectImageAlbumButton({album, setAlbum, ...res}) {
     <BarButton
       {...res}
       onPress={onPress}
-      text={album.title}
       icon={faAngleDown}
       iconStyle={{marginRight: 2}}
+      text={displayAlbumTitle(album.title)}
     />
   );
 }

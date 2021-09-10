@@ -3,6 +3,7 @@ import {useModal} from 'modal/ModalContext';
 import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, Text} from 'react-native';
 import {TouchableOpacity} from 'react-native';
+import {displayAlbumTitle} from './displayAlbumName';
 
 export function SelectLocalImageAlbumModal({setAlbum}) {
   const [albums, setAlbums] = useState([]);
@@ -46,7 +47,7 @@ export function SelectLocalImageAlbumModal({setAlbum}) {
             setAlbum(album);
             closeModal();
           }}>
-          <Text style={styles.text}>{album.title}</Text>
+          <Text style={styles.text}>{displayAlbumTitle(album.title)}</Text>
         </TouchableOpacity>
       ))}
     </ScrollView>

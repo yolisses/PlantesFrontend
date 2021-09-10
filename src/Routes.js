@@ -2,6 +2,8 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
+import {Dev} from './Dev';
+
 import {MapScreen} from 'map/MapScreen';
 import {ChatScreen} from 'chat/ChatScreen';
 import {UserScreen} from 'user/UserScreen';
@@ -33,11 +35,11 @@ export function Routes() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="development"
-          component={PublishScreen}
+          component={Dev}
           options={{headerShown: false}}
-        />
+        /> */}
         {user ? (
           <>
             {grantedLocation || grantedLocation === null ? (

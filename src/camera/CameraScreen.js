@@ -12,6 +12,7 @@ import {CameraSnapButton} from 'camera/CameraSnapButton';
 import {CameraCentralWrapper} from 'camera/CameraCentralWrapper';
 import {PictureConfirmButtons} from 'camera/PictureConfirmButtons';
 import {useDispatch} from 'react-redux';
+import CameraRoll from '@react-native-community/cameraroll';
 
 const optionButtonSize = 25;
 
@@ -48,7 +49,9 @@ export function CameraScreen() {
   }
 
   function approve() {
-    dispatch({type: 'ADD_IMAGE', uri});
+    CameraRoll.save(uri, {type: 'photo', album: 'Plantei'})
+      .then(uri => dispatch({type: 'ADD_IMAGE', uri}))
+      .catch(console.error);
     navigate('Publish');
 
     resume();

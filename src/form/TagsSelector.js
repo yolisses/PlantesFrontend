@@ -17,6 +17,7 @@ export function TagsSelector({
       {options.map(option => (
         <Field
           name={name + '.' + option.key}
+          subscription={name + '.' + option.key}
           render={({input}) => (
             <ToggleButton
               {...input}
