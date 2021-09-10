@@ -5,13 +5,24 @@ import {NextButton} from 'publish/NextButton';
 import {ImagesSwiper} from 'show/ImagesSwiper';
 import {DiscardButton} from 'publish/DiscardButton';
 import {TakePhotoButton} from 'publish/TakePhotoButton';
-import {PublishScreenTop} from 'publish/PublishScreenTop';
 import {LocalImagesSelector} from 'publish/LocalImagesSelector';
 import {SelectImageAlbumButton} from 'publish/SelectImageAlbumButton';
 import {ChooseImagesPlaceholder} from 'publish/ChooseImagesPlaceholder';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 
 import {useSelector} from 'react-redux';
+import {BackButton} from 'publish/BackButton';
+import {CustomHeader} from 'publish/CustomHeader';
+
+function ValidatedHeader({thereIsSomeImage}) {
+  return (
+    <CustomHeader
+      title="Publicar"
+      right={thereIsSomeImage && <NextButton route="Price" />}
+      left={thereIsSomeImage ? <DiscardButton /> : <BackButton />}
+    />
+  );
+}
 
 export function PublishImagesScreen() {
   const images = useSelector(state => state.images);
@@ -25,12 +36,8 @@ export function PublishImagesScreen() {
 
   return (
     <>
-      <PublishScreenTop
-        hideBar
-        headerLeft={thereIsSomeImage ? <DiscardButton /> : null}
-        headerRight={thereIsSomeImage ? <NextButton route="Detail" /> : null}
-      />
       <FooterNavigationLayout selected="Publish">
+        <ValidatedHeader thereIsSomeImage={thereIsSomeImage} />
         <View>
           <SectionList
             sections={layout}
