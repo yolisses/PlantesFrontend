@@ -1,5 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import react_native, {Keyboard, StyleSheet, Text, View} from 'react-native';
+
 import {Fieldset} from './Fieldset';
 
 export function TextInput({
@@ -25,6 +26,7 @@ export function TextInput({
   return (
     <View>
       <Fieldset
+        error={error}
         label={label}
         style={[styles.fieldset, active && styles.focused]}
         styleLabel={[styles.label, active && styles.focusedLabel]}>
@@ -43,7 +45,6 @@ export function TextInput({
           />
         </View>
       </Fieldset>
-      {error && <Text style={styles.error}>{error}</Text>}
     </View>
   );
 }
@@ -79,12 +80,6 @@ const styles = StyleSheet.create({
     zIndex: 10,
     transform: [{translateY: 0}],
     backgroundColor: '#eee',
-  },
-  error: {
-    color: '#900',
-    fontSize: 18,
-    marginHorizontal: 20,
-    marginBottom: 20,
   },
   multiline: {
     paddingBottom: 35,

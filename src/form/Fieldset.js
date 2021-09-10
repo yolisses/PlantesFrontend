@@ -1,24 +1,29 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
+import {ErrorMessage} from './ErrorMessage';
 import {Label} from './Label';
 
 export function Fieldset({
+  error,
   label,
   style,
-  styleLabel,
   children,
+  styleLabel,
   disableBorder,
   ...rest
 }) {
   return (
-    <View style={styles.container}>
-      <Label text={label} style={[styles.label, styleLabel]} />
-      <View
-        style={[styles.input, !disableBorder && styles.border, style]}
-        {...rest}>
-        {children}
+    <>
+      <View style={styles.container}>
+        <Label text={label} style={[styles.label, styleLabel]} />
+        <View
+          style={[styles.input, !disableBorder && styles.border, style]}
+          {...rest}>
+          {children}
+        </View>
+        {error && <ErrorMessage text={error} />}
       </View>
-    </View>
+    </>
   );
 }
 
