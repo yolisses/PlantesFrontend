@@ -1,5 +1,6 @@
 import React, {useCallback, useRef, useState} from 'react';
 import {
+  Button,
   Dimensions,
   FlatList,
   SectionList,
@@ -21,6 +22,7 @@ import {InfiniteScroll} from 'common/InfiniteScroll';
 import {UserInfo} from './UserInfo';
 import {TabSelector} from './TabSelector';
 import {UserButtons} from './UserButtons';
+import {signOut} from 'auth/oauth';
 
 const {width} = Dimensions.get('window');
 
@@ -64,6 +66,7 @@ export function UserScreen() {
 
   return (
     <FooterNavigationLayout selected={'Home'}>
+      <Button title="sign out" onPress={signOut} />
       <SectionList
         sections={[
           {
