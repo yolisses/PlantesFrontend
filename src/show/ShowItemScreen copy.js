@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {ItemInfo} from 'show/ItemInfo';
 import {ImagesSwiper} from 'show/ImagesSwiper';
@@ -11,22 +11,22 @@ import {LoadingStartConversetionButton} from './LoadingStartConversationButton';
 import {useQuery, gql} from '@apollo/client';
 
 export function ShowItemScreen({route}) {
-  // const {itemId, preImage} = route.params;
-  const itemId = '05f565d67d3625bb06ac';
+  const {itemId, preImage} = route.params;
 
   const PLANT = gql`
-    query {
-      getPlant(id: "${itemId}") {
-        id
-        name
-        tags
-        type
-        images
-        description
-      }
+  query {
+    getPlant(id:${itemId}) {
+      id
+      name
+      type
     }
-  `;
-  const {loading, error, data} = useQuery(PLANT);
+  }
+`;
+  const {
+    loading,
+    error,
+    data: {getPlant: item},
+  } = useQuery(PLANT);
 
   const scrollRef = useRef();
 
@@ -34,36 +34,38 @@ export function ShowItemScreen({route}) {
     scrollRef.current.scrollTo({y: pos, animated: true});
   };
 
-  // const {navigate} = useNavigation();
-  // const {setOneChatReference} = useChatReference();
+  const {navigate} = useNavigation();
+  const {setOneChatReference} = useChatReference();
 
-  const onPress = () => {};
-  // const onPress = () => {
-  //   if (!item) {
-  //     return;
-  //   }
-  //   const {name, thumbnail} = item;
-  //   setOneChatReference(item.owner.id, {
-  //     type: 'plant',
-  //     plantId: item.id,
-  //     name,
-  //     thumbnail,
-  //   });
-  //   navigate('Chat', {item: item.owner});
-  // };
+  const onPress = () => {
+    if (!item) {
+      return;
+    }
+    const {name, thumbnail} = item;
+    setOneChatReference(item.owner.id, {
+      type: 'plant',
+      plantId: item.id,
+      name,
+      thumbnail,
+    });
+    navigate('Chat', {item: item.owner});
+  };
 
   return (
     <View style={styles.screen}>
-      {/* <Text>{JSON.stringify(data)}</Text> */}
       <FloatingButton />
       <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
-        <ImagesSwiper images={data?.getPlant.images} />
-        <ItemInfo scrollTo={scrollTo} item={data?.getPlant} />
+        <ImagesSwiper images={item?.images || null} preImage={preImage} />
+        <ItemInfo scrollTo={scrollTo} item={item} />
       </ScrollView>
       <View style={styles.bottomWrapper}>
-        <AvailabilityInfo onModalConfirmPress={onPress} />
+        <AvailabilityInfo item={item} onModalConfirmPress={onPress} />
         <View style={{flex: 1, justifyContent: 'center'}}>
-          <StartConversetionButton onPress={onPress} loading={loading} />
+          {/* {item ? ( */}
+          <StartConversetionButton onPress={onPress} />
+          {/* ) : (
+            <LoadingStartConversetionButton />
+          )} */}
         </View>
       </View>
     </View>

@@ -11,6 +11,7 @@
     "mock": "json-server ./mock/db.json --host 192.168.10.23 --watch -p 5000 --static ./mock/public"
   },
   "dependencies": {
+    "@apollo/client": "^3.4.11",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
@@ -29,6 +30,7 @@
     "axios": "^0.21.1",
     "dotenv": "^10.0.0",
     "final-form": "^4.20.2",
+    "graphql": "^15.5.3",
     "moment": "^2.29.1",
     "path": "^0.12.7",
     "react": "17.0.2",

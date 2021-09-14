@@ -9,9 +9,9 @@ import {TagsList} from './TagsList';
 const {width} = Dimensions.get('window');
 
 export function ItemInfo({scrollTo, item}) {
-  if (!item) {
-    return <LoadingItemInfo />;
-  }
+  // if (!item) {
+  //   return <LoadingItemInfo />;
+  // }
 
   return (
     <View>
@@ -24,7 +24,7 @@ export function ItemInfo({scrollTo, item}) {
           <View style={styles.owner}>
             <UserRoundImage item={item?.owner} size={50} thumbnail />
             <View style={{marginLeft: 6}}>
-              <Text style={styles.userName}>{item?.owner.name || ''}</Text>
+              <Text style={styles.userName}>{item?.owner?.name || ''}</Text>
               <Text style={styles.distance}>
                 {item?.distance} quilômetros daqui
               </Text>

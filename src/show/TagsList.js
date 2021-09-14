@@ -5,8 +5,8 @@ import {Tag} from './Tag';
 export function TagsList({tags}) {
   return (
     <View style={sytles.container}>
-      {tags.map(({key, label}) => (
-        <Tag key={key} text={label} />
+      {tags.map(tag => (
+        <Tag key={tag} text={tag} />
       ))}
     </View>
   );
