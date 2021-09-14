@@ -19,7 +19,7 @@ export function AvailabilityInfo({item, onModalConfirmPress}) {
   const options = {
     donate: item.donate,
     swap: item.swap,
-    price: 10,
+    price: item.price,
   };
 
   const translation = entry => {
