@@ -28,7 +28,7 @@ export function PermissionsContextProvider({children}) {
 
   useEffect(() => {
     if (grantedLocation) {
-      updateLocation();
+      // updateLocation();
     }
   }, [grantedLocation]);
 

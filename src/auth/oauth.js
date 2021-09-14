@@ -10,6 +10,8 @@ export async function signIn() {
   const {idToken} = await GoogleSignin.signIn();
   const googleCredential = auth.GoogleAuthProvider.credential(idToken);
   await auth().signInWithCredential(googleCredential);
+  const idTokenResult = await auth().currentUser.getIdTokenResult();
+  console.error(idTokenResult);
 }
 
 export function signOut() {
