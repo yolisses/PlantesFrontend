@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {useAlert} from 'alert/AlertContext';
 import {StartConversationAlert} from './StartConversationAlert';
@@ -47,10 +47,10 @@ export function AvailabilityInfo({item, onModalConfirmPress}) {
         {Object.entries(options)
           .filter(oprion => oprion[1])
           .map((entry, index, array) => (
-            <>
+            <Fragment key={entry[0]}>
               {getSeparator(index, array)}
               <Text style={styles.emphasis}>{translation(entry)}</Text>
-            </>
+            </Fragment>
           ))}
       </View>
       <View style={styles.line}>
