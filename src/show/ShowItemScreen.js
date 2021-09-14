@@ -11,8 +11,7 @@ import {LoadingStartConversetionButton} from './LoadingStartConversationButton';
 import {useQuery, gql} from '@apollo/client';
 
 export function ShowItemScreen({route}) {
-  // const {itemId, preImage} = route.params;
-  const itemId = '2c6a997f11c6990b50f3';
+  const {itemId, preImage} = route.params;
 
   const PLANT = gql`
     query {
