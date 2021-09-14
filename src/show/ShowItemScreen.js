@@ -12,7 +12,7 @@ import {useQuery, gql} from '@apollo/client';
 
 export function ShowItemScreen({route}) {
   // const {itemId, preImage} = route.params;
-  const itemId = '05f565d67d3625bb06ac';
+  const itemId = '2c6a997f11c6990b50f3';
 
   const PLANT = gql`
     query {
@@ -22,6 +22,10 @@ export function ShowItemScreen({route}) {
         tags
         type
         images
+        swap
+        price
+        donate  
+        amount
         description
       }
     }
@@ -61,7 +65,7 @@ export function ShowItemScreen({route}) {
         <ItemInfo scrollTo={scrollTo} item={data?.getPlant} />
       </ScrollView>
       <View style={styles.bottomWrapper}>
-        <AvailabilityInfo onModalConfirmPress={onPress} />
+        <AvailabilityInfo onModalConfirmPress={onPress} item={data?.getPlant} />
         <View style={{flex: 1, justifyContent: 'center'}}>
           <StartConversetionButton onPress={onPress} loading={loading} />
         </View>

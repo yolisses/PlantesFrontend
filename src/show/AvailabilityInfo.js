@@ -7,28 +7,56 @@ import {LoadingAvailabilityInfo} from './LoadingAvailabilityInfo';
 export function AvailabilityInfo({item, onModalConfirmPress}) {
   const {showAlert} = useAlert();
   const onPress = () => {
-    showAlert(
-      <StartConversationAlert item={item} onSendPress={onModalConfirmPress} />,
-    );
+    // showAlert(
+    //   <StartConversationAlert item={item} onSendPress={onModalConfirmPress} />,
+    // );
   };
 
   if (!item) {
     return <LoadingAvailabilityInfo />;
   }
 
+  const options = {
+    donate: item.donate,
+    swap: item.swap,
+    price: 10,
+  };
+
+  const translation = entry => {
+    return {
+      donate: 'Doação',
+      swap: 'Trocar',
+      price: 'R$' + Number(entry[1]).toFixed(2),
+    }[entry[0]];
+  };
+
+  const getSeparator = (index, array) => {
+    switch (index) {
+      case 0:
+        return null;
+      case array.length - 1:
+        return <Text style={styles.secondary}> ou </Text>;
+      default:
+        return <Text style={styles.secondary}>, </Text>;
+    }
+  };
+
   return (
     <Pressable style={styles.container} onPress={onPress}>
       <View style={styles.line}>
-        <Text style={styles.emphasis}>Doação</Text>
-        <Text style={styles.secondary}>, </Text>
-        <Text style={styles.emphasis}>Trocar</Text>
-        <Text style={styles.secondary}> ou </Text>
-        <View>
-          <Text style={styles.emphasis}>R$100,00</Text>
-        </View>
+        {Object.entries(options)
+          .filter(oprion => oprion[1])
+          .map((entry, index, array) => (
+            <>
+              {getSeparator(index, array)}
+              <Text style={styles.emphasis}>{translation(entry)}</Text>
+            </>
+          ))}
       </View>
       <View style={styles.line}>
-        <Text style={styles.secondary}> 1 disponível</Text>
+        {item.amount && (
+          <Text style={styles.secondary}> {item.amount} disponível</Text>
+        )}
       </View>
     </Pressable>
   );
