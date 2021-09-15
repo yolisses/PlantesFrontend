@@ -11,6 +11,7 @@ import {PermissionsContextProvider} from 'permission/PermissionsContext';
 import {ChatReferenceContextProvider} from './chat/ChatReferenceContext';
 
 import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client';
+import {PublishContextProvider} from 'publish/contexts/PublishContext';
 
 // Initialize Apollo Client
 const client = new ApolloClient({
@@ -25,10 +26,12 @@ const App = () => {
         <PermissionsContextProvider>
           <AlertContextProvider>
             <ModalContextProvider>
-              <ChatReferenceContextProvider>
-                <StatusBar barStyle={'default'} hidden={true} />
-                <Routes />
-              </ChatReferenceContextProvider>
+              <PublishContextProvider>
+                <ChatReferenceContextProvider>
+                  <StatusBar barStyle={'default'} hidden={true} />
+                  <Routes />
+                </ChatReferenceContextProvider>
+              </PublishContextProvider>
             </ModalContextProvider>
           </AlertContextProvider>
         </PermissionsContextProvider>
