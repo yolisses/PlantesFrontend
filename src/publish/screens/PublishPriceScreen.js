@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView} from 'react-native';
+import {ScrollView, Text} from 'react-native';
 
 import {IntInput} from 'form/IntInput';
 
@@ -11,11 +11,21 @@ import {usePublish} from 'publish/contexts/PublishContext';
 import {AvailabilitySelector} from 'publish/AvailabilitySelector';
 
 function ValidatedHeader() {
+  const {price} = usePublish();
+  const {availabilities} = usePublish();
+
+  let canContinue = availabilities && availabilities.length > 0;
+  const includeSell = availabilities.indexOf('sell') !== -1;
+  if (!!includeSell && !price) {
+    console.error('' + false);
+    canContinue = false;
+  }
+
   return (
     <CustomHeader
       title="Publicar"
       left={<BackButton />}
-      right={<NextButton route="Price" />}
+      right={canContinue && <NextButton route="Price" />}
     />
   );
 }
