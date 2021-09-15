@@ -14,11 +14,13 @@ import {plantTypes} from 'publish/data/plantTypes';
 import {usePublish} from 'publish/contexts/PublishContext';
 
 function ValidatedHeader() {
+  const {name, type} = usePublish();
+  const canContinue = !!name && !!name?.trim() && !!type;
   return (
     <CustomHeader
       title="Publicar"
       left={<BackButton />}
-      right={<NextButton route="Price" />}
+      right={canContinue && <NextButton route="Price" />}
     />
   );
 }
