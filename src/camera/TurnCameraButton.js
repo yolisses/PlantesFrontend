@@ -2,8 +2,11 @@ import {RNCamera} from 'react-native-camera';
 import React from 'react';
 
 import {CameraOptionButton} from './CameraOptionButton';
+import {useCameraPreferences} from './contexts/CameraPreferencesContext';
 
-export function TurnCameraButton({type, setType}) {
+export function TurnCameraButton() {
+  const {type, setType} = useCameraPreferences();
+
   const turnCameraDirection = () => {
     setType(
       type === RNCamera.Constants.Type.back

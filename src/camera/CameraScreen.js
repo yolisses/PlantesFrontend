@@ -13,12 +13,13 @@ import {CameraSquareFocus} from './CameraFocusSquare';
 import {TurnCameraButton} from './TurnCameraButton';
 import {OptionsWrapper} from './OptionWrapper';
 import {FlashSelectorButton} from './FlashSelectorButton';
+import {useCameraPreferences} from './contexts/CameraPreferencesContext';
 
 export function CameraScreen() {
   const {goBack} = useNavigation();
-  const [type, setType] = useState(RNCamera.Constants.Type.back);
-  const [flash, setFlash] = useState(RNCamera.Constants.FlashMode.auto);
   const cameraRef = useRef();
+
+  const {flash, type} = useCameraPreferences();
 
   const [pictureTook, setPictureTook] = useState(false);
   const [uri, setUri] = useState();
@@ -76,9 +77,7 @@ export function CameraScreen() {
         </OptionsWrapper>
         <CameraSquareFocus />
         <OptionsWrapper>
-          {!pictureTook && (
-            <FlashSelectorButton flash={flash} setFlash={setFlash} />
-          )}
+          {!pictureTook && <FlashSelectorButton />}
           {!pictureTook ? (
             <CameraSnapButton onPress={takePicture} />
           ) : (
@@ -87,7 +86,7 @@ export function CameraScreen() {
               onApprovePress={approve}
             />
           )}
-          {!pictureTook && <TurnCameraButton type={type} setType={setType} />}
+          {!pictureTook && <TurnCameraButton />}
         </OptionsWrapper>
       </View>
     </View>

@@ -2,8 +2,11 @@ import React from 'react';
 import {RNCamera} from 'react-native-camera';
 
 import {CameraOptionButton} from './CameraOptionButton';
+import {useCameraPreferences} from './contexts/CameraPreferencesContext';
 
-export function FlashSelectorButton({flash, setFlash}) {
+export function FlashSelectorButton() {
+  const {flash, setFlash} = useCameraPreferences();
+
   const {auto, on, off} = RNCamera.Constants.FlashMode;
   const changeFlash = () => {
     setFlash(flash === auto ? off : flash === off ? on : auto);

@@ -7,11 +7,12 @@ import {Routes} from './Routes';
 import {UserContextProvider} from 'auth/userContext';
 import {AlertContextProvider} from 'alert/AlertContext';
 import {ModalContextProvider} from 'modal/ModalContext';
+import {PublishContextProvider} from 'publish/contexts/PublishContext';
 import {PermissionsContextProvider} from 'permission/PermissionsContext';
 import {ChatReferenceContextProvider} from './chat/ChatReferenceContext';
+import {CameraPreferencesProvider} from 'camera/contexts/CameraPreferencesContext';
 
 import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client';
-import {PublishContextProvider} from 'publish/contexts/PublishContext';
 
 // Initialize Apollo Client
 const client = new ApolloClient({
@@ -28,8 +29,10 @@ const App = () => {
             <ModalContextProvider>
               <PublishContextProvider>
                 <ChatReferenceContextProvider>
-                  <StatusBar barStyle={'default'} hidden={true} />
-                  <Routes />
+                  <CameraPreferencesProvider>
+                    <StatusBar barStyle={'default'} hidden={true} />
+                    <Routes />
+                  </CameraPreferencesProvider>
                 </ChatReferenceContextProvider>
               </PublishContextProvider>
             </ModalContextProvider>
