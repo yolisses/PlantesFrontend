@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
+import {width} from 'utils/width';
 
 export function CameraSquareFocus() {
   return <View style={styles.focus} />;
@@ -7,13 +8,13 @@ export function CameraSquareFocus() {
 
 const styles = StyleSheet.create({
   focus: {
-    marginTop: 'auto',
-    marginBottom: 'auto',
-    width: '100%',
-    aspectRatio: 1,
-    backgroundColor: '#0000',
-    borderStyle: 'solid',
+    width,
+    height: width,
     borderWidth: 1,
+    marginTop: 'auto',
     borderColor: '#fff7',
+    borderStyle: 'solid',
+    marginBottom: 'auto',
+    backgroundColor: '#0000',
   },
 });

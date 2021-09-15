@@ -1,4 +1,4 @@
-import {faArrowLeft} from '@fortawesome/free-solid-svg-icons';
+import {faTimes} from '@fortawesome/free-solid-svg-icons';
 import {useNavigation} from '@react-navigation/core';
 import React from 'react';
 import {CameraOptionButton} from './CameraOptionButton';
@@ -6,5 +6,11 @@ import {CameraOptionButton} from './CameraOptionButton';
 export function GoBackCameraButton() {
   const {goBack} = useNavigation();
 
-  return <CameraOptionButton icon={faArrowLeft} onPress={goBack} />;
+  return (
+    <CameraOptionButton
+      size={35}
+      image={require('./assets/close.png')}
+      onPress={goBack}
+    />
+  );
 }

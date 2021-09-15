@@ -1,7 +1,6 @@
 import {RNCamera} from 'react-native-camera';
 import React from 'react';
 
-import {faUndo} from '@fortawesome/free-solid-svg-icons';
 import {CameraOptionButton} from './CameraOptionButton';
 
 export function TurnCameraButton({type, setType}) {
@@ -13,5 +12,10 @@ export function TurnCameraButton({type, setType}) {
     );
   };
 
-  return <CameraOptionButton icon={faUndo} onPress={turnCameraDirection} />;
+  return (
+    <CameraOptionButton
+      image={require('./assets/turn.png')}
+      onPress={turnCameraDirection}
+    />
+  );
 }

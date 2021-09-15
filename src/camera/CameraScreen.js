@@ -12,6 +12,8 @@ import CameraRoll from '@react-native-community/cameraroll';
 import {GoBackCameraButton} from './GoBackCameraButton';
 import {CameraSquareFocus} from './CameraFocusSquare';
 import {TurnCameraButton} from './TurnCameraButton';
+import {OptionsWrapper} from './OptionWrapper';
+import {FlashSelectorButton} from './FlashSelectorButton';
 
 export function CameraScreen() {
   const {goBack} = useNavigation();
@@ -63,9 +65,14 @@ export function CameraScreen() {
         />
       )}
       <View style={styles.topLayer}>
-        <View style={[styles.optionsWrapper, {alignItems: 'flex-start'}]}>
-          {!pictureTook && <TurnCameraButton type={type} setType={setType} />}
-        </View>
+        <OptionsWrapper>
+          {!pictureTook && (
+            <>
+              <View />
+              <GoBackCameraButton />
+            </>
+          )}
+        </OptionsWrapper>
         <CameraSquareFocus />
         <CameraCentralWrapper>
           {!pictureTook ? (
@@ -77,13 +84,14 @@ export function CameraScreen() {
             />
           )}
         </CameraCentralWrapper>
-        <View
-          style={[
-            styles.optionsWrapper,
-            {flexDirection: 'row-reverse', paddingHorizontal: 25},
-          ]}>
-          {!pictureTook && <TurnCameraButton type={type} setType={setType} />}
-        </View>
+        <OptionsWrapper>
+          {!pictureTook && (
+            <>
+              <FlashSelectorButton />
+              <TurnCameraButton type={type} setType={setType} />
+            </>
+          )}
+        </OptionsWrapper>
       </View>
     </View>
   );
@@ -109,12 +117,5 @@ const styles = StyleSheet.create({
   topLayer: {
     height: '100%',
     position: 'absolute',
-  },
-  optionsWrapper: {
-    flex: 1,
-    width: '100%',
-    alignItems: 'center',
-    flexDirection: 'row',
-    backgroundColor: '#0005',
   },
 });
