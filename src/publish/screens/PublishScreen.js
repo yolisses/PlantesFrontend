@@ -5,7 +5,6 @@ import {PublishImagesScreen} from './PublishImagesScreen';
 import {PublishDetailScreen} from './PublishDetailScreen';
 import {PublishPriceScreen} from './PublishPriceScreen';
 import {CameraScreen} from 'camera/CameraScreen';
-import {PublishContextProvider} from 'publish/contexts/PublishContext';
 
 const Publish = createNativeStackNavigator();
 

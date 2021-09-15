@@ -6,7 +6,8 @@ import FastImage from 'react-native-fast-image';
 
 const {width} = Dimensions.get('window');
 
-export function ImagesSwiper({images, preImage}) {
+export function ImagesSwiper({images, preImage, forceScrollToend}) {
+  const [previousLength, setPreviousLength] = useState(images?.length);
   const [selected, setSelected] = useState(0);
 
   const onScroll = e => {
@@ -16,8 +17,12 @@ export function ImagesSwiper({images, preImage}) {
   const ref = useRef();
 
   useEffect(() => {
-    if (images) {
+    if (
+      images &&
+      (images.length > previousLength || images.length <= selected)
+    ) {
       ref?.current?.scrollToEnd();
+      setPreviousLength(images.length);
     }
   }, [images]);
 
