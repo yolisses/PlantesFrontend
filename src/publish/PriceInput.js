@@ -3,10 +3,10 @@ import React from 'react';
 import {MoneySign} from 'form/MoneySign';
 import {TextInput} from 'form/TextInput';
 
-export function PriceInput() {
+export function PriceInput({...rest}) {
   return (
     <TextInput
-      label="Preço"
+      {...rest}
       autoCorrect={false}
       autoCompleteType={'off'}
       leftChild={<MoneySign />}

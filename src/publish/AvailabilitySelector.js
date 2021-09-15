@@ -7,6 +7,7 @@ import {usePublish} from './contexts/PublishContext';
 import {PriceInput} from './PriceInput';
 
 export function AvailabilitySelector() {
+  const {price, setPrice} = usePublish();
   const {
     availabilities: selected,
     pushAvailability,
@@ -25,7 +26,9 @@ export function AvailabilitySelector() {
         buttonStyle={styles.button}
         removeTag={removeAvailability}
       />
-      {isSellActive && <PriceInput />}
+      {isSellActive && (
+        <PriceInput label="Preço" value={price} setValue={setPrice} />
+      )}
     </>
   );
 }
