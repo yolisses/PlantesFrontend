@@ -4,6 +4,8 @@ const PublishContext = createContext();
 
 export function PublishContextProvider({children}) {
   const [images, setImages] = useState([]);
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
 
   function pushImage(image) {
     setImages(images.concat(image));
@@ -18,7 +20,17 @@ export function PublishContextProvider({children}) {
   }
 
   return (
-    <PublishContext.Provider value={{images, pushImage, removeImage, discard}}>
+    <PublishContext.Provider
+      value={{
+        name,
+        images,
+        discard,
+        setName,
+        pushImage,
+        description,
+        removeImage,
+        setDescription,
+      }}>
       {children}
     </PublishContext.Provider>
   );

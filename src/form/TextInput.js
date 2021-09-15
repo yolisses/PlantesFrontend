@@ -11,6 +11,7 @@ export function TextInput({
   value,
   active,
   optional,
+  setValue,
   multiline,
   leftChild,
   ...rest
@@ -42,6 +43,7 @@ export function TextInput({
             ref={inputRef}
             multiline={multiline}
             style={[styles.input, multiline && styles.multiline, style]}
+            onChangeText={text => setValue(text)}
           />
         </View>
       </Fieldset>
