@@ -50,7 +50,7 @@ function useObjectAsList() {
     setObj({});
   }
 
-  return {push, remove, discard, indexOf};
+  return {push, remove, discard, indexOf, getAsList};
 }
 
 export function PublishContextProvider({children}) {

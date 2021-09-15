@@ -4,8 +4,8 @@ import {ChooseImagesPlaceholder} from './ChooseImagesPlaceholder';
 import {usePublish} from './contexts/PublishContext';
 
 export function PublishImagesPreview() {
-  const {images} = usePublish();
-
+  const {images: imagesObj} = usePublish();
+  const images = imagesObj?.getAsList();
   if (!images?.length) {
     return <ChooseImagesPlaceholder />;
   }
