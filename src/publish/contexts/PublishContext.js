@@ -13,8 +13,12 @@ export function PublishContextProvider({children}) {
     setImages(images.filter(i => i !== image));
   }
 
+  function discard() {
+    setImages([]);
+  }
+
   return (
-    <PublishContext.Provider value={{images, pushImage, removeImage}}>
+    <PublishContext.Provider value={{images, pushImage, removeImage, discard}}>
       {children}
     </PublishContext.Provider>
   );
