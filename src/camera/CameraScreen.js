@@ -6,7 +6,6 @@ import {useNavigation} from '@react-navigation/native';
 import {Dimensions, StyleSheet, View} from 'react-native';
 
 import {CameraSnapButton} from 'camera/CameraSnapButton';
-import {CameraCentralWrapper} from 'camera/CameraCentralWrapper';
 import {PictureConfirmButtons} from 'camera/PictureConfirmButtons';
 import CameraRoll from '@react-native-community/cameraroll';
 import {GoBackCameraButton} from './GoBackCameraButton';
@@ -18,6 +17,7 @@ import {FlashSelectorButton} from './FlashSelectorButton';
 export function CameraScreen() {
   const {goBack} = useNavigation();
   const [type, setType] = useState(RNCamera.Constants.Type.back);
+  const [flash, setFlash] = useState(RNCamera.Constants.FlashMode.auto);
   const cameraRef = useRef();
 
   const [pictureTook, setPictureTook] = useState(false);
@@ -54,6 +54,7 @@ export function CameraScreen() {
       <RNCamera
         type={type}
         ref={cameraRef}
+        flashMode={flash}
         captureAudio={false}
         style={styles.preview}
         pauseAfterCapture={true}
@@ -75,7 +76,9 @@ export function CameraScreen() {
         </OptionsWrapper>
         <CameraSquareFocus />
         <OptionsWrapper>
-          {!pictureTook && <FlashSelectorButton />}
+          {!pictureTook && (
+            <FlashSelectorButton flash={flash} setFlash={setFlash} />
+          )}
           {!pictureTook ? (
             <CameraSnapButton onPress={takePicture} />
           ) : (
