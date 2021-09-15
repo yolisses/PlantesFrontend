@@ -5,26 +5,21 @@ import {Pressable, StyleSheet, View} from 'react-native';
 
 import {width} from 'utils/width';
 import {SelectableImageNumber} from './SelectableImageNumber';
-import {usePublish} from './contexts/PublishContext';
 
 const numberOfCollums = 3;
 
-export function SelectableImage({uri}) {
-  const {images, pushImage, removeImage} = usePublish();
-
-  const index = images.indexOf(uri);
-  const selected = index !== -1;
-
-  function onPress() {
-    if (!selected) {
-      pushImage(uri);
-    } else {
-      removeImage(uri);
-    }
-  }
+export function SelectableImage({uri, index, push, remove}) {
+  const selected = index !== null;
 
   return (
-    <Pressable onPress={onPress}>
+    <Pressable
+      onPress={function () {
+        if (!selected) {
+          push(uri);
+        } else {
+          remove(uri);
+        }
+      }}>
       <FastImage
         style={[styles.image, selected && styles.selected]}
         source={{uri}}

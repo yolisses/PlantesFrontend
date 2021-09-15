@@ -4,11 +4,14 @@ import CameraRoll from '@react-native-community/cameraroll';
 
 import {width} from 'utils/width';
 import {SelectableImage} from './SelectableImage';
+import {usePublish} from './contexts/PublishContext';
 
 const numberOfCollums = 3;
 
 export function LocalImagesSelector({album, flatListHeader}) {
-  const [images, setImages] = useState([]);
+  const [foundImages, setFoundImages] = useState([]);
+
+  const {images} = usePublish();
 
   function getImages() {
     CameraRoll.getPhotos({
@@ -18,7 +21,7 @@ export function LocalImagesSelector({album, flatListHeader}) {
       include: ['location'],
     })
       .then(a => {
-        setImages(a.edges.map(item => item.node.image));
+        setFoundImages(a.edges.map(item => item.node.image));
       })
       .catch(err => console.error(err));
   }
@@ -30,7 +33,7 @@ export function LocalImagesSelector({album, flatListHeader}) {
   return (
     <FlatList
       numColumns={numberOfCollums}
-      data={images}
+      data={foundImages}
       getItemLayout={(data, index) => {
         return {
           length: width / numberOfCollums,
@@ -40,7 +43,17 @@ export function LocalImagesSelector({album, flatListHeader}) {
       }}
       ListHeaderComponent={flatListHeader}
       keyExtractor={item => item.uri}
-      renderItem={({item}) => <SelectableImage {...item} uri={item.uri} />}
+      renderItem={({item}) => {
+        return (
+          <SelectableImage
+            {...item}
+            uri={item.uri}
+            push={images.push}
+            remove={images.remove}
+            index={images.indexOf(item.uri)}
+          />
+        );
+      }}
     />
   );
 }

@@ -20,6 +20,39 @@ function useListState() {
   return [list, pushToList, removeFromList, discard];
 }
 
+function useObjectAsList() {
+  const [obj, setObj] = useState([]);
+
+  function push(item) {
+    const copy = {...obj};
+    copy[item] = true;
+    setObj(copy);
+  }
+
+  function remove(item) {
+    const copy = {...obj};
+    delete copy[item];
+    setObj(copy);
+  }
+
+  function getAsList() {
+    return Object.keys(obj);
+  }
+
+  function indexOf(item) {
+    if (!obj[item]) {
+      return null;
+    }
+    return getAsList().indexOf(item);
+  }
+
+  function discard() {
+    setObj({});
+  }
+
+  return {push, remove, discard, indexOf};
+}
+
 export function PublishContextProvider({children}) {
   const [name, setName] = useState('');
   const [type, setType] = useState('');
@@ -28,7 +61,6 @@ export function PublishContextProvider({children}) {
   const [description, setDescription] = useState('');
 
   const [tags, pushTag, removeTag, discardTags] = useListState();
-  const [images, pushImage, removeImage, discardImages] = useListState();
   const [
     availabilities,
     pushAvailability,
@@ -36,10 +68,12 @@ export function PublishContextProvider({children}) {
     discardAvailabilities,
   ] = useListState();
 
+  const images = useObjectAsList();
+
   function discard() {
     discardTags();
-    discardImages();
     discardAvailabilities();
+    images.discard();
   }
 
   return (
@@ -57,10 +91,8 @@ export function PublishContextProvider({children}) {
         setType,
         setPrice,
         setAmount,
-        pushImage,
         removeTag,
         description,
-        removeImage,
         availabilities,
         setDescription,
         pushAvailability,
