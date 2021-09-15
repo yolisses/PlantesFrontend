@@ -5,24 +5,27 @@ import {Pressable, StyleSheet, View} from 'react-native';
 
 import {width} from 'utils/width';
 import {SelectableImageNumber} from './SelectableImageNumber';
+import {usePublish} from './contexts/PublishContext';
 
 const numberOfCollums = 3;
 
 export function SelectableImage({onChange, uri}) {
+  const {images} = usePublish();
+
+  const index = images.indexOf(uri);
+  const selected = index !== -1;
+
   return (
-    <Pressable
-      onPress={() => {
-        onChange(value ? undefined : true);
-      }}>
+    <Pressable onPress={() => {}}>
       <FastImage
-        style={[styles.image, value && styles.selected]}
+        style={[styles.image, selected && styles.selected]}
         source={{uri}}
       />
-      {value ? (
+      {selected && (
         <View style={styles.numberWrapper}>
-          <SelectableImageNumber number={images.indexOf(uri) + 1} />
+          <SelectableImageNumber number={+1} />
         </View>
-      ) : null}
+      )}
     </Pressable>
   );
 }

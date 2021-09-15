@@ -34,12 +34,12 @@ export function Routes() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen
+        <Stack.Screen
           name="development"
-          component={LoginScreen}
+          component={PublishScreen}
           options={{headerShown: false}}
-        /> */}
-        {user ? (
+        />
+        {!user ? (
           <>
             {grantedLocation || grantedLocation === null ? (
               <Stack.Screen

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {SectionList, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 import {NextButton} from 'publish/NextButton';
 import {CustomHeader} from 'publish/CustomHeader';
@@ -9,8 +9,10 @@ import {LocalImagesSelector} from 'publish/LocalImagesSelector';
 import {PublishImagesPreview} from 'publish/PublishImagesPreview';
 import {SelectImageAlbumButton} from 'publish/SelectImageAlbumButton';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
+import {usePublish} from 'publish/contexts/PublishContext';
 
 function ValidatedHeader() {
+  const {images} = usePublish();
   const thereIsSomeImage = Object.values(images).length > 0;
 
   return (
