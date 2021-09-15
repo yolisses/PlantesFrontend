@@ -5,16 +5,10 @@ import {Pressable, StyleSheet, View} from 'react-native';
 
 import {width} from 'utils/width';
 import {SelectableImageNumber} from './SelectableImageNumber';
-import {useField} from 'react-final-form';
 
 const numberOfCollums = 3;
 
-export function SelectableImage({value, onChange, uri}) {
-  const {input} = useField('images');
-  const images = Object.keys(input.value)?.map(image =>
-    image.replace(':&#%', '.'),
-  );
-
+export function SelectableImage({onChange, uri}) {
   return (
     <Pressable
       onPress={() => {

@@ -1,5 +1,4 @@
 import {FlatList} from 'react-native';
-import {Field} from 'react-final-form';
 import React, {useEffect, useState} from 'react';
 import CameraRoll from '@react-native-community/cameraroll';
 
@@ -29,34 +28,19 @@ export function LocalImagesSelector({album, flatListHeader}) {
   }, [album]);
 
   return (
-    <Field
-      name="images"
-      render={({input}) => (
-        <FlatList
-          numColumns={numberOfCollums}
-          data={images}
-          getItemLayout={(data, index) => {
-            return {
-              length: width / numberOfCollums,
-              offset: ((width / numberOfCollums) * index) % numberOfCollums,
-              index,
-            };
-          }}
-          ListHeaderComponent={flatListHeader}
-          keyExtractor={item => item.uri}
-          renderItem={({item}) => {
-            const {uri} = item;
-            return (
-              <Field
-                name={input.name + '.' + uri.replace('.', ':&#%')}
-                render={({input}) => (
-                  <SelectableImage {...item} {...input} uri={item.uri} />
-                )}
-              />
-            );
-          }}
-        />
-      )}
+    <FlatList
+      numColumns={numberOfCollums}
+      data={images}
+      getItemLayout={(data, index) => {
+        return {
+          length: width / numberOfCollums,
+          offset: ((width / numberOfCollums) * index) % numberOfCollums,
+          index,
+        };
+      }}
+      ListHeaderComponent={flatListHeader}
+      keyExtractor={item => item.uri}
+      renderItem={({item}) => <SelectableImage {...item} uri={item.uri} />}
     />
   );
 }

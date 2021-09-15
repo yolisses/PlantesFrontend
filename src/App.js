@@ -10,9 +10,6 @@ import {ModalContextProvider} from 'modal/ModalContext';
 import {PermissionsContextProvider} from 'permission/PermissionsContext';
 import {ChatReferenceContextProvider} from './chat/ChatReferenceContext';
 
-import {Provider} from 'react-redux';
-import {PersistGate} from 'redux-persist/lib/integration/react';
-import {store, persistor} from 'global/configureStore';
 import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client';
 
 // Initialize Apollo Client
@@ -24,22 +21,18 @@ const client = new ApolloClient({
 const App = () => {
   return (
     <ApolloProvider client={client}>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <UserContextProvider>
-            <PermissionsContextProvider>
-              <AlertContextProvider>
-                <ModalContextProvider>
-                  <ChatReferenceContextProvider>
-                    <StatusBar barStyle={'default'} hidden={true} />
-                    <Routes />
-                  </ChatReferenceContextProvider>
-                </ModalContextProvider>
-              </AlertContextProvider>
-            </PermissionsContextProvider>
-          </UserContextProvider>
-        </PersistGate>
-      </Provider>
+      <UserContextProvider>
+        <PermissionsContextProvider>
+          <AlertContextProvider>
+            <ModalContextProvider>
+              <ChatReferenceContextProvider>
+                <StatusBar barStyle={'default'} hidden={true} />
+                <Routes />
+              </ChatReferenceContextProvider>
+            </ModalContextProvider>
+          </AlertContextProvider>
+        </PermissionsContextProvider>
+      </UserContextProvider>
     </ApolloProvider>
   );
 };

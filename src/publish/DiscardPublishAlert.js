@@ -1,14 +1,9 @@
 import React from 'react';
 import {Alert} from 'alert/Alert';
 import {AlertButton} from 'alert/AlertButton';
-import {useDispatch} from 'react-redux';
 
 export function DiscardPublishAlert() {
-  const dispatcher = useDispatch();
-
-  const discard = () => {
-    dispatcher({type: 'DISCARD'});
-  };
+  const discard = () => {};
 
   return (
     <Alert title="Descartar publicação?">

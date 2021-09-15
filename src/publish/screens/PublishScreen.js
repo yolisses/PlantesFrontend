@@ -1,5 +1,4 @@
 import React from 'react';
-import {Form} from 'react-final-form';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {PublishImagesScreen} from './PublishImagesScreen';
@@ -11,52 +10,27 @@ const Publish = createNativeStackNavigator();
 
 export function PublishScreen() {
   return (
-    <Form
-      onSubmit={() => console.error('coisa')}
-      validate={values => {
-        const errors = {};
-        if (!(values.name && values.name.trim())) {
-          errors.name = 'Por favor, escreva o nome da planta';
-        }
-        if (!values.type) {
-          errors.type = 'Por favor, selecione um destes';
-        }
-        if (
-          !values.availabilities ||
-          !Object.values(values.availabilities).some(item => item)
-        ) {
-          errors.availabilities = 'Por favor, selecione um destes';
-        }
-        if (!values.price) {
-          errors.price =
-            'Por favor, escreva um preço ou desmarque a opção venda';
-        }
-        return errors;
-      }}
-      render={({values}) => (
-        <Publish.Navigator>
-          <Publish.Screen
-            name="Images"
-            component={PublishImagesScreen}
-            options={{headerShown: false}}
-          />
-          <Publish.Screen
-            name="Detail"
-            component={PublishDetailScreen}
-            options={{headerShown: false}}
-          />
-          <Publish.Screen
-            name="Price"
-            component={PublishPriceScreen}
-            options={{headerShown: false}}
-          />
-          <Publish.Screen
-            name="Camera"
-            component={CameraScreen}
-            options={{headerShown: false}}
-          />
-        </Publish.Navigator>
-      )}
-    />
+    <Publish.Navigator>
+      <Publish.Screen
+        name="Images"
+        component={PublishImagesScreen}
+        options={{headerShown: false}}
+      />
+      <Publish.Screen
+        name="Detail"
+        component={PublishDetailScreen}
+        options={{headerShown: false}}
+      />
+      <Publish.Screen
+        name="Price"
+        component={PublishPriceScreen}
+        options={{headerShown: false}}
+      />
+      <Publish.Screen
+        name="Camera"
+        component={CameraScreen}
+        options={{headerShown: false}}
+      />
+    </Publish.Navigator>
   );
 }

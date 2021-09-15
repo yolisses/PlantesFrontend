@@ -11,14 +11,11 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {CameraSnapButton} from 'camera/CameraSnapButton';
 import {CameraCentralWrapper} from 'camera/CameraCentralWrapper';
 import {PictureConfirmButtons} from 'camera/PictureConfirmButtons';
-import {useDispatch} from 'react-redux';
 import CameraRoll from '@react-native-community/cameraroll';
 
 const optionButtonSize = 25;
 
 export function CameraScreen() {
-  const dispatch = useDispatch();
-
   const {goBack} = useNavigation();
   const [type, setType] = useState(RNCamera.Constants.Type.back);
   const cameraRef = useRef();
@@ -50,7 +47,7 @@ export function CameraScreen() {
 
   function approve() {
     CameraRoll.save(uri, {type: 'photo', album: 'Plantei'})
-      .then(uri => dispatch({type: 'ADD_IMAGE', uri}))
+      .then(uri => {}) //add image
       .catch(console.error);
     goBack();
 

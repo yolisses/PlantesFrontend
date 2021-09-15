@@ -29,7 +29,6 @@
     "@react-navigation/native-stack": "^6.1.0",
     "axios": "^0.21.1",
     "dotenv": "^10.0.0",
-    "final-form": "^4.20.2",
     "graphql": "^15.5.3",
     "moment": "^2.29.1",
     "path": "^0.12.7",
@@ -50,9 +49,6 @@
     "react-native-safe-area-context": "^3.3.0",
     "react-native-screens": "^3.5.0",
     "react-native-svg": "^12.1.1",
-    "react-redux": "^7.2.5",
-    "redux": "^4.1.1",
-    "redux-persist": "^6.0.0",
     "s3": "^4.4.0",
     "uuid": "^8.3.2"
   },
@@ -71,8 +67,7 @@
     "json-server": "^0.16.3",
     "metro-react-native-babel-preset": "^0.66.2",
     "react-native-codegen": "^0.0.7",
-    "react-test-renderer": "17.0.2",
-    "redux-logger": "^3.0.6"
+    "react-test-renderer": "17.0.2"
   },
   "jest": {
     "preset": "react-native"

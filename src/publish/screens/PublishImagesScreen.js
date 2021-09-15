@@ -9,12 +9,8 @@ import {LocalImagesSelector} from 'publish/LocalImagesSelector';
 import {PublishImagesPreview} from 'publish/PublishImagesPreview';
 import {SelectImageAlbumButton} from 'publish/SelectImageAlbumButton';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
-import {useField} from 'react-final-form';
 
 function ValidatedHeader() {
-  const {
-    input: {value: images},
-  } = useField('images');
   const thereIsSomeImage = Object.values(images).length > 0;
 
   return (
