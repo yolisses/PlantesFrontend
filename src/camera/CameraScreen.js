@@ -1,5 +1,4 @@
 import {useRef} from 'react';
-import {RNCamera} from 'react-native-camera';
 import FastImage from 'react-native-fast-image';
 import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
@@ -13,35 +12,26 @@ import {CameraSquareFocus} from './CameraFocusSquare';
 import {TurnCameraButton} from './TurnCameraButton';
 import {OptionsWrapper} from './OptionWrapper';
 import {FlashSelectorButton} from './FlashSelectorButton';
-import {useCameraPreferences} from './contexts/CameraPreferencesContext';
+import {CameraPreview} from './CameraPreview';
 
 export function CameraScreen() {
   const {goBack} = useNavigation();
   const cameraRef = useRef();
 
-  const {flash, type} = useCameraPreferences();
-
   const [pictureTook, setPictureTook] = useState(false);
   const [uri, setUri] = useState();
 
   const takePicture = async () => {
-    const options = {quality: 1, base64: true};
-    try {
-      const {uri} = await cameraRef.current.takePictureAsync(options);
-      setUri(uri);
-    } catch (err) {
-      console.error(err);
-    }
+    const options = {quality: 1};
+    const {uri} = await cameraRef.current.takePictureAsync(options);
+    setUri(uri);
   };
 
-  function resume() {
-    setPictureTook(false);
-  }
+  const resume = () => setPictureTook(false);
 
   function approve() {
     CameraRoll.save(uri, {type: 'photo', album: 'Plantei'});
     goBack();
-    resume();
   }
 
   useEffect(() => {
@@ -52,14 +42,7 @@ export function CameraScreen() {
 
   return (
     <View style={styles.container}>
-      <RNCamera
-        type={type}
-        ref={cameraRef}
-        flashMode={flash}
-        captureAudio={false}
-        style={styles.preview}
-        pauseAfterCapture={true}
-      />
+      <CameraPreview ref={cameraRef} />
       {pictureTook && (
         <FastImage
           source={{uri, priority: FastImage.priority.high}}
@@ -67,26 +50,23 @@ export function CameraScreen() {
         />
       )}
       <View style={styles.topLayer}>
-        <OptionsWrapper>
-          {!pictureTook && (
-            <>
-              <View />
-              <GoBackCameraButton />
-            </>
-          )}
+        <OptionsWrapper style={{flexDirection: 'row-reverse'}}>
+          {!pictureTook && <GoBackCameraButton />}
         </OptionsWrapper>
         <CameraSquareFocus />
         <OptionsWrapper>
-          {!pictureTook && <FlashSelectorButton />}
           {!pictureTook ? (
-            <CameraSnapButton onPress={takePicture} />
+            <>
+              <FlashSelectorButton />
+              <CameraSnapButton onPress={takePicture} />
+              <TurnCameraButton />
+            </>
           ) : (
             <PictureConfirmButtons
               onDiscardPress={resume}
               onApprovePress={approve}
             />
           )}
-          {!pictureTook && <TurnCameraButton />}
         </OptionsWrapper>
       </View>
     </View>
