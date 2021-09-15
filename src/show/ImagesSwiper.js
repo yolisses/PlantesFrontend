@@ -1,12 +1,13 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Dimensions, ScrollView, StyleSheet, View} from 'react-native';
+import {Dimensions, StyleSheet, View} from 'react-native';
 
 import {SwipeIndicator} from './SwipeIndicator';
 import FastImage from 'react-native-fast-image';
+import {FlatList} from 'react-native';
 
 const {width} = Dimensions.get('window');
 
-export function ImagesSwiper({images, preImage, forceScrollToend}) {
+export function ImagesSwiper({images, preImage}) {
   const [previousLength, setPreviousLength] = useState(images?.length);
   const [selected, setSelected] = useState(0);
 
@@ -32,17 +33,19 @@ export function ImagesSwiper({images, preImage, forceScrollToend}) {
 
   return (
     <View>
-      <ScrollView
+      <FlatList
         ref={ref}
+        data={images}
         horizontal={true}
         onScroll={onScroll}
         snapToInterval={width}
         disableIntervalMomentum
-        showsHorizontalScrollIndicator={false}>
-        {images.map((image, index) => (
-          <FastImage key={index} style={styles.image} source={{uri: image}} />
-        ))}
-      </ScrollView>
+        initialNumToRender={images.length}
+        renderItem={({item}) => (
+          <FastImage key={item} style={styles.image} source={{uri: item}} />
+        )}
+        showsHorizontalScrollIndicator={false}
+      />
       <SwipeIndicator images={images} selected={selected} />
     </View>
   );
