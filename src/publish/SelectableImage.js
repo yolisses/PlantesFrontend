@@ -9,21 +9,29 @@ import {usePublish} from './contexts/PublishContext';
 
 const numberOfCollums = 3;
 
-export function SelectableImage({onChange, uri}) {
-  const {images} = usePublish();
+export function SelectableImage({uri}) {
+  const {images, pushImage, removeImage} = usePublish();
 
   const index = images.indexOf(uri);
   const selected = index !== -1;
 
+  function onPress() {
+    if (!selected) {
+      pushImage(uri);
+    } else {
+      removeImage(uri);
+    }
+  }
+
   return (
-    <Pressable onPress={() => {}}>
+    <Pressable onPress={onPress}>
       <FastImage
         style={[styles.image, selected && styles.selected]}
         source={{uri}}
       />
       {selected && (
         <View style={styles.numberWrapper}>
-          <SelectableImageNumber number={+1} />
+          <SelectableImageNumber number={index + 1} />
         </View>
       )}
     </Pressable>
