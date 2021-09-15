@@ -4,7 +4,6 @@ import {Fieldset} from './Fieldset';
 import {ToggleButton} from './ToggleButton';
 
 export function TagsSelector({
-  name,
   label,
   style,
   options,
@@ -12,7 +11,6 @@ export function TagsSelector({
   removeTag,
   buttonStyle,
   selectedTags,
-  ...rest
 }) {
   return useMemo(
     () => (

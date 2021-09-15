@@ -2,31 +2,41 @@ import React, {createContext, useContext, useState} from 'react';
 
 const PublishContext = createContext();
 
-export function PublishContextProvider({children}) {
-  const [tags, setTags] = useState([]);
-  const [name, setName] = useState('');
-  const [type, setType] = useState('');
-  const [images, setImages] = useState([]);
-  const [description, setDescription] = useState('');
+function useListState() {
+  const [list, setList] = useState([]);
 
-  function pushTag(tag) {
-    setTags(tags.concat(tag));
+  function pushToList(item) {
+    setList(list.concat(item));
   }
 
-  function removeTag(tag) {
-    setTags(tags.filter(t => t !== tag));
-  }
-
-  function pushImage(image) {
-    setImages(images.concat(image));
-  }
-
-  function removeImage(image) {
-    setImages(images.filter(i => i !== image));
+  function removeFromList(item) {
+    setList(list.filter(i => i !== item));
   }
 
   function discard() {
-    setImages([]);
+    setList([]);
+  }
+
+  return [list, pushToList, removeFromList, discard];
+}
+
+export function PublishContextProvider({children}) {
+  const [name, setName] = useState('');
+  const [type, setType] = useState('');
+  const [description, setDescription] = useState('');
+  const [tags, pushTag, removeTag, discardTags] = useState([]);
+  const [images, pushImage, removeImage, discardImages] = useState([]);
+  const [
+    availabilities,
+    pushAvailability,
+    removeAvailability,
+    discardAvailabilities,
+  ] = useListState();
+
+  function discard() {
+    discardTags();
+    discardImages();
+    discardAvailabilities();
   }
 
   return (
@@ -44,7 +54,10 @@ export function PublishContextProvider({children}) {
         removeTag,
         description,
         removeImage,
+        availabilities,
         setDescription,
+        pushAvailability,
+        removeAvailability,
       }}>
       {children}
     </PublishContext.Provider>
