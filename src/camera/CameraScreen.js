@@ -3,18 +3,15 @@ import {RNCamera} from 'react-native-camera';
 import FastImage from 'react-native-fast-image';
 import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {Dimensions, StyleSheet, TouchableOpacity, View} from 'react-native';
-
-import {faArrowLeft, faUndo} from '@fortawesome/free-solid-svg-icons';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {Dimensions, StyleSheet, View} from 'react-native';
 
 import {CameraSnapButton} from 'camera/CameraSnapButton';
 import {CameraCentralWrapper} from 'camera/CameraCentralWrapper';
 import {PictureConfirmButtons} from 'camera/PictureConfirmButtons';
 import CameraRoll from '@react-native-community/cameraroll';
 import {GoBackCameraButton} from './GoBackCameraButton';
-
-const optionButtonSize = 25;
+import {CameraSquareFocus} from './CameraFocusSquare';
+import {CameraTurnButton} from './CameraTurnButton';
 
 export function CameraScreen() {
   const {goBack} = useNavigation();
@@ -23,14 +20,6 @@ export function CameraScreen() {
 
   const [pictureTook, setPictureTook] = useState(false);
   const [uri, setUri] = useState();
-
-  const turnCameraDirection = () => {
-    setType(
-      type === RNCamera.Constants.Type.back
-        ? RNCamera.Constants.Type.front
-        : RNCamera.Constants.Type.back,
-    );
-  };
 
   const takePicture = async () => {
     const options = {quality: 1, base64: true};
@@ -61,11 +50,11 @@ export function CameraScreen() {
   return (
     <View style={styles.container}>
       <RNCamera
-        style={styles.preview}
         type={type}
         ref={cameraRef}
-        pauseAfterCapture={true}
         captureAudio={false}
+        style={styles.preview}
+        pauseAfterCapture={true}
       />
       {pictureTook && (
         <FastImage
@@ -75,11 +64,9 @@ export function CameraScreen() {
       )}
       <View style={styles.topLayer}>
         <View style={[styles.optionsWrapper, {alignItems: 'flex-start'}]}>
-          {!pictureTook ? <GoBackCameraButton /> : null}
+          {!pictureTook && <CameraTurnButton type={type} setType={setType} />}
         </View>
-
-        <View style={styles.focus} />
-
+        <CameraSquareFocus />
         <CameraCentralWrapper>
           {!pictureTook ? (
             <CameraSnapButton onPress={takePicture} />
@@ -90,19 +77,12 @@ export function CameraScreen() {
             />
           )}
         </CameraCentralWrapper>
-
-        <View style={[styles.optionsWrapper, {flexDirection: 'row-reverse'}]}>
-          {!pictureTook ? (
-            <TouchableOpacity
-              onPress={turnCameraDirection}
-              style={styles.turnCameraOption}>
-              <FontAwesomeIcon
-                icon={faUndo}
-                color="white"
-                size={optionButtonSize}
-              />
-            </TouchableOpacity>
-          ) : null}
+        <View
+          style={[
+            styles.optionsWrapper,
+            {flexDirection: 'row-reverse', paddingHorizontal: 25},
+          ]}>
+          {!pictureTook && <CameraTurnButton type={type} setType={setType} />}
         </View>
       </View>
     </View>
@@ -111,7 +91,6 @@ export function CameraScreen() {
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
-const optionButtonPadding = 10;
 
 const styles = StyleSheet.create({
   container: {
@@ -127,34 +106,15 @@ const styles = StyleSheet.create({
   image: {
     backgroundColor: '#0000',
   },
-  focus: {
-    marginTop: 'auto',
-    marginBottom: 'auto',
-    width: '100%',
-    aspectRatio: 1,
-    backgroundColor: '#0000',
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: '#fff7',
-  },
   topLayer: {
     height: '100%',
     position: 'absolute',
   },
   optionsWrapper: {
-    width: '100%',
     flex: 1,
+    width: '100%',
+    alignItems: 'center',
     flexDirection: 'row',
     backgroundColor: '#0005',
-    alignItems: 'center',
-  },
-  turnCameraOption: {
-    marginHorizontal: optionButtonSize,
-    padding: optionButtonPadding,
-  },
-  goBackOption: {
-    marginHorizontal: optionButtonSize / 2,
-    marginTop: optionButtonSize / 2,
-    padding: optionButtonPadding,
   },
 });
