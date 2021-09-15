@@ -1,8 +1,7 @@
 import React from 'react';
 import {ScrollView} from 'react-native';
 
-import {TextInput} from 'form/TextInput';
-
+import {IntInput} from 'publish/IntInput';
 import {BackButton} from 'publish/BackButton';
 import {NextButton} from 'publish/NextButton';
 import {ProgressBar} from 'publish/ProgressBar';
@@ -29,14 +28,11 @@ export function PublishPriceScreen() {
       <ProgressBar ratio={3 / 3} />
       <ScrollView showsVerticalScrollIndicator={false} style={{padding: 10}}>
         <AvailabilitySelector />
-        <TextInput
+        <IntInput
           optional
           value={amount}
           label="Quantidade"
-          autoCorrect={false}
           setValue={setAmount}
-          autoCompleteType={'off'}
-          keyboardType="decimal-pad"
         />
       </ScrollView>
     </>
