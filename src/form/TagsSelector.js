@@ -8,16 +8,22 @@ export function TagsSelector({
   label,
   style,
   options,
+  pushTag,
+  removeTag,
   buttonStyle,
+  selectedTags,
   ...rest
 }) {
   return (
     <Fieldset label={label} style={[styles.fieldset, style]} disableBorder>
       {options.map(option => (
         <ToggleButton
+          option={option}
           key={option.key}
+          pushTag={pushTag}
           style={buttonStyle}
-          label={option.label}
+          removeTag={removeTag}
+          active={selectedTags.indexOf(option.key) !== -1}
         />
       ))}
     </Fieldset>

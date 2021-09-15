@@ -7,19 +7,28 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 
 const activeColor = '#0a0';
 
-export function ToggleButton({label, style, onChange, value, ...rest}) {
-  const onPress = () => {
-    if (onChange) {
-      onChange(!value);
+export function ToggleButton({
+  label,
+  style,
+  option,
+  pushTag,
+  removeTag,
+  active,
+  ...rest
+}) {
+  function onPress() {
+    if (active) {
+      removeTag(option.key);
+    } else {
+      pushTag(option.key);
     }
-  };
-
+  }
   return (
     <Pressable
       {...rest}
       onPress={onPress}
-      style={[styles.input, style, value && styles.active]}>
-      {value ? (
+      style={[styles.input, style, active && styles.active]}>
+      {active ? (
         <FontAwesomeIcon
           size={15}
           icon={faCheck}
@@ -34,7 +43,9 @@ export function ToggleButton({label, style, onChange, value, ...rest}) {
           style={styles.icon}
         />
       )}
-      <Text style={[styles.text, value && styles.activeText]}>{label}</Text>
+      <Text style={[styles.text, active && styles.activeText]}>
+        {option.label}
+      </Text>
     </Pressable>
   );
 }

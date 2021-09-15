@@ -3,10 +3,19 @@ import React, {createContext, useContext, useState} from 'react';
 const PublishContext = createContext();
 
 export function PublishContextProvider({children}) {
+  const [tags, setTags] = useState([]);
   const [name, setName] = useState('');
   const [type, setType] = useState('');
   const [images, setImages] = useState([]);
   const [description, setDescription] = useState('');
+
+  function pushTag(tag) {
+    setTags(tags.concat(tag));
+  }
+
+  function removeTag(tag) {
+    setTags(tags.filter(t => t !== tag));
+  }
 
   function pushImage(image) {
     setImages(images.concat(image));
@@ -24,12 +33,15 @@ export function PublishContextProvider({children}) {
     <PublishContext.Provider
       value={{
         name,
+        tags,
         type,
         images,
         discard,
+        pushTag,
         setName,
         setType,
         pushImage,
+        removeTag,
         description,
         removeImage,
         setDescription,

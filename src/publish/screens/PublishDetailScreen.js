@@ -27,6 +27,7 @@ export function PublishDetailScreen() {
   const {name, setName} = usePublish();
   const {type, setType} = usePublish();
   const {description, setDescription} = usePublish();
+  const {tags: selectedTags, pushTag, removeTag} = usePublish();
 
   return (
     <>
@@ -40,11 +41,17 @@ export function PublishDetailScreen() {
           setValue={setType}
           options={plantTypes}
         />
-        <TagsSelector options={tags} label="Marcar como" />
+        <TagsSelector
+          label="Marcar como"
+          options={tags}
+          pushTag={pushTag}
+          removeTag={removeTag}
+          selectedTags={selectedTags}
+        />
         <TextInput
+          label="Descrição"
           optional
           multiline
-          label="Descrição"
           value={description}
           setValue={setDescription}
         />
