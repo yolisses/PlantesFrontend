@@ -9,6 +9,7 @@ export function TextInput({
   label,
   style,
   value,
+  onBlur,
   optional,
   setValue,
   multiline,
@@ -28,8 +29,11 @@ export function TextInput({
     setFocused(true);
   }
 
-  function onBlur() {
+  function customOnBlur(e) {
     setFocused(false);
+    if (onBlur) {
+      onBlur(e);
+    }
   }
 
   const isValueShowable = value !== null && value !== undefined && value !== '';
@@ -52,9 +56,9 @@ export function TextInput({
               {...input}
               value={isValueShowable ? '' + value : ''}
               ref={inputRef}
-              onBlur={onBlur}
               onFocus={onFocus}
               multiline={multiline}
+              onBlur={customOnBlur}
               style={[styles.input, multiline && styles.multiline, style]}
               onChangeText={text => setValue(text)}
             />
