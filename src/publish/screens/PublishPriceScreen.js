@@ -8,6 +8,7 @@ import {NextButton} from 'publish/NextButton';
 import {ProgressBar} from 'publish/ProgressBar';
 import {CustomHeader} from 'publish/CustomHeader';
 import {AvailabilitySelector} from 'publish/AvailabilitySelector';
+import {usePublish} from 'publish/contexts/PublishContext';
 
 function ValidatedHeader() {
   return (
@@ -20,6 +21,8 @@ function ValidatedHeader() {
 }
 
 export function PublishPriceScreen() {
+  const {amount, setAmount} = usePublish();
+
   return (
     <>
       <ValidatedHeader />
@@ -28,8 +31,10 @@ export function PublishPriceScreen() {
         <AvailabilitySelector />
         <TextInput
           optional
+          value={amount}
           label="Quantidade"
           autoCorrect={false}
+          setValue={setAmount}
           autoCompleteType={'off'}
           keyboardType="decimal-pad"
         />

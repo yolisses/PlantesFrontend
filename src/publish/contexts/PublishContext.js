@@ -23,6 +23,8 @@ function useListState() {
 export function PublishContextProvider({children}) {
   const [name, setName] = useState('');
   const [type, setType] = useState('');
+  const [price, setPrice] = useState();
+  const [amount, setAmount] = useState();
   const [description, setDescription] = useState('');
   const [tags, pushTag, removeTag, discardTags] = useState([]);
   const [images, pushImage, removeImage, discardImages] = useState([]);
@@ -45,11 +47,15 @@ export function PublishContextProvider({children}) {
         name,
         tags,
         type,
+        price,
+        amount,
         images,
         discard,
         pushTag,
         setName,
         setType,
+        setPrice,
+        setAmount,
         pushImage,
         removeTag,
         description,
