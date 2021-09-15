@@ -4,7 +4,7 @@ import React from 'react';
 import {faUndo} from '@fortawesome/free-solid-svg-icons';
 import {CameraOptionButton} from './CameraOptionButton';
 
-export function CameraTurnButton({type, setType}) {
+export function TurnCameraButton({type, setType}) {
   const turnCameraDirection = () => {
     setType(
       type === RNCamera.Constants.Type.back

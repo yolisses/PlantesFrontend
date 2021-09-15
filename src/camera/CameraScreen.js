@@ -11,7 +11,7 @@ import {PictureConfirmButtons} from 'camera/PictureConfirmButtons';
 import CameraRoll from '@react-native-community/cameraroll';
 import {GoBackCameraButton} from './GoBackCameraButton';
 import {CameraSquareFocus} from './CameraFocusSquare';
-import {CameraTurnButton} from './CameraTurnButton';
+import {TurnCameraButton} from './TurnCameraButton';
 
 export function CameraScreen() {
   const {goBack} = useNavigation();
@@ -64,7 +64,7 @@ export function CameraScreen() {
       )}
       <View style={styles.topLayer}>
         <View style={[styles.optionsWrapper, {alignItems: 'flex-start'}]}>
-          {!pictureTook && <CameraTurnButton type={type} setType={setType} />}
+          {!pictureTook && <TurnCameraButton type={type} setType={setType} />}
         </View>
         <CameraSquareFocus />
         <CameraCentralWrapper>
@@ -82,7 +82,7 @@ export function CameraScreen() {
             styles.optionsWrapper,
             {flexDirection: 'row-reverse', paddingHorizontal: 25},
           ]}>
-          {!pictureTook && <CameraTurnButton type={type} setType={setType} />}
+          {!pictureTook && <TurnCameraButton type={type} setType={setType} />}
         </View>
       </View>
     </View>
