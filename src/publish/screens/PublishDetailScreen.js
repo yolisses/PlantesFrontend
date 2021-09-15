@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {ScrollView, StyleSheet} from 'react-native';
 
 import {TextInput} from 'form/TextInput';
@@ -16,12 +16,15 @@ import {usePublish} from 'publish/contexts/PublishContext';
 function ValidatedHeader() {
   const {name, type} = usePublish();
   const canContinue = !!name && !!name?.trim() && !!type;
-  return (
-    <CustomHeader
-      title="Publicar"
-      left={<BackButton />}
-      right={canContinue && <NextButton route="Price" />}
-    />
+  return useMemo(
+    () => (
+      <CustomHeader
+        title="Publicar"
+        left={<BackButton />}
+        right={canContinue && <NextButton route="Price" />}
+      />
+    ),
+    [name, type],
   );
 }
 
