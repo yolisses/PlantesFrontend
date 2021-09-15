@@ -1,5 +1,5 @@
-import React, {useCallback, useMemo} from 'react';
-import {ScrollView, StyleSheet, Text} from 'react-native';
+import React from 'react';
+import {ScrollView, StyleSheet} from 'react-native';
 
 import {TextInput} from 'form/TextInput';
 import {TagsSelector} from 'form/TagsSelector';
@@ -29,17 +29,12 @@ export function PublishDetailScreen() {
   const {description, setDescription} = usePublish();
   const {tags: selectedTags, pushTag, removeTag} = usePublish();
 
-  const nameInput = useMemo(
-    () => <TextInput autoFocus label="Nome" value={name} setValue={setName} />,
-    [name, setName],
-  );
-
   return (
     <>
       <ValidatedHeader />
       <ProgressBar ratio={2 / 3} />
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-        {nameInput}
+        <TextInput autoFocus label="Nome" value={name} setValue={setName} />
         <SingleOptionSelector
           label="Marcar como"
           value={type}
