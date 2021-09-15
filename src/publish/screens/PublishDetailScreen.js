@@ -25,6 +25,7 @@ function ValidatedHeader() {
 
 export function PublishDetailScreen() {
   const {name, setName} = usePublish();
+  const {type, setType} = usePublish();
   const {description, setDescription} = usePublish();
 
   return (
@@ -33,7 +34,12 @@ export function PublishDetailScreen() {
       <ProgressBar ratio={2 / 3} />
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
         <TextInput autoFocus label="Nome" value={name} setValue={setName} />
-        <SingleOptionSelector label="Marcar como" options={plantTypes} />
+        <SingleOptionSelector
+          label="Marcar como"
+          value={type}
+          setValue={setType}
+          options={plantTypes}
+        />
         <TagsSelector options={tags} label="Marcar como" />
         <TextInput
           optional

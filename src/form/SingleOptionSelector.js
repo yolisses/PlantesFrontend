@@ -8,7 +8,7 @@ export function SingleOptionSelector({
   value,
   style,
   options,
-  onChange,
+  setValue,
   buttonStyle,
 }) {
   return (
@@ -20,11 +20,7 @@ export function SingleOptionSelector({
           label={option.label}
           image={option.image}
           active={option.key === value}
-          onPress={() => {
-            if (onChange) {
-              onChange(option.key);
-            }
-          }}
+          onPress={() => setValue(option.key)}
         />
       ))}
     </Fieldset>

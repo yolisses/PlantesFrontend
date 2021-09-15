@@ -15,7 +15,7 @@ export function TextInput({
   leftChild,
   ...rest
 }) {
-  const [focused, setFocused] = useState(true);
+  const [focused, setFocused] = useState(false);
   const inputRef = useRef();
   const keyboardDidHide = () => {
     inputRef?.current?.blur();

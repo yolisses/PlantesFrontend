@@ -3,8 +3,9 @@ import React, {createContext, useContext, useState} from 'react';
 const PublishContext = createContext();
 
 export function PublishContextProvider({children}) {
-  const [images, setImages] = useState([]);
   const [name, setName] = useState('');
+  const [type, setType] = useState('');
+  const [images, setImages] = useState([]);
   const [description, setDescription] = useState('');
 
   function pushImage(image) {
@@ -23,9 +24,11 @@ export function PublishContextProvider({children}) {
     <PublishContext.Provider
       value={{
         name,
+        type,
         images,
         discard,
         setName,
+        setType,
         pushImage,
         description,
         removeImage,
