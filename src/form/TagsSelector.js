@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {StyleSheet} from 'react-native';
 import {Fieldset} from './Fieldset';
 import {ToggleButton} from './ToggleButton';
@@ -14,19 +14,22 @@ export function TagsSelector({
   selectedTags,
   ...rest
 }) {
-  return (
-    <Fieldset label={label} style={[styles.fieldset, style]} disableBorder>
-      {options.map(option => (
-        <ToggleButton
-          option={option}
-          key={option.key}
-          pushTag={pushTag}
-          style={buttonStyle}
-          removeTag={removeTag}
-          active={selectedTags.indexOf(option.key) !== -1}
-        />
-      ))}
-    </Fieldset>
+  return useMemo(
+    () => (
+      <Fieldset label={label} style={[styles.fieldset, style]} disableBorder>
+        {options.map(option => (
+          <ToggleButton
+            option={option}
+            key={option.key}
+            pushTag={pushTag}
+            style={buttonStyle}
+            removeTag={removeTag}
+            active={selectedTags.indexOf(option.key) !== -1}
+          />
+        ))}
+      </Fieldset>
+    ),
+    [selectedTags],
   );
 }
 

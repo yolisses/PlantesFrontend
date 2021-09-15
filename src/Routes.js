@@ -2,7 +2,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import {Dev} from './Dev';
+import {Dev} from './dev/Dev';
 
 import {MapScreen} from 'map/MapScreen';
 import {ChatScreen} from 'chat/ChatScreen';

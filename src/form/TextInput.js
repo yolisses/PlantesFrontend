@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import react_native, {Keyboard, StyleSheet, Text, View} from 'react-native';
 
 import {Fieldset} from './Fieldset';
@@ -32,32 +32,35 @@ export function TextInput({
     setFocused(false);
   }
 
-  return (
-    <View>
-      <Fieldset
-        error={error}
-        label={label}
-        style={[styles.fieldset, focused && styles.focused]}
-        styleLabel={[styles.label, focused && styles.focusedLabel]}>
-        <View style={styles.horizontalWrapper}>
-          {leftChild}
-          {optional && !focused && !value && (
-            <Text style={styles.optionalText}>Opcional </Text>
-          )}
-          <react_native.TextInput
-            {...rest}
-            {...input}
-            value={value}
-            ref={inputRef}
-            onBlur={onBlur}
-            onFocus={onFocus}
-            multiline={multiline}
-            style={[styles.input, multiline && styles.multiline, style]}
-            onChangeText={text => setValue(text)}
-          />
-        </View>
-      </Fieldset>
-    </View>
+  return useMemo(
+    () => (
+      <View>
+        <Fieldset
+          error={error}
+          label={label}
+          style={[styles.fieldset, focused && styles.focused]}
+          styleLabel={[styles.label, focused && styles.focusedLabel]}>
+          <View style={styles.horizontalWrapper}>
+            {leftChild}
+            {optional && !focused && !value && (
+              <Text style={styles.optionalText}>Opcional </Text>
+            )}
+            <react_native.TextInput
+              {...rest}
+              {...input}
+              value={value}
+              ref={inputRef}
+              onBlur={onBlur}
+              onFocus={onFocus}
+              multiline={multiline}
+              style={[styles.input, multiline && styles.multiline, style]}
+              onChangeText={text => setValue(text)}
+            />
+          </View>
+        </Fieldset>
+      </View>
+    ),
+    [value, focused],
   );
 }
 

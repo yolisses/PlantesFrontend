@@ -8,6 +8,7 @@ module.exports = {
           ['assets', './assets'],
 
           ['api', './src/api'],
+          ['dev', './src/dev'],
           ['map', './src/map'],
           ['auth', './src/auth'],
           ['chat', './src/chat'],
