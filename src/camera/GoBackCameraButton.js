@@ -1,4 +1,3 @@
-import {faTimes} from '@fortawesome/free-solid-svg-icons';
 import {useNavigation} from '@react-navigation/core';
 import React from 'react';
 import {CameraOptionButton} from './CameraOptionButton';

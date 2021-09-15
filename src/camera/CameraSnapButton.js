@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: 'white',
     padding: 2,
-    transform: [{translateY: 48}],
   },
   innerCameraButton: {
     backgroundColor: 'white',

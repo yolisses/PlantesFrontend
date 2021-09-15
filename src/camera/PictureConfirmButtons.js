@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'row',
     paddingHorizontal: 5,
-    transform: [{translateY: 31}],
   },
   button: {
     flex: 1,

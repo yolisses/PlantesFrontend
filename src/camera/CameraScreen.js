@@ -74,7 +74,8 @@ export function CameraScreen() {
           )}
         </OptionsWrapper>
         <CameraSquareFocus />
-        <CameraCentralWrapper>
+        <OptionsWrapper>
+          {!pictureTook && <FlashSelectorButton />}
           {!pictureTook ? (
             <CameraSnapButton onPress={takePicture} />
           ) : (
@@ -83,14 +84,7 @@ export function CameraScreen() {
               onApprovePress={approve}
             />
           )}
-        </CameraCentralWrapper>
-        <OptionsWrapper>
-          {!pictureTook && (
-            <>
-              <FlashSelectorButton />
-              <TurnCameraButton type={type} setType={setType} />
-            </>
-          )}
+          {!pictureTook && <TurnCameraButton type={type} setType={setType} />}
         </OptionsWrapper>
       </View>
     </View>
