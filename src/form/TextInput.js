@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 import react_native, {Keyboard, StyleSheet, Text, View} from 'react-native';
 
 import {Fieldset} from './Fieldset';
@@ -32,6 +32,8 @@ export function TextInput({
     setFocused(false);
   }
 
+  const isValueShowable = value !== null && value !== undefined && value !== '';
+
   return useMemo(
     () => (
       <View>
@@ -42,13 +44,13 @@ export function TextInput({
           styleLabel={[styles.label, focused && styles.focusedLabel]}>
           <View style={styles.horizontalWrapper}>
             {leftChild}
-            {optional && !focused && !value && (
+            {optional && !focused && !isValueShowable && (
               <Text style={styles.optionalText}>Opcional </Text>
             )}
             <react_native.TextInput
               {...rest}
               {...input}
-              value={value}
+              value={isValueShowable ? '' + value : ''}
               ref={inputRef}
               onBlur={onBlur}
               onFocus={onFocus}
