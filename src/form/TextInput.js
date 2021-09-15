@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import react_native, {Keyboard, StyleSheet, Text, View} from 'react-native';
 
 import {Fieldset} from './Fieldset';
@@ -9,13 +9,13 @@ export function TextInput({
   label,
   style,
   value,
-  active,
   optional,
   setValue,
   multiline,
   leftChild,
   ...rest
 }) {
+  const [focused, setFocused] = useState(true);
   const inputRef = useRef();
   const keyboardDidHide = () => {
     inputRef?.current?.blur();
@@ -24,16 +24,24 @@ export function TextInput({
     Keyboard.addListener('keyboardDidHide', keyboardDidHide);
   }, []);
 
+  function onFocus() {
+    setFocused(true);
+  }
+
+  function onBlur() {
+    setFocused(false);
+  }
+
   return (
     <View>
       <Fieldset
         error={error}
         label={label}
-        style={[styles.fieldset, active && styles.focused]}
-        styleLabel={[styles.label, active && styles.focusedLabel]}>
+        style={[styles.fieldset, focused && styles.focused]}
+        styleLabel={[styles.label, focused && styles.focusedLabel]}>
         <View style={styles.horizontalWrapper}>
           {leftChild}
-          {optional && !active && !value && (
+          {optional && !focused && !value && (
             <Text style={styles.optionalText}>Opcional </Text>
           )}
           <react_native.TextInput
@@ -41,6 +49,8 @@ export function TextInput({
             {...input}
             value={value}
             ref={inputRef}
+            onBlur={onBlur}
+            onFocus={onFocus}
             multiline={multiline}
             style={[styles.input, multiline && styles.multiline, style]}
             onChangeText={text => setValue(text)}

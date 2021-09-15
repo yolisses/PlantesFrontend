@@ -14,15 +14,20 @@ export function PublishScreen() {
     <PublishContextProvider>
       <Publish.Navigator>
         <Publish.Screen
-          name="Images"
-          component={PublishImagesScreen}
-          options={{headerShown: false}}
-        />
-        <Publish.Screen
           name="Detail"
           component={PublishDetailScreen}
           options={{headerShown: false}}
         />
+        <Publish.Screen
+          name="Images"
+          component={PublishImagesScreen}
+          options={{headerShown: false}}
+        />
+        {/* <Publish.Screen
+          name="Detail"
+          component={PublishDetailScreen}
+          options={{headerShown: false}}
+        /> */}
         <Publish.Screen
           name="Price"
           component={PublishPriceScreen}
