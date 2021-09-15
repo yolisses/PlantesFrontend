@@ -12,6 +12,7 @@ import {CameraSnapButton} from 'camera/CameraSnapButton';
 import {CameraCentralWrapper} from 'camera/CameraCentralWrapper';
 import {PictureConfirmButtons} from 'camera/PictureConfirmButtons';
 import CameraRoll from '@react-native-community/cameraroll';
+import {GoBackCameraButton} from './GoBackCameraButton';
 
 const optionButtonSize = 25;
 
@@ -46,11 +47,8 @@ export function CameraScreen() {
   }
 
   function approve() {
-    CameraRoll.save(uri, {type: 'photo', album: 'Plantei'})
-      .then(uri => {}) //add image
-      .catch(console.error);
+    CameraRoll.save(uri, {type: 'photo', album: 'Plantei'});
     goBack();
-
     resume();
   }
 
@@ -77,15 +75,7 @@ export function CameraScreen() {
       )}
       <View style={styles.topLayer}>
         <View style={[styles.optionsWrapper, {alignItems: 'flex-start'}]}>
-          {!pictureTook ? (
-            <TouchableOpacity onPress={goBack} style={styles.goBackOption}>
-              <FontAwesomeIcon
-                icon={faArrowLeft}
-                color="white"
-                size={optionButtonSize}
-              />
-            </TouchableOpacity>
-          ) : null}
+          {!pictureTook ? <GoBackCameraButton /> : null}
         </View>
 
         <View style={styles.focus} />
