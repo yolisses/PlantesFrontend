@@ -8,7 +8,6 @@ import {NextButton} from 'publish/NextButton';
 import {ProgressBar} from 'publish/ProgressBar';
 import {CustomHeader} from 'publish/CustomHeader';
 import {AvailabilitySelector} from 'publish/AvailabilitySelector';
-import {PriceInput} from 'publish/PriceInput';
 
 function ValidatedHeader() {
   return (
@@ -27,7 +26,6 @@ export function PublishPriceScreen() {
       <ProgressBar ratio={3 / 3} />
       <ScrollView showsVerticalScrollIndicator={false} style={{padding: 10}}>
         <AvailabilitySelector />
-        <PriceInput />
         <TextInput
           optional
           label="Quantidade"

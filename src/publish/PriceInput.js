@@ -3,8 +3,8 @@ import React from 'react';
 import {MoneySign} from 'form/MoneySign';
 import {TextInput} from 'form/TextInput';
 
-export function PriceInput({hide}) {
-  return !hide ? (
+export function PriceInput() {
+  return (
     <TextInput
       label="Preço"
       autoCorrect={false}
@@ -12,5 +12,5 @@ export function PriceInput({hide}) {
       leftChild={<MoneySign />}
       keyboardType="decimal-pad"
     />
-  ) : null;
+  );
 }

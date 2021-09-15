@@ -4,6 +4,7 @@ import {StyleSheet} from 'react-native';
 import {TagsSelector} from 'form/TagsSelector';
 import {availabilities} from './data/availiabilities';
 import {usePublish} from './contexts/PublishContext';
+import {PriceInput} from './PriceInput';
 
 export function AvailabilitySelector() {
   const {
@@ -12,15 +13,20 @@ export function AvailabilitySelector() {
     removeAvailability,
   } = usePublish();
 
+  const isSellActive = selected.indexOf('sell') !== -1;
+
   return (
-    <TagsSelector
-      label="Disponível para"
-      selectedTags={selected}
-      options={availabilities}
-      pushTag={pushAvailability}
-      buttonStyle={styles.button}
-      removeTag={removeAvailability}
-    />
+    <>
+      <TagsSelector
+        label="Disponível para"
+        selectedTags={selected}
+        options={availabilities}
+        pushTag={pushAvailability}
+        buttonStyle={styles.button}
+        removeTag={removeAvailability}
+      />
+      {isSellActive && <PriceInput />}
+    </>
   );
 }
 
