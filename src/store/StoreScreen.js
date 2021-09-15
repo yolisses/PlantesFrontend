@@ -21,7 +21,11 @@ export function StoreScreen() {
   const {loading, error, data} = useQuery(PLANTS);
 
   if (loading || error) {
-    return <CardsListLoading />;
+    return (
+      <FooterNavigationLayout selected={'Home'}>
+        <CardsListLoading />
+      </FooterNavigationLayout>
+    );
   }
 
   return (
