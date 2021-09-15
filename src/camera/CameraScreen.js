@@ -1,25 +1,23 @@
-import {useRef} from 'react';
-import FastImage from 'react-native-fast-image';
-import React, {useEffect, useState} from 'react';
+import {StyleSheet, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {Dimensions, StyleSheet, View} from 'react-native';
-
-import {CameraSnapButton} from 'camera/CameraSnapButton';
-import {PictureConfirmButtons} from 'camera/PictureConfirmButtons';
+import React, {useEffect, useState, useRef} from 'react';
 import CameraRoll from '@react-native-community/cameraroll';
-import {GoBackCameraButton} from './GoBackCameraButton';
-import {CameraSquareFocus} from './CameraFocusSquare';
-import {TurnCameraButton} from './TurnCameraButton';
-import {OptionsWrapper} from './OptionWrapper';
-import {FlashSelectorButton} from './FlashSelectorButton';
+
 import {CameraPreview} from './CameraPreview';
+import {OptionsWrapper} from './OptionWrapper';
+import {PicturePreview} from './PicturePreview';
+import {CameraSnapButton} from './CameraSnapButton';
+import {TurnCameraButton} from './TurnCameraButton';
+import {CameraSquareFocus} from './CameraFocusSquare';
+import {GoBackCameraButton} from './GoBackCameraButton';
+import {FlashSelectorButton} from './FlashSelectorButton';
+import {PictureConfirmButtons} from './PictureConfirmButtons';
 
 export function CameraScreen() {
-  const {goBack} = useNavigation();
   const cameraRef = useRef();
-
-  const [pictureTook, setPictureTook] = useState(false);
   const [uri, setUri] = useState();
+  const {goBack} = useNavigation();
+  const [pictureTook, setPictureTook] = useState(false);
 
   const takePicture = async () => {
     const options = {quality: 1};
@@ -34,21 +32,12 @@ export function CameraScreen() {
     goBack();
   }
 
-  useEffect(() => {
-    if (uri) {
-      setPictureTook(true);
-    }
-  }, [uri]);
+  useEffect(() => uri && setPictureTook(true), [uri]);
 
   return (
     <View style={styles.container}>
       <CameraPreview ref={cameraRef} />
-      {pictureTook && (
-        <FastImage
-          source={{uri, priority: FastImage.priority.high}}
-          style={[styles.preview, styles.image]}
-        />
-      )}
+      {pictureTook && <PicturePreview uri={uri} />}
       <View style={styles.topLayer}>
         <OptionsWrapper style={{flexDirection: 'row-reverse'}}>
           {!pictureTook && <GoBackCameraButton />}
@@ -73,22 +62,10 @@ export function CameraScreen() {
   );
 }
 
-const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
     backgroundColor: 'black',
-  },
-  preview: {
-    position: 'absolute',
-    width,
-    height,
-  },
-  image: {
-    backgroundColor: '#0000',
   },
   topLayer: {
     height: '100%',
