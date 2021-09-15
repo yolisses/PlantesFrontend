@@ -1,16 +1,21 @@
-import React, {useContext, useEffect} from 'react';
+import {useQuery} from '@apollo/client';
+import React, {useContext} from 'react';
 import {createContext, useState} from 'react';
-import auth from '@react-native-firebase/auth';
 import GetLocation from 'react-native-get-location';
+import {gql} from '@apollo/client';
 
 const UserContext = createContext({});
 
 export function UserContextProvider({children}) {
-  const [user, setUser] = useState();
-
-  async function onAuthStateChanged(newUser) {
-    setUser(newUser);
+  const [token, setToken] = useState();
+  const USER = gql`
+  query {
+    authenticateWithGoogle(token:"${token}") {
+      id, name
+    }
   }
+`;
+  const {loading, error, data} = useQuery(USER);
 
   function updateLocation() {
     GetLocation.getCurrentPosition({
@@ -25,7 +30,7 @@ export function UserContextProvider({children}) {
   // });
 
   return (
-    <UserContext.Provider value={{user, updateLocation}}>
+    <UserContext.Provider value={{user: data, setToken, updateLocation}}>
       {children}
     </UserContext.Provider>
   );

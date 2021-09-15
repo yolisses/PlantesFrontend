@@ -2,11 +2,9 @@ import React from 'react';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 
 import {Card} from 'store/Card';
-import {CardsListFooter} from './CardsListFooter';
 import {CardsListLoading} from './CardsListLoading';
-import {InfiniteScroll} from 'common/InfiniteScroll';
 import {useQuery, gql} from '@apollo/client';
-import {FlatList, Text} from 'react-native';
+import {FlatList} from 'react-native';
 
 const PLANTS = gql`
   query {

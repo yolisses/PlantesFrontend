@@ -11,7 +11,7 @@ export async function signIn() {
   const googleCredential = auth.GoogleAuthProvider.credential(idToken);
   await auth().signInWithCredential(googleCredential);
   const idTokenResult = await auth().currentUser.getIdTokenResult();
-  console.error(idTokenResult);
+  return idTokenResult.token;
 }
 
 export function signOut() {
