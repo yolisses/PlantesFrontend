@@ -26,8 +26,9 @@ export function PublishContextProvider({children}) {
   const [price, setPrice] = useState();
   const [amount, setAmount] = useState();
   const [description, setDescription] = useState('');
-  const [tags, pushTag, removeTag, discardTags] = useState([]);
-  const [images, pushImage, removeImage, discardImages] = useState([]);
+
+  const [tags, pushTag, removeTag, discardTags] = useListState();
+  const [images, pushImage, removeImage, discardImages] = useListState();
   const [
     availabilities,
     pushAvailability,
