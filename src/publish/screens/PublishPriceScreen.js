@@ -1,13 +1,14 @@
 import React from 'react';
 import {ScrollView} from 'react-native';
 
-import {IntInput} from 'publish/IntInput';
+import {IntInput} from 'form/IntInput';
+
 import {BackButton} from 'publish/BackButton';
 import {NextButton} from 'publish/NextButton';
 import {ProgressBar} from 'publish/ProgressBar';
 import {CustomHeader} from 'publish/CustomHeader';
-import {AvailabilitySelector} from 'publish/AvailabilitySelector';
 import {usePublish} from 'publish/contexts/PublishContext';
+import {AvailabilitySelector} from 'publish/AvailabilitySelector';
 
 function ValidatedHeader() {
   return (
