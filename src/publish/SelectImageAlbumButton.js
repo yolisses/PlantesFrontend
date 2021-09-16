@@ -4,14 +4,16 @@ import {faAngleDown} from '@fortawesome/free-solid-svg-icons';
 import {useModal} from 'modal/ModalContext';
 
 import {BarButton} from './BarButton';
+import {usePublish} from './PublishContext';
 import {SelectLocalImageAlbumModal} from './SelectImageAlbumModal';
-import {displayAlbumTitle} from './displayAlbumName';
 
-export function SelectImageAlbumButton({album, setAlbum, ...res}) {
+export function SelectImageAlbumButton({...res}) {
   const {showModal} = useModal();
 
+  const {state} = usePublish();
+
   const onPress = () => {
-    showModal(<SelectLocalImageAlbumModal setAlbum={setAlbum} />);
+    showModal(<SelectLocalImageAlbumModal />);
   };
 
   return (
@@ -20,7 +22,7 @@ export function SelectImageAlbumButton({album, setAlbum, ...res}) {
       onPress={onPress}
       icon={faAngleDown}
       iconStyle={{marginRight: 2}}
-      text={displayAlbumTitle(album.title)}
+      text={state._localAlbum}
     />
   );
 }

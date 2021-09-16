@@ -1,6 +1,5 @@
-import {FlatList, Text} from 'react-native';
-import React, {useEffect, useState} from 'react';
-import CameraRoll from '@react-native-community/cameraroll';
+import {FlatList} from 'react-native';
+import React from 'react';
 
 import {width} from 'utils/width';
 import {SelectableImage} from './SelectableImage';
@@ -8,30 +7,13 @@ import {usePublish} from './PublishContext';
 
 const numberOfCollums = 3;
 
-export function LocalImagesSelector({album, flatListHeader}) {
-  const [foundImages, setFoundImages] = useState([]);
-
+export function LocalImagesSelector({flatListHeader}) {
   const {state, dispatch} = usePublish();
   const images = state.images || {};
+  const foundImages = state._localFoundImages || [];
+
   const getImageIndex = uri =>
     images[uri] ? Object.keys(images).indexOf(uri) + 1 : null;
-
-  function getImages() {
-    CameraRoll.getPhotos({
-      first: 20,
-      groupTypes: album.type,
-      groupName: album.type !== 'All' ? album.title : undefined,
-      include: ['location'],
-    })
-      .then(a => {
-        setFoundImages(a.edges.map(item => item.node.image));
-      })
-      .catch(err => console.error(err));
-  }
-
-  useEffect(() => {
-    getImages();
-  }, [album]);
 
   return (
     <>

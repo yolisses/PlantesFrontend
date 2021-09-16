@@ -3,30 +3,18 @@ import {useModal} from 'modal/ModalContext';
 import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, Text} from 'react-native';
 import {TouchableOpacity} from 'react-native';
-import {displayAlbumTitle} from './displayAlbumName';
+import {usePublish} from './PublishContext';
 
-export function SelectLocalImageAlbumModal({setAlbum}) {
+export function SelectLocalImageAlbumModal() {
   const [albums, setAlbums] = useState([]);
+  const {dispatch} = usePublish();
   const {closeModal} = useModal();
-
-  const defaultAlbums = [
-    {
-      title: 'Galeria',
-      type: 'All',
-    },
-  ];
 
   async function getAlbums() {
     CameraRoll.getAlbums({assetType: 'Photos'})
       .then(albums => {
         setAlbums(
-          defaultAlbums.concat(
-            albums
-              .filter(album => album.title !== '0')
-              .map(album => {
-                return {...album, type: 'Album'};
-              }),
-          ),
+          albums.map(album => album.title).filter(album => album !== '0'),
         );
       })
       .catch(err => console.error(err));
@@ -40,14 +28,14 @@ export function SelectLocalImageAlbumModal({setAlbum}) {
     <ScrollView style={styles.container}>
       {albums.map(album => (
         <TouchableOpacity
-          key={album.title}
+          key={album}
           activeOpacity={0.8}
           style={styles.wrapper}
           onPress={() => {
-            setAlbum(album);
+            dispatch({id: '_localAlbum', value: album});
             closeModal();
           }}>
-          <Text style={styles.text}>{displayAlbumTitle(album.title)}</Text>
+          <Text style={styles.text}>{album}</Text>
         </TouchableOpacity>
       ))}
     </ScrollView>

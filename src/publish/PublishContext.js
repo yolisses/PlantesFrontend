@@ -4,7 +4,8 @@ import {PublishReducer} from './PublishReducer';
 const PublishContext = createContext();
 
 export function PublishContextProvider({children}) {
-  const [state, dispatch] = useReducer(PublishReducer, {});
+  const initialState = {_localAlbum: 'galeria'};
+  const [state, dispatch] = useReducer(PublishReducer, initialState);
   return (
     <PublishContext.Provider value={{state, dispatch}}>
       {children}
