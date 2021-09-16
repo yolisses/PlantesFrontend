@@ -8,7 +8,6 @@ import {SelectableImageNumber} from './SelectableImageNumber';
 import {useAlert} from 'alert/AlertContext';
 import {ImagesLimitAlert} from './ImagesLimitAlert';
 import {usePublish} from './PublishContext';
-import {UriTester} from 'dev/uriTester';
 
 const numberOfCollums = 3;
 
@@ -18,9 +17,7 @@ export function SelectableImage({uri, imagesReachedLimit}) {
   const {state, dispatch} = usePublish();
   const images = state.images || {};
 
-  const getImageIndex = uri =>
-    images[uri] ? Object.keys(images).indexOf(uri) + 1 : null;
-  const index = getImageIndex(uri);
+  const index = images[uri];
 
   return useMemo(
     () => (
@@ -31,10 +28,10 @@ export function SelectableImage({uri, imagesReachedLimit}) {
               showAlert(<ImagesLimitAlert />);
               return;
             }
-            dispatch({id: ['images', uri], value: true});
+            dispatch({id: ['images', uri], type: 'setWithIndex'});
             dispatch({id: '_localRefreshImagesPreview', value: uri + '+'});
           } else {
-            dispatch({id: ['images', uri], type: 'delete'});
+            dispatch({id: ['images', uri], type: 'deleteSettingIndexes'});
             dispatch({id: '_localRefreshImagesPreview', value: uri + '-'});
           }
         }}>

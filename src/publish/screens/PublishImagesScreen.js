@@ -1,5 +1,5 @@
 import React, {useMemo, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 
 import {NextButton} from 'publish/NextButton';
 import {CustomHeader} from 'publish/CustomHeader';
@@ -33,25 +33,27 @@ export function PublishImagesScreen() {
   const [album, setAlbum] = useState({title: 'Galeria', type: 'All'});
 
   return (
-    <FooterNavigationLayout selected="Publish">
-      <ValidatedHeader />
-      <LocalImagesSelector
-        album={album}
-        flatListHeader={() => (
-          <View style={{backgroundColor: 'white'}}>
-            <PublishImagesPreview />
-            <View style={styles.wrapper}>
-              <SelectImageAlbumButton
-                album={album}
-                setAlbum={setAlbum}
-                style={styles.button}
-              />
-              <TakePhotoButton style={styles.button} />
+    <>
+      <FooterNavigationLayout selected="Publish">
+        <ValidatedHeader />
+        <LocalImagesSelector
+          album={album}
+          flatListHeader={() => (
+            <View style={{backgroundColor: 'white'}}>
+              <PublishImagesPreview />
+              <View style={styles.wrapper}>
+                <SelectImageAlbumButton
+                  album={album}
+                  setAlbum={setAlbum}
+                  style={styles.button}
+                />
+                <TakePhotoButton style={styles.button} />
+              </View>
             </View>
-          </View>
-        )}
-      />
-    </FooterNavigationLayout>
+          )}
+        />
+      </FooterNavigationLayout>
+    </>
   );
 }
 

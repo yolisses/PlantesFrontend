@@ -44,6 +44,11 @@ export function PublishReducer(state, action) {
   getToThePath(id, copy, (subId, actual) => {
     if (action.type === 'delete') {
       delete actual[subId];
+    } else if (action.type === 'setWithIndex') {
+      actual[subId] = Object.keys(actual).length + 1;
+    } else if (action.type === 'deleteSettingIndexes') {
+      delete actual[subId];
+      Object.keys(actual).map((key, index) => (actual[key] = index + 1));
     } else {
       actual[subId] = action.value;
     }

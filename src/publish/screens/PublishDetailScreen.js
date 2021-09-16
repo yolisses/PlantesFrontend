@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react';
-import {ScrollView, StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet, Text} from 'react-native';
 
 import {TextInput} from 'form/TextInput';
 import {TagsSelector} from 'form/TagsSelector';
