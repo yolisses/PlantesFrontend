@@ -1,10 +1,20 @@
-const initialState = {count: 0, name: 'peteca'};
+const isInvalid = value => value === undefined || value === null;
 
-export function reducer(state = initialState, {id, value}) {
+export function reducer(state, {id, value}) {
   if (!id) {
-    throw new Error('No id provided');
+    throw new Error('No id provided. Action:', JSON.stringify({id, value}));
   }
-  const copy = {...state};
-  copy[id] = value;
-  return copy;
+  if (Array.isArray(id)) {
+    id.forEach(subId => {
+      console.error(typeof subId);
+      if (isInvalid(subId)) {
+        throw new Error('Invalid id. Action: ' + JSON.stringify({id, value}));
+      }
+    });
+    return state;
+  } else {
+    const copy = {...state};
+    copy[id] = value;
+    return copy;
+  }
 }
