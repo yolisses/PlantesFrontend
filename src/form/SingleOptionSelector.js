@@ -22,7 +22,7 @@ export function SingleOptionSelector({
             label={option.label}
             image={option.image}
             active={option.key === value}
-            onPress={() => dispatch({key: id, value: option.key})}
+            onPress={() => dispatch({id, value: option.key})}
           />
         ))}
       </Fieldset>

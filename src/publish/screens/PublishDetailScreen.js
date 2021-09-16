@@ -44,7 +44,7 @@ export function PublishDetailScreen() {
         <TextInput
           autoFocus
           label="Nome"
-          option="name"
+          id="name"
           value={state.name}
           dispatch={dispatch}
         />

@@ -16,7 +16,7 @@ export function TextInput({
   multiline,
   leftChild,
 
-  option,
+  id,
   dispatch,
   ...rest
 }) {
@@ -43,7 +43,7 @@ export function TextInput({
   const isValueShowable = value !== null && value !== undefined && value !== '';
 
   function onChangeText(text) {
-    dispatch({key: option, value: text});
+    dispatch({id, value: text});
   }
 
   return useMemo(
