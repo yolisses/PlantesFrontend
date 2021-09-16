@@ -18,17 +18,18 @@ export function Alert({title, description, children}) {
             <Text style={styles.description}>{description}</Text>
           </View>
           <View style={styles.horizontalWrapper}>
-            {children &&
-              children.map((child, index) => {
-                return (
-                  <Fragment key={index}>
-                    {child}
-                    {index + 1 < children.length && (
-                      <View style={styles.verticalLine} />
-                    )}
-                  </Fragment>
-                );
-              })}
+            {children && Array.isArray(children)
+              ? children.map((child, index) => {
+                  return (
+                    <Fragment key={index}>
+                      {child}
+                      {index + 1 < children.length && (
+                        <View style={styles.verticalLine} />
+                      )}
+                    </Fragment>
+                  );
+                })
+              : children}
           </View>
         </Pressable>
       </View>

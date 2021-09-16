@@ -5,6 +5,7 @@ import {width} from 'utils/width';
 import {SelectableImage} from './SelectableImage';
 import {usePublish} from './PublishContext';
 import CameraRoll from '@react-native-community/cameraroll';
+import {imagesLimit} from './imagesLimit';
 
 const numberOfCollums = 3;
 
@@ -33,6 +34,8 @@ export function LocalImagesSelector({flatListHeader}) {
   const getImageIndex = uri =>
     images[uri] ? Object.keys(images).indexOf(uri) + 1 : null;
 
+  const imagesReachedLimit = Object.keys(images).length >= imagesLimit;
+
   return (
     <FlatList
       data={foundImages}
@@ -53,6 +56,7 @@ export function LocalImagesSelector({flatListHeader}) {
           uri={uri}
           dispatch={dispatch}
           index={getImageIndex(uri)}
+          imagesReachedLimit={imagesReachedLimit}
         />
       )}
     />
