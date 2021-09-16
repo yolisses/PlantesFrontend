@@ -15,8 +15,10 @@ export function SelectableImage({uri, index, dispatch}) {
         onPress={function () {
           if (!index) {
             dispatch({id: ['images', uri], value: true});
+            dispatch({id: '_localRefreshImagesPreview', value: uri + '+'});
           } else {
             dispatch({id: ['images', uri], type: 'delete'});
+            dispatch({id: '_localRefreshImagesPreview', value: uri + '-'});
           }
         }}>
         <FastImage
@@ -25,7 +27,7 @@ export function SelectableImage({uri, index, dispatch}) {
         />
         {!!index && (
           <View style={styles.numberWrapper}>
-            <SelectableImageNumber number={index + 1} />
+            <SelectableImageNumber number={index} />
           </View>
         )}
       </Pressable>

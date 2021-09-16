@@ -1,15 +1,17 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {ImagesSwiper} from 'show/ImagesSwiper';
 import {ChooseImagesPlaceholder} from './ChooseImagesPlaceholder';
 import {usePublish} from './PublishContext';
 
 export function PublishImagesPreview() {
-  const {
-    state: {images},
-  } = usePublish();
-  if (!images?.length) {
-    return <ChooseImagesPlaceholder />;
-  }
+  const {state} = usePublish();
+  const refresh = state._localRefreshImagesPreview;
 
-  return <ImagesSwiper images={images} />;
+  return useMemo(() => {
+    const images = Object.keys(state.images || {});
+    if (!images?.length) {
+      return <ChooseImagesPlaceholder />;
+    }
+    return <ImagesSwiper images={images} />;
+  }, [refresh]);
 }
