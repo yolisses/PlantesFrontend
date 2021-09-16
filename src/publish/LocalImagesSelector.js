@@ -16,7 +16,6 @@ export function LocalImagesSelector({flatListHeader}) {
   const album = state._localAlbum;
 
   async function getPhotos() {
-    console.error('get photos, album ', album);
     CameraRoll.getPhotos({
       groupName: album !== 'Galeria' ? album : undefined,
       first: 100,
@@ -26,10 +25,6 @@ export function LocalImagesSelector({flatListHeader}) {
       })
       .catch(err => console.error(err));
   }
-
-  useEffect(() => {
-    getPhotos();
-  }, [album]);
 
   useEffect(() => {
     getPhotos();
