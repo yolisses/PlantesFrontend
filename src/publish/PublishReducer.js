@@ -1,5 +1,7 @@
 import {InvalidIdError} from './InvalidIdError';
 
+export const initialState = {_localAlbum: 'Galeria'};
+
 const isInvalid = id => id === undefined || id === null;
 
 function isIdValid(id) {
@@ -26,7 +28,7 @@ function getToThePath(id, state, callBack) {
 
 export function PublishReducer(state, action) {
   if (action.type === 'discardAll') {
-    return {};
+    return {...initialState};
   }
   let id = action.id;
   if (!id) {
