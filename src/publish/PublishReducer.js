@@ -25,6 +25,9 @@ function getToThePath(id, state, callBack) {
 }
 
 export function PublishReducer(state, action) {
+  if (action.type === 'discardAll') {
+    return {};
+  }
   let id = action.id;
   if (!id) {
     throw new InvalidIdError(action);
