@@ -1,5 +1,5 @@
 import React, {useReducer} from 'react';
-import {ScrollView, Text} from 'react-native';
+import {ScrollView, StyleSheet, Text} from 'react-native';
 
 import {IntInput} from 'form/IntInput';
 
@@ -7,8 +7,10 @@ import {BackButton} from 'publish/BackButton';
 import {NextButton} from 'publish/NextButton';
 import {ProgressBar} from 'publish/ProgressBar';
 import {CustomHeader} from 'publish/CustomHeader';
-import {AvailabilitySelector} from 'publish/AvailabilitySelector';
 import {reducer} from 'publish/reducer';
+import {PriceInput} from 'form/PriceInput';
+import {availabilities} from 'publish/data/availiabilities';
+import {TagsSelector} from 'form/TagsSelector';
 
 function ValidatedHeader({price, availabilities}) {
   // let canContinue = availabilities && availabilities.length > 0;
@@ -36,7 +38,15 @@ export function PublishPriceScreen() {
       <ProgressBar ratio={3 / 3} />
       <Text>{JSON.stringify(state)}</Text>
       <ScrollView showsVerticalScrollIndicator={false} style={{padding: 10}}>
-        <AvailabilitySelector />
+        <TagsSelector
+          id={null}
+          label="Disponível para"
+          value={state}
+          dispatch={dispatch}
+          options={availabilities}
+          buttonStyle={styles.button}
+        />
+        <PriceInput label="Preço" value={state.price} dispatch={dispatch} />
         <IntInput
           id="amount"
           label="Quantidade"
@@ -48,3 +58,11 @@ export function PublishPriceScreen() {
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  button: {
+    flex: 1,
+    paddingVertical: 15,
+    justifyContent: 'center',
+  },
+});

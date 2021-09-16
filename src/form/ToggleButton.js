@@ -19,9 +19,9 @@ export function ToggleButton({
   active,
   ...rest
 }) {
-  function onPress() {
+  const onPress = () => {
     dispatch({id, value: !active});
-  }
+  };
 
   return useMemo(
     () => (

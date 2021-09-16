@@ -17,27 +17,5 @@ export function AvailabilitySelector() {
 
   const isSellActive = selected.indexOf('sell') !== -1;
 
-  return (
-    <>
-      <TagsSelector
-        label="Disponível para"
-        selectedTags={selected}
-        options={availabilities}
-        pushTag={pushAvailability}
-        buttonStyle={styles.button}
-        removeTag={removeAvailability}
-      />
-      {isSellActive && (
-        <PriceInput label="Preço" value={price} setValue={setPrice} />
-      )}
-    </>
-  );
+  return <></>;
 }
-
-const styles = StyleSheet.create({
-  button: {
-    flex: 1,
-    paddingVertical: 15,
-    justifyContent: 'center',
-  },
-});
