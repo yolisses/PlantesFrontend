@@ -25,20 +25,20 @@ function setOnIdPath(id, value, state) {
 }
 
 export function PublishReducer(state, action) {
-  const {id, value} = action;
+  const {value} = action;
+  let id = action.id;
   if (!id) {
     throw new InvalidIdError(action);
   }
-  if (Array.isArray(id)) {
-    if (!isIdValid(id)) {
-      throw new InvalidIdError(action);
-    }
-    const copy = {...state};
-    setOnIdPath(id, value, copy);
-    return copy;
-  } else {
-    const copy = {...state};
-    copy[id] = value;
-    return copy;
+
+  if (!Array.isArray(id)) {
+    id = [id];
   }
+  console.error(state);
+  if (!isIdValid(id)) {
+    throw new InvalidIdError(action);
+  }
+  const copy = {...state};
+  setOnIdPath(id, value, copy);
+  return copy;
 }
