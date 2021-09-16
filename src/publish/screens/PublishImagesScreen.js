@@ -9,17 +9,16 @@ import {LocalImagesSelector} from 'publish/LocalImagesSelector';
 import {PublishImagesPreview} from 'publish/PublishImagesPreview';
 import {SelectImageAlbumButton} from 'publish/SelectImageAlbumButton';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
-import {usePublish} from 'publish/contexts/PublishContext';
 
 function ValidatedHeader() {
-  const {images} = usePublish();
-  const thereIsSomeImage = images.getAsList().length > 0;
+  // const {images} = usePublish();
+  // const thereIsSomeImage = images.getAsList().length > 0;
 
   return (
     <CustomHeader
       title="Publicar"
-      left={thereIsSomeImage && <DiscardButton />}
-      right={thereIsSomeImage && <NextButton route="Detail" />}
+      left={true && <DiscardButton />}
+      right={true && <NextButton route="Detail" />}
     />
   );
 }

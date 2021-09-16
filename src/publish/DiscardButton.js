@@ -4,7 +4,7 @@ import {useAlert} from 'alert/AlertContext';
 import {DiscardPublishAlert} from './DiscardPublishAlert';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
-import {usePublish} from './contexts/PublishContext';
+import {usePublish} from './PublishContext';
 
 export function DiscardButton() {
   const {discard} = usePublish();

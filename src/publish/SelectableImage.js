@@ -5,30 +5,30 @@ import {Pressable, StyleSheet, View} from 'react-native';
 
 import {width} from 'utils/width';
 import {SelectableImageNumber} from './SelectableImageNumber';
+import {RerenderTester} from 'dev/rerenderTester';
 
 const numberOfCollums = 3;
 
-export function SelectableImage({uri, index, push, remove}) {
-  const selected = index !== null;
-
+export function SelectableImage({uri, active, images, dispatch}) {
   return (
     <Pressable
       onPress={function () {
-        if (!selected) {
-          push(uri);
+        if (!active) {
+          dispatch({id: ['images', uri], value: true});
         } else {
-          remove(uri);
+          dispatch({id: ['images', uri], value: false});
         }
       }}>
       <FastImage
-        style={[styles.image, selected && styles.selected]}
+        style={[styles.image, active && styles.selected]}
         source={{uri}}
       />
-      {selected && (
+      {active && (
         <View style={styles.numberWrapper}>
-          <SelectableImageNumber number={index + 1} />
+          {/* <SelectableImageNumber number={10} /> */}
         </View>
       )}
+      <RerenderTester />
     </Pressable>
   );
 }

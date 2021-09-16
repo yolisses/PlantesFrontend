@@ -1,17 +1,18 @@
-import {FlatList} from 'react-native';
+import {FlatList, Text} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import CameraRoll from '@react-native-community/cameraroll';
 
 import {width} from 'utils/width';
 import {SelectableImage} from './SelectableImage';
-import {usePublish} from './contexts/PublishContext';
+import {usePublish} from './PublishContext';
 
 const numberOfCollums = 3;
 
 export function LocalImagesSelector({album, flatListHeader}) {
   const [foundImages, setFoundImages] = useState([]);
 
-  const {images} = usePublish();
+  const {state, dispatch} = usePublish();
+  const images = state.images || {};
 
   function getImages() {
     CameraRoll.getPhotos({
@@ -31,29 +32,31 @@ export function LocalImagesSelector({album, flatListHeader}) {
   }, [album]);
 
   return (
-    <FlatList
-      numColumns={numberOfCollums}
-      data={foundImages}
-      getItemLayout={(data, index) => {
-        return {
-          length: width / numberOfCollums,
-          offset: ((width / numberOfCollums) * index) % numberOfCollums,
-          index,
-        };
-      }}
-      ListHeaderComponent={flatListHeader}
-      keyExtractor={item => item.uri}
-      renderItem={({item}) => {
-        return (
-          <SelectableImage
-            {...item}
-            uri={item.uri}
-            push={images.push}
-            remove={images.remove}
-            index={images.indexOf(item.uri)}
-          />
-        );
-      }}
-    />
+    <>
+      <FlatList
+        data={foundImages}
+        numColumns={numberOfCollums}
+        keyExtractor={item => item.uri}
+        ListHeaderComponent={flatListHeader}
+        showsVerticalScrollIndicator={false}
+        getItemLayout={(data, index) => {
+          return {
+            length: width / numberOfCollums,
+            offset: ((width / numberOfCollums) * index) % numberOfCollums,
+            index,
+          };
+        }}
+        renderItem={({item: {uri}}) => {
+          return (
+            <SelectableImage
+              uri={uri}
+              images={images}
+              dispatch={dispatch}
+              active={images[uri]}
+            />
+          );
+        }}
+      />
+    </>
   );
 }

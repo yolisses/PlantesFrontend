@@ -24,7 +24,7 @@ function setOnIdPath(id, value, state) {
   }
 }
 
-export function reducer(state, action) {
+export function PublishReducer(state, action) {
   const {id, value} = action;
   if (!id) {
     throw new InvalidIdError(action);

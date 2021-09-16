@@ -7,7 +7,7 @@ import {Routes} from './Routes';
 import {UserContextProvider} from 'auth/userContext';
 import {AlertContextProvider} from 'alert/AlertContext';
 import {ModalContextProvider} from 'modal/ModalContext';
-import {PublishContextProvider} from 'publish/contexts/PublishContext';
+import {PublishContextProvider} from 'publish/PublishContext';
 import {PermissionsContextProvider} from 'permission/PermissionsContext';
 import {ChatReferenceContextProvider} from './chat/ChatReferenceContext';
 import {CameraPreferencesProvider} from 'camera/contexts/CameraPreferencesContext';

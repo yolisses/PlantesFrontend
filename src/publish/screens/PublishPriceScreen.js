@@ -1,9 +1,8 @@
-import React, {useMemo, useReducer} from 'react';
+import React, {useMemo} from 'react';
 import {ScrollView, StyleSheet, Text} from 'react-native';
 
 import {IntInput} from 'form/IntInput';
 
-import {reducer} from 'publish/reducer';
 import {BackButton} from 'publish/BackButton';
 import {NextButton} from 'publish/NextButton';
 import {ProgressBar} from 'publish/ProgressBar';
@@ -12,6 +11,7 @@ import {availabilities} from 'publish/data/availiabilities';
 
 import {PriceInput} from 'form/PriceInput';
 import {TagsSelector} from 'form/TagsSelector';
+import {usePublish} from 'publish/PublishContext';
 
 function ValidatedHeader({sell, swap, donate, price}) {
   let canContinue = (sell || swap || donate) && !(sell && !price);
@@ -28,7 +28,7 @@ function ValidatedHeader({sell, swap, donate, price}) {
 }
 
 export function PublishPriceScreen() {
-  const [state, dispatch] = useReducer(reducer, {});
+  const {state, dispatch} = usePublish();
 
   return (
     <>

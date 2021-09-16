@@ -1,4 +1,4 @@
-import React, {useMemo, useReducer} from 'react';
+import React, {useMemo} from 'react';
 import {ScrollView, StyleSheet} from 'react-native';
 
 import {TextInput} from 'form/TextInput';
@@ -11,7 +11,7 @@ import {NextButton} from 'publish/NextButton';
 import {ProgressBar} from 'publish/ProgressBar';
 import {CustomHeader} from 'publish/CustomHeader';
 import {plantTypes} from 'publish/data/plantTypes';
-import {reducer} from 'publish/reducer';
+import {usePublish} from 'publish/PublishContext';
 
 function ValidatedHeader({name, type}) {
   const canContinue = !!name && !!name?.trim() && !!type;
@@ -28,7 +28,7 @@ function ValidatedHeader({name, type}) {
 }
 
 export function PublishDetailScreen() {
-  const [state, dispatch] = useReducer(reducer, {});
+  const {state, dispatch} = usePublish();
 
   return (
     <>

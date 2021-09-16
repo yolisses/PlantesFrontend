@@ -1,11 +1,12 @@
 import React from 'react';
 import {ImagesSwiper} from 'show/ImagesSwiper';
 import {ChooseImagesPlaceholder} from './ChooseImagesPlaceholder';
-import {usePublish} from './contexts/PublishContext';
+import {usePublish} from './PublishContext';
 
 export function PublishImagesPreview() {
-  const {images: imagesObj} = usePublish();
-  const images = imagesObj?.getAsList();
+  const {
+    state: {images},
+  } = usePublish();
   if (!images?.length) {
     return <ChooseImagesPlaceholder />;
   }
