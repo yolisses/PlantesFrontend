@@ -13,8 +13,7 @@ import {CustomHeader} from 'publish/CustomHeader';
 import {plantTypes} from 'publish/data/plantTypes';
 import {usePublish} from 'publish/contexts/PublishContext';
 
-function ValidatedHeader() {
-  const {name, type} = usePublish();
+function ValidatedHeader({name, type}) {
   const canContinue = !!name && !!name?.trim() && !!type;
   return useMemo(
     () => (
@@ -36,7 +35,7 @@ export function PublishDetailScreen() {
 
   return (
     <>
-      <ValidatedHeader />
+      <ValidatedHeader name={name} type={type} />
       <ProgressBar ratio={2 / 3} />
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
         <TextInput autoFocus label="Nome" value={name} setValue={setName} />
