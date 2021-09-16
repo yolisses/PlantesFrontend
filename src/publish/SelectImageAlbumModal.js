@@ -3,6 +3,7 @@ import {useModal} from 'modal/ModalContext';
 import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, Text} from 'react-native';
 import {TouchableOpacity} from 'react-native';
+import {allPhotosAlbum} from './allPhotosAlbum';
 import {usePublish} from './PublishContext';
 
 export function SelectLocalImageAlbumModal() {
@@ -14,7 +15,11 @@ export function SelectLocalImageAlbumModal() {
     CameraRoll.getAlbums({assetType: 'Photos'})
       .then(albums => {
         setAlbums(
-          albums.map(album => album.title).filter(album => album !== '0'),
+          [allPhotosAlbum].concat(
+            albums
+              .map(album => album.title)
+              .filter(album => album !== '0' && album !== allPhotosAlbum),
+          ),
         );
       })
       .catch(err => console.error(err));

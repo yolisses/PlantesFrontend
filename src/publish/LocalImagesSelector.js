@@ -6,6 +6,7 @@ import {SelectableImage} from './SelectableImage';
 import {usePublish} from './PublishContext';
 import CameraRoll from '@react-native-community/cameraroll';
 import {imagesLimit} from './imagesLimit';
+import {allPhotosAlbum} from './allPhotosAlbum';
 
 const numberOfCollums = 3;
 
@@ -18,7 +19,7 @@ export function LocalImagesSelector({flatListHeader}) {
 
   async function getPhotos() {
     CameraRoll.getPhotos({
-      groupName: album !== 'Galeria' ? album : undefined,
+      groupName: album !== allPhotosAlbum ? album : undefined,
       first: 100,
     })
       .then(res => {
