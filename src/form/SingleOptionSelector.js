@@ -4,11 +4,12 @@ import {Fieldset} from './Fieldset';
 import {SelectorWithImage} from './SelectorWithImage';
 
 export function SingleOptionSelector({
+  id,
   label,
   value,
   style,
   options,
-  setValue,
+  dispatch,
   buttonStyle,
 }) {
   return useMemo(
@@ -21,7 +22,7 @@ export function SingleOptionSelector({
             label={option.label}
             image={option.image}
             active={option.key === value}
-            onPress={() => setValue(option.key)}
+            onPress={() => dispatch({key: id, value: option.key})}
           />
         ))}
       </Fieldset>

@@ -1,3 +1,4 @@
+import {RerenderTester} from 'dev/rerenderTester';
 import React, {useEffect, useMemo, useRef, useState} from 'react';
 import react_native, {Keyboard, StyleSheet, Text, View} from 'react-native';
 
@@ -14,6 +15,9 @@ export function TextInput({
   setValue,
   multiline,
   leftChild,
+
+  option,
+  dispatch,
   ...rest
 }) {
   const [focused, setFocused] = useState(false);
@@ -38,9 +42,14 @@ export function TextInput({
 
   const isValueShowable = value !== null && value !== undefined && value !== '';
 
+  function onChangeText(text) {
+    dispatch({key: option, value: text});
+  }
+
   return useMemo(
     () => (
       <View>
+        <RerenderTester />
         <Fieldset
           error={error}
           label={label}
@@ -60,7 +69,8 @@ export function TextInput({
               multiline={multiline}
               onBlur={customOnBlur}
               style={[styles.input, multiline && styles.multiline, style]}
-              onChangeText={text => setValue(text)}
+              // onChangeText={text => setValue(text)}
+              onChangeText={onChangeText}
             />
           </View>
         </Fieldset>

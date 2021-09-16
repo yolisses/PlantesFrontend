@@ -53,8 +53,18 @@ function useObjectAsList() {
   return {push, remove, discard, indexOf, getAsList};
 }
 
+function reducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return {count: state.count + 1};
+    case 'decrement':
+      return {count: state.count - 1};
+    default:
+      throw new Error();
+  }
+}
+
 export function PublishContextProvider({children}) {
-  const [name, setName] = useState('');
   const [type, setType] = useState('');
   const [price, setPrice] = useState();
   const [amount, setAmount] = useState();
@@ -79,7 +89,6 @@ export function PublishContextProvider({children}) {
   return (
     <PublishContext.Provider
       value={{
-        name,
         tags,
         type,
         price,
@@ -87,7 +96,6 @@ export function PublishContextProvider({children}) {
         images,
         discard,
         pushTag,
-        setName,
         setType,
         setPrice,
         setAmount,
@@ -97,6 +105,8 @@ export function PublishContextProvider({children}) {
         setDescription,
         pushAvailability,
         removeAvailability,
+
+        reducer,
       }}>
       {children}
     </PublishContext.Provider>
