@@ -28,43 +28,41 @@ function ValidatedHeader({name, type}) {
 }
 
 export function PublishDetailScreen() {
-  const [state, dispatch] = useReducer(reducer, {name: 'macarrão'});
+  const [state, dispatch] = useReducer(reducer, {});
 
   return (
     <>
       <ValidatedHeader name={state.name} type={state.type} />
       <ProgressBar ratio={2 / 3} />
-      <Text>{JSON.stringify(state)}</Text>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
         <TextInput
-          autoFocus
-          label="Nome"
           id="name"
+          label="Nome"
+          autoFocus
           value={state.name}
           dispatch={dispatch}
         />
         <SingleOptionSelector
-          label="Marcar como"
           id="type"
+          label="Marcar como"
           value={state.type}
-          options={plantTypes}
           dispatch={dispatch}
+          options={plantTypes}
         />
         <TagsSelector
-          label="Marcar como"
           id="tags"
+          label="Marcar como"
           options={tags}
-          dispatch={dispatch}
           value={state.tags}
+          dispatch={dispatch}
         />
-        <Text>{'' + JSON.stringify(state.tags)}</Text>
         <TextInput
-          label="Descrição"
           id="description"
+          label="Descrição"
           optional
           multiline
-          value={state.description}
           dispatch={dispatch}
+          value={state.description}
         />
       </ScrollView>
     </>
