@@ -1,16 +1,18 @@
+import {InvalidIdError} from './InvalidIdError';
+
 const isInvalid = value => value === undefined || value === null;
 
-export function reducer(state, {id, value}) {
+export function reducer(state, action) {
+  const {id, value} = action;
   if (!id) {
-    throw new Error('No id provided. Action:', JSON.stringify({id, value}));
+    throw new InvalidIdError(action);
   }
   if (Array.isArray(id)) {
-    id.forEach(subId => {
-      console.error(typeof subId);
+    for (let subId of id) {
       if (isInvalid(subId)) {
-        throw new Error('Invalid id. Action: ' + JSON.stringify({id, value}));
+        throw new InvalidIdError(action);
       }
-    });
+    }
     return state;
   } else {
     const copy = {...state};
