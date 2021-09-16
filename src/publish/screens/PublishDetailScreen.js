@@ -1,5 +1,5 @@
 import React, {useMemo, useReducer} from 'react';
-import {ScrollView, StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet, Text} from 'react-native';
 
 import {TextInput} from 'form/TextInput';
 import {TagsSelector} from 'form/TagsSelector';
@@ -11,7 +11,6 @@ import {NextButton} from 'publish/NextButton';
 import {ProgressBar} from 'publish/ProgressBar';
 import {CustomHeader} from 'publish/CustomHeader';
 import {plantTypes} from 'publish/data/plantTypes';
-import {usePublish} from 'publish/contexts/PublishContext';
 import {reducer} from 'publish/reducer';
 
 function ValidatedHeader({name, type}) {
@@ -29,17 +28,13 @@ function ValidatedHeader({name, type}) {
 }
 
 export function PublishDetailScreen() {
-  const {name, setName} = usePublish();
-  const {type, setType} = usePublish();
-  const {description, setDescription} = usePublish();
-  const {tags: selectedTags, pushTag, removeTag} = usePublish();
-
-  const [state, dispatch] = useReducer(reducer, {name: 'macarrão'});
+  const [state, dispatch] = useReducer(reducer, {name: 'macarrão', tags: []});
 
   return (
     <>
-      <ValidatedHeader name={name} type={state.type} />
+      <ValidatedHeader name={state.name} type={state.type} />
       <ProgressBar ratio={2 / 3} />
+      <Text>{JSON.stringify(state)}</Text>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
         <TextInput
           autoFocus
@@ -52,23 +47,24 @@ export function PublishDetailScreen() {
           label="Marcar como"
           id="type"
           value={state.type}
-          setValue={setType}
           options={plantTypes}
           dispatch={dispatch}
         />
         <TagsSelector
           label="Marcar como"
+          id="tags"
           options={tags}
-          pushTag={pushTag}
-          removeTag={removeTag}
-          selectedTags={selectedTags}
+          dispatch={dispatch}
+          value={state.tags}
         />
+        <Text>{'' + JSON.stringify(state.tags)}</Text>
         <TextInput
           label="Descrição"
+          id="description"
           optional
           multiline
-          value={description}
-          setValue={setDescription}
+          value={state.description}
+          dispatch={dispatch}
         />
       </ScrollView>
     </>

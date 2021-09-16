@@ -9,21 +9,21 @@ import {RerenderTester} from 'dev/rerenderTester';
 const activeColor = '#0a0';
 
 export function ToggleButton({
+  id,
   label,
   style,
+  value,
   option,
   pushTag,
+  dispatch,
   removeTag,
   active,
   ...rest
 }) {
   function onPress() {
-    if (active) {
-      removeTag(option.key);
-    } else {
-      pushTag(option.key);
-    }
+    dispatch({id: ['oi', 'hello', '', , 'quale'], value: true});
   }
+
   return (
     <Pressable
       {...rest}

@@ -65,7 +65,6 @@ function reducer(state, action) {
 }
 
 export function PublishContextProvider({children}) {
-  const [type, setType] = useState('');
   const [price, setPrice] = useState();
   const [amount, setAmount] = useState();
   const [description, setDescription] = useState('');
@@ -90,13 +89,11 @@ export function PublishContextProvider({children}) {
     <PublishContext.Provider
       value={{
         tags,
-        type,
         price,
         amount,
         images,
         discard,
         pushTag,
-        setType,
         setPrice,
         setAmount,
         removeTag,

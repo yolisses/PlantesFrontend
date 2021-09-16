@@ -4,13 +4,13 @@ import {Fieldset} from './Fieldset';
 import {ToggleButton} from './ToggleButton';
 
 export function TagsSelector({
+  id,
   label,
+  value,
   style,
   options,
-  pushTag,
-  removeTag,
   buttonStyle,
-  selectedTags,
+  dispatch,
 }) {
   return useMemo(
     () => (
@@ -19,15 +19,15 @@ export function TagsSelector({
           <ToggleButton
             option={option}
             key={option.key}
-            pushTag={pushTag}
             style={buttonStyle}
-            removeTag={removeTag}
-            active={selectedTags.indexOf(option.key) !== -1}
+            dispatch={dispatch}
+            active={!!value && value[option.key]}
+            id={[id, option.key]}
           />
         ))}
       </Fieldset>
     ),
-    [selectedTags],
+    [value],
   );
 }
 
