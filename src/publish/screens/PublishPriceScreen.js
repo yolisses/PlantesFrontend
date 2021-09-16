@@ -47,7 +47,12 @@ export function PublishPriceScreen() {
           buttonStyle={styles.button}
         />
         {state.sell && (
-          <PriceInput label="Preço" value={state.price} dispatch={dispatch} />
+          <PriceInput
+            id="price"
+            label="Preço"
+            value={state.price}
+            dispatch={dispatch}
+          />
         )}
         <IntInput
           id="amount"

@@ -7,7 +7,7 @@ import {getRegexMoney} from './getRegex/getRegexMoney';
 import {allowRegexMoney} from './allowRegex/allowRegexMoney';
 import {numberToMoney} from 'utils/numberToMoney';
 
-export function PriceInput({setValue, value, ...rest}) {
+export function PriceInput({id, dispatch, value, ...rest}) {
   const [localValue, setLocalValue] = useState(
     value ? numberToMoney(value) : '',
   );
@@ -23,12 +23,12 @@ export function PriceInput({setValue, value, ...rest}) {
 
   function onBlur() {
     if (!localValue) {
-      setValue(null);
+      dispatch({id, value: null});
       return;
     }
     const numberText = localValue.match(getRegexMoney);
     const number = Number(numberText[0].replace(',', '.'));
-    setValue(number);
+    dispatch({id, value: number});
     setLocalValue(numberToMoney(number));
   }
 
@@ -38,10 +38,10 @@ export function PriceInput({setValue, value, ...rest}) {
       onBlur={onBlur}
       value={localValue}
       autoCorrect={false}
-      setValue={onChangeText}
       autoCompleteType={'off'}
       leftChild={<MoneySign />}
       keyboardType="decimal-pad"
+      onChangeText={onChangeText}
     />
   );
 }
