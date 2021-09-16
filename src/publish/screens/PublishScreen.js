@@ -15,12 +15,12 @@ export function PublishScreen() {
         name="Images"
         component={PublishImagesScreen}
         options={{headerShown: false}}
-      /> */}
+      />
       <Publish.Screen
         name="Detail"
         component={PublishDetailScreen}
         options={{headerShown: false}}
-      />
+      /> */}
       <Publish.Screen
         name="Price"
         component={PublishPriceScreen}

@@ -5,19 +5,20 @@ import react_native, {Keyboard, StyleSheet, Text, View} from 'react-native';
 import {Fieldset} from './Fieldset';
 
 export function TextInput({
+  id,
   error,
   input,
   label,
   style,
   value,
-  onBlur,
+  dispatch,
   optional,
   setValue,
   multiline,
   leftChild,
-
-  id,
-  dispatch,
+  onChangeText,
+  onBlur: customOnBlur,
+  onChangeText: customOnChangeText,
   ...rest
 }) {
   const [focused, setFocused] = useState(false);
@@ -29,22 +30,26 @@ export function TextInput({
     Keyboard.addListener('keyboardDidHide', keyboardDidHide);
   }, []);
 
+  function onChangeText(text) {
+    if (customOnChangeText) {
+      customOnChangeText(text);
+    } else {
+      dispatch({id, value: text});
+    }
+  }
+
   function onFocus() {
     setFocused(true);
   }
 
-  function customOnBlur(e) {
+  function onBlur(e) {
     setFocused(false);
-    if (onBlur) {
-      onBlur(e);
+    if (customOnBlur) {
+      customOnBlur(e);
     }
   }
 
   const isValueShowable = value !== null && value !== undefined && value !== '';
-
-  function onChangeText(text) {
-    dispatch({id, value: text});
-  }
 
   return useMemo(
     () => (
@@ -65,12 +70,12 @@ export function TextInput({
               {...input}
               value={isValueShowable ? '' + value : ''}
               ref={inputRef}
+              onBlur={onBlur}
               onFocus={onFocus}
               multiline={multiline}
-              onBlur={customOnBlur}
+              onChangeText={onChangeText}
               style={[styles.input, multiline && styles.multiline, style]}
               // onChangeText={text => setValue(text)}
-              onChangeText={onChangeText}
             />
           </View>
         </Fieldset>
