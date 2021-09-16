@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import {NextButton} from 'publish/NextButton';
@@ -9,16 +9,22 @@ import {LocalImagesSelector} from 'publish/LocalImagesSelector';
 import {PublishImagesPreview} from 'publish/PublishImagesPreview';
 import {SelectImageAlbumButton} from 'publish/SelectImageAlbumButton';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
+import {usePublish} from 'publish/PublishContext';
 
 function ValidatedHeader() {
-  // const {images} = usePublish();
-  // const thereIsSomeImage = images.getAsList().length > 0;
+  const {state} = usePublish();
+  const refresh = state._localRefreshImagesPreview;
+
+  const canContinue = useMemo(() => {
+    const images = Object.keys(state.images || {});
+    return !!images?.length;
+  }, [refresh]);
 
   return (
     <CustomHeader
       title="Publicar"
-      left={true && <DiscardButton />}
-      right={true && <NextButton route="Detail" />}
+      left={canContinue && <DiscardButton />}
+      right={canContinue && <NextButton route="Detail" />}
     />
   );
 }
