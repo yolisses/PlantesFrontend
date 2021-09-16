@@ -47,7 +47,6 @@ export function ImagesSwiper({images, preImage}) {
         )}
         showsHorizontalScrollIndicator={false}
       />
-      <UriTester uri={images[selected]} />
       <SwipeIndicator images={images} selected={selected} />
     </View>
   );

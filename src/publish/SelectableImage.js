@@ -47,7 +47,7 @@ export function SelectableImage({uri, imagesReachedLimit}) {
             <SelectableImageNumber number={index} />
           </View>
         )}
-        <UriTester uri={uri} />
+        {/* <UriTester uri={uri} /> */}
       </Pressable>
     ),
     [index, imagesReachedLimit, state._localRefreshImageSelector],

@@ -2364,6 +2364,11 @@ big-integer@^1.6.44:
   resolved "https://registry.npmjs.org/big-integer/-/big-integer-1.6.48.tgz"
   integrity sha512-j51egjPa7/i+RdiRuJbPdJ2FIUYYPhvYLjzoYbcMMm62ooO6F94fETG4MTs46zPAF9Brs04OajboA/qTGuz78w==
 
+bluebird@^2.9.25:
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-2.11.0.tgz#534b9033c022c9579c56ba3b3e5a5caafbb650e1"
+  integrity sha1-U0uQM8AiyVecVro7Plpcqvu2UOE=
+
 body-parser@1.19.0, body-parser@^1.19.0:
   version "1.19.0"
   resolved "https://registry.npmjs.org/body-parser/-/body-parser-1.19.0.tgz"
@@ -6943,6 +6948,12 @@ react-native-get-random-values@^1.7.0:
   integrity sha512-zDhmpWUekGRFb9I+MQkxllHcqXN9HBSsgPwBQfrZ1KZYpzDspWLZ6/yLMMZrtq4pVqNR7C7N96L3SuLpXv1nhQ==
   dependencies:
     fast-base64-decode "^1.0.0"
+
+"react-native-get-real-path@https://github.com/Wraptime/react-native-get-real-path.git":
+  version "1.0.0"
+  resolved "https://github.com/Wraptime/react-native-get-real-path.git#77ecc74f3e28838abfcd9546a91cf262c2c5a1a4"
+  dependencies:
+    bluebird "^2.9.25"
 
 react-native-image-crop-picker@^0.36.2:
   version "0.36.2"

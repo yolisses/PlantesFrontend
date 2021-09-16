@@ -15,6 +15,8 @@ import {PictureConfirmButtons} from './PictureConfirmButtons';
 import {usePublish} from 'publish/PublishContext';
 import {imagesLimit} from 'publish/imagesLimit';
 
+import RNGRP from 'react-native-get-real-path';
+
 export function CameraScreen() {
   const cameraRef = useRef();
   const [uri, setUri] = useState();
@@ -31,13 +33,16 @@ export function CameraScreen() {
   const resume = () => setPictureTook(false);
 
   function approve() {
-    CameraRoll.save(uri, {type: 'photo', album: 'Plantei'}).then(uri => {
-      dispatch({id: '_localRefreshImageSelector', value: uri});
-      if (Object.keys(state.images || {}).length < imagesLimit) {
-        dispatch({id: ['images', uri], value: true});
-        dispatch({id: '_localRefreshImagesPreview', value: uri + '+'});
-      }
-    });
+    CameraRoll.save(uri, {type: 'photo', album: 'Plantei'}).then(uri =>
+      RNGRP.getRealPathFromURI(uri).then(filePath => {
+        const uri = 'file://' + filePath;
+        dispatch({id: '_localRefreshImageSelector', value: uri});
+        if (Object.keys(state.images || {}).length < imagesLimit) {
+          dispatch({id: ['images', uri], value: true});
+          dispatch({id: '_localRefreshImagesPreview', value: uri + '+'});
+        }
+      }),
+    );
     goBack();
   }
 
