@@ -11,7 +11,7 @@ const Publish = createNativeStackNavigator();
 export function PublishScreen() {
   return (
     <Publish.Navigator>
-      {/* <Publish.Screen
+      <Publish.Screen
         name="Images"
         component={PublishImagesScreen}
         options={{headerShown: false}}
@@ -20,7 +20,7 @@ export function PublishScreen() {
         name="Detail"
         component={PublishDetailScreen}
         options={{headerShown: false}}
-      /> */}
+      />
       <Publish.Screen
         name="Price"
         component={PublishPriceScreen}
