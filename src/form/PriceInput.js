@@ -7,7 +7,7 @@ import {getRegexMoney} from './getRegex/getRegexMoney';
 import {allowRegexMoney} from './allowRegex/allowRegexMoney';
 import {numberToMoney} from 'utils/numberToMoney';
 
-export function PriceInput({id, dispatch, value, ...rest}) {
+export function PriceInput({id, dispatch, value, onValueChange, ...rest}) {
   const [localValue, setLocalValue] = useState(
     value ? numberToMoney(value) : '',
   );
@@ -15,9 +15,16 @@ export function PriceInput({id, dispatch, value, ...rest}) {
   function onChangeText(text) {
     const numberText = text.match(allowRegexMoney);
     if (numberText) {
-      setLocalValue(numberText[0]);
+      const number = numberText[0];
+      setLocalValue(number);
+      if (onValueChange) {
+        onValueChange(number);
+      }
     } else {
       setLocalValue(null);
+      if (onValueChange) {
+        onValueChange(null);
+      }
     }
   }
 

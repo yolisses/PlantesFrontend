@@ -1,31 +1,29 @@
-import React, {useReducer} from 'react';
+import React, {useMemo, useReducer} from 'react';
 import {ScrollView, StyleSheet, Text} from 'react-native';
 
 import {IntInput} from 'form/IntInput';
 
+import {reducer} from 'publish/reducer';
 import {BackButton} from 'publish/BackButton';
 import {NextButton} from 'publish/NextButton';
 import {ProgressBar} from 'publish/ProgressBar';
 import {CustomHeader} from 'publish/CustomHeader';
-import {reducer} from 'publish/reducer';
-import {PriceInput} from 'form/PriceInput';
 import {availabilities} from 'publish/data/availiabilities';
+
+import {PriceInput} from 'form/PriceInput';
 import {TagsSelector} from 'form/TagsSelector';
 
-function ValidatedHeader({price, availabilities}) {
-  // let canContinue = availabilities && availabilities.length > 0;
-  // const includeSell = availabilities.indexOf('sell') !== -1;
-  // if (!!includeSell && !price) {
-  //   console.error('' + false);
-  //   canContinue = false;
-  // }
-
-  return (
-    <CustomHeader
-      title="Publicar"
-      left={<BackButton />}
-      right={true && <NextButton route="Price" />}
-    />
+function ValidatedHeader({sell, swap, donate, price}) {
+  let canContinue = (sell || swap || donate) && !(sell && !price);
+  return useMemo(
+    () => (
+      <CustomHeader
+        title="Publicar"
+        left={<BackButton />}
+        right={canContinue && <NextButton route="Price" />}
+      />
+    ),
+    [sell, swap, donate, price],
   );
 }
 
@@ -34,7 +32,12 @@ export function PublishPriceScreen() {
 
   return (
     <>
-      <ValidatedHeader />
+      <ValidatedHeader
+        price={state._localPrice}
+        sell={state.sell}
+        swap={state.swap}
+        donate={state.donate}
+      />
       <ProgressBar ratio={3 / 3} />
       <Text>{JSON.stringify(state)}</Text>
       <ScrollView showsVerticalScrollIndicator={false} style={{padding: 10}}>
@@ -52,6 +55,7 @@ export function PublishPriceScreen() {
             label="Preço"
             value={state.price}
             dispatch={dispatch}
+            onValueChange={value => dispatch({id: '_localPrice', value})}
           />
         )}
         <IntInput
