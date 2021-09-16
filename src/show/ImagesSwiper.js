@@ -4,6 +4,7 @@ import {Dimensions, StyleSheet, View} from 'react-native';
 import {SwipeIndicator} from './SwipeIndicator';
 import FastImage from 'react-native-fast-image';
 import {FlatList} from 'react-native';
+import {UriTester} from 'dev/uriTester';
 
 const {width} = Dimensions.get('window');
 
@@ -46,6 +47,7 @@ export function ImagesSwiper({images, preImage}) {
         )}
         showsHorizontalScrollIndicator={false}
       />
+      <UriTester uri={images[selected]} />
       <SwipeIndicator images={images} selected={selected} />
     </View>
   );

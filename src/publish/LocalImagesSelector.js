@@ -11,7 +11,7 @@ import {allPhotosAlbum} from './allPhotosAlbum';
 const numberOfCollums = 3;
 
 export function LocalImagesSelector({flatListHeader}) {
-  const {state, dispatch} = usePublish();
+  const {state} = usePublish();
   const images = state.images || {};
   const [foundImages, setFoundImages] = useState([]);
 
@@ -30,10 +30,7 @@ export function LocalImagesSelector({flatListHeader}) {
 
   useEffect(() => {
     getPhotos();
-  }, [album]);
-
-  const getImageIndex = uri =>
-    images[uri] ? Object.keys(images).indexOf(uri) + 1 : null;
+  }, [album, state._localRefreshImageSelector]);
 
   const imagesReachedLimit = Object.keys(images).length >= imagesLimit;
 
@@ -55,8 +52,6 @@ export function LocalImagesSelector({flatListHeader}) {
         <SelectableImage
           key={uri}
           uri={uri}
-          dispatch={dispatch}
-          index={getImageIndex(uri)}
           imagesReachedLimit={imagesReachedLimit}
         />
       )}

@@ -12,12 +12,15 @@ import {CameraSquareFocus} from './CameraFocusSquare';
 import {GoBackCameraButton} from './GoBackCameraButton';
 import {FlashSelectorButton} from './FlashSelectorButton';
 import {PictureConfirmButtons} from './PictureConfirmButtons';
+import {usePublish} from 'publish/PublishContext';
+import {imagesLimit} from 'publish/imagesLimit';
 
 export function CameraScreen() {
   const cameraRef = useRef();
   const [uri, setUri] = useState();
   const {goBack} = useNavigation();
   const [pictureTook, setPictureTook] = useState(false);
+  const {dispatch, state} = usePublish();
 
   const takePicture = async () => {
     const options = {quality: 1};
@@ -28,7 +31,13 @@ export function CameraScreen() {
   const resume = () => setPictureTook(false);
 
   function approve() {
-    CameraRoll.save(uri, {type: 'photo', album: 'Plantei'});
+    CameraRoll.save(uri, {type: 'photo', album: 'Plantei'}).then(uri => {
+      dispatch({id: '_localRefreshImageSelector', value: uri});
+      if (Object.keys(state.images || {}).length < imagesLimit) {
+        dispatch({id: ['images', uri], value: true});
+        dispatch({id: '_localRefreshImagesPreview', value: uri + '+'});
+      }
+    });
     goBack();
   }
 

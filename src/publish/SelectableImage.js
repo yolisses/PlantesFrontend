@@ -1,17 +1,26 @@
 import React, {useMemo} from 'react';
 import FastImage from 'react-native-fast-image';
 
-import {Pressable, StyleSheet, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 
 import {width} from 'utils/width';
 import {SelectableImageNumber} from './SelectableImageNumber';
 import {useAlert} from 'alert/AlertContext';
 import {ImagesLimitAlert} from './ImagesLimitAlert';
+import {usePublish} from './PublishContext';
+import {UriTester} from 'dev/uriTester';
 
 const numberOfCollums = 3;
 
-export function SelectableImage({uri, index, dispatch, imagesReachedLimit}) {
+export function SelectableImage({uri, imagesReachedLimit}) {
   const {showAlert} = useAlert();
+
+  const {state, dispatch} = usePublish();
+  const images = state.images || {};
+
+  const getImageIndex = uri =>
+    images[uri] ? Object.keys(images).indexOf(uri) + 1 : null;
+  const index = getImageIndex(uri);
 
   return useMemo(
     () => (
@@ -38,9 +47,10 @@ export function SelectableImage({uri, index, dispatch, imagesReachedLimit}) {
             <SelectableImageNumber number={index} />
           </View>
         )}
+        <UriTester uri={uri} />
       </Pressable>
     ),
-    [index, imagesReachedLimit],
+    [index, imagesReachedLimit, state._localRefreshImageSelector],
   );
 }
 
