@@ -13,7 +13,7 @@ import {usePublish} from 'publish/contexts/PublishContext';
 
 function ValidatedHeader() {
   const {images} = usePublish();
-  const thereIsSomeImage = images.length > 0;
+  const thereIsSomeImage = images.getAsList().length > 0;
 
   return (
     <CustomHeader
