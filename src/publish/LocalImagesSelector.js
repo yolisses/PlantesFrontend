@@ -13,6 +13,8 @@ export function LocalImagesSelector({album, flatListHeader}) {
 
   const {state, dispatch} = usePublish();
   const images = state.images || {};
+  const getImageIndex = uri =>
+    images[uri] ? Object.keys(images).indexOf(uri) + 1 : null;
 
   function getImages() {
     CameraRoll.getPhotos({
@@ -50,9 +52,8 @@ export function LocalImagesSelector({album, flatListHeader}) {
           return (
             <SelectableImage
               uri={uri}
-              images={images}
               dispatch={dispatch}
-              active={images[uri]}
+              index={getImageIndex(uri)}
             />
           );
         }}

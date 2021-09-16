@@ -1,6 +1,6 @@
 import {InvalidIdError} from './InvalidIdError';
 
-const isInvalid = value => value === undefined || value === null;
+const isInvalid = id => id === undefined || id === null;
 
 function isIdValid(id) {
   for (let subId of id) {
@@ -11,12 +11,12 @@ function isIdValid(id) {
   return true;
 }
 
-function setOnIdPath(id, value, state) {
+function getToThePath(id, state, callBack) {
   let actual = state;
   for (let i = 0; i < id.length; i++) {
     const subId = id[i];
     if (i === id.length - 1) {
-      actual[subId] = value;
+      callBack(subId, actual);
     } else {
       actual[subId] = actual[subId] ?? {};
       actual = actual[subId];
@@ -25,20 +25,23 @@ function setOnIdPath(id, value, state) {
 }
 
 export function PublishReducer(state, action) {
-  const {value} = action;
   let id = action.id;
   if (!id) {
     throw new InvalidIdError(action);
   }
-
   if (!Array.isArray(id)) {
     id = [id];
   }
-  console.error(state);
   if (!isIdValid(id)) {
     throw new InvalidIdError(action);
   }
   const copy = {...state};
-  setOnIdPath(id, value, copy);
+  getToThePath(id, copy, (subId, actual) => {
+    if (action.type === 'delete') {
+      delete actual[subId];
+    } else {
+      actual[subId] = action.value;
+    }
+  });
   return copy;
 }
