@@ -1,20 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import React, {useState} from 'react';
+import {SafeAreaView, StyleSheet} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
-import firestore from '@react-native-firebase/firestore';
-import {MapUserLocationButton} from './MapUserLocationButton';
 
 export function MapScreen() {
   const [users, setUsers] = useState([]);
-
-  useEffect(
-    () =>
-      firestore()
-        .collection('users')
-        .get()
-        .then(res => setUsers(res.docs)),
-    [],
-  );
 
   return (
     <SafeAreaView>
