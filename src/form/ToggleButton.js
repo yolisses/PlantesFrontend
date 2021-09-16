@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {Pressable, StyleSheet, Text} from 'react-native';
 
 import {faCheck} from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +12,6 @@ export function ToggleButton({
   id,
   label,
   style,
-  value,
   option,
   pushTag,
   dispatch,
@@ -21,34 +20,37 @@ export function ToggleButton({
   ...rest
 }) {
   function onPress() {
-    dispatch({id: ['oi', 'hello', '', , 'quale'], value: true});
+    dispatch({id, value: !active});
   }
 
-  return (
-    <Pressable
-      {...rest}
-      onPress={onPress}
-      style={[styles.input, style, active && styles.active]}>
-      <RerenderTester />
-      {active ? (
-        <FontAwesomeIcon
-          size={15}
-          icon={faCheck}
-          style={styles.icon}
-          color={activeColor}
-        />
-      ) : (
-        <FontAwesomeIcon
-          size={15}
-          color={'#ccc'}
-          icon={faCircle}
-          style={styles.icon}
-        />
-      )}
-      <Text style={[styles.text, active && styles.activeText]}>
-        {option.label}
-      </Text>
-    </Pressable>
+  return useMemo(
+    () => (
+      <Pressable
+        {...rest}
+        onPress={onPress}
+        style={[styles.input, style, active && styles.active]}>
+        <RerenderTester />
+        {active ? (
+          <FontAwesomeIcon
+            size={15}
+            icon={faCheck}
+            style={styles.icon}
+            color={activeColor}
+          />
+        ) : (
+          <FontAwesomeIcon
+            size={15}
+            color={'#ccc'}
+            icon={faCircle}
+            style={styles.icon}
+          />
+        )}
+        <Text style={[styles.text, active && styles.activeText]}>
+          {option.label}
+        </Text>
+      </Pressable>
+    ),
+    [active],
   );
 }
 

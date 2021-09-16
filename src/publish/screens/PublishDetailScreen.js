@@ -28,7 +28,7 @@ function ValidatedHeader({name, type}) {
 }
 
 export function PublishDetailScreen() {
-  const [state, dispatch] = useReducer(reducer, {name: 'macarrão', tags: []});
+  const [state, dispatch] = useReducer(reducer, {name: 'macarrão'});
 
   return (
     <>

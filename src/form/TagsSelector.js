@@ -12,22 +12,19 @@ export function TagsSelector({
   buttonStyle,
   dispatch,
 }) {
-  return useMemo(
-    () => (
-      <Fieldset label={label} style={[styles.fieldset, style]} disableBorder>
-        {options.map(option => (
-          <ToggleButton
-            option={option}
-            key={option.key}
-            style={buttonStyle}
-            dispatch={dispatch}
-            active={!!value && value[option.key]}
-            id={[id, option.key]}
-          />
-        ))}
-      </Fieldset>
-    ),
-    [value],
+  return (
+    <Fieldset label={label} style={[styles.fieldset, style]} disableBorder>
+      {options.map(option => (
+        <ToggleButton
+          option={option}
+          key={option.key}
+          style={buttonStyle}
+          dispatch={dispatch}
+          active={!!value && value[option.key]}
+          id={[id, option.key]}
+        />
+      ))}
+    </Fieldset>
   );
 }
 
