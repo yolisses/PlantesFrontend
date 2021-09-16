@@ -24,6 +24,11 @@ export function SelectLocalImageAlbumModal() {
     getAlbums();
   }, []);
 
+  function changeToAlbum(album) {
+    dispatch({id: '_localAlbum', value: album});
+    closeModal();
+  }
+
   return (
     <ScrollView style={styles.container}>
       {albums.map(album => (
@@ -31,10 +36,7 @@ export function SelectLocalImageAlbumModal() {
           key={album}
           activeOpacity={0.8}
           style={styles.wrapper}
-          onPress={() => {
-            dispatch({id: '_localAlbum', value: album});
-            closeModal();
-          }}>
+          onPress={() => changeToAlbum(album)}>
           <Text style={styles.text}>{album}</Text>
         </TouchableOpacity>
       ))}
