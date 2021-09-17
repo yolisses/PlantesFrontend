@@ -45,7 +45,7 @@ export function PriceInput({id, data, onChangeValue, ...rest}) {
       customOnBlur={onBlur}
       autoCompleteType={'off'}
       leftChild={<MoneySign />}
-      // keyboardType="decimal-pad"
+      keyboardType="decimal-pad"
       customOnChangeText={onChangeText}
       customGetInitialValue={getInitialValue}
     />
