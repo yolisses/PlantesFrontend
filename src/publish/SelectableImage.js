@@ -7,6 +7,7 @@ import {width} from 'utils/width';
 import {SelectableImageNumber} from './SelectableImageNumber';
 import {useAlert} from 'alert/AlertContext';
 import {ImagesLimitAlert} from './ImagesLimitAlert';
+import {imagesLimit} from './imagesLimit';
 const numberOfCollums = 3;
 
 export function SelectableImage({
@@ -30,6 +31,10 @@ export function SelectableImage({
       for (let item in images) {
         copy[item] = counter;
         counter++;
+      }
+      if (counter > imagesLimit) {
+        showAlert(<ImagesLimitAlert />);
+        return images;
       }
       copy[uri] = counter;
       data[id] = copy;

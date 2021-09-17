@@ -53,9 +53,10 @@ export function LocalImagesSelector() {
       }
       showsVerticalScrollIndicator={false}
       getItemLayout={(data, index) => {
+        const size = width / numberOfCollums;
         return {
-          length: width / numberOfCollums,
-          offset: ((width / numberOfCollums) * index) % numberOfCollums,
+          length: size,
+          offset: (size * index) % numberOfCollums,
           index,
         };
       }}
