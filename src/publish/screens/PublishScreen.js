@@ -14,22 +14,22 @@ export function PublishScreen() {
       <Publish.Screen
         name="Images"
         component={PublishImagesScreen}
-        options={{headerShown: false}}
+        options={{headerShown: false, animationEnabled: false}}
       />
       <Publish.Screen
         name="Detail"
         component={PublishDetailScreen}
-        options={{headerShown: false}}
+        options={{headerShown: false, animationEnabled: false}}
       />
       <Publish.Screen
         name="Price"
         component={PublishPriceScreen}
-        options={{headerShown: false}}
+        options={{headerShown: false, animationEnabled: false}}
       />
       <Publish.Screen
         name="Camera"
         component={CameraScreen}
-        options={{headerShown: false}}
+        options={{headerShown: false, animationEnabled: false}}
       />
     </Publish.Navigator>
   );

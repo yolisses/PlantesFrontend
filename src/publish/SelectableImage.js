@@ -1,7 +1,7 @@
 import React, {useMemo} from 'react';
 import FastImage from 'react-native-fast-image';
 
-import {Pressable, StyleSheet, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {width} from 'utils/width';
 import {SelectableImageNumber} from './SelectableImageNumber';
@@ -75,28 +75,32 @@ export function SelectableImage({
 
   return useMemo(
     () => (
-      <Pressable onPress={onPress}>
-        <FastImage
-          style={[styles.image, index && styles.selected]}
-          source={{uri}}
-        />
-        {!!index && (
-          <View style={styles.numberWrapper}>
-            <SelectableImageNumber number={index} />
-          </View>
-        )}
-      </Pressable>
+      <TouchableOpacity onPress={onPress} activeOpacity={0.9}>
+        <View style={styles.wrapper}>
+          <FastImage
+            style={[styles.image, index && styles.selected]}
+            source={{uri}}
+          />
+          {!!index && (
+            <View style={styles.numberWrapper}>
+              <SelectableImageNumber number={index} />
+            </View>
+          )}
+        </View>
+      </TouchableOpacity>
     ),
     [index, refresh],
   );
 }
 
 const styles = StyleSheet.create({
+  wrapper: {
+    marginRight: 1,
+    marginBottom: 1,
+  },
   image: {
     width: width / numberOfCollums - 1 / numberOfCollums,
     aspectRatio: 1,
-    marginRight: 1,
-    marginBottom: 1,
   },
   selected: {
     borderWidth: 3,

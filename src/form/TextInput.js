@@ -46,7 +46,6 @@ export function TextInput({
       if (onChangeValue) {
         onChangeValue(text);
       }
-      console.error(data);
     }
   }
 

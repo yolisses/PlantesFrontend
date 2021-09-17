@@ -10,11 +10,9 @@ export function IntInput({id, data, ...rest}) {
       const number = Number(numberText[0]);
       data[id] = number;
       setValue(number);
-      console.error(data);
     } else {
       data[id] = null;
       setValue(null);
-      console.error(data);
     }
   }
 
