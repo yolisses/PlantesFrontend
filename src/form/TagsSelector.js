@@ -5,6 +5,7 @@ import {ToggleButton} from './ToggleButton';
 
 export function TagsSelector({
   id, //Array
+  data,
   label,
   value,
   style,
@@ -12,19 +13,16 @@ export function TagsSelector({
   buttonStyle,
   dispatch,
 }) {
-  const getComposeId = key => {
-    if (id === undefined || id === null) {
-      return key;
-    } else {
-      return [id, key];
-    }
-  };
+  if (!data[id]) {
+    data[id] = {};
+  }
 
   return (
     <Fieldset label={label} style={[styles.fieldset, style]} disableBorder>
       {options.map(option => (
         <ToggleButton
-          id={getComposeId(option.key)}
+          id={option.key}
+          data={data[id]}
           option={option}
           key={option.key}
           style={buttonStyle}

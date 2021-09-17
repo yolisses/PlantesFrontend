@@ -32,6 +32,8 @@ export function PublishDetailScreen() {
   const {state, dispatch} = usePublish();
   const {data} = useShallowData();
 
+  console.error(data);
+
   return (
     <>
       <ValidatedHeader name={state.name} type={state.type} />
@@ -47,6 +49,7 @@ export function PublishDetailScreen() {
         />
         <TagsSelector
           id="tags"
+          data={data}
           label="Marcar como"
           options={tags}
           value={state.tags}

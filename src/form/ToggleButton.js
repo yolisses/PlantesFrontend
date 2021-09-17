@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, useState} from 'react';
 import {Pressable, StyleSheet, Text} from 'react-native';
 
 import {faCheck} from '@fortawesome/free-solid-svg-icons';
@@ -8,49 +8,39 @@ import {RerenderTester} from 'dev/rerenderTester';
 
 const activeColor = '#0a0';
 
-export function ToggleButton({
-  id,
-  label,
-  style,
-  option,
-  pushTag,
-  dispatch,
-  removeTag,
-  active,
-  ...rest
-}) {
+export function ToggleButton({id, data, label, style, option, ...rest}) {
+  const [active, setActive] = useState(false);
+
   const onPress = () => {
-    dispatch({id, value: !active});
+    data[id] = !active;
+    setActive(!active);
   };
 
-  return useMemo(
-    () => (
-      <Pressable
-        {...rest}
-        onPress={onPress}
-        style={[styles.input, style, active && styles.active]}>
-        <RerenderTester />
-        {active ? (
-          <FontAwesomeIcon
-            size={15}
-            icon={faCheck}
-            style={styles.icon}
-            color={activeColor}
-          />
-        ) : (
-          <FontAwesomeIcon
-            size={15}
-            color={'#ccc'}
-            icon={faCircle}
-            style={styles.icon}
-          />
-        )}
-        <Text style={[styles.text, active && styles.activeText]}>
-          {option.label}
-        </Text>
-      </Pressable>
-    ),
-    [active],
+  return (
+    <Pressable
+      {...rest}
+      onPress={onPress}
+      style={[styles.input, style, active && styles.active]}>
+      <RerenderTester />
+      {active ? (
+        <FontAwesomeIcon
+          size={15}
+          icon={faCheck}
+          style={styles.icon}
+          color={activeColor}
+        />
+      ) : (
+        <FontAwesomeIcon
+          size={15}
+          color={'#ccc'}
+          icon={faCircle}
+          style={styles.icon}
+        />
+      )}
+      <Text style={[styles.text, active && styles.activeText]}>
+        {option.label}
+      </Text>
+    </Pressable>
   );
 }
 
