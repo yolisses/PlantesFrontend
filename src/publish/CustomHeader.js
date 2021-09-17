@@ -1,4 +1,3 @@
-import {RerenderTester} from 'dev/rerenderTester';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
@@ -6,7 +5,6 @@ export function CustomHeader({title, left, right}) {
   return (
     <View style={styles.container}>
       {left}
-      <RerenderTester />
       <Text style={styles.title}>{title}</Text>
       {right}
     </View>

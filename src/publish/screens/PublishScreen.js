@@ -16,16 +16,16 @@ export function PublishScreen() {
         component={PublishImagesScreen}
         options={{headerShown: false}}
       />
-      {/* <Publish.Screen
+      <Publish.Screen
         name="Detail"
         component={PublishDetailScreen}
         options={{headerShown: false}}
-      /> */}
-      {/* <Publish.Screen
+      />
+      <Publish.Screen
         name="Price"
         component={PublishPriceScreen}
         options={{headerShown: false}}
-      />*/}
+      />
       <Publish.Screen
         name="Camera"
         component={CameraScreen}

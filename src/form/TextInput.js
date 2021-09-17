@@ -1,4 +1,3 @@
-import {RerenderTester} from 'dev/rerenderTester';
 import React, {useEffect, useMemo, useRef, useState} from 'react';
 import react_native, {Keyboard, StyleSheet, Text, View} from 'react-native';
 
@@ -67,7 +66,6 @@ export function TextInput({
   return useMemo(
     () => (
       <View>
-        <RerenderTester />
         <Fieldset
           error={error}
           label={label}

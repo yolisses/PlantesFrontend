@@ -1,10 +1,9 @@
-import React, {useMemo, useState} from 'react';
+import React, {useState} from 'react';
 import {Pressable, StyleSheet, Text} from 'react-native';
 
 import {faCheck} from '@fortawesome/free-solid-svg-icons';
 import {faCircle} from '@fortawesome/free-regular-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {RerenderTester} from 'dev/rerenderTester';
 
 const activeColor = '#0a0';
 
@@ -32,7 +31,6 @@ export function ToggleButton({
       {...rest}
       onPress={onPress}
       style={[styles.input, style, active && styles.active]}>
-      <RerenderTester />
       {active ? (
         <FontAwesomeIcon
           size={15}

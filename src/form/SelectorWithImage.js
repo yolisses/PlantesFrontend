@@ -1,4 +1,3 @@
-import {RerenderTester} from 'dev/rerenderTester';
 import React, {useMemo} from 'react';
 import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 
@@ -18,7 +17,6 @@ export function SelectorWithImage({
   return useMemo(
     () => (
       <View style={styles.padding}>
-        <RerenderTester />
         <Pressable
           onPress={() => {
             setValue(id);
