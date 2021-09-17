@@ -3,10 +3,15 @@ import {Alert} from 'alert/Alert';
 import {AlertButton} from 'alert/AlertButton';
 import {usePublish} from './PublishContext';
 import {useShallowData} from './ShallowDataContext';
+import {useImages} from './ImagesContext';
 
 export function DiscardPublishAlert() {
   const {discard} = useShallowData();
-  function onPress() {}
+  const {setImages} = useImages();
+  function onPress() {
+    discard();
+    setImages(images => ({}));
+  }
 
   return (
     <Alert title="Descartar publicação?">
