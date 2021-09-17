@@ -46,7 +46,7 @@ export function TextInput({
   function onBlur(e) {
     setFocused(false);
     if (customOnBlur) {
-      customOnBlur(e);
+      customOnBlur(e, value, setValue);
     }
   }
 

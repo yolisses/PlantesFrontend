@@ -1,49 +1,39 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import {TextInput} from 'form/TextInput';
 
 import {MoneySign} from './MoneySign';
-import {getRegexMoney} from './getRegex/getRegexMoney';
 import {allowRegexMoney} from './allowRegex/allowRegexMoney';
 import {numberToMoney} from 'utils/numberToMoney';
 
-export function PriceInput({id, dispatch, value, onValueChange, ...rest}) {
-  const [localValue, setLocalValue] = useState(
-    value ? numberToMoney(value) : '',
-  );
-
-  function onChangeText(text) {
-    const numberText = text.match(allowRegexMoney);
-    if (numberText) {
-      const number = numberText[0];
-      setLocalValue(number);
-      if (onValueChange) {
-        onValueChange(number);
-      }
+export function PriceInput({id, data, onValueChange, ...rest}) {
+  function onBlur(e, value, setValue) {
+    const number = data[id];
+    if (number === null) {
+      setValue(null);
     } else {
-      setLocalValue(null);
-      if (onValueChange) {
-        onValueChange(null);
-      }
+      setValue(numberToMoney(number));
     }
+
+    console.error(data);
   }
 
-  function onBlur() {
-    if (!localValue) {
-      dispatch({id, value: null});
-      return;
+  function onChangeText(text, setValue) {
+    const numberText = text.match(allowRegexMoney);
+    if (numberText) {
+      const number = Number(numberText[0].replace(',', '.'));
+      data[id] = number;
+      setValue(numberText[0]);
+    } else {
+      data[id] = null;
+      setValue(null);
     }
-    const numberText = localValue.match(getRegexMoney);
-    const number = Number(numberText[0].replace(',', '.'));
-    dispatch({id, value: number});
-    setLocalValue(numberToMoney(number));
   }
 
   return (
     <TextInput
       {...rest}
       onBlur={onBlur}
-      value={localValue}
       autoCorrect={false}
       autoCompleteType={'off'}
       leftChild={<MoneySign />}

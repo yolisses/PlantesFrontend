@@ -11,7 +11,6 @@ import {availabilities} from 'publish/data/availiabilities';
 
 import {PriceInput} from 'form/PriceInput';
 import {TagsSelector} from 'form/TagsSelector';
-import {usePublish} from 'publish/PublishContext';
 import {useShallowData} from 'publish/ShallowDataContext';
 
 function ValidatedHeader({sell, swap, donate, price}) {
@@ -43,7 +42,7 @@ export function PublishPriceScreen() {
           options={availabilities}
           buttonStyle={styles.button}
         />
-        {/* <PriceInput id="price" label="Preço" /> */}
+        <PriceInput id="price" data={data} label="Preço" />
         <IntInput id="amount" data={data} label="Quantidade" optional />
       </ScrollView>
     </>
