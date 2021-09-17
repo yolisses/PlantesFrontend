@@ -1,7 +1,7 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import {PublishImagesScreen} from './PublishImagesScreen copy';
+import {PublishImagesScreen} from './PublishImagesScreen';
 import {PublishDetailScreen} from './PublishDetailScreen';
 import {PublishPriceScreen} from './PublishPriceScreen';
 import {CameraScreen} from 'camera/CameraScreen';
