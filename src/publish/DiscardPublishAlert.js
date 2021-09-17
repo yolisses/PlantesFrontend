@@ -1,7 +1,6 @@
 import React from 'react';
 import {Alert} from 'alert/Alert';
 import {AlertButton} from 'alert/AlertButton';
-import {usePublish} from './PublishContext';
 import {useShallowData} from './ShallowDataContext';
 import {useImages} from './ImagesContext';
 
