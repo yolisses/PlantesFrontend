@@ -11,11 +11,11 @@ const Publish = createNativeStackNavigator();
 export function PublishScreen() {
   return (
     <Publish.Navigator>
-      <Publish.Screen
+      {/* <Publish.Screen
         name="Images"
         component={PublishImagesScreen}
         options={{headerShown: false}}
-      />
+      /> */}
       <Publish.Screen
         name="Detail"
         component={PublishDetailScreen}

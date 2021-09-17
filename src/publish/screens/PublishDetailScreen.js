@@ -12,6 +12,7 @@ import {ProgressBar} from 'publish/ProgressBar';
 import {CustomHeader} from 'publish/CustomHeader';
 import {plantTypes} from 'publish/data/plantTypes';
 import {usePublish} from 'publish/PublishContext';
+import {useShallowData} from 'publish/ShallowDataContext';
 
 function ValidatedHeader({name, type}) {
   const canContinue = !!name && !!name?.trim() && !!type;
@@ -29,19 +30,14 @@ function ValidatedHeader({name, type}) {
 
 export function PublishDetailScreen() {
   const {state, dispatch} = usePublish();
+  const {data} = useShallowData();
 
   return (
     <>
       <ValidatedHeader name={state.name} type={state.type} />
       <ProgressBar ratio={2 / 3} />
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-        <TextInput
-          id="name"
-          label="Nome"
-          autoFocus
-          value={state.name}
-          dispatch={dispatch}
-        />
+        <TextInput id="name" data={data} label="Nome" autoFocus />
         <SingleOptionSelector
           id="type"
           label="Marcar como"

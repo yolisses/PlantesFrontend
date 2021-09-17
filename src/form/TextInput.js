@@ -6,14 +6,12 @@ import {Fieldset} from './Fieldset';
 
 export function TextInput({
   id,
+  data,
   error,
   input,
   label,
   style,
-  value,
-  dispatch,
   optional,
-  setValue,
   multiline,
   leftChild,
   onChangeText,
@@ -21,6 +19,7 @@ export function TextInput({
   onChangeText: customOnChangeText,
   ...rest
 }) {
+  const [value, setValue] = useState();
   const [focused, setFocused] = useState(false);
   const inputRef = useRef();
   const keyboardDidHide = () => {
@@ -31,11 +30,8 @@ export function TextInput({
   }, []);
 
   function onChangeText(text) {
-    if (customOnChangeText) {
-      customOnChangeText(text);
-    } else {
-      dispatch({id, value: text});
-    }
+    setValue(text);
+    data[id] = text;
   }
 
   function onFocus() {

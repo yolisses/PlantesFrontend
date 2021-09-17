@@ -13,6 +13,7 @@ import {ChatReferenceContextProvider} from './chat/ChatReferenceContext';
 import {CameraPreferencesProvider} from 'camera/contexts/CameraPreferencesContext';
 
 import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client';
+import {ShallowDataContextProvider} from 'publish/ShallowDataContext';
 
 // Initialize Apollo Client
 const client = new ApolloClient({
@@ -23,22 +24,24 @@ const client = new ApolloClient({
 const App = () => {
   return (
     <ApolloProvider client={client}>
-      <UserContextProvider>
-        <PermissionsContextProvider>
-          <AlertContextProvider>
-            <ModalContextProvider>
-              <PublishContextProvider>
-                <ChatReferenceContextProvider>
-                  <CameraPreferencesProvider>
-                    <StatusBar barStyle={'default'} hidden={true} />
-                    <Routes />
-                  </CameraPreferencesProvider>
-                </ChatReferenceContextProvider>
-              </PublishContextProvider>
-            </ModalContextProvider>
-          </AlertContextProvider>
-        </PermissionsContextProvider>
-      </UserContextProvider>
+      <ShallowDataContextProvider>
+        <UserContextProvider>
+          <PermissionsContextProvider>
+            <AlertContextProvider>
+              <ModalContextProvider>
+                <PublishContextProvider>
+                  <ChatReferenceContextProvider>
+                    <CameraPreferencesProvider>
+                      <StatusBar barStyle={'default'} hidden={true} />
+                      <Routes />
+                    </CameraPreferencesProvider>
+                  </ChatReferenceContextProvider>
+                </PublishContextProvider>
+              </ModalContextProvider>
+            </AlertContextProvider>
+          </PermissionsContextProvider>
+        </UserContextProvider>
+      </ShallowDataContextProvider>
     </ApolloProvider>
   );
 };
