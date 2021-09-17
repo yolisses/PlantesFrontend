@@ -1,4 +1,4 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 
 import {SelectableImage} from './SelectableImage';
@@ -7,7 +7,7 @@ import {allPhotosAlbum} from './allPhotosAlbum';
 import {SelectImageAlbumButton} from './SelectImageAlbumButton';
 import {TakePhotoButton} from './TakePhotoButton';
 import {PublishImagesPreview} from './PublishImagesPreview';
-import {resumeUri} from 'dev/resumeUri';
+import {width} from 'utils/width';
 
 const numberOfCollums = 3;
 
@@ -47,23 +47,16 @@ export function LocalImagesSelector() {
             />
             <TakePhotoButton style={styles.button} />
           </View>
-          <Text>
-            {Object.entries(images).map(
-              entry =>
-                // ''+ entry[0].slice(-8, -4) + '-' +
-                entry[1],
-            )}
-          </Text>
         </View>
       }
       showsVerticalScrollIndicator={false}
-      // getItemLayout={(data, index) => {
-      //   return {
-      //     length: width / numberOfCollums,
-      //     offset: ((width / numberOfCollums) * index) % numberOfCollums,
-      //     index,
-      //   };
-      // }}
+      getItemLayout={(data, index) => {
+        return {
+          length: width / numberOfCollums,
+          offset: ((width / numberOfCollums) * index) % numberOfCollums,
+          index,
+        };
+      }}
       renderItem={({item: uri}) => (
         <SelectableImage
           key={uri}

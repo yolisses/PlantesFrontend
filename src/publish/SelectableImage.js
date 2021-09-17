@@ -1,13 +1,12 @@
 import React, {useMemo} from 'react';
 import FastImage from 'react-native-fast-image';
 
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, View} from 'react-native';
 
 import {width} from 'utils/width';
 import {SelectableImageNumber} from './SelectableImageNumber';
 import {useAlert} from 'alert/AlertContext';
 import {ImagesLimitAlert} from './ImagesLimitAlert';
-import {RerenderTester} from 'dev/rerenderTester';
 const numberOfCollums = 3;
 
 export function SelectableImage({uri, images, setImages, imagesReachedLimit}) {
@@ -71,7 +70,6 @@ export function SelectableImage({uri, images, setImages, imagesReachedLimit}) {
             <SelectableImageNumber number={index} />
           </View>
         )}
-        <RerenderTester />
       </Pressable>
     ),
     [index],
