@@ -12,7 +12,7 @@ export function SingleOptionSelector({
   buttonStyle,
   onChangeValue,
 }) {
-  const [value, setValue] = useState();
+  const [value, setValue] = useState(data[id]);
 
   function setValueWithCallback(value) {
     setValue(value);

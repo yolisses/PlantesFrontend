@@ -16,7 +16,7 @@ export function ToggleButton({
   onChangeCallback,
   ...rest
 }) {
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(data[id]);
 
   function onPress() {
     data[id] = !active;

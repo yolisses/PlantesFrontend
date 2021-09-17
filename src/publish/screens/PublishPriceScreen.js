@@ -31,9 +31,15 @@ function ValidatedHeader({sell, hasPrice, hasAvailability}) {
 export function PublishPriceScreen() {
   const {data} = useShallowData();
 
-  const [hasAvailability, setHasAvailability] = useState();
-  const [sell, setSell] = useState();
-  const [hasPrice, setHasPrice] = useState();
+  const [hasAvailability, setHasAvailability] = useState(
+    validAvailability(data.availabilities),
+  );
+  const [sell, setSell] = useState(!!data?.availabilities?.sell);
+  const [hasPrice, setHasPrice] = useState(!!data.price);
+
+  function validAvailability(obj) {
+    return obj && (obj.swap || obj.sell || obj.donate);
+  }
 
   function validateAvailability(value) {
     if (value && value.sell) {
@@ -41,7 +47,7 @@ export function PublishPriceScreen() {
     } else {
       setSell(false);
     }
-    if ((value && value.swap) || value.sell || value.donate) {
+    if (validAvailability(value)) {
       setHasAvailability(true);
     } else {
       setHasAvailability(false);
