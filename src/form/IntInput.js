@@ -3,13 +3,18 @@ import React from 'react';
 import {TextInput} from 'form/TextInput';
 import {allowRegexInt} from 'form/allowRegex/allowRegexInt';
 
-export function IntInput({id, dispatch, ...rest}) {
-  function onChangeText(text) {
+export function IntInput({id, data, ...rest}) {
+  function onChangeText(text, setValue) {
     const numberText = text.match(allowRegexInt);
     if (numberText) {
-      dispatch({id, value: Number(numberText[0])});
+      const number = Number(numberText[0]);
+      data[id] = number;
+      setValue(number);
+      console.error(data);
     } else {
-      dispatch({id, value: null});
+      data[id] = null;
+      setValue(null);
+      console.error(data);
     }
   }
 

@@ -30,9 +30,13 @@ export function TextInput({
   }, []);
 
   function onChangeText(text) {
-    setValue(text);
-    data[id] = text;
-    console.error(data);
+    if (customOnChangeText) {
+      customOnChangeText(text, setValue);
+    } else {
+      setValue(text);
+      data[id] = text;
+      console.error(data);
+    }
   }
 
   function onFocus() {
