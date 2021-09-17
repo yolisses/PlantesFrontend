@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, useState} from 'react';
 import {ScrollView, StyleSheet, Text} from 'react-native';
 
 import {IntInput} from 'form/IntInput';
@@ -13,8 +13,9 @@ import {PriceInput} from 'form/PriceInput';
 import {TagsSelector} from 'form/TagsSelector';
 import {useShallowData} from 'publish/ShallowDataContext';
 
-function ValidatedHeader({sell, swap, donate, price}) {
-  let canContinue = (sell || swap || donate) && !(sell && !price);
+function ValidatedHeader({sell, hasPrice, hasAvailability}) {
+  let canContinue = hasAvailability && !(sell && !hasPrice);
+
   return useMemo(
     () => (
       <CustomHeader
@@ -23,16 +24,41 @@ function ValidatedHeader({sell, swap, donate, price}) {
         right={canContinue && <NextButton route="Price" />}
       />
     ),
-    [sell, swap, donate, price],
+    [canContinue],
   );
 }
 
 export function PublishPriceScreen() {
   const {data} = useShallowData();
 
+  const [hasAvailability, setHasAvailability] = useState();
+  const [sell, setSell] = useState();
+  const [hasPrice, setHasPrice] = useState();
+
+  function validateAvailability(value) {
+    if (value && value.sell) {
+      setSell(true);
+    } else {
+      setSell(false);
+    }
+    if ((value && value.swap) || value.sell || value.donate) {
+      setHasAvailability(true);
+    } else {
+      setHasAvailability(false);
+    }
+  }
+
+  function validatePrice(value) {
+    setHasPrice(!!value);
+  }
+
   return (
     <>
-      <ValidatedHeader />
+      <ValidatedHeader
+        sell={sell}
+        hasPrice={hasPrice}
+        hasAvailability={hasAvailability}
+      />
       <ProgressBar ratio={3 / 3} />
       <ScrollView showsVerticalScrollIndicator={false} style={{padding: 10}}>
         <TagsSelector
@@ -41,8 +67,16 @@ export function PublishPriceScreen() {
           label="Disponível para"
           options={availabilities}
           buttonStyle={styles.button}
+          onValueChange={validateAvailability}
         />
-        <PriceInput id="price" data={data} label="Preço" />
+        {sell && (
+          <PriceInput
+            id="price"
+            data={data}
+            label="Preço"
+            onChangeValue={validatePrice}
+          />
+        )}
         <IntInput id="amount" data={data} label="Quantidade" optional />
       </ScrollView>
     </>

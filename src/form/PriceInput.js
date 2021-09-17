@@ -6,7 +6,7 @@ import {MoneySign} from './MoneySign';
 import {allowRegexMoney} from './allowRegex/allowRegexMoney';
 import {numberToMoney} from 'utils/numberToMoney';
 
-export function PriceInput({id, data, onValueChange, ...rest}) {
+export function PriceInput({id, data, onChangeValue, ...rest}) {
   function onBlur(e, value, setValue) {
     const number = data[id];
     if (number === null) {
@@ -14,31 +14,40 @@ export function PriceInput({id, data, onValueChange, ...rest}) {
     } else {
       setValue(numberToMoney(number));
     }
-
-    console.error(data);
   }
 
   function onChangeText(text, setValue) {
     const numberText = text.match(allowRegexMoney);
-    if (numberText) {
-      const number = Number(numberText[0].replace(',', '.'));
-      data[id] = number;
-      setValue(numberText[0]);
-    } else {
-      data[id] = null;
-      setValue(null);
+
+    const newNumber = numberText
+      ? Number(numberText[0].replace(',', '.'))
+      : null;
+    data[id] = newNumber;
+    if (onChangeValue) {
+      onChangeValue(newNumber);
     }
+
+    const newText = numberText ? numberText[0] : null;
+    setValue(newText);
+  }
+
+  function getInitialValue() {
+    if (data[id]) {
+      return numberToMoney(data[id]);
+    }
+    return null;
   }
 
   return (
     <TextInput
       {...rest}
-      onBlur={onBlur}
       autoCorrect={false}
+      customOnBlur={onBlur}
       autoCompleteType={'off'}
       leftChild={<MoneySign />}
-      keyboardType="decimal-pad"
+      // keyboardType="decimal-pad"
       customOnChangeText={onChangeText}
+      customGetInitialValue={getInitialValue}
     />
   );
 }

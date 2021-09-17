@@ -15,12 +15,15 @@ import {useShallowData} from 'publish/ShallowDataContext';
 
 function ValidatedHeader({hasName, hasType}) {
   const canContinue = hasName && hasType;
-  return (
-    <CustomHeader
-      title="Publicar"
-      left={<BackButton />}
-      right={canContinue && <NextButton route="Price" />}
-    />
+  return useMemo(
+    () => (
+      <CustomHeader
+        title="Publicar"
+        left={<BackButton />}
+        right={canContinue && <NextButton route="Price" />}
+      />
+    ),
+    [canContinue],
   );
 }
 
@@ -30,19 +33,11 @@ export function PublishDetailScreen() {
   const [hasType, setHasType] = useState();
 
   function validateName(value) {
-    if (value === null || value === undefined || value === '') {
-      setHasName(false);
-    } else {
-      setHasName(true);
-    }
+    setHasName(!!value);
   }
 
   function validateType(value) {
-    if (value === null || value === undefined || value === '') {
-      setHasType(false);
-    } else {
-      setHasType(true);
-    }
+    setHasType(!!value);
   }
 
   return (

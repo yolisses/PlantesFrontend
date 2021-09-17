@@ -11,10 +11,16 @@ export function TagsSelector({
   style,
   options,
   buttonStyle,
-  dispatch,
+  onValueChange,
 }) {
   if (!data[id]) {
     data[id] = {};
+  }
+
+  function onChangeCallback() {
+    if (onValueChange) {
+      onValueChange(data[id]);
+    }
   }
 
   return (
@@ -26,7 +32,7 @@ export function TagsSelector({
           option={option}
           key={option.key}
           style={buttonStyle}
-          dispatch={dispatch}
+          onChangeCallback={onChangeCallback}
           active={!!value && value[option.key]}
         />
       ))}

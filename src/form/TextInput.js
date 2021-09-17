@@ -17,9 +17,18 @@ export function TextInput({
   customOnBlur,
   onChangeValue,
   customOnChangeText,
+  customGetInitialValue,
   ...rest
 }) {
-  const [value, setValue] = useState();
+  function getInitialValue() {
+    if (customGetInitialValue) {
+      return customGetInitialValue();
+    } else {
+      return data[id];
+    }
+  }
+
+  const [value, setValue] = useState(getInitialValue());
   const [focused, setFocused] = useState(false);
   const inputRef = useRef();
   const keyboardDidHide = () => {

@@ -8,13 +8,24 @@ import {RerenderTester} from 'dev/rerenderTester';
 
 const activeColor = '#0a0';
 
-export function ToggleButton({id, data, label, style, option, ...rest}) {
+export function ToggleButton({
+  id,
+  data,
+  label,
+  style,
+  option,
+  onChangeCallback,
+  ...rest
+}) {
   const [active, setActive] = useState(false);
 
-  const onPress = () => {
+  function onPress() {
     data[id] = !active;
     setActive(!active);
-  };
+    if (onChangeCallback) {
+      onChangeCallback();
+    }
+  }
 
   return (
     <Pressable

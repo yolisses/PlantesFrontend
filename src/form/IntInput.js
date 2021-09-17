@@ -21,6 +21,8 @@ export function IntInput({id, data, ...rest}) {
   return (
     <TextInput
       {...rest}
+      id={id}
+      data={data}
       autoCorrect={false}
       autoCompleteType={'off'}
       keyboardType="number-pad"
