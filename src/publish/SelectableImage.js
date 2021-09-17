@@ -10,36 +10,71 @@ import {ImagesLimitAlert} from './ImagesLimitAlert';
 import {RerenderTester} from 'dev/rerenderTester';
 const numberOfCollums = 3;
 
-export function SelectableImage({uri, index, pushImage, imagesReachedLimit}) {
+export function SelectableImage({uri, images, setImages, imagesReachedLimit}) {
   const {showAlert} = useAlert();
 
-  return (
-    <Pressable
-      onPress={() => {
-        if (!index) {
-          if (imagesReachedLimit) {
-            showAlert(<ImagesLimitAlert />);
-            return;
-          }
-          pushImage(uri);
-          // dispatch({id: ['images', uri], type: 'setWithIndex'});
-          // dispatch({id: '_localRefreshImagesPreview', value: uri + '+'});
-        } else {
-          // dispatch({id: ['images', uri], type: 'deleteSettingIndexes'});
-          // dispatch({id: '_localRefreshImagesPreview', value: uri + '-'});
+  function getImageIndex(uri) {
+    return images[uri];
+  }
+
+  function pushImage(uri) {
+    setImages(images => {
+      const copy = {};
+      let counter = 1;
+      for (let item in images) {
+        copy[item] = counter;
+        counter++;
+      }
+      copy[uri] = counter;
+      return copy;
+    });
+  }
+
+  function removeImage(uri) {
+    setImages(images => {
+      const copy = {};
+      let counter = 1;
+      for (let item in images) {
+        if (item === uri) {
+          continue;
         }
-      }}>
-      <FastImage
-        style={[styles.image, index && styles.selected]}
-        source={{uri}}
-      />
-      {!!index && (
-        <View style={styles.numberWrapper}>
-          <SelectableImageNumber number={index} />
-        </View>
-      )}
-      <RerenderTester />
-    </Pressable>
+        copy[item] = counter;
+        counter++;
+      }
+      return copy;
+    });
+  }
+
+  function onPress() {
+    if (!index) {
+      if (imagesReachedLimit) {
+        showAlert(<ImagesLimitAlert />);
+        return;
+      }
+      pushImage(uri);
+    } else {
+      removeImage(uri);
+    }
+  }
+
+  const index = getImageIndex(uri);
+
+  return useMemo(
+    () => (
+      <Pressable onPress={onPress}>
+        <FastImage
+          style={[styles.image, index && styles.selected]}
+          source={{uri}}
+        />
+        {!!index && (
+          <View style={styles.numberWrapper}>
+            <SelectableImageNumber number={index} />
+          </View>
+        )}
+        <RerenderTester />
+      </Pressable>
+    ),
+    [index],
   );
 }
 

@@ -19,27 +19,12 @@ export function LocalImagesSelector() {
   async function getPhotos() {
     CameraRoll.getPhotos({
       groupName: album !== allPhotosAlbum ? album : undefined,
-      first: 10,
+      first: 100,
     })
       .then(res => {
         setFoundImages(res.edges.map(edge => edge.node.image.uri));
       })
       .catch(err => console.error(err));
-  }
-
-  function getImageIndex(uri) {
-    return images[uri];
-  }
-
-  function pushImage(uri) {
-    const copy = {};
-    let counter = 1;
-    for (let item in images) {
-      copy[item] = counter;
-      counter++;
-    }
-    copy[uri] = counter;
-    setImages(copy);
   }
 
   useEffect(() => {
@@ -83,8 +68,8 @@ export function LocalImagesSelector() {
         <SelectableImage
           key={uri}
           uri={uri}
-          index={getImageIndex(uri)}
-          pushImage={pushImage}
+          images={images}
+          setImages={setImages}
         />
       )}
     />
