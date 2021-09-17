@@ -15,6 +15,7 @@ import {SelectImageAlbumButton} from '../SelectImageAlbumButton';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 
 import CameraRoll from '@react-native-community/cameraroll';
+import {useImages} from 'publish/ImagesContext';
 
 const numberOfCollums = 3;
 
@@ -38,9 +39,8 @@ function ValidatedHeader({images}) {
 }
 
 export function PublishImagesScreen() {
-  const [album, setAlbum] = useState(allPhotosAlbum);
+  const {images, setImages, album, setAlbum, refresh} = useImages();
   const [foundImages, setFoundImages] = useState([]);
-  const [images, setImages] = useState({});
   const {data} = useShallowData();
 
   async function getPhotos() {
@@ -56,13 +56,13 @@ export function PublishImagesScreen() {
 
   useEffect(() => {
     getPhotos();
-  }, [album]);
+  }, [album, refresh]);
 
   return (
     <FooterNavigationLayout selected="Publish">
       <ValidatedHeader images={images} />
       <FlatList
-        data={foundImages}
+        data={foundImages || (refresh && false)}
         numColumns={numberOfCollums}
         keyExtractor={item => item}
         ListHeaderComponent={
@@ -94,6 +94,7 @@ export function PublishImagesScreen() {
             key={uri}
             uri={uri}
             images={images}
+            refresh={refresh}
             setImages={setImages}
           />
         )}

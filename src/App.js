@@ -14,6 +14,7 @@ import {CameraPreferencesProvider} from 'camera/contexts/CameraPreferencesContex
 
 import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client';
 import {ShallowDataContextProvider} from 'publish/ShallowDataContext';
+import {ImagesContextProvider} from 'publish/ImagesContext';
 
 // Initialize Apollo Client
 const client = new ApolloClient({
@@ -29,14 +30,14 @@ const App = () => {
           <PermissionsContextProvider>
             <AlertContextProvider>
               <ModalContextProvider>
-                <PublishContextProvider>
+                <ImagesContextProvider>
                   <ChatReferenceContextProvider>
                     <CameraPreferencesProvider>
                       <StatusBar barStyle={'default'} hidden={true} />
                       <Routes />
                     </CameraPreferencesProvider>
                   </ChatReferenceContextProvider>
-                </PublishContextProvider>
+                </ImagesContextProvider>
               </ModalContextProvider>
             </AlertContextProvider>
           </PermissionsContextProvider>

@@ -15,6 +15,7 @@ export function SelectableImage({
   uri,
   data,
   images,
+  refresh,
   setImages,
   imagesReachedLimit,
 }) {
@@ -86,7 +87,7 @@ export function SelectableImage({
         )}
       </Pressable>
     ),
-    [index],
+    [index, refresh],
   );
 }
 

@@ -25,12 +25,12 @@ export function PublishScreen() {
         name="Price"
         component={PublishPriceScreen}
         options={{headerShown: false}}
-      />
+      />*/}
       <Publish.Screen
         name="Camera"
         component={CameraScreen}
         options={{headerShown: false}}
-      /> */}
+      />
     </Publish.Navigator>
   );
 }

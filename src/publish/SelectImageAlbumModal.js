@@ -4,12 +4,13 @@ import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, Text} from 'react-native';
 import {TouchableOpacity} from 'react-native';
 import {allPhotosAlbum} from './allPhotosAlbum';
-import {usePublish} from './PublishContext';
+import {useImages} from './ImagesContext';
 
 export function SelectLocalImageAlbumModal() {
   const [albums, setAlbums] = useState([]);
-  const {dispatch} = usePublish();
   const {closeModal} = useModal();
+
+  const {setAlbum} = useImages();
 
   async function getAlbums() {
     CameraRoll.getAlbums({assetType: 'Photos'})
@@ -30,7 +31,7 @@ export function SelectLocalImageAlbumModal() {
   }, []);
 
   function changeToAlbum(album) {
-    dispatch({id: '_localAlbum', value: album});
+    setAlbum(album);
     closeModal();
   }
 

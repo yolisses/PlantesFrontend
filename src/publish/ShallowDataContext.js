@@ -5,8 +5,14 @@ const ShallowDataContext = createContext();
 export function ShallowDataContextProvider({children}) {
   const data = {};
 
+  function discard() {
+    for (let key in data) {
+      delete data[key];
+    }
+  }
+
   return (
-    <ShallowDataContext.Provider value={{data}}>
+    <ShallowDataContext.Provider value={{data, discard}}>
       {children}
     </ShallowDataContext.Provider>
   );

@@ -16,13 +16,18 @@ import {usePublish} from 'publish/PublishContext';
 import {imagesLimit} from 'publish/imagesLimit';
 
 import RNGRP from 'react-native-get-real-path';
+import {useImages} from 'publish/ImagesContext';
+import {useShallowData} from 'publish/ShallowDataContext';
+
+const ID = 'images';
 
 export function CameraScreen() {
   const cameraRef = useRef();
   const [uri, setUri] = useState();
   const {goBack} = useNavigation();
+  const {images, setImages, setRefresh} = useImages();
+  const {data} = useShallowData();
   const [pictureTook, setPictureTook] = useState(false);
-  const {dispatch, state} = usePublish();
 
   const takePicture = async () => {
     const options = {quality: 1};
@@ -36,10 +41,22 @@ export function CameraScreen() {
     CameraRoll.save(uri, {type: 'photo', album: 'Plantei'}).then(uri =>
       RNGRP.getRealPathFromURI(uri).then(filePath => {
         const uri = 'file://' + filePath;
-        dispatch({id: '_localRefreshImageSelector', value: uri});
-        if (Object.keys(state.images || {}).length < imagesLimit) {
-          dispatch({id: ['images', uri], value: true});
-          dispatch({id: '_localRefreshImagesPreview', value: uri + '+'});
+        if (Object.keys(images || {}).length < imagesLimit) {
+          setRefresh(Math.random());
+          setImages(images => {
+            const copy = {};
+            let counter = 1;
+            for (let item in images) {
+              copy[item] = counter;
+              counter++;
+            }
+            if (counter > imagesLimit) {
+              return images;
+            }
+            copy[uri] = counter;
+            data[images] = copy;
+            return copy;
+          });
         }
       }),
     );
