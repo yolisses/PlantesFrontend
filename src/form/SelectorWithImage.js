@@ -4,12 +4,26 @@ import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 
 const activeColor = '#0a0';
 
-export function SelectorWithImage({image, label, style, active, ...rest}) {
+export function SelectorWithImage({
+  id,
+  data,
+  image,
+  label,
+  style,
+  active,
+  setValue,
+  selectorId,
+  ...rest
+}) {
   return useMemo(
     () => (
       <View style={styles.padding}>
         <RerenderTester />
         <Pressable
+          onPress={() => {
+            setValue(id);
+            data[selectorId] = id;
+          }}
           style={[styles.input, style, active && styles.active]}
           {...rest}>
           {active ? (

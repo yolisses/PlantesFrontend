@@ -42,9 +42,8 @@ export function PublishDetailScreen() {
         <TextInput id="name" data={data} label="Nome" autoFocus />
         <SingleOptionSelector
           id="type"
+          data={data}
           label="Marcar como"
-          value={state.type}
-          dispatch={dispatch}
           options={plantTypes}
         />
         <TagsSelector

@@ -1,33 +1,34 @@
-import React, {useMemo} from 'react';
+import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {Fieldset} from './Fieldset';
 import {SelectorWithImage} from './SelectorWithImage';
 
 export function SingleOptionSelector({
   id,
+  data,
   label,
-  value,
   style,
   options,
-  dispatch,
   buttonStyle,
 }) {
-  return useMemo(
-    () => (
-      <Fieldset label={label} style={[styles.fieldset, style]} disableBorder>
-        {options.map(option => (
-          <SelectorWithImage
-            key={option.key}
-            style={buttonStyle}
-            label={option.label}
-            image={option.image}
-            active={option.key === value}
-            onPress={() => dispatch({id, value: option.key})}
-          />
-        ))}
-      </Fieldset>
-    ),
-    [value],
+  const [value, setValue] = useState();
+
+  return (
+    <Fieldset label={label} style={[styles.fieldset, style]} disableBorder>
+      {options.map(option => (
+        <SelectorWithImage
+          id={option.key}
+          selectorId={id}
+          data={data}
+          key={option.key}
+          style={buttonStyle}
+          label={option.label}
+          image={option.image}
+          active={option.key === value}
+          setValue={setValue}
+        />
+      ))}
+    </Fieldset>
   );
 }
 
