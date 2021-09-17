@@ -7,47 +7,39 @@ import {width} from 'utils/width';
 import {SelectableImageNumber} from './SelectableImageNumber';
 import {useAlert} from 'alert/AlertContext';
 import {ImagesLimitAlert} from './ImagesLimitAlert';
-import {usePublish} from './PublishContext';
-
+import {RerenderTester} from 'dev/rerenderTester';
 const numberOfCollums = 3;
 
-export function SelectableImage({uri, imagesReachedLimit}) {
+export function SelectableImage({uri, index, pushImage, imagesReachedLimit}) {
   const {showAlert} = useAlert();
 
-  const {state, dispatch} = usePublish();
-  const images = state.images || {};
-
-  const index = images[uri];
-
-  return useMemo(
-    () => (
-      <Pressable
-        onPress={function () {
-          if (!index) {
-            if (imagesReachedLimit) {
-              showAlert(<ImagesLimitAlert />);
-              return;
-            }
-            dispatch({id: ['images', uri], type: 'setWithIndex'});
-            dispatch({id: '_localRefreshImagesPreview', value: uri + '+'});
-          } else {
-            dispatch({id: ['images', uri], type: 'deleteSettingIndexes'});
-            dispatch({id: '_localRefreshImagesPreview', value: uri + '-'});
+  return (
+    <Pressable
+      onPress={() => {
+        if (!index) {
+          if (imagesReachedLimit) {
+            showAlert(<ImagesLimitAlert />);
+            return;
           }
-        }}>
-        <FastImage
-          style={[styles.image, index && styles.selected]}
-          source={{uri}}
-        />
-        {!!index && (
-          <View style={styles.numberWrapper}>
-            <SelectableImageNumber number={index} />
-          </View>
-        )}
-        {/* <UriTester uri={uri} /> */}
-      </Pressable>
-    ),
-    [index, imagesReachedLimit, state._localRefreshImageSelector],
+          pushImage(uri);
+          // dispatch({id: ['images', uri], type: 'setWithIndex'});
+          // dispatch({id: '_localRefreshImagesPreview', value: uri + '+'});
+        } else {
+          // dispatch({id: ['images', uri], type: 'deleteSettingIndexes'});
+          // dispatch({id: '_localRefreshImagesPreview', value: uri + '-'});
+        }
+      }}>
+      <FastImage
+        style={[styles.image, index && styles.selected]}
+        source={{uri}}
+      />
+      {!!index && (
+        <View style={styles.numberWrapper}>
+          <SelectableImageNumber number={index} />
+        </View>
+      )}
+      <RerenderTester />
+    </Pressable>
   );
 }
 

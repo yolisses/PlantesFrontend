@@ -1,13 +1,9 @@
-import React, {useMemo, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useMemo} from 'react';
 
 import {NextButton} from 'publish/NextButton';
 import {CustomHeader} from 'publish/CustomHeader';
 import {DiscardButton} from 'publish/DiscardButton';
-import {TakePhotoButton} from 'publish/TakePhotoButton';
 import {LocalImagesSelector} from 'publish/LocalImagesSelector';
-import {PublishImagesPreview} from 'publish/PublishImagesPreview';
-import {SelectImageAlbumButton} from 'publish/SelectImageAlbumButton';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import {usePublish} from 'publish/PublishContext';
 
@@ -30,38 +26,12 @@ function ValidatedHeader() {
 }
 
 export function PublishImagesScreen() {
-  const [album, setAlbum] = useState({title: 'Galeria', type: 'All'});
-
   return (
     <>
       <FooterNavigationLayout selected="Publish">
         <ValidatedHeader />
-        <LocalImagesSelector
-          album={album}
-          flatListHeader={
-            <View style={{backgroundColor: 'white'}}>
-              <PublishImagesPreview />
-              <View style={styles.wrapper}>
-                <SelectImageAlbumButton
-                  album={album}
-                  setAlbum={setAlbum}
-                  style={styles.button}
-                />
-                <TakePhotoButton style={styles.button} />
-              </View>
-            </View>
-          }
-        />
+        <LocalImagesSelector />
       </FooterNavigationLayout>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  wrapper: {
-    backgroundColor: 'white',
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
-});

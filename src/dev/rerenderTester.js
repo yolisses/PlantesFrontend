@@ -3,8 +3,6 @@ import {Text} from 'react-native';
 
 export function RerenderTester() {
   return (
-    <Text style={{color: 'purple'}}>
-      {Math.random().toFixed(3).split('.')[1]}
-    </Text>
+    <Text style={{color: 'purple'}}>{('' + Math.random()).slice(2, 5)}</Text>
   );
 }

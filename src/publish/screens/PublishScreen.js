@@ -11,17 +11,17 @@ const Publish = createNativeStackNavigator();
 export function PublishScreen() {
   return (
     <Publish.Navigator>
-      {/* <Publish.Screen
+      <Publish.Screen
         name="Images"
         component={PublishImagesScreen}
         options={{headerShown: false}}
-      /> */}
+      />
       {/* <Publish.Screen
         name="Detail"
         component={PublishDetailScreen}
         options={{headerShown: false}}
       /> */}
-      <Publish.Screen
+      {/* <Publish.Screen
         name="Price"
         component={PublishPriceScreen}
         options={{headerShown: false}}
@@ -30,7 +30,7 @@ export function PublishScreen() {
         name="Camera"
         component={CameraScreen}
         options={{headerShown: false}}
-      />
+      /> */}
     </Publish.Navigator>
   );
 }
