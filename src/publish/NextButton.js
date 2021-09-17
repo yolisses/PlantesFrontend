@@ -36,7 +36,6 @@ const styles = StyleSheet.create({
     borderRadius: 0,
     marginVertical: 0,
     flexDirection: 'row',
-    alignSelf: 'flex-end',
   },
   text: {
     fontSize: 20,

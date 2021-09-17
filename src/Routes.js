@@ -24,7 +24,6 @@ import {useUserContext} from 'auth/userContext';
 import {CommentsScreen} from 'comment/CommentsScreen';
 import {usePermissions} from 'permission/PermissionsContext';
 import {MapUserLocationButton} from 'map/MapUserLocationButton';
-import {CameraScreen} from 'camera/CameraScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -46,20 +45,13 @@ export function Routes() {
               <Stack.Screen
                 name="Home"
                 component={StoreScreen}
-                options={{
-                  headerTitle: 'Plantei',
-                  headerRight: () => <UserRoundImage size={38} />,
-                  animation: 'none',
-                }}
+                options={{headerShown: false}}
               />
             ) : (
               <Stack.Screen
                 name="Home"
                 component={RequestLocationPermissionScreen}
-                options={{
-                  headerTitle: 'Plantei',
-                  headerRight: () => <UserRoundImage size={36} />,
-                }}
+                options={{headerShown: false}}
               />
             )}
             <Stack.Screen

@@ -1,10 +1,13 @@
 import React from 'react';
-import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
+import {FlatList} from 'react-native';
 
 import {Card} from 'store/Card';
-import {CardsListLoading} from './CardsListLoading';
+import {CustomHeader} from 'publish/CustomHeader';
+import {UserRoundImage} from 'common/UserRoundImage';
+import {CardsListLoading} from 'store/CardsListLoading';
+import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
+
 import {useQuery, gql} from '@apollo/client';
-import {FlatList} from 'react-native';
 
 const PLANTS = gql`
   query {
@@ -20,28 +23,18 @@ const PLANTS = gql`
 export function StoreScreen() {
   const {loading, error, data} = useQuery(PLANTS);
 
-  if (loading || error) {
-    return (
-      <FooterNavigationLayout selected={'Home'}>
-        <CardsListLoading />
-      </FooterNavigationLayout>
-    );
-  }
-
   return (
     <FooterNavigationLayout selected={'Home'}>
-      <FlatList
-        numColumns={2}
-        data={data.getAllPlants}
-        renderItem={({item}) => <Card item={item} />}
-      />
-      {/* <InfiniteScroll
-        numColumns={2}
-        loadingFooter={<CardsListFooter />}
-        startingComponent={<CardsListLoading />}
-        renderItem={({item}) => <Card key={item.id} item={item} />}
-        getUrl={(page, limit) => `/cards?_page=${page}&_limit=${limit}`}
-      /> */}
+      <CustomHeader title="Plantei" right={<UserRoundImage size={40} />} />
+      {loading || error ? (
+        <CardsListLoading />
+      ) : (
+        <FlatList
+          numColumns={2}
+          data={data.getAllPlants}
+          renderItem={({item}) => <Card item={item} />}
+        />
+      )}
     </FooterNavigationLayout>
   );
 }

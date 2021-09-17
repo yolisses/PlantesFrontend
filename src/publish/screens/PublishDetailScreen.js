@@ -29,8 +29,8 @@ function ValidatedHeader({hasName, hasType}) {
 
 export function PublishDetailScreen() {
   const {data} = useShallowData();
-  const [hasName, setHasName] = useState(data.name);
-  const [hasType, setHasType] = useState(data.type);
+  const [hasName, setHasName] = useState(!!data.name);
+  const [hasType, setHasType] = useState(!!data.type);
 
   function validateName(value) {
     setHasName(!!value);
