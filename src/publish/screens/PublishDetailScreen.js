@@ -54,11 +54,10 @@ export function PublishDetailScreen() {
         />
         <TextInput
           id="description"
+          data={data}
           label="Descrição"
           optional
           multiline
-          dispatch={dispatch}
-          value={state.description}
         />
       </ScrollView>
     </>
