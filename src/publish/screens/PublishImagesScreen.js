@@ -38,7 +38,7 @@ export function PublishImagesScreen() {
         <ValidatedHeader />
         <LocalImagesSelector
           album={album}
-          flatListHeader={() => (
+          flatListHeader={
             <View style={{backgroundColor: 'white'}}>
               <PublishImagesPreview />
               <View style={styles.wrapper}>
@@ -50,7 +50,7 @@ export function PublishImagesScreen() {
                 <TakePhotoButton style={styles.button} />
               </View>
             </View>
-          )}
+          }
         />
       </FooterNavigationLayout>
     </>
