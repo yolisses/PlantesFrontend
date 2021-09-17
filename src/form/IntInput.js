@@ -24,7 +24,7 @@ export function IntInput({id, data, ...rest}) {
       autoCorrect={false}
       autoCompleteType={'off'}
       keyboardType="number-pad"
-      onChangeText={onChangeText}
+      customOnChangeText={onChangeText}
     />
   );
 }

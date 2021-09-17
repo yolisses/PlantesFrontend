@@ -10,8 +10,16 @@ export function SingleOptionSelector({
   style,
   options,
   buttonStyle,
+  onChangeValue,
 }) {
   const [value, setValue] = useState();
+
+  function setValueWithCallback(value) {
+    setValue(value);
+    if (onChangeValue) {
+      onChangeValue(value);
+    }
+  }
 
   return (
     <Fieldset label={label} style={[styles.fieldset, style]} disableBorder>
@@ -25,7 +33,7 @@ export function SingleOptionSelector({
           label={option.label}
           image={option.image}
           active={option.key === value}
-          setValue={setValue}
+          setValue={setValueWithCallback}
         />
       ))}
     </Fieldset>

@@ -14,9 +14,9 @@ export function TextInput({
   optional,
   multiline,
   leftChild,
-  onChangeText,
-  onBlur: customOnBlur,
-  onChangeText: customOnChangeText,
+  customOnBlur,
+  onChangeValue,
+  customOnChangeText,
   ...rest
 }) {
   const [value, setValue] = useState();
@@ -35,6 +35,9 @@ export function TextInput({
     } else {
       setValue(text);
       data[id] = text;
+      if (onChangeValue) {
+        onChangeValue(text);
+      }
       console.error(data);
     }
   }

@@ -1,5 +1,5 @@
-import React, {useMemo} from 'react';
-import {ScrollView, StyleSheet, Text} from 'react-native';
+import React, {useMemo, useReducer, useRef, useState} from 'react';
+import {ScrollView, StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 import {TextInput} from 'form/TextInput';
 import {TagsSelector} from 'form/TagsSelector';
@@ -11,48 +11,64 @@ import {NextButton} from 'publish/NextButton';
 import {ProgressBar} from 'publish/ProgressBar';
 import {CustomHeader} from 'publish/CustomHeader';
 import {plantTypes} from 'publish/data/plantTypes';
-import {usePublish} from 'publish/PublishContext';
 import {useShallowData} from 'publish/ShallowDataContext';
 
-function ValidatedHeader({name, type}) {
-  const canContinue = !!name && !!name?.trim() && !!type;
-  return useMemo(
-    () => (
-      <CustomHeader
-        title="Publicar"
-        left={<BackButton />}
-        right={canContinue && <NextButton route="Price" />}
-      />
-    ),
-    [name, type],
+function ValidatedHeader({hasName, hasType}) {
+  const canContinue = hasName && hasType;
+  return (
+    <CustomHeader
+      title="Publicar"
+      left={<BackButton />}
+      right={canContinue && <NextButton route="Price" />}
+    />
   );
 }
 
 export function PublishDetailScreen() {
-  const {state, dispatch} = usePublish();
   const {data} = useShallowData();
+  const [hasName, setHasName] = useState();
+  const [hasType, setHasType] = useState();
 
-  console.error(data);
+  function validateName(value) {
+    if (value === null || value === undefined || value === '') {
+      setHasName(false);
+    } else {
+      setHasName(true);
+    }
+  }
+
+  function validateType(value) {
+    if (value === null || value === undefined || value === '') {
+      setHasType(false);
+    } else {
+      setHasType(true);
+    }
+  }
 
   return (
     <>
-      <ValidatedHeader name={state.name} type={state.type} />
+      <ValidatedHeader hasName={hasName} hasType={hasType} />
       <ProgressBar ratio={2 / 3} />
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-        <TextInput id="name" data={data} label="Nome" autoFocus />
+        <TextInput
+          id="name"
+          data={data}
+          label="Nome"
+          onChangeValue={validateName}
+          autoFocus
+        />
         <SingleOptionSelector
           id="type"
           data={data}
           label="Marcar como"
           options={plantTypes}
+          onChangeValue={validateType}
         />
         <TagsSelector
           id="tags"
           data={data}
           label="Marcar como"
           options={tags}
-          value={state.tags}
-          dispatch={dispatch}
         />
         <TextInput
           id="description"

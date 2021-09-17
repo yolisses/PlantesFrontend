@@ -38,7 +38,7 @@ export function PriceInput({id, data, onValueChange, ...rest}) {
       autoCompleteType={'off'}
       leftChild={<MoneySign />}
       keyboardType="decimal-pad"
-      onChangeText={onChangeText}
+      customOnChangeText={onChangeText}
     />
   );
 }
