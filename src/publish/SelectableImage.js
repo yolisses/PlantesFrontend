@@ -9,7 +9,14 @@ import {useAlert} from 'alert/AlertContext';
 import {ImagesLimitAlert} from './ImagesLimitAlert';
 const numberOfCollums = 3;
 
-export function SelectableImage({uri, images, setImages, imagesReachedLimit}) {
+export function SelectableImage({
+  id,
+  uri,
+  data,
+  images,
+  setImages,
+  imagesReachedLimit,
+}) {
   const {showAlert} = useAlert();
 
   function getImageIndex(uri) {
@@ -25,6 +32,7 @@ export function SelectableImage({uri, images, setImages, imagesReachedLimit}) {
         counter++;
       }
       copy[uri] = counter;
+      data[id] = copy;
       return copy;
     });
   }
@@ -40,6 +48,7 @@ export function SelectableImage({uri, images, setImages, imagesReachedLimit}) {
         copy[item] = counter;
         counter++;
       }
+      data[id] = copy;
       return copy;
     });
   }

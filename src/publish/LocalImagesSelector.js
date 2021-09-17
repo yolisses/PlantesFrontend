@@ -8,6 +8,7 @@ import {SelectImageAlbumButton} from './SelectImageAlbumButton';
 import {TakePhotoButton} from './TakePhotoButton';
 import {PublishImagesPreview} from './PublishImagesPreview';
 import {width} from 'utils/width';
+import {useShallowData} from './ShallowDataContext';
 
 const numberOfCollums = 3;
 
@@ -15,6 +16,7 @@ export function LocalImagesSelector() {
   const [album, setAlbum] = useState(allPhotosAlbum);
   const [foundImages, setFoundImages] = useState([]);
   const [images, setImages] = useState({});
+  const {data} = useShallowData();
 
   async function getPhotos() {
     CameraRoll.getPhotos({
@@ -59,6 +61,8 @@ export function LocalImagesSelector() {
       }}
       renderItem={({item: uri}) => (
         <SelectableImage
+          id="images"
+          data={data}
           key={uri}
           uri={uri}
           images={images}
