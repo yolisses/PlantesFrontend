@@ -14,7 +14,6 @@ const PLANTS = gql`
     getAllPlants {
       id
       name
-      type
       card
     }
   }
