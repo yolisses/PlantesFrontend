@@ -9,15 +9,18 @@ export function FinishButton() {
   const {send} = useSending();
   const {dispatch} = useNavigation();
 
-  function onPress() {
-    send();
-
+  function resetNavigation() {
     dispatch({
       ...CommonActions.reset({
         index: 0,
         routes: [{name: 'Home'}],
       }),
     });
+  }
+
+  function onPress() {
+    resetNavigation();
+    send();
   }
 
   return <NextButton route="Home" text="Enviar" customOnPress={onPress} />;
