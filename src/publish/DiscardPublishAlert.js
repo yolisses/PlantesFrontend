@@ -5,11 +5,11 @@ import {useShallowData} from './ShallowDataContext';
 import {useImages} from './ImagesContext';
 
 export function DiscardPublishAlert() {
-  const {discard} = useShallowData();
-  const {setImages} = useImages();
+  const {discard: discardShallowData} = useShallowData();
+  const {discard: discardImagesSelection} = useImages();
   function onPress() {
-    discard();
-    setImages(images => ({}));
+    discardShallowData();
+    discardImagesSelection();
   }
 
   return (

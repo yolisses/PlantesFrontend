@@ -7,9 +7,22 @@ export function ImagesContextProvider({children}) {
   const [images, setImages] = useState({});
   const [album, setAlbum] = useState(allPhotosAlbum);
   const [refresh, setRefresh] = useState();
+
+  function discard() {
+    setImages({});
+  }
+
   return (
     <ImagesContext.Provider
-      value={{images, setImages, album, setAlbum, refresh, setRefresh}}>
+      value={{
+        album,
+        images,
+        refresh,
+        discard,
+        setAlbum,
+        setImages,
+        setRefresh,
+      }}>
       {children}
     </ImagesContext.Provider>
   );

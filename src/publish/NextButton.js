@@ -1,23 +1,26 @@
-import {faArrowRight, faChevronRight} from '@fortawesome/free-solid-svg-icons';
+import {faArrowRight} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import {StyleSheet, Text} from 'react-native';
 
-export function NextButton({route, last}) {
+export function NextButton({route, text, onSubmit}) {
   const {navigate} = useNavigation();
+
+  function onPress() {
+    navigate(route);
+    if (onSubmit) {
+      onSubmit();
+    }
+  }
 
   return (
     <TouchableOpacity
       style={styles.button}
       activeOpacity={0.8}
-      onPress={() => navigate(route)}>
-      {/* rightIconColor="green" */}
-      {/* style={styles.nextButton} */}
-      {/* rightIcon={faChevronRight} */}
-      {/* textStyle={styles.nextButtonText}> */}
-      <Text style={styles.text}>{last ? 'Enviar' : 'Próximo'}</Text>
+      onPress={onPress}>
+      <Text style={styles.text}>{text || 'Próximo'}</Text>
       <FontAwesomeIcon
         style={styles.icon}
         icon={faArrowRight}

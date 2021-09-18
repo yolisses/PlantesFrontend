@@ -49,7 +49,6 @@ export function PublishImagesScreen() {
       first: 100,
     })
       .then(res => {
-        console.error(res.edges.map(edge => edge.node.image.uri));
         setFoundImages(res.edges.map(edge => edge.node.image.uri));
       })
       .catch(err => console.error(err));

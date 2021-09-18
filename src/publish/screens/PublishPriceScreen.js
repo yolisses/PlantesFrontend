@@ -12,16 +12,22 @@ import {availabilities} from 'publish/data/availiabilities';
 import {PriceInput} from 'form/PriceInput';
 import {TagsSelector} from 'form/TagsSelector';
 import {useShallowData} from 'publish/ShallowDataContext';
+import {useSending} from 'send/SendingContext';
 
 function ValidatedHeader({sell, hasPrice, hasAvailability}) {
   let canContinue = hasAvailability && !(sell && !hasPrice);
+  const {send} = useSending();
 
   return useMemo(
     () => (
       <CustomHeader
         title="Publicar"
         left={<BackButton />}
-        right={canContinue && <NextButton route="Price" />}
+        right={
+          canContinue && (
+            <NextButton route="Home" text="Enviar" onSubmit={send} />
+          )
+        }
       />
     ),
     [canContinue],
