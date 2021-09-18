@@ -23,6 +23,10 @@ const PLANTS = gql`
 export function StoreScreen() {
   const {loading, error, data} = useQuery(PLANTS);
 
+  if (error) {
+    console.error(error);
+  }
+
   return (
     <FooterNavigationLayout selected={'Home'}>
       <CustomHeader title="Plantei" right={<UserRoundImage size={40} />} />

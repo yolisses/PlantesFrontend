@@ -5,7 +5,7 @@ import {TextInput} from 'form/TextInput';
 import {TagsSelector} from 'form/TagsSelector';
 import {SingleOptionSelector} from 'form/SingleOptionSelector';
 
-import {tags} from 'publish/data/tags';
+import {tagsList} from 'publish/data/tags';
 import {BackButton} from 'publish/BackButton';
 import {NextButton} from 'publish/NextButton';
 import {ProgressBar} from 'publish/ProgressBar';
@@ -63,7 +63,7 @@ export function PublishDetailScreen() {
           id="tags"
           data={data}
           label="Marcar como"
-          options={tags}
+          options={tagsList}
         />
         <TextInput
           id="description"

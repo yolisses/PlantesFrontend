@@ -1,10 +1,15 @@
 //the same order as displayed
-export const tags = [
-  {key: 'fruitful', label: 'frutífera'},
-  {key: 'edible', label: 'comestível'},
-  {key: 'ornamental', label: 'ornamental'},
-  {key: 'medicinal', label: 'medicinal'},
-  {key: 'shade', label: 'de sombra'},
-  {key: 'half_shade', label: 'meia sombra'},
-  {key: 'full_sun', label: 'sol pleno'},
-];
+export const tags = {
+  fruitful: 'frutífera',
+  edible: 'comestível',
+  ornamental: 'ornamental',
+  medicinal: 'medicinal',
+  shade: 'de sombra',
+  half_shade: 'meia sombra',
+  full_sun: 'sol pleno',
+};
+
+export const tagsList = Object.entries(tags).map(entry => ({
+  key: entry[0],
+  label: entry[1],
+}));

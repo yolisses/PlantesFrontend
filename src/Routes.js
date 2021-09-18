@@ -3,6 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {Dev} from './dev/Dev';
+import {SendSomeImage} from 'dev/SendSomeImage';
 
 import {MapScreen} from 'map/MapScreen';
 import {ChatScreen} from 'chat/ChatScreen';
@@ -18,13 +19,12 @@ import {RequestLocationPermissionScreen} from 'permission/RequestLocationPermiss
 import {ChatHeader} from 'chat/ChatHeader';
 import {AlertDisplay} from 'alert/AlertDisplay';
 import {ModalDisplay} from 'modal/ModalDisplay';
-import {UserRoundImage} from 'common/UserRoundImage';
 
 import {useUserContext} from 'auth/userContext';
 import {CommentsScreen} from 'comment/CommentsScreen';
 import {usePermissions} from 'permission/PermissionsContext';
 import {MapUserLocationButton} from 'map/MapUserLocationButton';
-import {SendSomeImage} from 'dev/SendSomeImage';
+import {PublishDetailScreen} from 'publish/screens/PublishDetailScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,7 +37,7 @@ export function Routes() {
       <Stack.Navigator>
         {/* <Stack.Screen
           name="development"
-          component={UserScreen}
+          component={PublishDetailScreen}
           options={{headerShown: false}}
         /> */}
         {!user ? (
