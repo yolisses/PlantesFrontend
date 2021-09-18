@@ -5,13 +5,14 @@ import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import {StyleSheet, Text} from 'react-native';
 
-export function NextButton({route, text, onSubmit}) {
+export function NextButton({route, text, customOnPress}) {
   const {navigate} = useNavigation();
 
   function onPress() {
-    navigate(route);
-    if (onSubmit) {
-      onSubmit();
+    if (customOnPress) {
+      customOnPress();
+    } else {
+      navigate(route);
     }
   }
 

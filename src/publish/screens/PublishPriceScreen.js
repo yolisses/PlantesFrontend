@@ -1,10 +1,9 @@
 import React, {useMemo, useState} from 'react';
-import {ScrollView, StyleSheet, Text} from 'react-native';
+import {ScrollView, StyleSheet} from 'react-native';
 
 import {IntInput} from 'form/IntInput';
 
 import {BackButton} from 'publish/BackButton';
-import {NextButton} from 'publish/NextButton';
 import {ProgressBar} from 'publish/ProgressBar';
 import {CustomHeader} from 'publish/CustomHeader';
 import {availabilities} from 'publish/data/availiabilities';
@@ -12,22 +11,17 @@ import {availabilities} from 'publish/data/availiabilities';
 import {PriceInput} from 'form/PriceInput';
 import {TagsSelector} from 'form/TagsSelector';
 import {useShallowData} from 'publish/ShallowDataContext';
-import {useSending} from 'send/SendingContext';
+
+import {FinishButton} from 'publish/FinishButton';
 
 function ValidatedHeader({sell, hasPrice, hasAvailability}) {
   let canContinue = hasAvailability && !(sell && !hasPrice);
-  const {send} = useSending();
-
   return useMemo(
     () => (
       <CustomHeader
         title="Publicar"
         left={<BackButton />}
-        right={
-          canContinue && (
-            <NextButton route="Home" text="Enviar" onSubmit={send} />
-          )
-        }
+        right={canContinue && <FinishButton />}
       />
     ),
     [canContinue],
