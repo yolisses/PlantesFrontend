@@ -23,7 +23,7 @@ export function SendingContextProvider({children}) {
   const {discard: discardImagesSelection} = useImages();
   const {data: shallowData, discard: discardShallowData} = useShallowData();
 
-  // const [mutateFunction, {data, loading, error}] = useMutation(CREATE_PLANT);
+  const [mutateFunction, {data, loading, error}] = useMutation(CREATE_PLANT);
 
   async function send() {
     const sending = formatToPlant(shallowData);
@@ -33,16 +33,14 @@ export function SendingContextProvider({children}) {
   }
 
   function onPress() {
-    // mutateFunction({
-    //   variables: {inpt
-    //   },
-    // });
-    formatToPlant(sending);
+    mutateFunction({
+      variables: {plant: sending},
+    });
   }
 
-  // useEffect(() => {
-  //   console.error(data, loading, error);
-  // }, [data, loading, error]);
+  useEffect(() => {
+    console.error(data, loading, error);
+  }, [data, loading, error]);
 
   return (
     <SendingContext.Provider value={{send, sending, setSending}}>
