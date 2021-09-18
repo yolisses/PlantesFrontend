@@ -15,8 +15,6 @@ export function SendSomeImage() {
 
   const file = {
     uri: 'file:///storage/emulated/0/Tranks.jpg',
-    name: 'coisa.jpg',
-    typ: 'image/jpeg',
   };
 
   function onPress() {
@@ -30,21 +28,6 @@ export function SendSomeImage() {
     })
       .then(res => console.error(res))
       .catch(err => console.error(err));
-  }
-
-  function uploadFile(file, signedRequest, url) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('PUT', signedRequest);
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-          alert(url);
-        } else {
-          alert('Could not upload file.');
-        }
-      }
-    };
-    xhr.send(file);
   }
 
   return (
