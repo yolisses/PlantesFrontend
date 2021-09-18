@@ -14,6 +14,7 @@ module.exports = {
           ['chat', './src/chat'],
           ['form', './src/form'],
           ['post', './src/post'],
+          ['send', './src/send'],
           ['show', './src/show'],
           ['user', './src/user'],
           ['alert', './src/alert'],
