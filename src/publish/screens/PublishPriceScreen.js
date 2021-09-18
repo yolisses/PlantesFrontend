@@ -6,7 +6,10 @@ import {IntInput} from 'form/IntInput';
 import {BackButton} from 'publish/BackButton';
 import {ProgressBar} from 'publish/ProgressBar';
 import {CustomHeader} from 'publish/CustomHeader';
-import {availabilities} from 'publish/data/availiabilities';
+import {
+  availabilities,
+  availabilitiesLabels,
+} from 'publish/data/availiabilities';
 
 import {PriceInput} from 'form/PriceInput';
 import {TagsSelector} from 'form/TagsSelector';
@@ -73,6 +76,7 @@ export function PublishPriceScreen() {
           label="Disponível para"
           options={availabilities}
           buttonStyle={styles.button}
+          labels={availabilitiesLabels}
           onValueChange={validateAvailability}
         />
         {sell && (

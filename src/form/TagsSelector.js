@@ -1,12 +1,13 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Fieldset} from './Fieldset';
 import {ToggleButton} from './ToggleButton';
 
 export function TagsSelector({
-  id, //Array
+  id,
   data,
   label,
+  labels,
   value,
   style,
   options,
@@ -27,13 +28,13 @@ export function TagsSelector({
     <Fieldset label={label} style={[styles.fieldset, style]} disableBorder>
       {options.map(option => (
         <ToggleButton
-          id={option.key}
+          id={option}
           data={data[id]}
-          option={option}
-          key={option.key}
+          key={option}
+          label={labels ? labels[option] : option}
           style={buttonStyle}
           onChangeCallback={onChangeCallback}
-          active={!!value && value[option.key]}
+          active={!!value && value[option]}
         />
       ))}
     </Fieldset>
