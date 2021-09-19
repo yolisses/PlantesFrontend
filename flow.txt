@@ -1,0 +1,22 @@
+Event: new plant
+User inputs --> Create images backup --> Save plant object
+
+
+
+Event: start app
+dispatchRegistry(registry)
+For each registry:
+    if !links
+        getLinks()->saveLinks()->dispatchRegistry(this)
+    else 
+        for each link
+            if !linkFinished
+                uploadImage(link.image, link.uri)->dispatchRegistry(this)
+
+
+getLinks -> sendImages -> sendPlant
+
+
+
+
+entradas -> backup das imagens -> backup dos dados -> envia -> remove backup
