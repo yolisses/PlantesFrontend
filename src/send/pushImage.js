@@ -1,16 +1,18 @@
-import {brokenSendLink} from './brokenSendLink';
-import {connectionError} from './connectionError';
-
 export async function sendImage(image) {
-  if (Math.random() > 0.5) {
-    console.error('image sent:', image.localUri);
-    image.sent = true;
-  } else {
-    image.sent = false;
-    if (Math.random() > 0.5) {
-      throw connectionError;
-    } else {
-      throw brokenSendLink;
-    }
-  }
+  const file = {
+    uri: image.localUri,
+  };
+
+  console.error('sending: ', JSON.stringify(image));
+  await fetch(image.sendLink, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+    body: file,
+  })
+    .then(data => console.error(data))
+    .catch(err => console.error(err));
+
+  image.sent = true;
 }
