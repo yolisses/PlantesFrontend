@@ -2,6 +2,7 @@ import React, {createContext, useContext, useEffect} from 'react';
 import {Button} from 'react-native';
 import {v4} from 'uuid';
 import {dispatchAllSendings} from './dispatchAllSendings';
+import {dispatchSending} from './dispatchSending';
 import {getNewLink} from './getNewLink';
 
 const SendingContext = createContext();
@@ -10,6 +11,7 @@ export function SendingContextProvider({children}) {
   const sendings = {};
   function pushSending(sending) {
     sending[v4()] = sending;
+    dispatchSending(sending);
   }
 
   useEffect(() => {
@@ -30,6 +32,5 @@ export function SendingContextProvider({children}) {
 }
 
 export function useSending() {
-  toda;
   return useContext(SendingContext);
 }

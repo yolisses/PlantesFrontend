@@ -1,3 +1,4 @@
+import gql from 'graphql-tag';
 import {sendPlantError} from './sendPlantErrorl';
 
 const CREATE_PLANT = gql`

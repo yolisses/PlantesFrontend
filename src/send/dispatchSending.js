@@ -8,7 +8,6 @@ export async function dispatchSending(sending, callback) {
   // await required to mutate images
   await dispatchAllImages(images);
   const resultImages = images.map(image => image.sendLink);
-  console.error(resultImages);
   sending.images = resultImages;
   await dispatchPlant(sending);
   console.error('callback');
