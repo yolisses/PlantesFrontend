@@ -1,10 +1,7 @@
 import {useMutation} from '@apollo/client';
 import gql from 'graphql-tag';
-import {useImages} from 'publish/ImagesContext';
-import {useShallowData} from 'publish/ShallowDataContext';
 import React, {createContext, useContext, useEffect, useState} from 'react';
 import {Button} from 'react-native';
-import {formatToPlant} from './formatToPlant';
 
 const SendingContext = createContext();
 
@@ -18,23 +15,19 @@ const CREATE_PLANT = gql`
 `;
 
 export function SendingContextProvider({children}) {
-  const [sending, setSending] = useState();
-  const {discard: discardImagesSelection} = useImages();
-  const {data: shallowData, discard: discardShallowData} = useShallowData();
+  const [sendings, setSendings] = useState([]);
 
   const [mutateFunction, {data, loading, error}] = useMutation(CREATE_PLANT);
 
-  async function send() {
-    const sending = formatToPlant(shallowData);
-    setSending(sending);
-    discardImagesSelection();
-    discardShallowData();
+  async function pushSending(sending) {
+    const copy = sendings.concat(sending);
+    setSendings(copy);
   }
 
   function onPress() {
-    console.error(sending);
+    console.error(sendings);
     mutateFunction({
-      variables: {plant: sending},
+      variables: {plant: sendings[0]},
     });
   }
 
@@ -43,7 +36,7 @@ export function SendingContextProvider({children}) {
   }, [data, loading, error]);
 
   return (
-    <SendingContext.Provider value={{send, sending, setSending}}>
+    <SendingContext.Provider value={{pushSending, sendings}}>
       {children}
       <Button title="refresh" onPress={onPress} />
     </SendingContext.Provider>
