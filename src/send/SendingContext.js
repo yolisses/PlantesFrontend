@@ -3,27 +3,9 @@ import gql from 'graphql-tag';
 import {v4} from 'uuid';
 import {Button} from 'react-native';
 import {api} from 'api/api';
-import {dispatchAllImages} from './dispatchSending';
+import {dispatchAllSendings} from './dispatchAllSendings';
 
 const SendingContext = createContext();
-
-const images1 = [
-  {localUri: 'file://coisa1.jpg'},
-  {localUri: 'file://coisa2.jpg'},
-  {localUri: 'file://coisa3.jpg'},
-];
-const images2 = [
-  {localUri: 'file://coisa4.jpg'},
-  {localUri: 'file://coisa5.jpg'},
-  {localUri: 'file://coisa6.jpg'},
-];
-const images3 = [
-  {localUri: 'file://coisa7.jpg'},
-  {localUri: 'file://coisa8.jpg'},
-  {localUri: 'file://coisa9.jpg'},
-];
-
-const testSendings = [images1, images2, images3];
 
 const CREATE_PLANT = gql`
   mutation CreatePlant($plant: PlantInput) {
