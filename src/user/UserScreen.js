@@ -1,3 +1,4 @@
+import {RerenderTester} from 'dev/rerenderTester';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import React from 'react';
 import {FlatList, Text} from 'react-native';
@@ -12,6 +13,7 @@ export function UserScreen() {
 
   return (
     <FooterNavigationLayout>
+      <RerenderTester />
       <FlatList data={[sendings]} renderItem={renderItem} />
     </FooterNavigationLayout>
   );
