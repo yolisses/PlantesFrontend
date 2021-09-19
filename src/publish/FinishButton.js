@@ -11,13 +11,11 @@ import {useImages} from './ImagesContext';
 import {useShallowData} from './ShallowDataContext';
 
 export function FinishButton() {
-  const {send} = useSending();
+  const {pushSending} = useSending();
   const {dispatch} = useNavigation();
 
   const {discard: discardImagesSelection} = useImages();
   const {data: shallowData, discard: discardShallowData} = useShallowData();
-
-  const {pushSending} = useSending();
 
   function resetNavigation() {
     dispatch({
@@ -30,7 +28,6 @@ export function FinishButton() {
 
   function onPress() {
     resetNavigation();
-    send();
     const sending = formatToPlant(shallowData);
     pushSending(sending);
     discardImagesSelection();
