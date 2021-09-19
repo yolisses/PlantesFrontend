@@ -9,11 +9,10 @@ import {formatToPlant} from './formatToPlant';
 const SendingContext = createContext();
 
 const CREATE_PLANT = gql`
-  mutation Counter($plant: PlantInput) {
+  mutation CreatePlant($plant: PlantInput) {
     createPlant(input: $plant) {
       id
       name
-      type
     }
   }
 `;
@@ -33,6 +32,7 @@ export function SendingContextProvider({children}) {
   }
 
   function onPress() {
+    console.error(sending);
     mutateFunction({
       variables: {plant: sending},
     });

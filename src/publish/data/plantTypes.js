@@ -1,21 +1,21 @@
 export const plantTypes = [
   {
-    key: 'plant',
+    key: 'PLANT',
     label: 'Muda',
     image: require('assets/typeIcons/green/plant.png'),
   },
   {
-    key: 'seed',
+    key: 'SEED',
     label: 'Semente',
     image: require('assets/typeIcons/green/seed.png'),
   },
   {
-    key: 'clipping',
+    key: 'CUTTING',
     label: 'Ramo',
     image: require('assets/typeIcons/green/clipping.png'),
   },
   {
-    key: 'bulb',
+    key: 'BULB',
     label: 'Bulbo',
     image: require('assets/typeIcons/green/bulb.png'),
   },

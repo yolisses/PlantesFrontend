@@ -7,7 +7,6 @@ import {Routes} from './Routes';
 import {UserContextProvider} from 'auth/userContext';
 import {AlertContextProvider} from 'alert/AlertContext';
 import {ModalContextProvider} from 'modal/ModalContext';
-import {PublishContextProvider} from 'publish/PublishContext';
 import {PermissionsContextProvider} from 'permission/PermissionsContext';
 import {ChatReferenceContextProvider} from './chat/ChatReferenceContext';
 import {CameraPreferencesProvider} from 'camera/contexts/CameraPreferencesContext';
@@ -20,6 +19,10 @@ import {SendingContextProvider} from 'send/SendingContext';
 // Initialize Apollo Client
 const client = new ApolloClient({
   uri: 'http://192.168.10.23:4000/graphql',
+  onError: ({networkError, graphQLErrors}) => {
+    console.warn('graphQLErrors', graphQLErrors);
+    console.warn('networkError', networkError);
+  },
   cache: new InMemoryCache(),
 });
 

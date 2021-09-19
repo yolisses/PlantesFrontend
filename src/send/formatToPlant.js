@@ -11,7 +11,6 @@ function getOrderValuedKeys(obj) {
 export function formatToPlant(item) {
   const {
     name,
-    type,
     price,
     amount,
     description,
@@ -21,17 +20,16 @@ export function formatToPlant(item) {
   } = item;
 
   const tags = getTrueValuedKeys(tagsObj);
-  const images = getOrderValuedKeys(imagesObj);
+  const imagesCount = getOrderValuedKeys(imagesObj).length;
 
   return {
     name,
-    type,
     tags,
     description,
     swap,
     price,
     donate,
     amount,
-    images,
+    imagesCount,
   };
 }
