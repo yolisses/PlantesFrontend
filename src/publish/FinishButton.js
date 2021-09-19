@@ -28,8 +28,8 @@ export function FinishButton() {
 
   function onPress() {
     resetNavigation();
-    const sending = formatToPlant(shallowData);
-    pushSending(sending);
+    const plant = formatToPlant(shallowData);
+    pushSending(plant);
     discardImagesSelection();
     discardShallowData();
   }

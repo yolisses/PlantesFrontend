@@ -20,7 +20,7 @@ export function formatToPlant(item) {
   } = item;
 
   const tags = getTrueValuedKeys(tagsObj);
-  const imagesCount = getOrderValuedKeys(imagesObj).length;
+  const images = getOrderValuedKeys(imagesObj);
 
   return {
     name,
@@ -30,6 +30,6 @@ export function formatToPlant(item) {
     price,
     donate,
     amount,
-    imagesCount,
+    images,
   };
 }
