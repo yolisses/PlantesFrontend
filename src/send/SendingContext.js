@@ -8,14 +8,22 @@ const SendingContext = createContext();
 
 export function SendingContextProvider({children}) {
   const sendings = {};
-  function pushSending(sending) {
-    sendings[v4()] = sending;
-    dispatchSending(sending);
+  const [refresh, setRefresh] = useState(0);
+
+  function removeSending(id) {
+    delete sendings[id];
+    setRefresh(Math.random());
   }
 
-  useEffect(() => {
-    dispatchAllSendings(sendings);
-  });
+  function pushSending(sending) {
+    const id = v4();
+    sendings[id] = sending;
+    dispatchSending(sending, () => removeSending(id));
+  }
+
+  // useEffect(() => {
+  //   dispatchAllSendings(sendings, removeSending());
+  // });
 
   async function onPress() {
     const link = await getNewLink();
@@ -23,7 +31,7 @@ export function SendingContextProvider({children}) {
   }
 
   return (
-    <SendingContext.Provider value={{pushSending, sendings}}>
+    <SendingContext.Provider value={{pushSending, sendings, refresh}}>
       {children}
       {/* <Button title="teste" onPress={onPress} /> */}
     </SendingContext.Provider>

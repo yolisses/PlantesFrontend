@@ -1,7 +1,7 @@
 import {RerenderTester} from 'dev/rerenderTester';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
-import React, {Fragment, useMemo} from 'react';
-import {FlatList, StyleSheet, Text} from 'react-native';
+import React, {Fragment} from 'react';
+import {FlatList, StyleSheet} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {useSending} from 'send/SendingContext';
 import {width} from 'utils/width';
