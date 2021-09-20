@@ -10,7 +10,7 @@ const SendingContext = createContext();
 export function SendingContextProvider({children}) {
   const sendings = {};
   function pushSending(sending) {
-    sending[v4()] = sending;
+    sendings[v4()] = sending;
     dispatchSending(sending);
   }
 

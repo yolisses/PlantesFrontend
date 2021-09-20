@@ -7,7 +7,7 @@ export async function dispatchImage(image) {
   return new Promise(async (resolve, reject) => {
     while (true) {
       if (image.sent) {
-        return resolve(true);
+        return resolve(image.sendLink.split('?')[0]);
       } else if (!image.sendLink) {
         try {
           const link = await getNewLink(image);
