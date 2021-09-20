@@ -33,7 +33,7 @@ export function UserScreen() {
   );
 }
 
-const size = width / numberOfCollums - 1;
+const size = width / numberOfCollums - (numberOfCollums - 1) / numberOfCollums;
 
 const styles = StyleSheet.create({
   image: {
