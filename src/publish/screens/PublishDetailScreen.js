@@ -3,18 +3,16 @@ import {ScrollView, StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 import {TextInput} from 'form/TextInput';
 import {TagsSelector} from 'form/TagsSelector';
-import {SingleOptionSelector} from 'form/SingleOptionSelector';
 
 import {tags} from 'publish/data/tags';
 import {BackButton} from 'publish/BackButton';
 import {NextButton} from 'publish/NextButton';
 import {ProgressBar} from 'publish/ProgressBar';
 import {CustomHeader} from 'publish/CustomHeader';
-import {plantTypes} from 'publish/data/plantTypes';
 import {useShallowData} from 'publish/ShallowDataContext';
 
-function ValidatedHeader({hasName, hasType}) {
-  const canContinue = hasName && hasType;
+function ValidatedHeader({hasName}) {
+  const canContinue = hasName;
   return useMemo(
     () => (
       <CustomHeader
@@ -51,13 +49,6 @@ export function PublishDetailScreen() {
           label="Nome"
           onChangeValue={validateName}
           autoFocus
-        />
-        <SingleOptionSelector
-          id="type"
-          data={data}
-          label="Marcar como"
-          options={plantTypes}
-          onChangeValue={validateType}
         />
         <TagsSelector
           id="tags"

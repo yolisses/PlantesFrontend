@@ -12,7 +12,6 @@ export function ToggleButton({
   data,
   label,
   style,
-  option,
   onChangeCallback,
   ...rest
 }) {
@@ -46,9 +45,7 @@ export function ToggleButton({
           style={styles.icon}
         />
       )}
-      <Text style={[styles.text, active && styles.activeText]}>
-        {option.label}
-      </Text>
+      <Text style={[styles.text, active && styles.activeText]}>{label}</Text>
     </Pressable>
   );
 }

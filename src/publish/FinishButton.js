@@ -1,13 +1,21 @@
 import React from 'react';
-import {useSending} from 'send/SendingContext';
-import {NextButton} from './NextButton';
 
 import {CommonActions} from '@react-navigation/native';
 import {useNavigation} from '@react-navigation/native';
 
+import {useSending} from 'send/SendingContext';
+import {formatToPlant} from 'send/formatToPlant';
+
+import {NextButton} from './NextButton';
+import {useImages} from './ImagesContext';
+import {useShallowData} from './ShallowDataContext';
+
 export function FinishButton() {
-  const {send} = useSending();
+  const {pushSending} = useSending();
   const {dispatch} = useNavigation();
+
+  const {discard: discardImagesSelection} = useImages();
+  const {data: shallowData, discard: discardShallowData} = useShallowData();
 
   function resetNavigation() {
     dispatch({
@@ -20,7 +28,10 @@ export function FinishButton() {
 
   function onPress() {
     resetNavigation();
-    send();
+    const plant = formatToPlant(shallowData);
+    pushSending(plant);
+    discardImagesSelection();
+    discardShallowData();
   }
 
   return <NextButton route="Home" text="Enviar" customOnPress={onPress} />;

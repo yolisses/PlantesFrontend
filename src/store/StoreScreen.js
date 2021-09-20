@@ -14,7 +14,6 @@ const PLANTS = gql`
     getAllPlants {
       id
       name
-      type
       card
     }
   }
@@ -22,6 +21,10 @@ const PLANTS = gql`
 
 export function StoreScreen() {
   const {loading, error, data} = useQuery(PLANTS);
+
+  if (error) {
+    console.error(error);
+  }
 
   return (
     <FooterNavigationLayout selected={'Home'}>

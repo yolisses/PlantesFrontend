@@ -1,17 +1,16 @@
-import React, {useEffect, useRef} from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import React, {useRef} from 'react';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {ItemInfo} from 'show/ItemInfo';
 import {ImagesSwiper} from 'show/ImagesSwiper';
 import {FloatingButton} from 'show/FloatingButton';
 import {AvailabilityInfo} from 'show/AvailabilityInfo';
 import {StartConversetionButton} from 'show/StartConversationButton';
-import {useChatReference} from 'chat/ChatReferenceContext';
-import {LoadingStartConversetionButton} from './LoadingStartConversationButton';
 import {useQuery, gql} from '@apollo/client';
 
 export function ShowItemScreen({route}) {
   const {itemId, preImage} = route.params;
+
+  console.error(itemId);
 
   const PLANT = gql`
     query {
@@ -19,7 +18,6 @@ export function ShowItemScreen({route}) {
         id
         name
         tags
-        type
         images
         swap
         price
@@ -32,6 +30,8 @@ export function ShowItemScreen({route}) {
   const {loading, error, data} = useQuery(PLANT);
 
   const scrollRef = useRef();
+
+  console.error(error);
 
   const scrollTo = pos => {
     scrollRef.current.scrollTo({y: pos, animated: true});
