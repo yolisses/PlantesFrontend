@@ -6,7 +6,7 @@ import {width} from 'utils/width';
 
 const PLANTS = gql`
   query {
-    getUploadUrl
+    getPlantImageUploadLink
   }
 `;
 
@@ -19,7 +19,7 @@ export function SendSomeImage() {
 
   function onPress() {
     console.error('press');
-    fetch(data.getUploadUrl, {
+    fetch(data.getPlantImageUploadLink, {
       method: 'PUT',
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -36,9 +36,11 @@ export function SendSomeImage() {
         style={styles.image}
         source={{uri: 'file:///storage/emulated/0/Tranks.jpg'}}
       />
-      <Text>{JSON.stringify(loading)}</Text>
-      <Text>{JSON.stringify(error)}</Text>
-      <Text>{JSON.stringify(data)}</Text>
+      <Text>
+        {JSON.stringify(loading)}
+        {JSON.stringify(error)}
+        {JSON.stringify(data)}
+      </Text>
       <TouchableOpacity onPress={onPress}>
         <Text>Enviar (ou não)</Text>
       </TouchableOpacity>
