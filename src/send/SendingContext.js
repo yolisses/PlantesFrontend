@@ -1,5 +1,4 @@
-import React, {createContext, useContext, useEffect} from 'react';
-import {Button} from 'react-native';
+import React, {createContext, useContext, useEffect, useState} from 'react';
 import {v4} from 'uuid';
 import {dispatchAllSendings} from './dispatchAllSendings';
 import {dispatchSending} from './dispatchSending';
@@ -26,7 +25,7 @@ export function SendingContextProvider({children}) {
   return (
     <SendingContext.Provider value={{pushSending, sendings}}>
       {children}
-      <Button title="teste" onPress={onPress} />
+      {/* <Button title="teste" onPress={onPress} /> */}
     </SendingContext.Provider>
   );
 }
