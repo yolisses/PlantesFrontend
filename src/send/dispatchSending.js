@@ -11,6 +11,6 @@ export async function dispatchSending(sending, callback) {
   sending.images = resultImages;
   await dispatchPlant(sending);
   console.error('callback');
-  callback();
+  // callback();
   return;
 }

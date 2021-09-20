@@ -1,18 +1,24 @@
+import {brokenSendLink} from './brokenSendLink';
+
 export async function sendImage(image) {
   const file = {
     uri: image.localUri,
   };
 
-  console.error('sending: ', JSON.stringify(image));
-  await fetch(image.sendLink, {
+  console.error('sending: ', image.localUri);
+  const data = await fetch(image.sendLink, {
     method: 'PUT',
     headers: {
       'Content-Type': 'multipart/form-data',
     },
     body: file,
-  })
-    .then(data => console.error(data))
-    .catch(err => console.error(err));
-
-  image.sent = true;
+  });
+  console.error(data);
+  if (data.status === 403) {
+    throw brokenSendLink;
+  } else if (data.status === 200) {
+    image.sent = true;
+  } else {
+    throw 'Unknown error: ' + JSON.stringify(data);
+  }
 }

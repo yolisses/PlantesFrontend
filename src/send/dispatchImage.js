@@ -1,5 +1,4 @@
 import {brokenSendLink} from './brokenSendLink';
-import {connectionError} from './connectionError';
 import {getNewLink} from './getNewLink';
 import {sendImage} from './pushImage';
 import {waitSomeTime} from './waitSomeTime';
@@ -21,10 +20,10 @@ export async function dispatchImage(image) {
           await sendImage(image);
         } catch (err) {
           console.error('error sending image: ', image.localUri, err);
-          if (err === connectionError) {
-            await waitSomeTime();
-          } else if (err === brokenSendLink) {
+          if (err === brokenSendLink) {
             image.sendLink = false;
+          } else {
+            await waitSomeTime();
           }
         }
       }
