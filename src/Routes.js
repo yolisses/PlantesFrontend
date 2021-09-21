@@ -40,7 +40,7 @@ export function Routes() {
           component={PublishDetailScreen}
           options={{headerShown: false}}
         /> */}
-        {!user ? (
+        {user ? (
           <>
             {grantedLocation || grantedLocation === null ? (
               <Stack.Screen

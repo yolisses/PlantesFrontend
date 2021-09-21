@@ -1,8 +1,9 @@
-import {useQuery} from '@apollo/client';
+import {useLazyQuery, useQuery} from '@apollo/client';
 import React, {useContext} from 'react';
 import {createContext, useState} from 'react';
 import GetLocation from 'react-native-get-location';
 import {gql} from '@apollo/client';
+import {Text} from 'react-native';
 
 const UserContext = createContext({});
 
@@ -15,7 +16,7 @@ export function UserContextProvider({children}) {
     }
   }
 `;
-  const {loading, error, data} = useQuery(USER);
+  const {loading, error, data: user} = useLazyQuery(USER);
 
   function updateLocation() {
     GetLocation.getCurrentPosition({
@@ -30,7 +31,10 @@ export function UserContextProvider({children}) {
   // });
 
   return (
-    <UserContext.Provider value={{user: data, setToken, updateLocation}}>
+    <UserContext.Provider value={{user, setToken, updateLocation}}>
+      <Text>loading{JSON.stringify(loading)}</Text>
+      <Text>error{JSON.stringify(error)}</Text>
+      <Text>data{JSON.stringify(user)}</Text>
       {children}
     </UserContext.Provider>
   );

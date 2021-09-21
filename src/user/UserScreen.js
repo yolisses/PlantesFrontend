@@ -1,7 +1,8 @@
+import {signOut} from 'auth/oauth';
 import {RerenderTester} from 'dev/rerenderTester';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import React, {Fragment} from 'react';
-import {FlatList, StyleSheet} from 'react-native';
+import {Button, FlatList, StyleSheet} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {useSending} from 'send/SendingContext';
 import {width} from 'utils/width';
@@ -23,6 +24,7 @@ export function UserScreen() {
 
   return (
     <FooterNavigationLayout>
+      <Button onPress={signOut} title="Sair" />
       <RerenderTester />
       <FlatList
         data={Object.entries(sendings)}
