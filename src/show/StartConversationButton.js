@@ -28,7 +28,6 @@ export function StartConversetionButton({onPress, loading}) {
 const styles = StyleSheet.create({
   messageButton: {
     backgroundColor: 'green',
-    marginRight: 4,
   },
   messageButtonText: {
     color: 'white',
