@@ -76,6 +76,7 @@ export function ShowItemScreen({route}) {
 const styles = StyleSheet.create({
   screen: {
     height: '100%',
+    backgroundColor: 'white',
   },
   bottomWrapper: {
     flexDirection: 'row',
