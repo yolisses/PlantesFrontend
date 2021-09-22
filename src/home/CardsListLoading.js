@@ -1,6 +1,6 @@
 import React from 'react';
 import {FlatList} from 'react-native';
-import {Card} from 'store/Card';
+import {Card} from 'home/Card';
 
 export function CardsListLoading() {
   return (

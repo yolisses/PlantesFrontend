@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import {FlatList} from 'react-native';
 
-import {Card} from 'store/Card';
+import {Card} from 'home/Card';
 import {CustomHeader} from 'publish/CustomHeader';
 import {UserRoundImage} from 'common/UserRoundImage';
-import {CardsListLoading} from 'store/CardsListLoading';
+import {CardsListLoading} from 'home/CardsListLoading';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 
-export function StoreScreen() {
+export function HomeScreen() {
   const [plants, setPlants] = useState([]);
 
   return (

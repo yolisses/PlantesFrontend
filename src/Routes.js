@@ -9,7 +9,7 @@ import {MapScreen} from 'map/MapScreen';
 import {ChatScreen} from 'chat/ChatScreen';
 import {UserScreen} from 'user/UserScreen';
 import {LoginScreen} from 'auth/LoginScreen';
-import {StoreScreen} from 'store/StoreScreen';
+import {HomeScreen} from 'home/HomeScreen';
 import {ShowItemScreen} from 'show/ShowItemScreen';
 import {ChatsListScreen} from 'chat/ChatsListScreen';
 import {CommunityScreen} from 'post/CommunityScreen';
@@ -45,7 +45,7 @@ export function Routes() {
             {grantedLocation || grantedLocation === null ? (
               <Stack.Screen
                 name="Home"
-                component={StoreScreen}
+                component={HomeScreen}
                 options={{headerShown: false}}
               />
             ) : (

@@ -14,9 +14,9 @@ import {
   faThumbsUp,
 } from '@fortawesome/free-solid-svg-icons';
 
-import {Card} from 'store/Card';
-import {CardsListFooter} from 'store/CardsListFooter';
-import {CardsListLoading} from 'store/CardsListLoading';
+import {Card} from 'home/Card';
+import {CardsListFooter} from 'home/CardsListFooter';
+import {CardsListLoading} from 'home/CardsListLoading';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import {InfiniteScroll} from 'common/InfiniteScroll';
 import {UserInfo} from '../user/UserInfo';
