@@ -16,7 +16,7 @@ export function HomeScreen() {
       const res = await api.get('/plants');
       setPlants(res.data);
     } catch (err) {
-      console.error(err);
+      // console.error(err);
     }
   }
 

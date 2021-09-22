@@ -1,6 +1,10 @@
 import React, {createContext, useContext, useState} from 'react';
 import {v4} from 'uuid';
-import sendPlant from './sendPlant.js';
+import {sendPlant} from './sendPlant';
+
+import {examplePlant} from './examplePlant';
+
+import {useEffect} from 'react';
 
 const SendingContext = createContext();
 
@@ -18,6 +22,10 @@ export function SendingContextProvider({children}) {
     sendings[id] = sending;
     sendPlant(sending);
   }
+
+  useEffect(() => {
+    sendPlant(examplePlant);
+  }, []);
 
   return (
     <SendingContext.Provider value={{pushSending, sendings, refresh}}>
