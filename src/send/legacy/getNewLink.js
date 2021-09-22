@@ -1,4 +1,4 @@
-import {api} from '../api/api';
+import {api} from '../../api/api';
 
 export async function getNewLink(amount) {
   const res = await api.post('/graphql', {

@@ -1,7 +1,7 @@
 import {brokenSendLink} from './brokenSendLink';
 import {getNewLink} from './getNewLink';
 import {sendImage} from './pushImage';
-import {waitSomeTime} from './waitSomeTime';
+import {waitSomeTime} from '../waitSomeTime';
 
 export async function dispatchImage(image) {
   return new Promise(async (resolve, reject) => {

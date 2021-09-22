@@ -1,8 +1,6 @@
-import React, {createContext, useContext, useEffect, useState} from 'react';
+import React, {createContext, useContext, useState} from 'react';
 import {v4} from 'uuid';
-import {dispatchAllSendings} from './dispatchAllSendings';
-import {dispatchSending} from './dispatchSending';
-import {getNewLink} from './getNewLink';
+import sendPlant from './sendPlant.js';
 
 const SendingContext = createContext();
 
@@ -18,22 +16,12 @@ export function SendingContextProvider({children}) {
   function pushSending(sending) {
     const id = v4();
     sendings[id] = sending;
-    dispatchSending(sending, () => removeSending(id));
-  }
-
-  // useEffect(() => {
-  //   dispatchAllSendings(sendings, removeSending());
-  // });
-
-  async function onPress() {
-    const link = await getNewLink();
-    console.error(link);
+    sendPlant(sending);
   }
 
   return (
     <SendingContext.Provider value={{pushSending, sendings, refresh}}>
       {children}
-      {/* <Button title="teste" onPress={onPress} /> */}
     </SendingContext.Provider>
   );
 }
