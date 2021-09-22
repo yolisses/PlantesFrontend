@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {FlatList} from 'react-native';
 
 import {Card} from 'store/Card';
@@ -7,34 +7,18 @@ import {UserRoundImage} from 'common/UserRoundImage';
 import {CardsListLoading} from 'store/CardsListLoading';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 
-import {useQuery, gql} from '@apollo/client';
-
-const PLANTS = gql`
-  query {
-    getAllPlants {
-      id
-      name
-      card
-    }
-  }
-`;
-
 export function StoreScreen() {
-  const {loading, error, data} = useQuery(PLANTS);
-
-  if (error) {
-    console.error(error);
-  }
+  const [plants, setPlants] = useState([]);
 
   return (
     <FooterNavigationLayout selected={'Home'}>
       <CustomHeader title="Plantei" right={<UserRoundImage size={40} />} />
-      {loading || error ? (
+      {!plants ? (
         <CardsListLoading />
       ) : (
         <FlatList
           numColumns={2}
-          data={data.getAllPlants}
+          data={plants}
           renderItem={({item}) => <Card item={item} />}
         />
       )}

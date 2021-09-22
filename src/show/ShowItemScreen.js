@@ -1,37 +1,17 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {ItemInfo} from 'show/ItemInfo';
 import {ImagesSwiper} from 'show/ImagesSwiper';
 import {FloatingButton} from 'show/FloatingButton';
 import {AvailabilityInfo} from 'show/AvailabilityInfo';
 import {StartConversetionButton} from 'show/StartConversationButton';
-import {useQuery, gql} from '@apollo/client';
 
 export function ShowItemScreen({route}) {
   const {itemId, preImage} = route.params;
 
-  console.error(itemId);
-
-  const PLANT = gql`
-    query {
-      getPlant(id: "${itemId}") {
-        id
-        name
-        tags
-        images
-        swap
-        price
-        donate  
-        amount
-        description
-      }
-    }
-  `;
-  const {loading, error, data} = useQuery(PLANT);
+  const [item, setItem] = useState(null);
 
   const scrollRef = useRef();
-
-  console.error(error);
 
   const scrollTo = pos => {
     scrollRef.current.scrollTo({y: pos, animated: true});
@@ -60,13 +40,13 @@ export function ShowItemScreen({route}) {
       {/* <Text>{JSON.stringify(data)}</Text> */}
       <FloatingButton />
       <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
-        <ImagesSwiper images={data?.getPlant.images} />
-        <ItemInfo scrollTo={scrollTo} item={data?.getPlant} />
+        <ImagesSwiper images={item.images} />
+        <ItemInfo scrollTo={scrollTo} item={item} />
       </ScrollView>
       <View style={styles.bottomWrapper}>
-        <AvailabilityInfo onModalConfirmPress={onPress} item={data?.getPlant} />
+        <AvailabilityInfo onModalConfirmPress={onPress} item={item} />
         <View style={{flex: 1, justifyContent: 'center'}}>
-          <StartConversetionButton onPress={onPress} loading={loading} />
+          <StartConversetionButton onPress={onPress} loading={!!item} />
         </View>
       </View>
     </View>

@@ -1,25 +1,16 @@
-import {useQuery, useEffect, gql} from '@apollo/client';
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {width} from 'utils/width';
 
-const PLANTS = gql`
-  query {
-    getPlantImageUploadLink
-  }
-`;
-
 export function SendSomeImage() {
-  const {loading, error, data} = useQuery(PLANTS);
-
   const file = {
     uri: 'file:///storage/emulated/0/Tranks.jpg',
   };
 
   function onPress() {
     console.error('press');
-    fetch(data.getPlantImageUploadLink, {
+    fetch(url, {
       method: 'PUT',
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -36,11 +27,6 @@ export function SendSomeImage() {
         style={styles.image}
         source={{uri: 'file:///storage/emulated/0/Tranks.jpg'}}
       />
-      <Text>
-        {JSON.stringify(loading)}
-        {JSON.stringify(error)}
-        {JSON.stringify(data)}
-      </Text>
       <TouchableOpacity onPress={onPress}>
         <Text>Enviar (ou não)</Text>
       </TouchableOpacity>
