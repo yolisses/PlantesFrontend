@@ -1,15 +1,11 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {signIn} from './oauth';
 import {useUserContext} from './userContext';
 
 export function GoogleSignInButton() {
   const {setToken} = useUserContext();
 
-  async function onPress() {
-    const token = await signIn();
-    setToken(token);
-  }
+  async function onPress() {}
 
   return (
     <TouchableOpacity

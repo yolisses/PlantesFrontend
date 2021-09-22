@@ -16,8 +16,6 @@ target 'Plantei' do
 
   pod 'react-native-camera', :path => '../node_modules/react-native-camera'
 
-  pod 'RNGoogleSignin', :path => '../node_modules/react-native-google-signin'
-
   pod 'react-native-cameraroll', :path => '../node_modules/@react-native-community/cameraroll'
 
   target 'PlanteiTests' do
