@@ -1,21 +1,32 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {ItemInfo} from 'show/ItemInfo';
 import {ImagesSwiper} from 'show/ImagesSwiper';
 import {FloatingButton} from 'show/FloatingButton';
 import {AvailabilityInfo} from 'show/AvailabilityInfo';
 import {StartConversetionButton} from 'show/StartConversationButton';
+import {api} from 'api/api';
 
 export function ShowItemScreen({route}) {
   const {itemId, preImage} = route.params;
 
-  const [item, setItem] = useState(null);
+  const [item, setItem] = useState({});
 
   const scrollRef = useRef();
 
   const scrollTo = pos => {
     scrollRef.current.scrollTo({y: pos, animated: true});
   };
+
+  async function getItem() {
+    const res = await api.get('/plant/' + itemId);
+    console.error(res);
+    setItem(res.data);
+  }
+
+  useEffect(() => {
+    getItem();
+  }, []);
 
   // const {navigate} = useNavigation();
   // const {setOneChatReference} = useChatReference();
@@ -40,13 +51,13 @@ export function ShowItemScreen({route}) {
       {/* <Text>{JSON.stringify(data)}</Text> */}
       <FloatingButton />
       <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
-        <ImagesSwiper images={item.images} />
+        <ImagesSwiper images={item?.images} />
         <ItemInfo scrollTo={scrollTo} item={item} />
       </ScrollView>
       <View style={styles.bottomWrapper}>
         <AvailabilityInfo onModalConfirmPress={onPress} item={item} />
         <View style={{flex: 1, justifyContent: 'center'}}>
-          <StartConversetionButton onPress={onPress} loading={!!item} />
+          <StartConversetionButton onPress={onPress} loading={!item} />
         </View>
       </View>
     </View>
