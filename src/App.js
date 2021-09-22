@@ -26,6 +26,13 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+import {GoogleSignin} from '@react-native-community/google-signin';
+
+GoogleSignin.configure({
+  webClientId:
+    '870876078379-fbcve7jhhn9udg1e37vpn0olekmr9bau.apps.googleusercontent.com',
+});
+
 const App = () => {
   return (
     <ApolloProvider client={client}>

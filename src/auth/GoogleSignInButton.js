@@ -1,15 +1,25 @@
-import React from 'react';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+} from '@react-native-community/google-signin';
+import React, {useEffect} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {signIn} from './oauth';
+import {signIn} from './signIn';
 import {useUserContext} from './userContext';
 
 export function GoogleSignInButton() {
-  const {setToken} = useUserContext();
+  const {setGoogleToken} = useUserContext();
 
   async function onPress() {
     const token = await signIn();
-    setToken(token);
+    setGoogleToken(token);
   }
+
+  useEffect(() => {
+    GoogleSignin.signInSilently()
+      .then(userInfo => console.error(userInfo))
+      .catch(err => console.error(err));
+  }, []);
 
   return (
     <TouchableOpacity
