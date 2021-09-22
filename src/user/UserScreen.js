@@ -1,4 +1,3 @@
-import {signOut} from 'auth/oauth';
 import {RerenderTester} from 'dev/rerenderTester';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import React, {Fragment} from 'react';
@@ -24,7 +23,6 @@ export function UserScreen() {
 
   return (
     <FooterNavigationLayout>
-      <Button onPress={signOut} title="Sair" />
       <RerenderTester />
       <FlatList
         data={Object.entries(sendings)}
