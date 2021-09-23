@@ -1,19 +1,18 @@
 import React, {useContext} from 'react';
 import {createContext, useState} from 'react';
-import {useEffect} from 'react';
-
 import {api} from 'api';
 
 const UserContext = createContext({});
 
 export function UserContextProvider({children}) {
   const [token, setToken] = useState();
-  const [idToken, setIdToken] = useState(); //from Google
 
   async function authenticate(idToken) {
     try {
       const res = await api.post('/googlesignin', {idToken});
-      setToken(res.data.token);
+      const {token} = res.data;
+      setToken(token);
+      api.defaults.headers.common.auth = `Bearer ${token}`;
     } catch (err) {
       console.error(err);
     }
