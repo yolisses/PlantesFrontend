@@ -25,14 +25,9 @@ export function SendingContextProvider({children}) {
     sendPlant(sending);
   }
 
-  function onPress() {
-    pushSending(examplePlant);
-  }
-
   return (
     <SendingContext.Provider value={{pushSending, sendings, refresh}}>
       {children}
-      <Button onPress={onPress} title="try" />
     </SendingContext.Provider>
   );
 }
