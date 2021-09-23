@@ -1,7 +1,7 @@
 import {RerenderTester} from 'dev/rerenderTester';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import React, {Fragment} from 'react';
-import {FlatList, StyleSheet} from 'react-native';
+import {FlatList, StyleSheet, Text} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {useSending} from 'send/SendingContext';
 import {width} from 'utils/width';
@@ -15,8 +15,8 @@ export function UserScreen() {
   function renderItem({item}) {
     return (
       <Fragment key={item[0]}>
-        <FastImage source={{uri: item[1].images[0]}} style={styles.image} />
-        {/* <Text>{JSON.stringify(item)}</Text> */}
+        {/* <FastImage source={{uri: item[1].images[0]}} style={styles.image} /> */}
+        <Text>{JSON.stringify(item)}</Text>
       </Fragment>
     );
   }

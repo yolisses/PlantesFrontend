@@ -17,14 +17,16 @@ export function SendingContextProvider({children}) {
     setRefresh(Math.random());
   }
 
-  function pushSending(sending) {
+  function pushSending(plant) {
     const id = v4();
+    const sending = {};
+    sending.localData = plant;
     sendings[id] = sending;
     sendPlant(sending);
   }
 
   function onPress() {
-    sendPlant(examplePlant);
+    pushSending(examplePlant);
   }
 
   return (
