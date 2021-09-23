@@ -1,5 +1,6 @@
 import {sendPlantInfo} from './sendPlantInfo';
 import {sendImage} from './sendImage';
+import {confirmSending} from './confirmSending';
 
 export async function sendPlant(sending) {
   while (!sending.sent) {
@@ -12,6 +13,7 @@ export async function sendPlant(sending) {
         await Promise.all(
           sending.images.map(image => sendImage({image, plantId})),
         );
+        await confirmSending(plantId);
         sending.sent = true;
       }
     } catch (err) {
