@@ -5,6 +5,7 @@ import React from 'react';
 import {StyleSheet, Text, View, Pressable, Dimensions} from 'react-native';
 import {LoadingItemInfo} from './LoadingItemInfo';
 import {TagsList} from './TagsList';
+import {UserLink} from './UserLink';
 
 const {width} = Dimensions.get('window');
 
@@ -16,29 +17,16 @@ export function ItemInfo({scrollTo, item}) {
   return (
     <View>
       <Text style={styles.title}>{item?.name}</Text>
-      <View
-        style={{
-          flexDirection: 'row',
-        }}>
-        <View style={styles.userWrapper}>
-          <View style={styles.owner}>
-            <UserRoundImage item={item?.owner} size={50} thumbnail />
-            <View style={{marginLeft: 6}}>
-              <Text style={styles.userName}>{item?.owner?.name || ''}</Text>
-              <Text style={styles.distance}>
-                {item?.distance} quilômetros daqui
-              </Text>
-            </View>
-          </View>
-        </View>
+      <UserLink />
+      <View style={styles.section}>
+        <Pressable
+          style={styles.aboutWrapper}
+          onPress={() => scrollTo(width + 80)}>
+          <FontAwesomeIcon icon={faChevronDown} color={'gray'} />
+          <Text style={styles.about}>Detalhes</Text>
+        </Pressable>
+        <TagsList tags={item?.tags || []} />
       </View>
-      <Pressable
-        style={styles.aboutWrapper}
-        onPress={() => scrollTo(width + 80)}>
-        <FontAwesomeIcon icon={faChevronDown} color={'gray'} />
-        <Text style={styles.about}>Detalhes</Text>
-      </Pressable>
-      <TagsList tags={item?.tags || []} />
       <View style={styles.aboutWrapper}>
         <FontAwesomeIcon icon={faChevronDown} color={'gray'} />
         <Text style={styles.about}>Descrição</Text>
@@ -73,14 +61,16 @@ const styles = StyleSheet.create({
   },
   about: {
     fontSize: 18,
-    marginBottom: 10,
+    marginBottom: 8,
     flexDirection: 'row',
     marginHorizontal: 10,
   },
   aboutWrapper: {
-    marginTop: 20,
     alignItems: 'center',
     flexDirection: 'row',
     paddingHorizontal: 10,
+  },
+  section: {
+    marginBottom: 20,
   },
 });

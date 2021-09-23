@@ -18,7 +18,6 @@ export function ShowItemScreen({route}) {
     scrollRef.current.scrollTo({y: pos, animated: true});
   };
 
-  console.error(preImage);
   async function getItem() {
     const res = await api.get('/plant/' + itemId);
     setItem(res.data);
