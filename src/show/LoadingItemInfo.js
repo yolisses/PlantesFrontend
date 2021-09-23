@@ -14,7 +14,7 @@ export function LoadingItemInfo() {
 
 const styles = StyleSheet.create({
   line: {
-    backgroundColor: '#ddd',
+    backgroundColor: '#eee',
     marginHorizontal: 10,
     marginTop: 10,
     borderRadius: 10,

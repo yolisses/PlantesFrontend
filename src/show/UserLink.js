@@ -3,12 +3,16 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 
-export function UserLink(userId) {
+export function UserLink({id}) {
   const [user, setUser] = useState();
 
   async function getUser() {
-    const res = await api.get('/user/614c85e97244c7e73c35ca5c');
-    setUser(res.data);
+    try {
+      const res = await api.get('/user/' + id);
+      setUser(res.data);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   useEffect(() => {

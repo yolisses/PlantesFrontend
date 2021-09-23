@@ -24,7 +24,6 @@ import {useUserContext} from 'auth/userContext';
 import {CommentsScreen} from 'comment/CommentsScreen';
 import {usePermissions} from 'permission/PermissionsContext';
 import {MapUserLocationButton} from 'map/MapUserLocationButton';
-import {PublishDetailScreen} from 'publish/screens/PublishDetailScreen';
 
 const Stack = createNativeStackNavigator();
 

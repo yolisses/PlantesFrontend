@@ -12,7 +12,7 @@ export function LoadingAvailabilityInfo() {
 
 const styles = StyleSheet.create({
   line: {
-    backgroundColor: '#ddd',
+    backgroundColor: '#eee',
     borderRadius: 10,
     marginBottom: 10,
     paddingTop: 30,
