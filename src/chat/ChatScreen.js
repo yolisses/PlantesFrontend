@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {KeyboardAvoidingView, ScrollView, StyleSheet, View} from 'react-native';
 import {Message} from 'chat/Message';
 import {MessageInput} from 'chat/MessageInput';
 import {api} from 'api';
 import {useNavigation} from '@react-navigation/core';
 import {ChatHeader} from './ChatHeader';
+import {CustomHeader} from 'publish/CustomHeader';
 
 export function ChatScreen({route}) {
   const {item} = route.params;
@@ -32,6 +33,7 @@ export function ChatScreen({route}) {
 
   return (
     <View style={styles.screen}>
+      <CustomHeader />
       <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
         <View style={styles.pad}>
           {messages &&

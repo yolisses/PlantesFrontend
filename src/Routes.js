@@ -16,7 +16,6 @@ import {CommunityScreen} from 'post/CommunityScreen';
 import {PublishScreen} from 'publish/screens/PublishScreen';
 import {RequestLocationPermissionScreen} from 'permission/RequestLocationPermissionScreen';
 
-import {ChatHeader} from 'chat/ChatHeader';
 import {AlertDisplay} from 'alert/AlertDisplay';
 import {ModalDisplay} from 'modal/ModalDisplay';
 
@@ -75,15 +74,7 @@ export function Routes() {
             <Stack.Screen
               name="Chat"
               component={ChatScreen}
-              options={{
-                // headerTitle: 'Nome da pessoa',
-                headerTitle: () => (
-                  <ChatHeader
-                    imageUri={'https://avatars.githubusercontent.com/yowlisses'}
-                    name={'Ulisses Albuquerque'}
-                  />
-                ),
-              }}
+              options={{headerShown: false}}
             />
             <Stack.Screen
               name="ChatsList"
