@@ -72,8 +72,7 @@ const styles = StyleSheet.create({
   bottomWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingBottom: 10,
-    paddingHorizontal: 10,
+    paddingHorizontal: 5,
   },
   padding: {
     padding: 10,

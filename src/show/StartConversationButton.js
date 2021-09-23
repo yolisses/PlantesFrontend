@@ -12,7 +12,7 @@ export function StartConversetionButton({onPress, loading}) {
   }
 
   return (
-    <View style={{flex: 1, justifyContent: 'center'}}>
+    <View style={{justifyContent: 'center'}}>
       <LightButton
         text="Mandar mensagem"
         icon={faCommentAlt}
