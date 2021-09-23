@@ -4,7 +4,7 @@ import {sendPlant} from './sendPlant';
 
 import {examplePlant} from './examplePlant';
 
-import {useEffect} from 'react';
+import {Button} from 'react-native';
 
 const SendingContext = createContext();
 
@@ -23,13 +23,14 @@ export function SendingContextProvider({children}) {
     sendPlant(sending);
   }
 
-  // useEffect(() => {
-  //   sendPlant(examplePlant);
-  // }, []);
+  function onPress() {
+    sendPlant(examplePlant);
+  }
 
   return (
     <SendingContext.Provider value={{pushSending, sendings, refresh}}>
       {children}
+      <Button onPress={onPress} title="try" />
     </SendingContext.Provider>
   );
 }
