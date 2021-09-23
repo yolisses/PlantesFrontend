@@ -37,8 +37,8 @@ export function Routes() {
       <Stack.Navigator>
         {/* <Stack.Screen
           name="development"
-          component={PublishDetailScreen}
-          options={{headerShown: false}}
+          component={UserScreen}
+          // options={{headerShown: false}}
         /> */}
         {token ? (
           <>

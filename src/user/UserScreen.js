@@ -1,32 +1,42 @@
+import {api} from 'api';
 import {SquareImage} from 'common/SquareImage';
-import {RerenderTester} from 'dev/rerenderTester';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
-import React, {Fragment} from 'react';
-import {FlatList, Text} from 'react-native';
-import {useSending} from 'send/SendingContext';
+import React, {Fragment, useEffect, useState} from 'react';
+import {FlatList, Text, View} from 'react-native';
+import {UserInfo} from './UserInfo';
 
 const numberOfCollums = 3;
 
 export function UserScreen() {
-  const {sendings} = useSending();
-  // console.error(sendings);
+  const [user, setUser] = useState();
 
   function renderItem({item}) {
+    return <Text>{JSON.stringify(item)}</Text>;
+  }
+
+  async function getUser() {
+    const res = await api.get('user/614c85e97244c7e73c35ca5c');
+    setUser(res.data);
+  }
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  function ListHeaderComponent() {
     return (
-      <Fragment key={item[0]}>
-        {/* <SquareImage source={{uri: item[1].images[0]}} /> */}
-        <Text>{JSON.stringify(item)}</Text>
-      </Fragment>
+      <View>
+        <UserInfo user={user} />
+      </View>
     );
   }
 
   return (
     <FooterNavigationLayout>
-      <RerenderTester />
       <FlatList
-        data={Object.entries(sendings)}
         renderItem={renderItem}
         numColumns={numberOfCollums}
+        ListHeaderComponent={ListHeaderComponent}
       />
     </FooterNavigationLayout>
   );

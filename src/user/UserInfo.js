@@ -1,21 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {api} from 'api';
 
-export function UserInfo({item}) {
-  const [user, setUser] = useState(null);
-
-  async function getUser() {
-    const res = await api.get('/users/11');
-    setUser(res.data);
-  }
-  useEffect(() => {
-    getUser();
-  }, []);
-
+export function UserInfo({user}) {
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.imageNameWrapper}>
         <FastImage style={styles.image} source={{uri: user?.image}} />
         <Text style={styles.text}>{user?.name}</Text>
@@ -25,6 +14,9 @@ export function UserInfo({item}) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+  },
   imageNameWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
