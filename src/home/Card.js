@@ -15,7 +15,7 @@ export function Card({item, fraction}) {
 
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.9}>
-      <SquareImage uri={item?.card} fraction={fraction || 2} offset={1} />
+      <SquareImage uri={item?.card} fraction={fraction || 2} />
       <Text>{item?.name}</Text>
     </TouchableOpacity>
   );
