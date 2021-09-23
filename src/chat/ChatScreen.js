@@ -19,8 +19,8 @@ export function ChatScreen({route}) {
 
   async function getMessages() {
     try {
-      const res = await api.get('/chats/11');
-      setMessages(res.data.messages);
+      const res = await api.get('chatmessages/' + '614d0b5d76df7f9d6707fbdd');
+      setMessages(res.data);
     } catch (err) {
       console.error(err);
     }
