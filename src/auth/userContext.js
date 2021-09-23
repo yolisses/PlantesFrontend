@@ -1,21 +1,26 @@
 import React, {useContext} from 'react';
 import {createContext, useState} from 'react';
-import GetLocation from 'react-native-get-location';
+import {useEffect} from 'react';
+
+import {api} from 'api';
 
 const UserContext = createContext({});
 
 export function UserContextProvider({children}) {
   const [token, setToken] = useState();
+  const [idToken, setIdToken] = useState(); //from Google
 
-  function updateLocation() {
-    GetLocation.getCurrentPosition({
-      enableHighAccuracy: true,
-      timeout: 15000,
-    });
+  async function authenticate(idToken) {
+    try {
+      const res = await api.post('/googlesignin', {idToken});
+      setToken(res.data.token);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   return (
-    <UserContext.Provider value={{setToken, updateLocation}}>
+    <UserContext.Provider value={{authenticate, token}}>
       {children}
     </UserContext.Provider>
   );

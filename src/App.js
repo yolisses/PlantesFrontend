@@ -1,6 +1,7 @@
 import React from 'react';
 import {StatusBar} from 'react-native';
 import 'react-native-gesture-handler'; // prevent modal error
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 import {Routes} from './Routes';
 
@@ -14,6 +15,13 @@ import {CameraPreferencesProvider} from 'camera/contexts/CameraPreferencesContex
 import {ShallowDataContextProvider} from 'publish/ShallowDataContext';
 import {ImagesContextProvider} from 'publish/ImagesContext';
 import {SendingContextProvider} from 'send/SendingContext';
+
+import {GOOGLE_WEB_CLIENT_ID} from '@env';
+
+GoogleSignin.configure({
+  webClientId: GOOGLE_WEB_CLIENT_ID,
+  offlineAccess: true,
+});
 
 const App = () => {
   return (

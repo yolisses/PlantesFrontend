@@ -23,9 +23,9 @@ export function SendingContextProvider({children}) {
     sendPlant(sending);
   }
 
-  useEffect(() => {
-    sendPlant(examplePlant);
-  }, []);
+  // useEffect(() => {
+  //   sendPlant(examplePlant);
+  // }, []);
 
   return (
     <SendingContext.Provider value={{pushSending, sendings, refresh}}>

@@ -29,7 +29,7 @@ import {PublishDetailScreen} from 'publish/screens/PublishDetailScreen';
 const Stack = createNativeStackNavigator();
 
 export function Routes() {
-  const {user} = useUserContext();
+  const {token} = useUserContext();
   const {grantedLocation} = usePermissions();
 
   return (
@@ -40,7 +40,7 @@ export function Routes() {
           component={PublishDetailScreen}
           options={{headerShown: false}}
         /> */}
-        {!user ? (
+        {token ? (
           <>
             {grantedLocation || grantedLocation === null ? (
               <Stack.Screen

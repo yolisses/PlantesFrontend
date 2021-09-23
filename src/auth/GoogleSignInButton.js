@@ -2,10 +2,23 @@ import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {useUserContext} from './userContext';
 
-export function GoogleSignInButton() {
-  const {setToken} = useUserContext();
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 
-  async function onPress() {}
+export function GoogleSignInButton() {
+  const {authenticate} = useUserContext();
+
+  async function onPress() {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      authenticate(userInfo.idToken);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <TouchableOpacity
