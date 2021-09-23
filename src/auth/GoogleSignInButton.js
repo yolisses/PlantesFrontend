@@ -2,10 +2,7 @@ import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {useUserContext} from './userContext';
 
-import {
-  GoogleSignin,
-  statusCodes,
-} from '@react-native-google-signin/google-signin';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 export function GoogleSignInButton() {
   const {authenticate} = useUserContext();
@@ -16,7 +13,7 @@ export function GoogleSignInButton() {
       const userInfo = await GoogleSignin.signIn();
       authenticate(userInfo.idToken);
     } catch (error) {
-      console.error(error);
+      console.error(JSON.stringify(error));
     }
   }
 

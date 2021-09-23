@@ -1,9 +1,8 @@
 import {api} from 'api';
-import {SquareImage} from 'common/SquareImage';
 import {Card} from 'home/Card';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
-import React, {Fragment, useEffect, useState} from 'react';
-import {FlatList, Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {FlatList, View} from 'react-native';
 import {UserInfo} from './UserInfo';
 
 const numberOfCollums = 3;
