@@ -9,12 +9,12 @@ const numberOfCollums = 3;
 
 export function UserScreen() {
   const {sendings} = useSending();
-  console.error(sendings);
+  // console.error(sendings);
 
   function renderItem({item}) {
     return (
       <Fragment key={item[0]}>
-        <SquareImage source={{uri: item[1].images[0]}} />
+        {/* <SquareImage source={{uri: item[1].images[0]}} /> */}
         <Text>{JSON.stringify(item)}</Text>
       </Fragment>
     );

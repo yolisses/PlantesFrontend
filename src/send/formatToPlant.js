@@ -23,13 +23,13 @@ export function formatToPlant(item) {
   const images = getOrderValuedKeys(imagesObj);
 
   return {
-    name,
+    name: name ?? '',
     tags,
-    description,
-    swap,
-    price,
-    donate,
-    amount,
+    description: description ?? null,
+    swap: swap ?? false,
+    price: price ?? null,
+    donate: donate ?? false,
+    amount: amount ?? null,
     images,
   };
 }
