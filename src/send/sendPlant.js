@@ -1,21 +1,22 @@
-import {api} from 'api';
+import {sendPlantInfo} from './sendPlantInfo';
+import {sendImage} from './sendImage';
 
 export async function sendPlant(sending) {
-  const plant = sending.localData;
-  console.error(plant);
-  const getExtension = filename => filename.split('.').pop();
-  plant.imagesTypes = plant.images.map(getExtension);
-  try {
-    const res = await api.post('/plant', plant);
-    sending.images = res.data.images.map((image, index) => {
-      return {
-        image,
-        localImage: sending.localData.images[index],
-      };
-    });
-    delete sending.localData;
-    console.error(sending);
-  } catch (err) {
-    console.error(err.message);
+  while (!sending.sent) {
+    try {
+      if (!sending.plantInfoSent) {
+        await sendPlantInfo(sending);
+        console.error();
+      } else {
+        const plantId = sending.plantId;
+        await Promise.all(
+          sending.images.map(image => sendImage({image, plantId})),
+        );
+        sending.sent = true;
+      }
+    } catch (err) {
+      console.error(err);
+    }
   }
+  console.error('fim');
 }

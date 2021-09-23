@@ -1,10 +1,10 @@
 import {brokenSendLink} from './brokenSendLink';
 
-export async function sendImage(image) {
+export async function pushImage(image) {
   const file = {
-    uri: image.localUri,
+    uri: image.localImage,
   };
-  console.error('sending: ', image.localUri);
+  console.error('sending: ', image.localImage);
   const data = await fetch(image.sendLink, {
     method: 'PUT',
     headers: {
