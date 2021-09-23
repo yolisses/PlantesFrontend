@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Dimensions, StyleSheet, View} from 'react-native';
+import {Dimensions, StyleSheet, Text, View} from 'react-native';
 
 import {SwipeIndicator} from './SwipeIndicator';
 import FastImage from 'react-native-fast-image';

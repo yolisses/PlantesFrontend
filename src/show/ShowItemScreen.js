@@ -10,7 +10,7 @@ import {api} from 'api/api';
 export function ShowItemScreen({route}) {
   const {itemId, preImage} = route.params;
 
-  const [item, setItem] = useState({});
+  const [item, setItem] = useState(null);
 
   const scrollRef = useRef();
 
@@ -18,9 +18,9 @@ export function ShowItemScreen({route}) {
     scrollRef.current.scrollTo({y: pos, animated: true});
   };
 
+  console.error(preImage);
   async function getItem() {
     const res = await api.get('/plant/' + itemId);
-    console.error(res);
     setItem(res.data);
   }
 
@@ -51,7 +51,7 @@ export function ShowItemScreen({route}) {
       {/* <Text>{JSON.stringify(data)}</Text> */}
       <FloatingButton />
       <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
-        <ImagesSwiper images={item?.images} />
+        <ImagesSwiper images={item?.images} preImage={preImage} />
         <ItemInfo scrollTo={scrollTo} item={item} />
       </ScrollView>
       <View style={styles.bottomWrapper}>
