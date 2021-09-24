@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Message} from 'chat/Message';
 import {MessageInput} from 'chat/MessageInput';
 import {CustomHeader} from 'publish/CustomHeader';
@@ -8,15 +8,12 @@ import {UserImageAndName} from 'user/UserImageAndName';
 import {FlatList} from 'react-native-gesture-handler';
 import {api} from 'api/api';
 import {useUserContext} from 'auth/userContext';
-import {useSendingMessage} from './SendingMessageContext';
 
 export function ChatScreen({route}) {
   const {chat, user} = route.params;
   const {user: currentUser} = useUserContext();
 
   const [messages, setMessages] = useState([]);
-
-  const {sendingMessages, refreshValue} = useSendingMessage();
 
   async function getMessages() {
     try {
@@ -31,8 +28,6 @@ export function ChatScreen({route}) {
     getMessages();
     return getMessages;
   }, []);
-
-  const allMessages = messages.concat(Object.values(sendingMessages));
 
   function renderItem({item: message}) {
     return (
@@ -55,7 +50,7 @@ export function ChatScreen({route}) {
       />
       {/* <Text>{JSON.stringify(sendingMessages)}</Text>
       <Text>{JSON.stringify(messages)}</Text> */}
-      <FlatList data={allMessages} renderItem={renderItem} />
+      <FlatList data={messages} renderItem={renderItem} />
       <MessageInput chatId={chat._id} />
     </View>
   );
