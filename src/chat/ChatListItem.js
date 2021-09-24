@@ -1,13 +1,29 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {ChatDate} from './ChatDate';
 import {ChatNumberIndicator} from 'chat/ChatNumberIndicator';
 import {UserRoundImage} from 'common/UserRoundImage';
+import {api} from 'api';
 
 export function ChatListItem({item}) {
-  const {name, last_activity, message_count, last_activity_time} = item;
+  const {last_activity, message_count, last_activity_time} = item;
   const {navigate} = useNavigation();
+
+  const [user, setUser] = useState();
+
+  async function getUser() {
+    try {
+      const res = await api.get('/user/' + item?.users[0]);
+      setUser(res.data);
+    } catch (err) {
+      // console.error(err);
+    }
+  }
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   const onPress = () => navigate('Chat', {item});
 
@@ -17,11 +33,11 @@ export function ChatListItem({item}) {
       activeOpacity={0.8}
       onPress={onPress}>
       <View style={styles.imageWrapper}>
-        <UserRoundImage id={item.users[0]} size={50} />
+        <UserRoundImage image={user?.image} size={50} />
       </View>
       <View style={styles.lineSeparator}>
         <View style={styles.detailsWrapper}>
-          <Text style={styles.name}>{name}</Text>
+          <Text style={styles.name}>{user?.name}</Text>
           <Text style={styles.lastActivity} numberOfLines={1}>
             {last_activity}
           </Text>
