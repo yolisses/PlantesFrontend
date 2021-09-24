@@ -1,9 +1,11 @@
 import {api} from 'api';
+import {useUserContext} from 'auth/userContext';
 import React, {createContext, useContext, useEffect, useState} from 'react';
 
 const ChatsContext = createContext();
 
 export function ChatsContextProvider({children}) {
+  const {user} = useUserContext();
   const [chats, setChats] = useState([]);
 
   async function getChats() {
@@ -16,9 +18,12 @@ export function ChatsContextProvider({children}) {
   }
 
   useEffect(() => {
+    if (!user) {
+      return;
+    }
     getChats();
     return getChats;
-  }, []);
+  }, [user]);
 
   return (
     <ChatsContext.Provider value={{chats}}>{children}</ChatsContext.Provider>
