@@ -5,7 +5,7 @@ import FastImage from 'react-native-fast-image';
 
 export function UserRoundImage({userId, image, size, style}) {
   const {navigate} = useNavigation();
-  size = size || 30;
+  size = size || 35;
 
   return (
     <TouchableOpacity

@@ -1,10 +1,11 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-export function CustomHeader({title, left, right}) {
+export function CustomHeader({title, left, center, right}) {
   return (
     <View style={styles.container}>
       {left}
+      {center}
       <Text style={styles.title}>{title}</Text>
       {right}
     </View>

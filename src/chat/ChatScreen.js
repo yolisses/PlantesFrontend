@@ -5,6 +5,8 @@ import {MessageInput} from 'chat/MessageInput';
 import {api} from 'api';
 import {CustomHeader} from 'publish/CustomHeader';
 import {useUserContext} from 'auth/userContext';
+import {BackButton} from 'publish/BackButton';
+import {UserImageAndName} from 'user/UserImageAndName';
 
 export function ChatScreen({route}) {
   const {item} = route.params;
@@ -27,7 +29,10 @@ export function ChatScreen({route}) {
 
   return (
     <View style={styles.screen}>
-      <CustomHeader />
+      <CustomHeader
+        left={<BackButton />}
+        center={<UserImageAndName id={item?.users[0]} />}
+      />
       <Text>{JSON.stringify(item)}</Text>
       <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
         <View style={styles.pad}>
