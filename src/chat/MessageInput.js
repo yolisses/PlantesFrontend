@@ -1,16 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, TextInput, View} from 'react-native';
 import {ChatReference} from './ChatReference';
 import {SendMessageButton} from './SendMessageButton';
 import {useChatReference} from './ChatReferenceContext';
+import {api} from 'api/api';
 
 export function MessageInput({chatId}) {
   const {chatReferences, removeOneChatReference} = useChatReference();
   const reference = chatReferences[chatId];
 
+  const [text, setText] = useState('');
+
   const onPressCloseButton = () => {
     removeOneChatReference(chatId);
   };
+
+  function onSendPress() {
+    if (text.trim() === '') {
+      return;
+    }
+    api.post('/sendmessage', {chatId, text});
+    setText('');
+  }
 
   return (
     <View style={styles.textButtonContainer}>
@@ -29,13 +40,15 @@ export function MessageInput({chatId}) {
         )}
         <View style={styles.horizontal}>
           <TextInput
-            style={styles.input}
             multiline
+            value={text}
+            style={styles.input}
+            onChangeText={setText}
             placeholder="Escrever mensagem"
           />
         </View>
       </View>
-      <SendMessageButton />
+      <SendMessageButton onPress={onSendPress} />
     </View>
   );
 }

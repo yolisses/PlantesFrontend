@@ -26,8 +26,6 @@ export function ChatScreen({route}) {
 
   useEffect(() => getMessages(), []);
 
-  let lastUserId = null;
-
   function renderItem({item: message}) {
     return (
       <Message
@@ -47,7 +45,7 @@ export function ChatScreen({route}) {
       />
       <Text>{JSON.stringify(item)}</Text>
       <FlatList data={messages} renderItem={renderItem} />
-      <MessageInput chatId={item?.id} />
+      <MessageInput chatId={item?._id} />
     </View>
   );
 }

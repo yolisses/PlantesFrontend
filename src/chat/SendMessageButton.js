@@ -3,9 +3,12 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 
-export function SendMessageButton() {
+export function SendMessageButton({onPress}) {
   return (
-    <TouchableOpacity style={styles.button} activeOpacity={0.7}>
+    <TouchableOpacity
+      onPress={onPress}
+      activeOpacity={0.7}
+      style={styles.button}>
       <FontAwesomeIcon icon={faPaperPlane} color="#fff" size={25} />
     </TouchableOpacity>
   );
