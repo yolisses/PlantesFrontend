@@ -1,3 +1,4 @@
+import {api} from 'api';
 import React, {createContext, useContext, useState} from 'react';
 import {v4} from 'uuid';
 
@@ -13,11 +14,26 @@ export function SendingMessageContextProvider({children}) {
     message.status = 'sending';
     sendingMessages[fakeId] = message;
     refresh();
+    try {
+      api
+        .post('sendmessage', message)
+        .then(res => {
+          removeMessage(message._id);
+          refresh();
+        })
+        .catch(err => console.error(err));
+    } catch (err) {}
+  }
+
+  function removeMessage(messageId) {
+    delete sendingMessages[messageId];
+    refresh();
   }
 
   function refresh() {
     setRefreshValue(Math.random());
   }
+
   return (
     <SendingMessageContext.Provider
       value={{refreshValue, pushMessage, sendingMessages}}>

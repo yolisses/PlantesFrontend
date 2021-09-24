@@ -21,7 +21,7 @@ export function ChatScreen({route}) {
   async function getMessages() {
     try {
       const res = await api.get('chatmessages/' + chat._id);
-      setMessages(res.data.concat(Object.values(sendingMessages)));
+      setMessages(res.data);
     } catch (err) {
       console.error(err);
     }
@@ -30,7 +30,9 @@ export function ChatScreen({route}) {
   useEffect(() => {
     getMessages();
     return getMessages;
-  }, [refreshValue]);
+  }, []);
+
+  const allMessages = messages.concat(Object.values(sendingMessages));
 
   function renderItem({item: message}) {
     return (
@@ -53,7 +55,7 @@ export function ChatScreen({route}) {
       />
       {/* <Text>{JSON.stringify(sendingMessages)}</Text>
       <Text>{JSON.stringify(messages)}</Text> */}
-      <FlatList data={messages} renderItem={renderItem} />
+      <FlatList data={allMessages} renderItem={renderItem} />
       <MessageInput chatId={chat._id} />
     </View>
   );
