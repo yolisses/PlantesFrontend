@@ -29,9 +29,9 @@ export function ChatListItem({item}) {
       <View style={styles.lineSeparator}>
         <View style={styles.detailsWrapper}>
           <Text style={styles.name}>{user?.name}</Text>
-          <Text style={styles.lastActivity} numberOfLines={1}>
+          {/* <Text style={styles.lastActivity} numberOfLines={1}>
             {last_activity}
-          </Text>
+          </Text> */}
         </View>
         <View>
           <ChatDate time={last_activity_time} active={message_count > 0} />
