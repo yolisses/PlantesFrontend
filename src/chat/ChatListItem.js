@@ -4,12 +4,12 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {UserRoundImage} from 'common/UserRoundImage';
 import {useUser} from 'user/useUser';
 
-export function ChatListItem({item}) {
+export function ChatListItem({chat}) {
   const {navigate} = useNavigation();
 
-  const onPress = () => navigate('Chat', {chatRoomId: item?.id});
+  const onPress = () => navigate('Chat', {chat, user});
 
-  const userId = item.users[1];
+  const userId = chat.users[1];
   const user = useUser(userId);
 
   return (

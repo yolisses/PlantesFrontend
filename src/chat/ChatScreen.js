@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Message} from 'chat/Message';
 import {MessageInput} from 'chat/MessageInput';
@@ -6,14 +6,35 @@ import {CustomHeader} from 'publish/CustomHeader';
 import {BackButton} from 'publish/BackButton';
 import {UserImageAndName} from 'user/UserImageAndName';
 import {FlatList} from 'react-native-gesture-handler';
+import {api} from 'api/api';
+import {useUserContext} from 'auth/userContext';
 
-export function ChatScreen({route, user}) {
+export function ChatScreen({route}) {
+  const {chat, user} = route.params;
+  const {user: currentUser} = useUserContext();
+
+  const [messages, setMessages] = useState([]);
+
+  async function getMessages() {
+    try {
+      const res = await api.get('chatmessages/' + chat._id);
+      setMessages(res.data);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  useEffect(() => {
+    getMessages();
+    return getMessages;
+  }, []);
+
   function renderItem({item: message}) {
     return (
       <Message
         key={message.id}
-        item={message}
-        // fromUser={message.userId === user._id}
+        message={message}
+        fromUser={currentUser._id === message.userId}
         // moreMargin={actualLastUserId !== message.userId}
       />
     );
@@ -25,7 +46,7 @@ export function ChatScreen({route, user}) {
         left={<BackButton />}
         center={<UserImageAndName image={user?.image} name={user?.name} />}
       />
-      <FlatList renderItem={renderItem} />
+      <FlatList data={messages} renderItem={renderItem} />
       <MessageInput />
     </View>
   );

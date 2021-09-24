@@ -7,7 +7,7 @@ import {useChats} from './ChatsContext';
 export function ChatsListScreen() {
   const {chats} = useChats();
 
-  const renderItem = ({item}) => <ChatListItem key={item} item={item} />;
+  const renderItem = ({item: chat}) => <ChatListItem key={chat} chat={chat} />;
 
   const messageCountHigher = (a, b) => a.message_count < b.message_count;
 

@@ -4,8 +4,8 @@ import {MessageHour} from './MessageHour';
 import {MessageStatus} from './MessageStatus';
 import {ChatReference} from './ChatReference';
 
-export function Message({item, moreMargin, fromUser}) {
-  const {text, time, status, reference} = item;
+export function Message({message, moreMargin, fromUser}) {
+  const {text, time, status, reference} = message;
 
   return (
     <View
