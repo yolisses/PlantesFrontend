@@ -3,13 +3,13 @@ import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
 
-export function UserRoundImage({image, size, style}) {
+export function UserRoundImage({userId, image, size, style}) {
   const {navigate} = useNavigation();
   size = size || 30;
 
   return (
     <TouchableOpacity
-      onPress={() => navigate('UserScreen')}
+      onPress={() => navigate('UserScreen', {userId})}
       activeOpacity={0.8}>
       <FastImage
         style={[styles.image, {width: size, height: size}, style]}
