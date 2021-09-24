@@ -10,7 +10,6 @@ import {ChatsContextProvider} from 'chat/ChatsContext';
 import {AlertContextProvider} from 'alert/AlertContext';
 import {ModalContextProvider} from 'modal/ModalContext';
 import {PermissionsContextProvider} from 'permission/PermissionsContext';
-import {ChatReferenceContextProvider} from './chat/ChatReferenceContext';
 import {CameraPreferencesProvider} from 'camera/contexts/CameraPreferencesContext';
 
 import {ShallowDataContextProvider} from 'publish/ShallowDataContext';
@@ -34,16 +33,14 @@ const App = () => {
             <ModalContextProvider>
               <ChatRoomContextProvider>
                 <ImagesContextProvider>
-                  <ChatReferenceContextProvider>
-                    <ChatsContextProvider>
-                      <CameraPreferencesProvider>
-                        <SendingContextProvider>
-                          <StatusBar barStyle={'default'} hidden={true} />
-                          <Routes />
-                        </SendingContextProvider>
-                      </CameraPreferencesProvider>
-                    </ChatsContextProvider>
-                  </ChatReferenceContextProvider>
+                  <ChatsContextProvider>
+                    <CameraPreferencesProvider>
+                      <SendingContextProvider>
+                        <StatusBar barStyle={'default'} hidden={true} />
+                        <Routes />
+                      </SendingContextProvider>
+                    </CameraPreferencesProvider>
+                  </ChatsContextProvider>
                 </ImagesContextProvider>
               </ChatRoomContextProvider>
             </ModalContextProvider>
