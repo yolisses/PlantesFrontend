@@ -31,18 +31,18 @@ const App = () => {
         <PermissionsContextProvider>
           <AlertContextProvider>
             <ModalContextProvider>
-              <ChatRoomContextProvider>
-                <ImagesContextProvider>
-                  <ChatsContextProvider>
+              <ChatsContextProvider>
+                <ChatRoomContextProvider>
+                  <ImagesContextProvider>
                     <CameraPreferencesProvider>
                       <SendingContextProvider>
                         <StatusBar barStyle={'default'} hidden={true} />
                         <Routes />
                       </SendingContextProvider>
                     </CameraPreferencesProvider>
-                  </ChatsContextProvider>
-                </ImagesContextProvider>
-              </ChatRoomContextProvider>
+                  </ImagesContextProvider>
+                </ChatRoomContextProvider>
+              </ChatsContextProvider>
             </ModalContextProvider>
           </AlertContextProvider>
         </PermissionsContextProvider>

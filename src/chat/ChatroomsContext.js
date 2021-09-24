@@ -13,7 +13,7 @@ const ChatRoomContext = createContext();
  }
 }*/
 
-const chatRooms = {};
+const localRooms = {};
 export function ChatRoomContextProvider({children}) {
   const [refreshValue, setRefreshValue] = useState();
 
@@ -21,34 +21,34 @@ export function ChatRoomContextProvider({children}) {
     setRefreshValue(Math.random());
   }
 
-  function createChatRoom({id, type}) {
-    chatRooms[id] = {id, type};
+  function createLocalRoom({id, type}) {
+    localRooms[id] = {id, type};
     api
       .get('/user/' + id)
       .then(res => {
-        chatRooms[id].user = res.data;
+        localRooms[id].user = res.data;
         refresh();
       })
       .catch(err => console.error(err));
   }
 
   function setReference({id, reference}) {
-    chatRooms[id].reference = reference;
+    localRooms[id].reference = reference;
     refresh();
   }
 
   function removeReference(id) {
-    delete chatRooms[id].reference;
+    delete localRooms[id].reference;
     refresh();
   }
 
   return (
     <ChatRoomContext.Provider
       value={{
-        chatRooms,
+        chatRooms: localRooms,
         refreshValue,
         setReference,
-        createChatRoom,
+        createLocalRoom,
         removeReference,
       }}>
       {children}

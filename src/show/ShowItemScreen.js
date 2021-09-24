@@ -31,13 +31,13 @@ export function ShowItemScreen({route}) {
 
   const {navigate} = useNavigation();
 
-  const {createChatRoom, setReference} = useChatRoom();
+  const {createLocalRoom, setReference} = useChatRoom();
 
   function onPress() {
     if (!item) {
       return;
     }
-    createChatRoom({id: item.userId, type: 'user'});
+    createLocalRoom({id: item.userId, type: 'user'});
     setReference({
       id: item.userId,
       reference: {
