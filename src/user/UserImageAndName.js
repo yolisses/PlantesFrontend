@@ -2,15 +2,12 @@ import {UserRoundImage} from 'common/UserRoundImage';
 import React from 'react';
 import {StyleSheet, Text} from 'react-native';
 import {View} from 'react-native';
-import {useUser} from './useUser';
 
-export function UserImageAndName({id}) {
-  const user = useUser(id);
-
+export function UserImageAndName({image, name}) {
   return (
     <View style={styles.container}>
-      <UserRoundImage image={user?.image} style={styles.image} userId={id} />
-      <Text style={styles.name}>{user?.name}</Text>
+      <UserRoundImage image={image} style={styles.image} />
+      <Text style={styles.name}>{name}</Text>
     </View>
   );
 }

@@ -8,15 +8,10 @@ import {useUser} from 'user/useUser';
 import {useUserContext} from 'auth/userContext';
 
 export function ChatListItem({item}) {
-  const {last_activity, message_count, last_activity_time} = item;
+  const {message_count, last_activity_time, user} = item;
   const {navigate} = useNavigation();
 
-  const {user: currentUser} = useUserContext();
-
-  const userId = item?.users?.filter(user => user !== currentUser._id);
-  const user = useUser(userId);
-
-  const onPress = () => navigate('Chat', {chat: item});
+  const onPress = () => navigate('Chat', {chatRoomId: item?.id});
 
   return (
     <TouchableOpacity
@@ -33,9 +28,10 @@ export function ChatListItem({item}) {
             {last_activity}
           </Text> */}
         </View>
+        {/* <Text>{JSON.stringify(item.user)}</Text> */}
         <View>
-          <ChatDate time={last_activity_time} active={message_count > 0} />
-          <ChatNumberIndicator count={message_count} />
+          {/* <ChatDate time={last_activity_time} active={message_count > 0} />
+          <ChatNumberIndicator count={message_count} /> */}
         </View>
       </View>
     </TouchableOpacity>

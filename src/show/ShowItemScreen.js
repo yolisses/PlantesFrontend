@@ -7,7 +7,7 @@ import {AvailabilityInfo} from 'show/AvailabilityInfo';
 import {StartConversetionButton} from 'show/StartConversationButton';
 import {api} from 'api/api';
 import {useNavigation} from '@react-navigation/core';
-import {useChatReference} from 'chat/ChatReferenceContext';
+import {useChatRoom} from 'chat/ChatroomsContext';
 
 export function ShowItemScreen({route}) {
   const {itemId, preImage} = route.params;
@@ -30,17 +30,15 @@ export function ShowItemScreen({route}) {
   }, []);
 
   const {navigate} = useNavigation();
-  const {setOneChatReference} = useChatReference();
+
+  const {createChatRoom} = useChatRoom();
 
   function onPress() {
     if (!item) {
       return;
     }
-    // setOneChatReference(item.userId, {
-    //   type: 'plant',
-    //   plantId: item.id,
-    // });
-    navigate('Chat', {userId: item.userId});
+    createChatRoom({id: item.userId, type: 'user'});
+    navigate('Chat', {chatRoomId: item.userId});
   }
 
   return (
