@@ -7,6 +7,8 @@ import {ChatReference} from './ChatReference';
 export function Message({message, moreMargin, fromUser}) {
   const {text, time, status, reference} = message;
 
+  const paddingRight = status === 'sending' ? 11 : fromUser ? 48 : 30;
+
   return (
     <View
       style={[
@@ -18,11 +20,11 @@ export function Message({message, moreMargin, fromUser}) {
       <View style={[styles.message]}>
         <Text style={[styles.text]}>
           {text}
-          <View style={{paddingRight: fromUser ? 48 : 30, paddingTop: 6}} />
+          <View style={{paddingRight, paddingTop: 6}} />
         </Text>
       </View>
       <View style={styles.miniInfo}>
-        <MessageHour time={time} />
+        {status !== 'sending' && <MessageHour time={time} />}
         {fromUser && <MessageStatus status={status} />}
       </View>
     </View>
