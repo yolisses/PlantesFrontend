@@ -6,12 +6,14 @@ const UserContext = createContext({});
 
 export function UserContextProvider({children}) {
   const [token, setToken] = useState();
+  const [user, setUser] = useState();
 
   async function authenticate(idToken) {
     try {
       const res = await api.post('/googlesignin', {idToken});
-      const {token} = res.data;
+      const {token, user} = res.data;
       setToken(token);
+      setUser(user);
       api.defaults.headers.common.auth = `Bearer ${token}`;
     } catch (err) {
       console.error(err);
@@ -19,7 +21,7 @@ export function UserContextProvider({children}) {
   }
 
   return (
-    <UserContext.Provider value={{authenticate, token}}>
+    <UserContext.Provider value={{authenticate, token, user}}>
       {children}
     </UserContext.Provider>
   );

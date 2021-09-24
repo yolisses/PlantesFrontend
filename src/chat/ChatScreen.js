@@ -1,14 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {KeyboardAvoidingView, ScrollView, StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {Message} from 'chat/Message';
 import {MessageInput} from 'chat/MessageInput';
 import {api} from 'api';
 import {useNavigation} from '@react-navigation/core';
 import {ChatHeader} from './ChatHeader';
 import {CustomHeader} from 'publish/CustomHeader';
+import {useUserContext} from 'auth/userContext';
 
 export function ChatScreen({route}) {
   const {item} = route.params;
+  const {user} = useUserContext();
 
   const navigation = useNavigation();
 
@@ -44,6 +46,7 @@ export function ChatScreen({route}) {
                 <Message
                   key={message.id}
                   item={message}
+                  fromUser={message.userId === user._id}
                   moreMargin={actualLastUserId !== message.userId}
                 />
               );
