@@ -7,6 +7,7 @@ import {UserRoundImage} from 'common/UserRoundImage';
 import {CardsListLoading} from 'home/CardsListLoading';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import {api} from 'api/api';
+import {useUserContext} from 'auth/userContext';
 
 export function HomeScreen() {
   const [plants, setPlants] = useState(null);
@@ -20,13 +21,20 @@ export function HomeScreen() {
     }
   }
 
+  const {user} = useUserContext();
+
   useEffect(() => {
     getPlants();
   }, []);
 
   return (
     <FooterNavigationLayout selected={'Home'}>
-      <CustomHeader title="Plantei" right={<UserRoundImage size={40} />} />
+      <CustomHeader
+        title="Plantei"
+        right={
+          <UserRoundImage size={40} userId={user?._id} image={user?.image} />
+        }
+      />
       {!plants ? (
         <CardsListLoading />
       ) : (
