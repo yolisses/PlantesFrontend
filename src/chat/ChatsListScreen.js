@@ -30,16 +30,8 @@ export function ChatsListScreen() {
         <FlatList
           data={chats.sort(messageCountHigher)}
           renderItem={renderItem}
-          contentContainerStyle={styles.container}
         />
       ) : null}
     </FooterNavigationLayout>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    paddingLeft: 2,
-    paddingRight: 8,
-  },
-});

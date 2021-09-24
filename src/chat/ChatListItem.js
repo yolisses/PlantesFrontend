@@ -39,6 +39,8 @@ const styles = StyleSheet.create({
   bigContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: 'white',
+    paddingHorizontal: 10,
   },
   lineSeparator: {
     flexDirection: 'row',
