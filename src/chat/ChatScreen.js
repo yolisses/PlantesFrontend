@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {Message} from 'chat/Message';
 import {MessageInput} from 'chat/MessageInput';
 import {api} from 'api';
@@ -7,6 +7,7 @@ import {CustomHeader} from 'publish/CustomHeader';
 import {useUserContext} from 'auth/userContext';
 import {BackButton} from 'publish/BackButton';
 import {UserImageAndName} from 'user/UserImageAndName';
+import {FlatList} from 'react-native-gesture-handler';
 
 export function ChatScreen({route}) {
   const {item} = route.params;
@@ -27,6 +28,17 @@ export function ChatScreen({route}) {
 
   let lastUserId = null;
 
+  function renderItem({item: message}) {
+    return (
+      <Message
+        key={message.id}
+        item={message}
+        fromUser={message.userId === user._id}
+        // moreMargin={actualLastUserId !== message.userId}
+      />
+    );
+  }
+
   return (
     <View style={styles.screen}>
       <CustomHeader
@@ -34,23 +46,7 @@ export function ChatScreen({route}) {
         center={<UserImageAndName id={item?.users[1]} />}
       />
       <Text>{JSON.stringify(item)}</Text>
-      <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
-        <View style={styles.pad}>
-          {messages &&
-            messages.map(message => {
-              const actualLastUserId = lastUserId;
-              lastUserId = message.userId;
-              return (
-                <Message
-                  key={message.id}
-                  item={message}
-                  fromUser={message.userId === user._id}
-                  moreMargin={actualLastUserId !== message.userId}
-                />
-              );
-            })}
-        </View>
-      </ScrollView>
+      <FlatList data={messages} renderItem={renderItem} />
       <MessageInput chatId={item?.id} />
     </View>
   );
