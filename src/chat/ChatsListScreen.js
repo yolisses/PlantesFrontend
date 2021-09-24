@@ -2,11 +2,9 @@ import React from 'react';
 import {FlatList} from 'react-native';
 import {ChatListItem} from 'chat/ChatListItem';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
-import {useChatsContext} from './ChatsContext';
-import {useChatRoom} from './ChatroomsContext';
 
 export function ChatsListScreen() {
-  const {chatRooms} = useChatRoom();
+  const chats = [];
 
   const renderItem = ({item}) => <ChatListItem key={item} item={item} />;
 
@@ -14,9 +12,9 @@ export function ChatsListScreen() {
 
   return (
     <FooterNavigationLayout selected="ChatsList">
-      {chatRooms ? (
+      {chats ? (
         <FlatList
-          data={Object.entries(chatRooms)
+          data={Object.entries(chats)
             .sort(messageCountHigher)
             .map(entry => entry[1])}
           renderItem={renderItem}

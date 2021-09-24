@@ -1,26 +1,16 @@
 import React, {useState} from 'react';
-import {Text} from 'react-native';
 import {StyleSheet, TextInput, View} from 'react-native';
 import {ChatReference} from './ChatReference';
-import {useChatRoom} from './ChatroomsContext';
 import {SendMessageButton} from './SendMessageButton';
 
-export function MessageInput({chatRoomId}) {
+export function MessageInput({chatRoomId, reference}) {
   const [text, setText] = useState('');
 
   async function onSendPress() {
     setText('');
   }
 
-  const {chatRooms, removeReference} = useChatRoom();
-
-  const item = chatRooms[chatRoomId];
-
-  const reference = item?.reference;
-
-  function onPressCloseButton() {
-    removeReference(chatRoomId);
-  }
+  function onPressCloseButton() {}
 
   return (
     <View style={styles.textButtonContainer}>

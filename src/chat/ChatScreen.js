@@ -1,21 +1,13 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Message} from 'chat/Message';
 import {MessageInput} from 'chat/MessageInput';
 import {CustomHeader} from 'publish/CustomHeader';
 import {BackButton} from 'publish/BackButton';
 import {UserImageAndName} from 'user/UserImageAndName';
 import {FlatList} from 'react-native-gesture-handler';
-import {useChatRoom} from './ChatroomsContext';
 
-export function ChatScreen({route}) {
-  const {chatRoomId} = route.params;
-
-  const {chatRooms} = useChatRoom();
-
-  const item = chatRooms[chatRoomId];
-  const user = item?.user;
-
+export function ChatScreen({route, user}) {
   function renderItem({item: message}) {
     return (
       <Message
@@ -33,9 +25,8 @@ export function ChatScreen({route}) {
         left={<BackButton />}
         center={<UserImageAndName image={user?.image} name={user?.name} />}
       />
-      <Text>{JSON.stringify(item)}</Text>
       <FlatList renderItem={renderItem} />
-      <MessageInput chatRoomId={chatRoomId} />
+      <MessageInput />
     </View>
   );
 }
