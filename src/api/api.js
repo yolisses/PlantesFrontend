@@ -8,6 +8,6 @@ const cache = setupCache({
 });
 
 export const api = axios.create({
-  adapter: cache.adapter,
+  // adapter: cache.adapter,
   baseURL: SERVER_URL,
 });
