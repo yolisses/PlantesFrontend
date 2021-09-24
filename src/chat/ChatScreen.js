@@ -16,7 +16,7 @@ export function ChatScreen({route}) {
 
   async function getMessages() {
     try {
-      const res = await api.get('chatmessages/' + '614d0b5d76df7f9d6707fbdd');
+      const res = await api.get('chatmessages/' + item?._id);
       setMessages(res.data);
     } catch (err) {
       console.error(err);
@@ -31,7 +31,7 @@ export function ChatScreen({route}) {
     <View style={styles.screen}>
       <CustomHeader
         left={<BackButton />}
-        center={<UserImageAndName id={item?.users[0]} />}
+        center={<UserImageAndName id={item?.users[1]} />}
       />
       <Text>{JSON.stringify(item)}</Text>
       <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
