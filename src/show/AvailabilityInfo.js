@@ -7,9 +7,9 @@ import {LoadingAvailabilityInfo} from './LoadingAvailabilityInfo';
 export function AvailabilityInfo({item, onModalConfirmPress}) {
   const {showAlert} = useAlert();
   const onPress = () => {
-    // showAlert(
-    //   <StartConversationAlert item={item} onSendPress={onModalConfirmPress} />,
-    // );
+    showAlert(
+      <StartConversationAlert item={item} onSendPress={onModalConfirmPress} />,
+    );
   };
 
   if (!item) {
