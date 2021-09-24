@@ -1,7 +1,8 @@
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {useNavigation} from '@react-navigation/core';
-import React from 'react';
+import {api} from 'api/api';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
 export function ChatReference({
@@ -11,6 +12,29 @@ export function ChatReference({
   disableNavigation,
   onPressCloseButton,
 }) {
+  const [data, setData] = useState();
+
+  async function getData() {
+    if (reference.type === 'plant') {
+      try {
+        const res = await api.get('/plant/' + reference.id);
+        const plant = res.data;
+        const newData = {
+          main: plant?.name,
+          image: plant?.card,
+        };
+        setData(newData);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  }
+
+  useEffect(() => {
+    getData();
+    return getData;
+  }, [reference]);
+
   const {navigate} = useNavigation();
 
   const onPress = () => {
@@ -26,8 +50,9 @@ export function ChatReference({
       onPress={onPress}
       activeOpacity={disableNavigation ? 1 : 0.7}>
       <View style={[styles.inner, {borderRadius}]}>
+        {/* <Text>{JSON.stringify(reference)}</Text> */}
         <FastImage
-          source={{uri: reference?.thumbnail}}
+          source={{uri: data?.image}}
           style={[styles.image, {borderRadius}]}
         />
         <View style={styles.titleSubtitleContainer}>
@@ -42,12 +67,12 @@ export function ChatReference({
           <Text
             style={[styles.title, showCloseButton && {paddingRight: 20}]}
             numberOfLines={1}>
-            {reference?.name}
+            {data?.main}
           </Text>
-          <Text style={styles.subtitle} numberOfLines={2}>
+          {/* <Text style={styles.subtitle} numberOfLines={2}>
             <Text>Doação</Text>,<Text> Trocar</Text> ou
             <Text> R$100,00</Text>
-          </Text>
+          </Text> */}
         </View>
       </View>
     </TouchableOpacity>

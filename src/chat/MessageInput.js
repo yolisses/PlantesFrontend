@@ -26,6 +26,7 @@ export function MessageInput({chatRoomId}) {
             <ChatReference
               borderRadius={15}
               disableNavigation
+              reference={reference}
               showCloseButton={true}
             />
           </View>
