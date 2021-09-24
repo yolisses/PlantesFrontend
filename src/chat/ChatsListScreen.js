@@ -2,9 +2,10 @@ import React from 'react';
 import {FlatList} from 'react-native';
 import {ChatListItem} from 'chat/ChatListItem';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
+import {useChats} from './ChatsContext';
 
 export function ChatsListScreen() {
-  const chats = [];
+  const {chats} = useChats();
 
   const renderItem = ({item}) => <ChatListItem key={item} item={item} />;
 

@@ -1,40 +1,32 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {ChatDate} from './ChatDate';
-import {ChatNumberIndicator} from 'chat/ChatNumberIndicator';
 import {UserRoundImage} from 'common/UserRoundImage';
 import {useUser} from 'user/useUser';
-import {useUserContext} from 'auth/userContext';
 
 export function ChatListItem({item}) {
-  const {message_count, last_activity_time, user} = item;
   const {navigate} = useNavigation();
 
   const onPress = () => navigate('Chat', {chatRoomId: item?.id});
 
+  const userId = item.users[1];
+  const user = useUser(userId);
+
   return (
-    <TouchableOpacity
-      style={styles.bigContainer}
-      activeOpacity={0.8}
-      onPress={onPress}>
-      <View style={styles.imageWrapper}>
-        <UserRoundImage image={user?.image} userId={user?._id} size={50} />
-      </View>
-      <View style={styles.lineSeparator}>
+    <>
+      <TouchableOpacity
+        style={styles.bigContainer}
+        activeOpacity={0.8}
+        onPress={onPress}>
+        <View style={styles.imageWrapper}>
+          <UserRoundImage image={user?.image} userId={user?._id} size={50} />
+        </View>
         <View style={styles.detailsWrapper}>
           <Text style={styles.name}>{user?.name}</Text>
-          {/* <Text style={styles.lastActivity} numberOfLines={1}>
-            {last_activity}
-          </Text> */}
         </View>
-        {/* <Text>{JSON.stringify(item.user)}</Text> */}
-        <View>
-          {/* <ChatDate time={last_activity_time} active={message_count > 0} />
-          <ChatNumberIndicator count={message_count} /> */}
-        </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+      <View style={styles.lineSeparator} />
+    </>
   );
 }
 
@@ -44,6 +36,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
     paddingHorizontal: 10,
+    paddingVertical: 10,
   },
   lineSeparator: {
     flexDirection: 'row',
@@ -51,18 +44,12 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderBottomWidth: 1,
     borderColor: '#ddd',
-    paddingVertical: 2,
     flex: 1,
   },
   name: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 3,
-  },
-  lastActivity: {
-    fontSize: 16,
-    color: '#888',
-    overflow: 'hidden',
   },
   detailsWrapper: {
     padding: 10,
