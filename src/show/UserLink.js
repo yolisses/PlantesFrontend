@@ -1,4 +1,5 @@
 import {api} from 'api/api';
+import {UserRoundImage} from 'common/UserRoundImage';
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
@@ -25,7 +26,12 @@ export function UserLink({id}) {
 
   return (
     <View style={styles.container}>
-      <FastImage style={styles.image} source={{uri: user?.image}} />
+      <UserRoundImage
+        style={styles.image}
+        size={40}
+        userId={user?._id}
+        image={user?.image}
+      />
       <Text style={styles.name}>{user?.name}</Text>
     </View>
   );
@@ -38,11 +44,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   image: {
-    width: 40,
-    aspectRatio: 1,
     marginRight: 10,
-    borderRadius: 100,
-    backgroundColor: '#ddd',
   },
   name: {
     fontSize: 18,
