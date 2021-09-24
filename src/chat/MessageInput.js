@@ -12,24 +12,28 @@ export function MessageInput({chatRoomId}) {
     setText('');
   }
 
-  const {chatRooms} = useChatRoom();
+  const {chatRooms, removeReference} = useChatRoom();
 
   const item = chatRooms[chatRoomId];
 
   const reference = item?.reference;
 
+  function onPressCloseButton() {
+    removeReference(chatRoomId);
+  }
+
   return (
     <View style={styles.textButtonContainer}>
       <View style={styles.container}>
         {reference && (
-          <View style={styles.referenceWrapper}>
-            <ChatReference
-              borderRadius={15}
-              disableNavigation
-              reference={reference}
-              showCloseButton={true}
-            />
-          </View>
+          <ChatReference
+            borderRadius={15}
+            disableNavigation
+            reference={reference}
+            showCloseButton={true}
+            style={styles.reference}
+            onPressCloseButton={onPressCloseButton}
+          />
         )}
         <View style={styles.horizontal}>
           <TextInput
@@ -56,8 +60,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     flex: 1,
-    borderRadius: 20,
     elevation: 2,
+    borderRadius: 20,
   },
   horizontal: {
     padding: 4,
@@ -73,7 +77,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 18,
   },
-  referenceWrapper: {
+  reference: {
     padding: 5,
     paddingBottom: 0,
   },

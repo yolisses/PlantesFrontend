@@ -34,11 +34,23 @@ export function ChatRoomContextProvider({children}) {
 
   function setReference({id, reference}) {
     chatRooms[id].reference = reference;
+    refresh();
+  }
+
+  function removeReference(id) {
+    delete chatRooms[id].reference;
+    refresh();
   }
 
   return (
     <ChatRoomContext.Provider
-      value={{chatRooms, refreshValue, createChatRoom, setReference}}>
+      value={{
+        chatRooms,
+        refreshValue,
+        setReference,
+        createChatRoom,
+        removeReference,
+      }}>
       {children}
     </ChatRoomContext.Provider>
   );

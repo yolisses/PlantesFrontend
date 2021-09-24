@@ -6,6 +6,7 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
 export function ChatReference({
+  style,
   reference,
   showCloseButton,
   borderRadius = 9,
@@ -46,7 +47,7 @@ export function ChatReference({
 
   return (
     <TouchableOpacity
-      style={styles.container}
+      style={[styles.container, style]}
       onPress={onPress}
       activeOpacity={disableNavigation ? 1 : 0.7}>
       <View style={[styles.inner, {borderRadius}]}>
