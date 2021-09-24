@@ -5,12 +5,16 @@ import {ChatDate} from './ChatDate';
 import {ChatNumberIndicator} from 'chat/ChatNumberIndicator';
 import {UserRoundImage} from 'common/UserRoundImage';
 import {useUser} from 'user/useUser';
+import {useUserContext} from 'auth/userContext';
 
 export function ChatListItem({item}) {
   const {last_activity, message_count, last_activity_time} = item;
   const {navigate} = useNavigation();
 
-  const user = useUser(item.users[0]);
+  const {user: currentUser} = useUserContext();
+
+  const userId = item?.users?.filter(user => user !== currentUser._id);
+  const user = useUser(userId);
 
   const onPress = () => navigate('Chat', {item});
 

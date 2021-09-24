@@ -13,8 +13,6 @@ export function UserScreen({route}) {
 
   const {userId} = route.params;
 
-  console.error(userId);
-
   function renderItem({item}) {
     return <Card item={item} fraction={3} />;
   }
