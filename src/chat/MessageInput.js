@@ -5,7 +5,7 @@ import {SendMessageButton} from './SendMessageButton';
 import {useChatReference} from './ChatReferenceContext';
 import {api} from 'api/api';
 
-export function MessageInput({chatId}) {
+export function MessageInput({chatId, userId}) {
   const {chatReferences, removeOneChatReference} = useChatReference();
   const reference = chatReferences[chatId];
 
@@ -15,11 +15,16 @@ export function MessageInput({chatId}) {
     removeOneChatReference(chatId);
   };
 
-  function onSendPress() {
+  async function onSendPress() {
     if (text.trim() === '') {
       return;
     }
-    api.post('/sendmessage', {chatId, text});
+    try {
+      const send = userId ? {toUserId: userId, text} : {chatId, text};
+      await api.post('/sendmessage', send);
+    } catch (err) {
+      console.error(err.response);
+    }
     setText('');
   }
 

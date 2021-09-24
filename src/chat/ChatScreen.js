@@ -15,7 +15,6 @@ export function ChatScreen({route}) {
   const [chat, setChat] = useState(paramChat);
 
   function getTheOtherUserId(users) {
-    console.error(user);
     for (const memberUser of users) {
       if (memberUser !== user._id) {
         return memberUser;
@@ -72,7 +71,7 @@ export function ChatScreen({route}) {
       />
       {/* <Text>{JSON.stringify(item)}</Text> */}
       <FlatList data={messages} renderItem={renderItem} />
-      <MessageInput chatId={chat?._id} />
+      <MessageInput chatId={chat?._id} userId={userId} />
     </View>
   );
 }
