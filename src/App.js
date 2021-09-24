@@ -6,6 +6,7 @@ import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {Routes} from './Routes';
 
 import {UserContextProvider} from 'auth/userContext';
+import {ChatsContextProvider} from 'chat/ChatsContext';
 import {AlertContextProvider} from 'alert/AlertContext';
 import {ModalContextProvider} from 'modal/ModalContext';
 import {PermissionsContextProvider} from 'permission/PermissionsContext';
@@ -32,12 +33,14 @@ const App = () => {
             <ModalContextProvider>
               <ImagesContextProvider>
                 <ChatReferenceContextProvider>
-                  <CameraPreferencesProvider>
-                    <SendingContextProvider>
-                      <StatusBar barStyle={'default'} hidden={true} />
-                      <Routes />
-                    </SendingContextProvider>
-                  </CameraPreferencesProvider>
+                  <ChatsContextProvider>
+                    <CameraPreferencesProvider>
+                      <SendingContextProvider>
+                        <StatusBar barStyle={'default'} hidden={true} />
+                        <Routes />
+                      </SendingContextProvider>
+                    </CameraPreferencesProvider>
+                  </ChatsContextProvider>
                 </ChatReferenceContextProvider>
               </ImagesContextProvider>
             </ModalContextProvider>
