@@ -16,7 +16,7 @@ export function ChatListItem({item}) {
   const userId = item?.users?.filter(user => user !== currentUser._id);
   const user = useUser(userId);
 
-  const onPress = () => navigate('Chat', {item});
+  const onPress = () => navigate('Chat', {chat: item});
 
   return (
     <TouchableOpacity

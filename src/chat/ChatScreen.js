@@ -10,21 +10,46 @@ import {UserImageAndName} from 'user/UserImageAndName';
 import {FlatList} from 'react-native-gesture-handler';
 
 export function ChatScreen({route}) {
-  const {item} = route.params;
+  const {userId, chat: paramChat} = route.params;
   const {user} = useUserContext();
+  const [chat, setChat] = useState(paramChat);
+
+  function getTheOtherUserId(users) {
+    console.error(user);
+    for (const memberUser of users) {
+      if (memberUser !== user._id) {
+        return memberUser;
+      }
+    }
+  }
+
+  async function getChat() {
+    try {
+      const res = await api.post('/privatechatbyuser', {userId});
+      setChat(res.data);
+    } catch (err) {
+      // console.error(err);
+    }
+  }
 
   const [messages, setMessages] = useState(null);
 
   async function getMessages() {
     try {
-      const res = await api.get('chatmessages/' + item?._id);
+      const res = await api.get('chatmessages/' + chat?._id);
       setMessages(res.data);
     } catch (err) {
-      console.error(err);
+      // console.error(err);
     }
   }
 
-  useEffect(() => getMessages(), []);
+  useEffect(() => {
+    getChat();
+  }, []);
+
+  useEffect(() => {
+    getMessages();
+  }, [chat]);
 
   function renderItem({item: message}) {
     return (
@@ -41,11 +66,13 @@ export function ChatScreen({route}) {
     <View style={styles.screen}>
       <CustomHeader
         left={<BackButton />}
-        center={<UserImageAndName id={item?.users[1]} />}
+        center={
+          <UserImageAndName id={userId || getTheOtherUserId(chat.users)} />
+        }
       />
-      <Text>{JSON.stringify(item)}</Text>
+      {/* <Text>{JSON.stringify(item)}</Text> */}
       <FlatList data={messages} renderItem={renderItem} />
-      <MessageInput chatId={item?._id} />
+      <MessageInput chatId={chat?._id} />
     </View>
   );
 }

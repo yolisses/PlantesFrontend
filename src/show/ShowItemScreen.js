@@ -6,6 +6,8 @@ import {FloatingButton} from 'show/FloatingButton';
 import {AvailabilityInfo} from 'show/AvailabilityInfo';
 import {StartConversetionButton} from 'show/StartConversationButton';
 import {api} from 'api/api';
+import {useNavigation} from '@react-navigation/core';
+import {useChatReference} from 'chat/ChatReferenceContext';
 
 export function ShowItemScreen({route}) {
   const {itemId, preImage} = route.params;
@@ -27,23 +29,19 @@ export function ShowItemScreen({route}) {
     getItem();
   }, []);
 
-  // const {navigate} = useNavigation();
-  // const {setOneChatReference} = useChatReference();
+  const {navigate} = useNavigation();
+  const {setOneChatReference} = useChatReference();
 
-  const onPress = () => {};
-  // const onPress = () => {
-  //   if (!item) {
-  //     return;
-  //   }
-  //   const {name, thumbnail} = item;
-  //   setOneChatReference(item.owner.id, {
-  //     type: 'plant',
-  //     plantId: item.id,
-  //     name,
-  //     thumbnail,
-  //   });
-  //   navigate('Chat', {item: item.owner});
-  // };
+  function onPress() {
+    if (!item) {
+      return;
+    }
+    // setOneChatReference(item.userId, {
+    //   type: 'plant',
+    //   plantId: item.id,
+    // });
+    navigate('Chat', {userId: item.userId});
+  }
 
   return (
     <View style={styles.screen}>
