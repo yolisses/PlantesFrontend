@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {ItemInfo} from 'show/ItemInfo';
 import {ImagesSwiper} from 'show/ImagesSwiper';
 import {FloatingButton} from 'show/FloatingButton';
@@ -31,19 +31,26 @@ export function ShowItemScreen({route}) {
 
   const {navigate} = useNavigation();
 
-  const {createChatRoom} = useChatRoom();
+  const {createChatRoom, setReference} = useChatRoom();
 
   function onPress() {
     if (!item) {
       return;
     }
     createChatRoom({id: item.userId, type: 'user'});
+    setReference({
+      id: item.userId,
+      reference: {
+        id: item?._id,
+        type: 'plant',
+      },
+    });
     navigate('Chat', {chatRoomId: item.userId});
   }
 
   return (
     <View style={styles.screen}>
-      {/* <Text>{JSON.stringify(data)}</Text> */}
+      {/* <Text>{JSON.stringify(item)}</Text> */}
       <FloatingButton />
       <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
         <ImagesSwiper images={item?.images} preImage={preImage} />

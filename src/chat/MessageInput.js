@@ -1,32 +1,22 @@
 import React, {useState} from 'react';
+import {Text} from 'react-native';
 import {StyleSheet, TextInput, View} from 'react-native';
 import {ChatReference} from './ChatReference';
+import {useChatRoom} from './ChatroomsContext';
 import {SendMessageButton} from './SendMessageButton';
-import {useChatReference} from './ChatReferenceContext';
-import {api} from 'api/api';
 
-export function MessageInput({chatId, userId}) {
-  const {chatReferences, removeOneChatReference} = useChatReference();
-  const reference = chatReferences[chatId];
-
+export function MessageInput({chatRoomId}) {
   const [text, setText] = useState('');
 
-  const onPressCloseButton = () => {
-    removeOneChatReference(chatId);
-  };
-
   async function onSendPress() {
-    if (text.trim() === '') {
-      return;
-    }
-    try {
-      const send = userId ? {toUserId: userId, text} : {chatId, text};
-      await api.post('/sendmessage', send);
-    } catch (err) {
-      console.error(err.response);
-    }
     setText('');
   }
+
+  const {chatRooms} = useChatRoom();
+
+  const item = chatRooms[chatRoomId];
+
+  const reference = item?.reference;
 
   return (
     <View style={styles.textButtonContainer}>
@@ -35,11 +25,8 @@ export function MessageInput({chatId, userId}) {
           <View style={styles.referenceWrapper}>
             <ChatReference
               borderRadius={15}
-              showCloseButton={true}
-              chatId={chatId}
-              reference={reference}
-              onPressCloseButton={onPressCloseButton}
               disableNavigation
+              showCloseButton={true}
             />
           </View>
         )}

@@ -35,7 +35,7 @@ export function ChatScreen({route}) {
       />
       <Text>{JSON.stringify(item)}</Text>
       <FlatList renderItem={renderItem} />
-      <MessageInput />
+      <MessageInput chatRoomId={chatRoomId} />
     </View>
   );
 }

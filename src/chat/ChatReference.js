@@ -4,13 +4,12 @@ import {useNavigation} from '@react-navigation/core';
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
-
 export function ChatReference({
-  showCloseButton,
   reference,
+  showCloseButton,
   borderRadius = 9,
-  onPressCloseButton,
   disableNavigation,
+  onPressCloseButton,
 }) {
   const {navigate} = useNavigation();
 
@@ -18,7 +17,7 @@ export function ChatReference({
     if (disableNavigation) {
       return;
     }
-    navigate('ShowItem', {itemId: reference.plantId});
+    navigate('ShowItem', {itemId: reference?.plantId});
   };
 
   return (
@@ -28,7 +27,7 @@ export function ChatReference({
       activeOpacity={disableNavigation ? 1 : 0.7}>
       <View style={[styles.inner, {borderRadius}]}>
         <FastImage
-          source={{uri: reference.thumbnail}}
+          source={{uri: reference?.thumbnail}}
           style={[styles.image, {borderRadius}]}
         />
         <View style={styles.titleSubtitleContainer}>
@@ -43,7 +42,7 @@ export function ChatReference({
           <Text
             style={[styles.title, showCloseButton && {paddingRight: 20}]}
             numberOfLines={1}>
-            {reference.name}
+            {reference?.name}
           </Text>
           <Text style={styles.subtitle} numberOfLines={2}>
             <Text>Doação</Text>,<Text> Trocar</Text> ou
