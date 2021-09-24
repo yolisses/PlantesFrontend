@@ -1,12 +1,27 @@
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
+import {api} from 'api';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
 
-export function UserRoundImage({image, size, style, thumbnail}) {
+export function UserRoundImage({id, size, style}) {
   const {navigate} = useNavigation();
+  const [user, setUser] = useState();
 
   size = size || 30;
+
+  async function getUser() {
+    try {
+      const res = await api.get('/user/' + id);
+      setUser(res.data);
+    } catch (err) {
+      // console.error(err);
+    }
+  }
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <TouchableOpacity
@@ -14,7 +29,7 @@ export function UserRoundImage({image, size, style, thumbnail}) {
       activeOpacity={0.8}>
       <FastImage
         style={[styles.image, {width: size, height: size}, style]}
-        source={{uri: thumbnail || image}}
+        source={{uri: user?.image}}
       />
     </TouchableOpacity>
   );

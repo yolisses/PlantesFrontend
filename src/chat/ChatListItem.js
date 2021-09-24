@@ -17,7 +17,7 @@ export function ChatListItem({item}) {
       activeOpacity={0.8}
       onPress={onPress}>
       <View style={styles.imageWrapper}>
-        <UserRoundImage item={item} size={50} />
+        <UserRoundImage id={item.users[0]} size={50} />
       </View>
       <View style={styles.lineSeparator}>
         <View style={styles.detailsWrapper}>
