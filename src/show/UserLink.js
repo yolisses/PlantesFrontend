@@ -1,28 +1,10 @@
-import {api} from 'api/api';
 import {UserRoundImage} from 'common/UserRoundImage';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import FastImage from 'react-native-fast-image';
+import {useUser} from 'user/useUser';
 
 export function UserLink({id}) {
-  const [user, setUser] = useState();
-
-  async function getUser() {
-    try {
-      const res = await api.get('/user/' + id);
-      setUser(res.data);
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
-  useEffect(() => {
-    getUser();
-  }, []);
-
-  if (!user) {
-    return null;
-  }
+  const user = useUser(id);
 
   return (
     <View style={styles.container}>

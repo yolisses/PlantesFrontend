@@ -1,29 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {ChatDate} from './ChatDate';
 import {ChatNumberIndicator} from 'chat/ChatNumberIndicator';
 import {UserRoundImage} from 'common/UserRoundImage';
-import {api} from 'api';
+import {useUser} from 'user/useUser';
 
 export function ChatListItem({item}) {
   const {last_activity, message_count, last_activity_time} = item;
   const {navigate} = useNavigation();
 
-  const [user, setUser] = useState();
-
-  async function getUser() {
-    try {
-      const res = await api.get('/user/' + item?.users[0]);
-      setUser(res.data);
-    } catch (err) {
-      // console.error(err);
-    }
-  }
-
-  useEffect(() => {
-    getUser();
-  }, []);
+  const user = useUser(item.users[0]);
 
   const onPress = () => navigate('Chat', {item});
 
@@ -68,7 +55,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   name: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 3,
   },

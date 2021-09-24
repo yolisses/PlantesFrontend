@@ -1,22 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Message} from 'chat/Message';
 import {MessageInput} from 'chat/MessageInput';
 import {api} from 'api';
-import {useNavigation} from '@react-navigation/core';
-import {ChatHeader} from './ChatHeader';
 import {CustomHeader} from 'publish/CustomHeader';
 import {useUserContext} from 'auth/userContext';
 
 export function ChatScreen({route}) {
   const {item} = route.params;
   const {user} = useUserContext();
-
-  const navigation = useNavigation();
-
-  navigation.setOptions({
-    headerTitle: () => <ChatHeader item={item} />,
-  });
 
   const [messages, setMessages] = useState(null);
 
@@ -36,6 +28,7 @@ export function ChatScreen({route}) {
   return (
     <View style={styles.screen}>
       <CustomHeader />
+      <Text>{JSON.stringify(item)}</Text>
       <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
         <View style={styles.pad}>
           {messages &&
