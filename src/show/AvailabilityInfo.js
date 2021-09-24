@@ -54,7 +54,7 @@ export function AvailabilityInfo({item, onModalConfirmPress}) {
           ))}
       </View>
       <View style={styles.line}>
-        {item.amount && (
+        {!!item.amount && (
           <Text style={styles.secondary}> {item.amount} disponível</Text>
         )}
       </View>
