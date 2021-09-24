@@ -41,7 +41,7 @@ export function UserScreen({route}) {
   }
 
   return (
-    <FooterNavigationLayout>
+    <FooterNavigationLayout selected="Home">
       <FlatList
         data={plants}
         renderItem={renderItem}
