@@ -17,6 +17,7 @@ import {SendingContextProvider} from 'send/SendingContext';
 
 import {GOOGLE_WEB_CLIENT_ID} from '@env';
 import {ChatsContextProvider} from 'chat/ChatsContext';
+import {SendingMessageContextProvider} from 'chat/SendingMessageContext';
 
 GoogleSignin.configure({
   webClientId: GOOGLE_WEB_CLIENT_ID,
@@ -33,10 +34,12 @@ const App = () => {
               <ModalContextProvider>
                 <ImagesContextProvider>
                   <CameraPreferencesProvider>
-                    <SendingContextProvider>
-                      <StatusBar barStyle={'default'} hidden={true} />
-                      <Routes />
-                    </SendingContextProvider>
+                    <SendingMessageContextProvider>
+                      <SendingContextProvider>
+                        <StatusBar barStyle={'default'} hidden={true} />
+                        <Routes />
+                      </SendingContextProvider>
+                    </SendingMessageContextProvider>
                   </CameraPreferencesProvider>
                 </ImagesContextProvider>
               </ModalContextProvider>

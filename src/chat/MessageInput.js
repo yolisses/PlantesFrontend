@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
 import {StyleSheet, TextInput, View} from 'react-native';
 import {ChatReference} from './ChatReference';
+import {useSendingMessage} from './SendingMessageContext';
 import {SendMessageButton} from './SendMessageButton';
 
-export function MessageInput({chatRoomId, reference}) {
+export function MessageInput({chatRoomId, chatId, reference}) {
   const [text, setText] = useState('');
+  const {pushMessage} = useSendingMessage();
 
   async function onSendPress() {
+    pushMessage({text, chatId});
     setText('');
   }
 

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {Message} from 'chat/Message';
 import {MessageInput} from 'chat/MessageInput';
 import {CustomHeader} from 'publish/CustomHeader';
@@ -8,6 +8,7 @@ import {UserImageAndName} from 'user/UserImageAndName';
 import {FlatList} from 'react-native-gesture-handler';
 import {api} from 'api/api';
 import {useUserContext} from 'auth/userContext';
+import {useSendingMessage} from './SendingMessageContext';
 
 export function ChatScreen({route}) {
   const {chat, user} = route.params;
@@ -15,10 +16,12 @@ export function ChatScreen({route}) {
 
   const [messages, setMessages] = useState([]);
 
+  const {sendingMessages, refreshValue} = useSendingMessage();
+
   async function getMessages() {
     try {
       const res = await api.get('chatmessages/' + chat._id);
-      setMessages(res.data);
+      setMessages(res.data.concat(Object.values(sendingMessages)));
     } catch (err) {
       console.error(err);
     }
@@ -27,14 +30,16 @@ export function ChatScreen({route}) {
   useEffect(() => {
     getMessages();
     return getMessages;
-  }, []);
+  }, [refreshValue]);
 
   function renderItem({item: message}) {
     return (
       <Message
         key={message.id}
         message={message}
-        fromUser={currentUser._id === message.userId}
+        fromUser={
+          message.status === 'sending' || currentUser._id === message.userId
+        }
         // moreMargin={actualLastUserId !== message.userId}
       />
     );
@@ -46,8 +51,10 @@ export function ChatScreen({route}) {
         left={<BackButton />}
         center={<UserImageAndName image={user?.image} name={user?.name} />}
       />
+      {/* <Text>{JSON.stringify(sendingMessages)}</Text>
+      <Text>{JSON.stringify(messages)}</Text> */}
       <FlatList data={messages} renderItem={renderItem} />
-      <MessageInput />
+      <MessageInput chatId={chat._id} />
     </View>
   );
 }
