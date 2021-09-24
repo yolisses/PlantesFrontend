@@ -44,10 +44,12 @@ export function ChatScreen({route}) {
 
   useEffect(() => {
     getChat();
+    return getChat;
   }, []);
 
   useEffect(() => {
     getMessages();
+    return getMessages;
   }, [chat]);
 
   function renderItem({item: message}) {
