@@ -6,7 +6,6 @@ import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {Routes} from './Routes';
 
 import {UserContextProvider} from 'auth/userContext';
-import {ChatsContextProvider} from 'chat/ChatsContext';
 import {AlertContextProvider} from 'alert/AlertContext';
 import {ModalContextProvider} from 'modal/ModalContext';
 import {PermissionsContextProvider} from 'permission/PermissionsContext';
@@ -17,7 +16,6 @@ import {ImagesContextProvider} from 'publish/ImagesContext';
 import {SendingContextProvider} from 'send/SendingContext';
 
 import {GOOGLE_WEB_CLIENT_ID} from '@env';
-import {ChatRoomContextProvider} from 'chat/ChatroomsContext';
 
 GoogleSignin.configure({
   webClientId: GOOGLE_WEB_CLIENT_ID,
@@ -31,18 +29,14 @@ const App = () => {
         <PermissionsContextProvider>
           <AlertContextProvider>
             <ModalContextProvider>
-              <ChatsContextProvider>
-                <ChatRoomContextProvider>
-                  <ImagesContextProvider>
-                    <CameraPreferencesProvider>
-                      <SendingContextProvider>
-                        <StatusBar barStyle={'default'} hidden={true} />
-                        <Routes />
-                      </SendingContextProvider>
-                    </CameraPreferencesProvider>
-                  </ImagesContextProvider>
-                </ChatRoomContextProvider>
-              </ChatsContextProvider>
+              <ImagesContextProvider>
+                <CameraPreferencesProvider>
+                  <SendingContextProvider>
+                    <StatusBar barStyle={'default'} hidden={true} />
+                    <Routes />
+                  </SendingContextProvider>
+                </CameraPreferencesProvider>
+              </ImagesContextProvider>
             </ModalContextProvider>
           </AlertContextProvider>
         </PermissionsContextProvider>
