@@ -8,12 +8,12 @@ export function Message({message, moreMargin, fromUser}) {
   const {text, time, status, reference} = message;
 
   // status === 'sending' ? 12 :
-  const paddingRight = fromUser ? (status === 'sending' ? 2 : 37) : 30;
+  const paddingRight = fromUser ? (status === 'sending' ? 10 : 46) : 30;
 
-  const [refresh, setRefresh] = useState();
+  const [refresh, setRefresh] = useState(1);
 
   useEffect(() => {
-    setRefresh(Math.random());
+    setRefresh(-refresh);
   }, [paddingRight]);
 
   return (
