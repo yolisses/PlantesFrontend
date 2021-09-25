@@ -7,7 +7,7 @@ import {ChatReference} from './ChatReference';
 export function Message({message, moreMargin, fromUser}) {
   const {text, time, status, reference} = message;
 
-  const paddingRight = status === 'sending' ? 11 : fromUser ? 48 : 30;
+  const paddingRight = status === 'sending' ? 12 : fromUser ? 48 : 30;
 
   return (
     <View

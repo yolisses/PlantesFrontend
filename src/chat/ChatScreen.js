@@ -8,6 +8,7 @@ import {UserImageAndName} from 'user/UserImageAndName';
 import {FlatList} from 'react-native-gesture-handler';
 import {api} from 'api/api';
 import {useUserContext} from 'auth/userContext';
+import {useMessages} from './MessagesContext';
 
 export function ChatScreen() {
   const chat = {_id: '614e5e91bc8e4ff26a3346e2'};
@@ -16,6 +17,8 @@ export function ChatScreen() {
   const {user: currentUser, token} = useUserContext();
 
   const [messages, setMessages] = useState([]);
+
+  const {sendingMessages} = useMessages();
 
   async function getMessages() {
     try {
@@ -38,9 +41,7 @@ export function ChatScreen() {
       <Message
         key={message.id}
         message={message}
-        fromUser={
-          message.status === 'sending' || currentUser._id === message.userId
-        }
+        fromUser={currentUser._id === message.userId}
         // moreMargin={actualLastUserId !== message.userId}
       />
     );
@@ -54,7 +55,10 @@ export function ChatScreen() {
       />
       {/* <Text>{JSON.stringify(sendingMessages)}</Text>
       <Text>{JSON.stringify(messages)}</Text> */}
-      <FlatList data={messages} renderItem={renderItem} />
+      <FlatList
+        data={messages.concat(Object.values(sendingMessages))}
+        renderItem={renderItem}
+      />
       <Button title="refresh" onPress={getMessages} />
       <MessageInput chatId={chat._id} />
     </View>
