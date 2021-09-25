@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {MessageHour} from './MessageHour';
 import {MessageStatus} from './MessageStatus';
@@ -7,7 +7,14 @@ import {ChatReference} from './ChatReference';
 export function Message({message, moreMargin, fromUser}) {
   const {text, time, status, reference} = message;
 
-  const paddingRight = status === 'sending' ? 12 : fromUser ? 48 : 30;
+  // status === 'sending' ? 12 :
+  const paddingRight = fromUser ? (status === 'sending' ? 2 : 37) : 30;
+
+  const [refresh, setRefresh] = useState();
+
+  useEffect(() => {
+    setRefresh(Math.random());
+  }, [paddingRight]);
 
   return (
     <View
@@ -20,6 +27,7 @@ export function Message({message, moreMargin, fromUser}) {
       <View style={[styles.message]}>
         <Text style={[styles.text]}>
           {text}
+          <Text style={{fontSize: 0}}>{refresh}</Text>
           <View style={{paddingRight, paddingTop: 6}} />
         </Text>
       </View>
