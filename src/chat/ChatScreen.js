@@ -9,9 +9,11 @@ import {FlatList} from 'react-native-gesture-handler';
 import {api} from 'api/api';
 import {useUserContext} from 'auth/userContext';
 
-export function ChatScreen({route}) {
-  const {chat, user} = route.params;
-  const {user: currentUser} = useUserContext();
+export function ChatScreen() {
+  const chat = {_id: '614e5e91bc8e4ff26a3346e2'};
+  const user = {};
+
+  const {user: currentUser, token} = useUserContext();
 
   const [messages, setMessages] = useState([]);
 
@@ -25,9 +27,11 @@ export function ChatScreen({route}) {
   }
 
   useEffect(() => {
-    getMessages();
-    return getMessages;
-  }, []);
+    if (token) {
+      getMessages();
+      return getMessages;
+    }
+  }, [token]);
 
   function renderItem({item: message}) {
     return (
