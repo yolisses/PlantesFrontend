@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Button, StyleSheet, View} from 'react-native';
 import {Message} from 'chat/Message';
 import {MessageInput} from 'chat/MessageInput';
 import {CustomHeader} from 'publish/CustomHeader';
@@ -55,6 +55,7 @@ export function ChatScreen() {
       {/* <Text>{JSON.stringify(sendingMessages)}</Text>
       <Text>{JSON.stringify(messages)}</Text> */}
       <FlatList data={messages} renderItem={renderItem} />
+      <Button title="refresh" onPress={getMessages} />
       <MessageInput chatId={chat._id} />
     </View>
   );
