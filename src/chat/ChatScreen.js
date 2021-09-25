@@ -7,7 +7,7 @@ import {useUserContext} from 'auth/userContext';
 import React, {useEffect, useState} from 'react';
 import {CustomHeader} from 'publish/CustomHeader';
 import {FlatList} from 'react-native-gesture-handler';
-import {Button, StyleSheet, View} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 import {UserImageAndName} from 'user/UserImageAndName';
 
 export function ChatScreen() {
@@ -49,18 +49,21 @@ export function ChatScreen() {
     );
   }
 
+  function newer(a, b) {
+    return a.createdAt < b.createdAt;
+  }
+
   return (
     <View style={styles.screen}>
       <CustomHeader
         left={<BackButton />}
         center={<UserImageAndName image={user?.image} name={user?.name} />}
       />
-      {/* <Text>{JSON.stringify(sendingMessages)}</Text>
-      <Text>{JSON.stringify(messages)}</Text> */}
+      {/* <Text>{JSON.stringify(messages)}</Text> */}
       <FlatList
         inverted
         data={Object.values(sendingMessages)
-          .concat(Object.values(adtionalMessages))
+          .concat(Object.values(adtionalMessages).sort(newer))
           .concat(messages)}
         renderItem={renderItem}
       />
