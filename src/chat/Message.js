@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {MessageHour} from './MessageHour';
 import {MessageStatus} from './MessageStatus';
@@ -8,13 +8,11 @@ export function Message({message, moreMargin, fromUser}) {
   const {text, time, status, reference} = message;
 
   // status === 'sending' ? 12 :
-  const paddingRight = fromUser ? (status === 'sending' ? 10 : 46) : 30;
-
-  const [refresh, setRefresh] = useState(1);
-
-  useEffect(() => {
-    setRefresh(-refresh);
-  }, [paddingRight]);
+  const spacing = fromUser
+    ? status === 'sending'
+      ? 'aa'
+      : 'aaaaaaa'
+    : 'aaaaa';
 
   return (
     <View
@@ -27,8 +25,7 @@ export function Message({message, moreMargin, fromUser}) {
       <View style={[styles.message]}>
         <Text style={[styles.text]}>
           {text}
-          <Text style={{fontSize: 0}}>{refresh}</Text>
-          <View style={{paddingRight, paddingTop: 6}} />
+          <Text style={{color: '#00000000', fontSize: 12}}>{spacing}</Text>
         </Text>
       </View>
       <View style={styles.miniInfo}>

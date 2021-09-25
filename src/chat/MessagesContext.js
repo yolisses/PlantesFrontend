@@ -28,7 +28,6 @@ export function MessagesContextProvider({children}) {
       .post('/sendmessage', message)
       .then(res => {
         const message = res.data;
-        console.error(message);
         adtionalMessages[fakeId] = message;
         delete sendingMessages[fakeId];
         refresh();

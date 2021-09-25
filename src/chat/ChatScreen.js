@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import {Button, StyleSheet, View} from 'react-native';
-import {Message} from 'chat/Message';
-import {MessageInput} from 'chat/MessageInput';
-import {CustomHeader} from 'publish/CustomHeader';
-import {BackButton} from 'publish/BackButton';
-import {UserImageAndName} from 'user/UserImageAndName';
-import {FlatList} from 'react-native-gesture-handler';
 import {api} from 'api/api';
-import {useUserContext} from 'auth/userContext';
+import {Message} from 'chat/Message';
 import {useMessages} from './MessagesContext';
+import {BackButton} from 'publish/BackButton';
+import {MessageInput} from 'chat/MessageInput';
+import {useUserContext} from 'auth/userContext';
+import React, {useEffect, useState} from 'react';
+import {CustomHeader} from 'publish/CustomHeader';
+import {FlatList} from 'react-native-gesture-handler';
+import {Button, StyleSheet, View} from 'react-native';
+import {UserImageAndName} from 'user/UserImageAndName';
 
 export function ChatScreen() {
   const chat = {_id: '614e5e91bc8e4ff26a3346e2'};
