@@ -58,9 +58,10 @@ export function ChatScreen() {
       {/* <Text>{JSON.stringify(sendingMessages)}</Text>
       <Text>{JSON.stringify(messages)}</Text> */}
       <FlatList
-        data={messages
+        inverted
+        data={Object.values(sendingMessages)
           .concat(Object.values(adtionalMessages))
-          .concat(Object.values(sendingMessages))}
+          .concat(messages)}
         renderItem={renderItem}
       />
       <Button title="refresh" onPress={getMessages} />
