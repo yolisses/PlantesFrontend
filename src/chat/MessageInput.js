@@ -5,13 +5,16 @@ import {useMessages} from './MessagesContext';
 import {SendMessageButton} from './SendMessageButton';
 
 export function MessageInput({chatRoomId, chatId, reference}) {
-  const [text, setText] = useState('');
-
   const {pushMessage} = useMessages();
 
+  const [text, setText] = useState();
+
   async function onSendPress() {
-    pushMessage({text});
-    setText('');
+    if (!text) {
+      return;
+    }
+    setText(null);
+    await pushMessage({text});
   }
 
   function onPressCloseButton() {}
@@ -31,10 +34,12 @@ export function MessageInput({chatRoomId, chatId, reference}) {
         )}
         <View style={styles.horizontal}>
           <TextInput
-            multiline
             value={text}
+            multiline
             style={styles.input}
-            onChangeText={setText}
+            onChangeText={text => {
+              setText(text);
+            }}
             placeholder="Escrever mensagem"
           />
         </View>
