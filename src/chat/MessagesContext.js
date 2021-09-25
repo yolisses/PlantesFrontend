@@ -16,8 +16,8 @@ export function MessagesContextProvider({children}) {
     setRefreshValue(Math.random());
   }
 
-  function pushMessage(message) {
-    const fakeId = v4();
+  async function pushMessage(message) {
+    const fakeId = Math.random();
     message._id = fakeId;
     message.status = 'sending';
     message.userId = user._id;
