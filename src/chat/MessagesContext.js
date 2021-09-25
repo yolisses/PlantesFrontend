@@ -1,10 +1,11 @@
+import {api} from 'api';
 import {useUserContext} from 'auth/userContext';
 import React, {createContext, useContext, useState} from 'react';
 import {v4} from 'uuid';
 
 const MessagesContext = createContext();
 
-const messages = {};
+let adtionalMessages = {};
 const sendingMessages = {};
 export function MessagesContextProvider({children}) {
   const [refreshValue, setRefreshValue] = useState();
@@ -20,13 +21,37 @@ export function MessagesContextProvider({children}) {
     message._id = fakeId;
     message.status = 'sending';
     message.userId = user._id;
+    message.chatId = '614e5e91bc8e4ff26a3346e2';
     sendingMessages[fakeId] = message;
+    refresh();
+    api
+      .post('/sendmessage', message)
+      .then(res => {
+        const message = res.data;
+        console.error(message);
+        adtionalMessages[fakeId] = message;
+        delete sendingMessages[fakeId];
+        refresh();
+      })
+      .catch(err => console.error(err));
+  }
+
+  function cleanAdtionalMessages() {
+    for (let key in adtionalMessages) {
+      delete adtionalMessages[key];
+    }
     refresh();
   }
 
   return (
     <MessagesContext.Provider
-      value={{messages, sendingMessages, refreshValue, pushMessage}}>
+      value={{
+        adtionalMessages,
+        cleanAdtionalMessages,
+        sendingMessages,
+        refreshValue,
+        pushMessage,
+      }}>
       {children}
     </MessagesContext.Provider>
   );

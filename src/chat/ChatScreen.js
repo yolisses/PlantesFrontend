@@ -18,11 +18,13 @@ export function ChatScreen() {
 
   const [messages, setMessages] = useState([]);
 
-  const {sendingMessages} = useMessages();
+  const {sendingMessages, adtionalMessages, cleanAdtionalMessages} =
+    useMessages();
 
   async function getMessages() {
     try {
       const res = await api.get('chatmessages/' + chat._id);
+      cleanAdtionalMessages();
       setMessages(res.data);
     } catch (err) {
       console.error(err);
@@ -56,7 +58,9 @@ export function ChatScreen() {
       {/* <Text>{JSON.stringify(sendingMessages)}</Text>
       <Text>{JSON.stringify(messages)}</Text> */}
       <FlatList
-        data={messages.concat(Object.values(sendingMessages))}
+        data={messages
+          .concat(Object.values(adtionalMessages))
+          .concat(Object.values(sendingMessages))}
         renderItem={renderItem}
       />
       <Button title="refresh" onPress={getMessages} />
