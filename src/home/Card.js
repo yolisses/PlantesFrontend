@@ -4,12 +4,12 @@ import {SquareImage} from 'common/SquareImage';
 import {TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
-export function Card({item, fraction, disableOnpress, postComponent}) {
+export function Card({item, fraction, postComponent}) {
   const {navigate} = useNavigation();
 
   const onPress = () => {
     if (item) {
-      navigate('ShowItem', {itemId: item._id, preImage: item?.card});
+      navigate('ShowItem', {item: item, preImage: item?.card});
     }
   };
 

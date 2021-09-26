@@ -1,32 +1,20 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import React, {useRef} from 'react';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {ItemInfo} from 'show/ItemInfo';
 import {ImagesSwiper} from 'show/ImagesSwiper';
 import {FloatingButton} from 'show/FloatingButton';
 import {AvailabilityInfo} from 'show/AvailabilityInfo';
 import {StartConversetionButton} from 'show/StartConversationButton';
-import {api} from 'api/api';
 import {useNavigation} from '@react-navigation/core';
 
 export function ShowItemScreen({route}) {
-  const {itemId, preImage} = route.params;
-
-  const [item, setItem] = useState(null);
+  const {preImage, item} = route.params;
 
   const scrollRef = useRef();
 
   const scrollTo = pos => {
     scrollRef.current.scrollTo({y: pos, animated: true});
   };
-
-  async function getItem() {
-    const res = await api.get('/plant/' + itemId);
-    setItem(res.data);
-  }
-
-  useEffect(() => {
-    getItem();
-  }, []);
 
   const {navigate} = useNavigation();
 
@@ -39,7 +27,6 @@ export function ShowItemScreen({route}) {
 
   return (
     <View style={styles.screen}>
-      {/* <Text>{JSON.stringify(item)}</Text> */}
       <FloatingButton />
       <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
         <ImagesSwiper images={item?.images} preImage={preImage} />
