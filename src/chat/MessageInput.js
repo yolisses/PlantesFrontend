@@ -4,7 +4,7 @@ import {ChatReference} from './ChatReference';
 import {useMessages} from './MessagesContext';
 import {SendMessageButton} from './SendMessageButton';
 
-export function MessageInput({chatId, reference}) {
+export function MessageInput({chatId, toUserId, reference}) {
   const {pushMessage} = useMessages();
 
   const [text, setText] = useState();
@@ -14,7 +14,7 @@ export function MessageInput({chatId, reference}) {
       return;
     }
     setText(null);
-    await pushMessage({text, chatId});
+    await pushMessage({text, toUserId, chatId});
   }
 
   function onPressCloseButton() {}
@@ -37,10 +37,10 @@ export function MessageInput({chatId, reference}) {
             value={text}
             multiline
             style={styles.input}
+            placeholder="Escrever mensagem"
             onChangeText={text => {
               setText(text);
             }}
-            placeholder="Escrever mensagem"
           />
         </View>
       </View>

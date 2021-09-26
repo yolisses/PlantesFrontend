@@ -73,7 +73,6 @@ export function ChatScreen({route}) {
         left={<BackButton />}
         center={<UserImageAndName image={user?.image} name={user?.name} />}
       />
-      {/* <Text>{JSON.stringify(messages)}</Text> */}
       <FlatList
         inverted
         data={Object.values(sendingMessages)
@@ -82,7 +81,7 @@ export function ChatScreen({route}) {
         renderItem={renderItem}
       />
       <Button title="refresh" onPress={getMessages} />
-      <MessageInput chatId={chat?._id} />
+      <MessageInput chatId={chat?._id} toUserId={userId} />
     </View>
   );
 }

@@ -15,12 +15,13 @@ export function MessagesContextProvider({children}) {
     setRefreshValue(Math.random());
   }
 
-  async function pushMessage({chatId, text}) {
+  async function pushMessage({chatId, text, toUserId}) {
     const fakeId = Math.random();
     const message = {
       text,
       chatId,
       userId,
+      toUserId,
       _id: fakeId,
       status: 'sending',
     };
