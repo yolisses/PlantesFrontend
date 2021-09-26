@@ -7,7 +7,6 @@ export async function sendPlant(sending, callback) {
     try {
       if (!sending.plantInfoSent) {
         await sendPlantInfo(sending);
-        console.error();
       } else {
         const plantId = sending.plantId;
         await Promise.all(

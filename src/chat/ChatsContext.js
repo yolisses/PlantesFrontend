@@ -13,7 +13,6 @@ export function ChatsContextProvider({children}) {
       .get('/chats')
       .then(res => {
         setChats(res.data);
-        console.error(res.data);
       })
       .catch(err => console.error(err.response));
   }, [token]);

@@ -2,7 +2,6 @@ import {api} from 'api';
 
 export async function sendPlantInfo(sending) {
   const plant = sending.localData;
-  console.error(plant);
   const getExtension = filename => filename.split('.').pop();
   plant.imagesTypes = plant.images.map(getExtension);
   try {
@@ -16,7 +15,6 @@ export async function sendPlantInfo(sending) {
     });
     delete sending.localData;
     sending.plantInfoSent = true;
-    console.error(sending);
   } catch (err) {
     console.error(err.message);
   }

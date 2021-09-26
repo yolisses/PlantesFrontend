@@ -26,7 +26,6 @@ export function UserScreen({route}) {
     return <Card item={item} fraction={3} />;
   }
   function renderSendingItem({item}) {
-    console.error(item);
     return <SendingCard item={item} fraction={3} />;
   }
 
