@@ -5,7 +5,6 @@ import {Card} from 'home/Card';
 import {CustomHeader} from 'publish/CustomHeader';
 import {UserRoundImage} from 'common/UserRoundImage';
 import {CardsListLoading} from 'home/CardsListLoading';
-import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import {api} from 'api/api';
 import {useUserContext} from 'auth/userContext';
 

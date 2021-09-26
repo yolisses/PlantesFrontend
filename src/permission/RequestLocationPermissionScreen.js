@@ -1,24 +1,20 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {FooterNavigation} from 'navigation/FooterNavigation';
 import {LightButton} from 'common/LightButton';
 import {usePermissions} from 'permission/PermissionsContext';
 
 export function RequestLocationPermissionScreen() {
   const {requestLocationPermission} = usePermissions();
   return (
-    <View style={{flex: 1}}>
-      <View style={styles.container}>
-        <Text style={styles.title}>Permitir localização</Text>
-        <Text style={styles.legend}>Para mostrar as plantas perto de você</Text>
-        <LightButton
-          text="Permitir"
-          onPress={requestLocationPermission}
-          style={styles.button}
-          textStyle={styles.buttonText}
-        />
-      </View>
-      <FooterNavigation />
+    <View style={styles.container}>
+      <Text style={styles.title}>Permitir localização</Text>
+      <Text style={styles.legend}>Para mostrar as plantas perto de você</Text>
+      <LightButton
+        text="Permitir"
+        onPress={requestLocationPermission}
+        style={styles.button}
+        textStyle={styles.buttonText}
+      />
     </View>
   );
 }

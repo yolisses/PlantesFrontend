@@ -5,7 +5,6 @@ import {api} from 'api';
 import {Card} from 'home/Card';
 import {useSending} from 'send/SendingContext';
 import {useUserContext} from 'auth/userContext';
-import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 
 import {UserInfo} from './UserInfo';
 import {SendingCard} from './SendingCard';
@@ -70,14 +69,12 @@ export function UserScreen({route}) {
   }
 
   return (
-    <FooterNavigationLayout selected="Home">
-      <FlatList
-        data={plants}
-        renderItem={renderItem}
-        keyExtractor={keyExtractor}
-        numColumns={numberOfCollums}
-        ListHeaderComponent={ListHeaderComponent}
-      />
-    </FooterNavigationLayout>
+    <FlatList
+      data={plants}
+      renderItem={renderItem}
+      keyExtractor={keyExtractor}
+      numColumns={numberOfCollums}
+      ListHeaderComponent={ListHeaderComponent}
+    />
   );
 }

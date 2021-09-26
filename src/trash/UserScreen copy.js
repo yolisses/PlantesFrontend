@@ -17,7 +17,6 @@ import {
 import {Card} from 'home/Card';
 import {CardsListFooter} from 'home/CardsListFooter';
 import {CardsListLoading} from 'home/CardsListLoading';
-import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import {InfiniteScroll} from 'common/InfiniteScroll';
 import {UserInfo} from '../user/UserInfo';
 import {TabSelector} from '../user/TabSelector';
@@ -65,7 +64,7 @@ export function UserScreen() {
   );
 
   return (
-    <FooterNavigationLayout selected={'Home'}>
+    <View>
       <Button title="sign out" onPress={signOut} />
       <SectionList
         sections={[
@@ -127,7 +126,7 @@ export function UserScreen() {
           )
         }
       />
-    </FooterNavigationLayout>
+    </View>
   );
 }
 
