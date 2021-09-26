@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StatusBar} from 'react-native';
 import 'react-native-gesture-handler'; // prevent modal error
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
@@ -22,6 +22,8 @@ GoogleSignin.configure({
   webClientId: GOOGLE_WEB_CLIENT_ID,
   offlineAccess: true,
 });
+
+// 2bee2ed3-aef3-4be5-974a-9fac21878cab
 
 const App = () => {
   return (
