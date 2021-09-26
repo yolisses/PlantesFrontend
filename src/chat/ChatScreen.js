@@ -1,4 +1,4 @@
-import {api} from 'api/api';
+import {api} from 'api';
 import {Message} from 'chat/Message';
 import {useMessages} from './MessagesContext';
 import {BackButton} from 'publish/BackButton';
@@ -11,7 +11,7 @@ import {Button, StyleSheet, View} from 'react-native';
 import {UserImageAndName} from 'user/UserImageAndName';
 
 export function ChatScreen({route}) {
-  const {user, chat} = route.params;
+  const {user, chatParam, userId} = route.params;
 
   const {user: currentUser, token} = useUserContext();
 
@@ -20,13 +20,28 @@ export function ChatScreen({route}) {
   const {sendingMessages, adtionalMessages, cleanAdtionalMessages} =
     useMessages();
 
+  const [chat, setChat] = useState();
+
+  useEffect(() => {
+    if (userId && !chatParam) {
+      api
+        .post('/privatechatbyuser', {userId})
+        .then(res => {
+          setChat(res.data);
+        })
+        .catch(err => console.error(err.response));
+    }
+  }, [userId]);
+
   async function getMessages() {
-    try {
-      const res = await api.get('chatmessages/' + chat._id);
-      cleanAdtionalMessages();
-      setMessages(res.data);
-    } catch (err) {
-      console.error(err);
+    if (chat) {
+      try {
+        const res = await api.get('chatmessages/' + chat?._id);
+        cleanAdtionalMessages();
+        setMessages(res.data);
+      } catch (err) {
+        console.error(err.response);
+      }
     }
   }
 
@@ -35,7 +50,7 @@ export function ChatScreen({route}) {
       getMessages();
       return getMessages;
     }
-  }, [token]);
+  }, [token, chat]);
 
   function renderItem({item: message}) {
     return (
@@ -67,7 +82,7 @@ export function ChatScreen({route}) {
         renderItem={renderItem}
       />
       <Button title="refresh" onPress={getMessages} />
-      <MessageInput chatId={chat._id} />
+      <MessageInput chatId={chat?._id} />
     </View>
   );
 }

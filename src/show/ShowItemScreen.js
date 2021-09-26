@@ -34,7 +34,7 @@ export function ShowItemScreen({route}) {
     if (!item) {
       return;
     }
-    navigate('Chat', {chatRoomId: item.userId});
+    navigate('Chat', {userId: item.userId});
   }
 
   return (
