@@ -1,13 +1,14 @@
-import {api} from 'api';
-import {useUserContext} from 'auth/userContext';
-import {Card} from 'home/Card';
-import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
-import React, {useEffect, useState} from 'react';
-import {Text} from 'react-native';
 import {FlatList} from 'react-native';
+import React, {useEffect, useState} from 'react';
+
+import {api} from 'api';
+import {Card} from 'home/Card';
 import {useSending} from 'send/SendingContext';
-import {SendingCard} from './SendingCard';
+import {useUserContext} from 'auth/userContext';
+import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
+
 import {UserInfo} from './UserInfo';
+import {SendingCard} from './SendingCard';
 
 const numberOfCollums = 3;
 
