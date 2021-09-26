@@ -3,10 +3,14 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
 export function SendingCard({item, fraction, ...rest}) {
+  const backgroundColor = item?.sent ? '#060b' : '#000a';
+
   return (
     <View>
       <SquareImage uri={item?.images[0]?.localImage} fraction={fraction} />
-      <Text style={[styles.text]}>enviando...</Text>
+      <Text style={[styles.text, {backgroundColor}]}>
+        {item?.sent ? 'enviado' : 'enviando...'}
+      </Text>
     </View>
   );
 }
@@ -23,7 +27,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#050b',
     borderBottomLeftRadius: 20,
   },
 });

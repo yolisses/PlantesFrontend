@@ -18,7 +18,7 @@ export function UserScreen({route}) {
 
   const {userId} = route.params;
 
-  const {sendings} = useSending();
+  const {sendings, removeFinisheds} = useSending();
 
   const {userId: currentUserId} = useUserContext();
 
@@ -38,6 +38,7 @@ export function UserScreen({route}) {
   async function getPlants() {
     const res = await api.get('userplants/' + userId);
     setPlants(res.data);
+    removeFinisheds();
   }
 
   useEffect(() => {

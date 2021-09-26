@@ -1,20 +1,23 @@
 import React, {createContext, useContext, useState} from 'react';
 import {v4} from 'uuid';
 import {sendPlant} from './sendPlant';
-
-import {examplePlant} from './examplePlant';
-
-import {Button} from 'react-native';
-
 const SendingContext = createContext();
 
+const sendings = {};
 export function SendingContextProvider({children}) {
-  const sendings = {};
   const [refresh, setRefresh] = useState(0);
 
-  function removeSending(id) {
-    delete sendings[id];
+  function removeFinisheds() {
+    Object.keys(sendings).map(key => {
+      if (sendings[key]?.sent) {
+        delete sendings[key];
+      }
+    });
     setRefresh(Math.random());
+  }
+
+  function onFinish(id) {
+    setRefresh(() => Math.random());
   }
 
   function pushSending(plant) {
@@ -22,11 +25,14 @@ export function SendingContextProvider({children}) {
     const sending = {};
     sending.localData = plant;
     sendings[id] = sending;
-    sendPlant(sending);
+    sendPlant(sending, () => {
+      onFinish(id);
+    });
   }
 
   return (
-    <SendingContext.Provider value={{pushSending, sendings, refresh}}>
+    <SendingContext.Provider
+      value={{pushSending, sendings, refresh, removeFinisheds}}>
       {children}
     </SendingContext.Provider>
   );

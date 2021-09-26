@@ -2,7 +2,7 @@ import {sendPlantInfo} from './sendPlantInfo';
 import {sendImage} from './sendImage';
 import {confirmSending} from './confirmSending';
 
-export async function sendPlant(sending) {
+export async function sendPlant(sending, callback) {
   while (!sending.sent) {
     try {
       if (!sending.plantInfoSent) {
@@ -21,4 +21,7 @@ export async function sendPlant(sending) {
     }
   }
   console.error('fim');
+  if (callback) {
+    callback(sending);
+  }
 }
