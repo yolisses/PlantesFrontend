@@ -8,13 +8,15 @@ const UserContext = createContext({});
 export function UserContextProvider({children}) {
   const [token, setToken] = useState();
   const [user, setUser] = useState();
+  const [userId, setUserId] = useState();
 
   async function authenticate(idToken) {
     try {
       const res = await api.post('/googlesignin', {idToken});
       const {token, user, email, emailAuthToken, id, idAuthToken} = res.data;
-      setToken(token);
       setUser(user);
+      setUserId(id);
+      setToken(token);
 
       OneSignal.setEmail(email, emailAuthToken, err => {
         console.error(err);
@@ -31,7 +33,7 @@ export function UserContextProvider({children}) {
   }
 
   return (
-    <UserContext.Provider value={{authenticate, token, user}}>
+    <UserContext.Provider value={{authenticate, token, user, userId}}>
       {children}
     </UserContext.Provider>
   );

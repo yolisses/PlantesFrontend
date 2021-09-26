@@ -1,7 +1,6 @@
 import {api} from 'api';
 import {useUserContext} from 'auth/userContext';
 import React, {createContext, useContext, useState} from 'react';
-import {v4} from 'uuid';
 
 const MessagesContext = createContext();
 
@@ -10,18 +9,21 @@ const sendingMessages = {};
 export function MessagesContextProvider({children}) {
   const [refreshValue, setRefreshValue] = useState();
 
-  const {user} = useUserContext();
+  const {userId} = useUserContext();
 
   function refresh() {
     setRefreshValue(Math.random());
   }
 
-  async function pushMessage(message) {
+  async function pushMessage({chatId, text}) {
     const fakeId = Math.random();
-    message._id = fakeId;
-    message.status = 'sending';
-    message.userId = user._id;
-    message.chatId = '614e5e91bc8e4ff26a3346e2';
+    const message = {
+      text,
+      chatId,
+      userId,
+      _id: fakeId,
+      status: 'sending',
+    };
     sendingMessages[fakeId] = message;
     refresh();
     api
@@ -32,7 +34,7 @@ export function MessagesContextProvider({children}) {
         delete sendingMessages[fakeId];
         refresh();
       })
-      .catch(err => console.error(err));
+      .catch(err => console.error(JSON.stringify(err.response)));
   }
 
   function cleanAdtionalMessages() {

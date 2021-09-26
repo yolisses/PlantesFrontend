@@ -4,7 +4,7 @@ import {ChatReference} from './ChatReference';
 import {useMessages} from './MessagesContext';
 import {SendMessageButton} from './SendMessageButton';
 
-export function MessageInput({chatRoomId, chatId, reference}) {
+export function MessageInput({chatId, reference}) {
   const {pushMessage} = useMessages();
 
   const [text, setText] = useState();
@@ -14,7 +14,7 @@ export function MessageInput({chatRoomId, chatId, reference}) {
       return;
     }
     setText(null);
-    await pushMessage({text});
+    await pushMessage({text, chatId});
   }
 
   function onPressCloseButton() {}

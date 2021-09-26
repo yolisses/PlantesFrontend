@@ -7,11 +7,11 @@ import {useUserContext} from 'auth/userContext';
 import React, {useEffect, useState} from 'react';
 import {CustomHeader} from 'publish/CustomHeader';
 import {FlatList} from 'react-native-gesture-handler';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {Button, StyleSheet, View} from 'react-native';
 import {UserImageAndName} from 'user/UserImageAndName';
 
 export function ChatScreen() {
-  const chat = {_id: '614e5e91bc8e4ff26a3346e2'};
+  const chat = {_id: '61504e1a5235318bc253b952'};
   const user = {};
 
   const {user: currentUser, token} = useUserContext();
