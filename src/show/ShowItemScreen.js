@@ -8,7 +8,8 @@ import {StartConversetionButton} from 'show/StartConversationButton';
 import {useNavigation} from '@react-navigation/core';
 
 export function ShowItemScreen({route}) {
-  const {preImage, item} = route.params;
+  const item = route.params?.item;
+  const preImage = route.params?.preImage;
 
   const scrollRef = useRef();
 
@@ -29,7 +30,7 @@ export function ShowItemScreen({route}) {
     <View style={styles.screen}>
       <FloatingButton />
       <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
-        <ImagesSwiper images={item?.images} preImage={preImage} />
+        <ImagesSwiper images={item?.images} preImage={preImage ?? null} />
         <ItemInfo scrollTo={scrollTo} item={item} />
       </ScrollView>
       <View style={styles.bottomWrapper}>

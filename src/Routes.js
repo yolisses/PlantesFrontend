@@ -11,6 +11,7 @@ import {PublishScreen} from 'publish/screens/PublishScreen';
 
 import {AlertDisplay} from 'alert/AlertDisplay';
 import {ModalDisplay} from 'modal/ModalDisplay';
+import {HomeStackScreen} from 'home/HomeStackScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -28,7 +29,7 @@ export function Routes() {
           tabBarIcon: ({size, color}) => getIcon({route, size, color}),
         })}>
         {/* The order matter! */}
-        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Home" component={HomeStackScreen} />
         <Tab.Screen name="Publish" component={PublishScreen} />
         <Tab.Screen name="Chats" component={ChatsListScreen} />
       </Tab.Navigator>
