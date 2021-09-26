@@ -40,11 +40,11 @@ export function Routes() {
         /> */}
         {token ? (
           <>
-            <Stack.Screen
+            {/* <Stack.Screen
               name="ChatsList"
               component={ChatScreen}
               options={{headerShown: false}}
-            />
+            /> */}
             {grantedLocation || grantedLocation === null ? (
               <Stack.Screen
                 name="Home"
@@ -81,11 +81,11 @@ export function Routes() {
               component={ChatScreen}
               options={{headerShown: false}}
             />
-            {/* <Stack.Screen
+            <Stack.Screen
               name="ChatsList"
               component={ChatsListScreen}
               options={{title: 'Conversas', headerLeft: () => <></>}}
-            /> */}
+            />
             <Stack.Screen
               name="ShowItem"
               component={ShowItemScreen}
