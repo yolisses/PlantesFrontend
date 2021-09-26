@@ -1,10 +1,11 @@
 import {UserRoundImage} from 'common/UserRoundImage';
+import {useUserById} from 'common/UsersByIdContext';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {useUser} from 'user/useUser';
 
 export function UserLink({id}) {
-  const user = useUser(id);
+  const {getUserById} = useUserById();
+  const user = getUserById(id);
 
   return (
     <View style={styles.container}>

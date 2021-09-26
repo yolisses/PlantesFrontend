@@ -2,11 +2,11 @@ import React from 'react';
 
 import {Alert} from 'alert/Alert';
 import {AlertButton} from 'alert/AlertButton';
-
-import {useUser} from 'user/useUser';
+import {useUserById} from 'common/UsersByIdContext';
 
 export function StartConversationAlert({item, onSendPress}) {
-  const user = useUser(item.userId);
+  const {getUserById} = useUserById();
+  const user = getUserById(item.userId);
 
   return (
     <Alert
