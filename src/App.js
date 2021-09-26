@@ -1,57 +1,38 @@
+// In index.js of a new project
 import React from 'react';
-import {StatusBar} from 'react-native';
-import 'react-native-gesture-handler'; // prevent modal error
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {View, Text, Button, StyleSheet} from 'react-native';
+import {Navigation} from 'react-native-navigation';
 
-import {Routes} from './Routes';
-
-import {UserContextProvider} from 'auth/userContext';
-import {AlertContextProvider} from 'alert/AlertContext';
-import {ModalContextProvider} from 'modal/ModalContext';
-import {PermissionsContextProvider} from 'permission/PermissionsContext';
-import {CameraPreferencesProvider} from 'camera/contexts/CameraPreferencesContext';
-
-import {ShallowDataContextProvider} from 'publish/ShallowDataContext';
-import {ImagesContextProvider} from 'publish/ImagesContext';
-import {SendingContextProvider} from 'send/SendingContext';
-
-import {GOOGLE_WEB_CLIENT_ID} from '@env';
-import {MessagesContextProvider} from 'chat/MessagesContext';
-import {ChatsContextProvider} from 'chat/ChatsContext';
-import {UsersByIdContextProvider} from 'common/UsersByIdContext';
-
-GoogleSignin.configure({
-  webClientId: GOOGLE_WEB_CLIENT_ID,
-  offlineAccess: true,
-});
-
-const App = () => {
+const HomeScreen = props => {
   return (
-    <ShallowDataContextProvider>
-      <UserContextProvider>
-        <PermissionsContextProvider>
-          <AlertContextProvider>
-            <ModalContextProvider>
-              <ChatsContextProvider>
-                <ImagesContextProvider>
-                  <UsersByIdContextProvider>
-                    <MessagesContextProvider>
-                      <CameraPreferencesProvider>
-                        <SendingContextProvider>
-                          <StatusBar barStyle={'default'} hidden={true} />
-                          <Routes />
-                        </SendingContextProvider>
-                      </CameraPreferencesProvider>
-                    </MessagesContextProvider>
-                  </UsersByIdContextProvider>
-                </ImagesContextProvider>
-              </ChatsContextProvider>
-            </ModalContextProvider>
-          </AlertContextProvider>
-        </PermissionsContextProvider>
-      </UserContextProvider>
-    </ShallowDataContextProvider>
+    <View style={styles.root}>
+      <Text>Home Screen</Text>
+    </View>
   );
 };
+Navigation.registerComponent('Home', () => HomeScreen);
 
-export default App;
+Navigation.events().registerAppLaunchedListener(async () => {
+  Navigation.setRoot({
+    root: {
+      stack: {
+        children: [
+          {
+            component: {
+              name: 'Home',
+            },
+          },
+        ],
+      },
+    },
+  });
+});
+
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'whitesmoke',
+  },
+});

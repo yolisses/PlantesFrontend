@@ -41,6 +41,7 @@
     "react-native-get-real-path": "https://github.com/Wraptime/react-native-get-real-path.git",
     "react-native-maps": "^0.28.0",
     "react-native-modalize": "^2.0.8",
+    "react-native-navigation": "^7.21.0",
     "react-native-onesignal": "^4.3.1",
     "react-native-safe-area-context": "^3.3.0",
     "react-native-screens": "^3.5.0",
