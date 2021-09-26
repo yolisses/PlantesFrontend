@@ -48,9 +48,10 @@ export function UserScreen({route}) {
     if (userId === currentUserId) {
       return (
         <FlatList
-          data={Object.values(sendings)}
           numColumns={numberOfCollums}
+          data={Object.values(sendings)}
           renderItem={renderSendingItem}
+          keyExtractor={sendingKeyExtractor}
           ListHeaderComponent={<UserInfo user={user} />}
         />
       );
@@ -59,11 +60,20 @@ export function UserScreen({route}) {
     }
   }
 
+  function keyExtractor(item) {
+    return item?._id;
+  }
+
+  function sendingKeyExtractor(item) {
+    return item?.plantId;
+  }
+
   return (
     <FooterNavigationLayout selected="Home">
       <FlatList
         data={plants}
         renderItem={renderItem}
+        keyExtractor={keyExtractor}
         numColumns={numberOfCollums}
         ListHeaderComponent={ListHeaderComponent}
       />
