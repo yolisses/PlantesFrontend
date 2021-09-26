@@ -9,9 +9,10 @@ import {CustomHeader} from 'publish/CustomHeader';
 import {FlatList} from 'react-native-gesture-handler';
 import {Button, StyleSheet, View} from 'react-native';
 import {UserImageAndName} from 'user/UserImageAndName';
+import {useUserById} from 'common/UsersByIdContext';
 
 export function ChatScreen({route}) {
-  const {user, chat: chatParam, userId} = route.params;
+  const {user: userParam, chat: chatParam, userId} = route.params;
 
   const {user: currentUser, token} = useUserContext();
 
@@ -22,6 +23,11 @@ export function ChatScreen({route}) {
 
   const [chat, setChat] = useState(chatParam);
   const chatId = chat?._id;
+
+  const {getUserById} = useUserById();
+  const userById = getUserById(userId);
+
+  const user = userParam || userById;
 
   useEffect(() => {
     if (userId && !chatParam) {

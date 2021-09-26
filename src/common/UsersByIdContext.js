@@ -9,6 +9,9 @@ export function UsersByIdContextProvider({children}) {
   const [refreshValue, setRefreshValue] = useState();
 
   function getUserById(id) {
+    if (!id) {
+      return null;
+    }
     if (usersById[id]) {
       return usersById[id];
     }
@@ -28,6 +31,6 @@ export function UsersByIdContextProvider({children}) {
   );
 }
 
-export function useUserById(id) {
+export function useUserById() {
   return useContext(UsersByIdContext);
 }
