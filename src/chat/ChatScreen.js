@@ -11,7 +11,7 @@ import {Button, StyleSheet, View} from 'react-native';
 import {UserImageAndName} from 'user/UserImageAndName';
 
 export function ChatScreen({route}) {
-  const {user, chatParam, userId} = route.params;
+  const {user, chat: chatParam, userId} = route.params;
 
   const {user: currentUser, token} = useUserContext();
 
@@ -20,7 +20,7 @@ export function ChatScreen({route}) {
   const {sendingMessages, adtionalMessages, cleanAdtionalMessages} =
     useMessages();
 
-  const [chat, setChat] = useState();
+  const [chat, setChat] = useState(chatParam);
 
   useEffect(() => {
     if (userId && !chatParam) {
