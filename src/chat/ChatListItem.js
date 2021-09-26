@@ -3,11 +3,14 @@ import {useNavigation} from '@react-navigation/native';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {UserRoundImage} from 'common/UserRoundImage';
 import {useUser} from 'user/useUser';
+import {useUserContext} from 'auth/userContext';
 
 export function ChatListItem({chat}) {
   const {navigate} = useNavigation();
 
-  const userId = chat.users[0];
+  const {userId: currentUserId} = useUserContext();
+
+  const userId = chat.users.filter(user => user !== currentUserId)[0];
   const user = useUser(userId);
 
   const onPress = () => navigate('Chat', {chat, user});
