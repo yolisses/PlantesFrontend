@@ -7,10 +7,10 @@ import {useUser} from 'user/useUser';
 export function ChatListItem({chat}) {
   const {navigate} = useNavigation();
 
-  const onPress = () => navigate('Chat', {chat, user});
-
-  const userId = chat.users[1];
+  const userId = chat.users[0];
   const user = useUser(userId);
+
+  const onPress = () => navigate('Chat', {chat, user});
 
   return (
     <>

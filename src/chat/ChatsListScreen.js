@@ -14,7 +14,10 @@ export function ChatsListScreen() {
   useEffect(() => {
     api
       .get('/chats')
-      .then(res => setChats(res.data))
+      .then(res => {
+        setChats(res.data);
+        console.error(res.data);
+      })
       .catch(err => console.error(err.response));
   }, []);
 

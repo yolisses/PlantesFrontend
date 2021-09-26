@@ -10,9 +10,8 @@ import {FlatList} from 'react-native-gesture-handler';
 import {Button, StyleSheet, View} from 'react-native';
 import {UserImageAndName} from 'user/UserImageAndName';
 
-export function ChatScreen() {
-  const chat = {_id: '61504e1a5235318bc253b952'};
-  const user = {};
+export function ChatScreen({route}) {
+  const {user, chat} = route.params;
 
   const {user: currentUser, token} = useUserContext();
 
