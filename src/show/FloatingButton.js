@@ -7,15 +7,11 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 const optionButtonSize = 25;
 
 export function FloatingButton() {
-  const {navigate} = useNavigation();
-
-  function onPress() {
-    navigate('Home');
-  }
+  const {goBack} = useNavigation();
 
   return (
     <View style={[styles.optionsWrapper, {alignItems: 'flex-start'}]}>
-      <TouchableOpacity onPress={onPress} style={styles.goBackOption}>
+      <TouchableOpacity onPress={goBack} style={styles.goBackOption}>
         <FontAwesomeIcon
           icon={faArrowLeft}
           color="white"
