@@ -12,7 +12,6 @@ import {TakePhotoButton} from '../TakePhotoButton';
 import {useShallowData} from '../ShallowDataContext';
 import {PublishImagesPreview} from '../PublishImagesPreview';
 import {SelectImageAlbumButton} from '../SelectImageAlbumButton';
-import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 
 import CameraRoll from '@react-native-community/cameraroll';
 import {useImages} from 'publish/ImagesContext';
@@ -59,7 +58,7 @@ export function PublishImagesScreen() {
   }, [album, refresh]);
 
   return (
-    <FooterNavigationLayout selected="Publish">
+    <View>
       <ValidatedHeader images={images} />
       <FlatList
         data={foundImages || (refresh && false)}
@@ -99,7 +98,7 @@ export function PublishImagesScreen() {
           />
         )}
       />
-    </FooterNavigationLayout>
+    </View>
   );
 }
 

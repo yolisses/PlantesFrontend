@@ -18,7 +18,7 @@ export function ChatListItem({chat}) {
   const onPress = () => navigate('Chat', {chat, user});
 
   return (
-    <>
+    <View>
       <TouchableOpacity
         style={styles.bigContainer}
         activeOpacity={0.8}
@@ -31,7 +31,7 @@ export function ChatListItem({chat}) {
         </View>
       </TouchableOpacity>
       <View style={styles.lineSeparator} />
-    </>
+    </View>
   );
 }
 

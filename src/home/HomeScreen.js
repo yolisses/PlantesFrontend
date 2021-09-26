@@ -28,7 +28,7 @@ export function HomeScreen() {
   }, []);
 
   return (
-    <FooterNavigationLayout selected={'Home'}>
+    <>
       <CustomHeader
         title="Plantei"
         right={
@@ -44,6 +44,6 @@ export function HomeScreen() {
           renderItem={({item}) => <Card item={item} />}
         />
       )}
-    </FooterNavigationLayout>
+    </>
   );
 }
