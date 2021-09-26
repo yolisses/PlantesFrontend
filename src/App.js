@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {StatusBar} from 'react-native';
 import 'react-native-gesture-handler'; // prevent modal error
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
@@ -17,13 +17,12 @@ import {SendingContextProvider} from 'send/SendingContext';
 
 import {GOOGLE_WEB_CLIENT_ID} from '@env';
 import {MessagesContextProvider} from 'chat/MessagesContext';
+import {ChatsContextProvider} from 'chat/ChatsContext';
 
 GoogleSignin.configure({
   webClientId: GOOGLE_WEB_CLIENT_ID,
   offlineAccess: true,
 });
-
-// 2bee2ed3-aef3-4be5-974a-9fac21878cab
 
 const App = () => {
   return (
@@ -32,16 +31,18 @@ const App = () => {
         <PermissionsContextProvider>
           <AlertContextProvider>
             <ModalContextProvider>
-              <ImagesContextProvider>
-                <MessagesContextProvider>
-                  <CameraPreferencesProvider>
-                    <SendingContextProvider>
-                      <StatusBar barStyle={'default'} hidden={true} />
-                      <Routes />
-                    </SendingContextProvider>
-                  </CameraPreferencesProvider>
-                </MessagesContextProvider>
-              </ImagesContextProvider>
+              <ChatsContextProvider>
+                <ImagesContextProvider>
+                  <MessagesContextProvider>
+                    <CameraPreferencesProvider>
+                      <SendingContextProvider>
+                        <StatusBar barStyle={'default'} hidden={true} />
+                        <Routes />
+                      </SendingContextProvider>
+                    </CameraPreferencesProvider>
+                  </MessagesContextProvider>
+                </ImagesContextProvider>
+              </ChatsContextProvider>
             </ModalContextProvider>
           </AlertContextProvider>
         </PermissionsContextProvider>
