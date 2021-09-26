@@ -21,6 +21,7 @@ export function ChatScreen({route}) {
     useMessages();
 
   const [chat, setChat] = useState(chatParam);
+  const chatId = chat?._id;
 
   useEffect(() => {
     if (userId && !chatParam) {
@@ -36,7 +37,7 @@ export function ChatScreen({route}) {
   async function getMessages() {
     if (chat) {
       try {
-        const res = await api.get('chatmessages/' + chat?._id);
+        const res = await api.get('chatmessages/' + chatId);
         cleanAdtionalMessages();
         setMessages(res.data);
       } catch (err) {
@@ -67,21 +68,28 @@ export function ChatScreen({route}) {
     return a.createdAt < b.createdAt;
   }
 
+  function isFromThisChat(message) {
+    return (
+      (!!message.chatId && message.chatId === chatId) ||
+      (!!message.toUserId && message.toUserId === userId)
+    );
+  }
+
+  const renderMessages = Object.values(sendingMessages)
+    .filter(isFromThisChat)
+    .concat(Object.values(adtionalMessages).sort(newer))
+    .filter(isFromThisChat)
+    .concat(messages);
+
   return (
     <View style={styles.screen}>
       <CustomHeader
         left={<BackButton />}
         center={<UserImageAndName image={user?.image} name={user?.name} />}
       />
-      <FlatList
-        inverted
-        data={Object.values(sendingMessages)
-          .concat(Object.values(adtionalMessages).sort(newer))
-          .concat(messages)}
-        renderItem={renderItem}
-      />
+      <FlatList inverted data={renderMessages} renderItem={renderItem} />
       <Button title="refresh" onPress={getMessages} />
-      <MessageInput chatId={chat?._id} toUserId={userId} />
+      <MessageInput chatId={chatId} toUserId={userId} />
     </View>
   );
 }
