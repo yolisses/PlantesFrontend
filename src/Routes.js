@@ -2,7 +2,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import {Dev} from './dev/Dev';
+import Dev from './dev/Dev';
 import {SendSomeImage} from 'dev/SendSomeImage';
 
 import {MapScreen} from 'map/MapScreen';
@@ -35,7 +35,7 @@ export function Routes() {
       <Stack.Navigator>
         {/* <Stack.Screen
           name="development"
-          component={HomeScreen}
+          component={Dev}
           options={{headerShown: false}}
         /> */}
         {!token ? (
