@@ -10,16 +10,28 @@ import {api} from 'api/api';
 import {useUserContext} from 'auth/userContext';
 
 export function HomeScreen() {
-  const [plants, setPlants] = useState(null);
+  const [page, setPage] = useState(1);
+  const [plants, setPlants] = useState([]);
+  const [ended, setEnded] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  async function getPlants() {
+  const getPlants = async () => {
+    if (loading || ended) {
+      return;
+    }
+    setLoading(true);
     try {
-      const res = await api.get('/plants');
-      setPlants(res.data);
+      const res = await api.get('/plants/' + page);
+      if (res.data.length === 0) {
+        setEnded(true);
+      }
+      setPlants([...plants, ...res.data]);
+      setPage(page + 1);
+      setLoading(false);
     } catch (err) {
       console.error(err);
     }
-  }
+  };
 
   const {user} = useUserContext();
 
@@ -41,6 +53,8 @@ export function HomeScreen() {
         <FlatList
           numColumns={2}
           data={plants}
+          onEndReached={getPlants}
+          onEndReachedThreshold={0.1}
           renderItem={({item}) => <Card item={item} />}
         />
       )}

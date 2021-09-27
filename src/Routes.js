@@ -35,10 +35,10 @@ export function Routes() {
       <Stack.Navigator>
         {/* <Stack.Screen
           name="development"
-          component={UserScreen}
-          // options={{headerShown: false}}
+          component={HomeScreen}
+          options={{headerShown: false}}
         /> */}
-        {token ? (
+        {!token ? (
           <>
             {/* <Stack.Screen
               name="ChatsList"
