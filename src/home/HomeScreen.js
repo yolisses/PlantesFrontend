@@ -11,12 +11,17 @@ import {AvailabilityButtons} from 'home/AvailabilityButtons';
 import {createHidableHeader} from 'common/createHidableHeader';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import {StyleSheet} from 'react-native';
+import {SearchButton} from './SearchButton';
+import {View} from 'react-native';
+import {SearchingField} from './SearchingField';
 
 export function HomeScreen() {
   const [page, setPage] = useState(0);
   const [plants, setPlants] = useState([]);
   const [ended, setEnded] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const [searching, setSearching] = useState(false);
 
   const getPlants = async () => {
     if (loading || ended) {
@@ -50,15 +55,37 @@ export function HomeScreen() {
     getPlants();
   }, []);
 
+  function onSearchPress() {
+    setSearching(true);
+  }
+  function onCloseSearchPress() {
+    setSearching(false);
+  }
+
   return (
     <FooterNavigationLayout selected={'Home'}>
-      <CustomHeader
-        title="Plantei"
-        style={styles.header}
-        right={
-          <UserRoundImage size={40} userId={user?._id} image={user?.image} />
-        }
-      />
+      <View style={styles.topWrapper}>
+        {!searching ? (
+          <CustomHeader
+            title="Plantei"
+            style={styles.header}
+            right={
+              <View style={styles.rightWrapper}>
+                <View style={styles.spacer}>
+                  <SearchButton onPress={onSearchPress} />
+                </View>
+                <UserRoundImage
+                  size={40}
+                  userId={user?._id}
+                  image={user?.image}
+                />
+              </View>
+            }
+          />
+        ) : (
+          <SearchingField onClosePress={onCloseSearchPress} />
+        )}
+      </View>
       <HidableHeader>
         <AvailabilityButtons />
       </HidableHeader>
@@ -80,10 +107,20 @@ export function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  header: {
+  topWrapper: {
     zIndex: 20,
-    elevation: 0,
     width: '100%',
     position: 'absolute',
+    backgroundColor: 'white',
+  },
+  header: {
+    elevation: 0,
+  },
+  rightWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  spacer: {
+    marginRight: 20,
   },
 });

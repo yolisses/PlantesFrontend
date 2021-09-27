@@ -20,6 +20,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   text: {
-    fontSize: 17,
+    fontSize: 18,
   },
 });
