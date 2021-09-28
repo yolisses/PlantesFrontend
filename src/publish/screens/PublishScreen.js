@@ -12,11 +12,6 @@ export function PublishScreen() {
   return (
     <Publish.Navigator>
       <Publish.Screen
-        name="Images"
-        component={PublishImagesScreen}
-        options={{headerShown: false, animationEnabled: false}}
-      />
-      <Publish.Screen
         name="Detail"
         component={PublishDetailScreen}
         options={{headerShown: false, animationEnabled: false}}
