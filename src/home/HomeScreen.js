@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList} from 'react-native';
+import {Button, FlatList, Text} from 'react-native';
 
 import {api} from 'api';
 import {Card} from 'home/Card';
@@ -14,6 +14,8 @@ import {StyleSheet} from 'react-native';
 import {SearchButton} from './SearchButton';
 import {View} from 'react-native';
 import {SearchingField} from './SearchingField';
+import {useObserver} from 'mobx-react-lite';
+import {person} from './searchAvailability';
 
 export function HomeScreen() {
   const [page, setPage] = useState(0);
@@ -61,9 +63,16 @@ export function HomeScreen() {
     setSearching(false);
   }
 
-  return (
+  return useObserver(() => (
     <FooterNavigationLayout selected={'Home'}>
       <View style={styles.topWrapper}>
+        <Text>{JSON.stringify(person)}</Text>
+        <Button
+          title="change"
+          onPress={() => {
+            person.coisa = Math.random();
+          }}
+        />
         {!searching ? (
           <CustomHeader
             title="Plantei"
@@ -102,7 +111,7 @@ export function HomeScreen() {
         />
       )}
     </FooterNavigationLayout>
-  );
+  ));
 }
 
 const styles = StyleSheet.create({
