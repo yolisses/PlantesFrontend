@@ -12,14 +12,11 @@ import {CameraSquareFocus} from './CameraFocusSquare';
 import {GoBackCameraButton} from './GoBackCameraButton';
 import {FlashSelectorButton} from './FlashSelectorButton';
 import {PictureConfirmButtons} from './PictureConfirmButtons';
-import {usePublish} from 'publish/PublishContext';
 import {imagesLimit} from 'publish/imagesLimit';
 
 import RNGRP from 'react-native-get-real-path';
 import {useImages} from 'publish/ImagesContext';
 import {useShallowData} from 'publish/ShallowDataContext';
-
-const ID = 'images';
 
 export function CameraScreen() {
   const cameraRef = useRef();
@@ -54,7 +51,7 @@ export function CameraScreen() {
               return images;
             }
             copy[uri] = counter;
-            data[images] = copy;
+            data.images = copy;
             return copy;
           });
         }

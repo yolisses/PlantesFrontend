@@ -1,5 +1,6 @@
-import {FlatList, StyleSheet, View} from 'react-native';
 import React, {useEffect, useMemo, useState} from 'react';
+import CameraRoll from '@react-native-community/cameraroll';
+import {FlatList, StyleSheet, View} from 'react-native';
 
 import {width} from 'utils/width';
 
@@ -12,16 +13,15 @@ import {TakePhotoButton} from '../TakePhotoButton';
 import {useShallowData} from '../ShallowDataContext';
 import {PublishImagesPreview} from '../PublishImagesPreview';
 import {SelectImageAlbumButton} from '../SelectImageAlbumButton';
-import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 
-import CameraRoll from '@react-native-community/cameraroll';
 import {useImages} from 'publish/ImagesContext';
+import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 
 const numberOfCollums = 3;
 
 function ValidatedHeader({images}) {
   let canContinue = false;
-  for (let image in images) {
+  for (let _ in images) {
     canContinue = true;
     break;
   }

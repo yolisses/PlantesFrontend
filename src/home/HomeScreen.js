@@ -96,7 +96,7 @@ export function HomeScreen() {
           numColumns={2}
           onScroll={onScroll}
           onEndReached={getPlants}
-          onEndReachedThreshold={0.1}
+          onEndReachedThreshold={0.5}
           renderItem={({item}) => <Card item={item} />}
           contentContainerStyle={{paddingTop: headerHeight}}
         />
