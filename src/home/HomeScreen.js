@@ -46,9 +46,8 @@ export function HomeScreen() {
   const headerHeight = 100;
 
   const {onScroll, HidableHeader} = createHidableHeader({
-    headerHeight,
+    headerHeight: 60,
     unsafeArea: 25,
-    threshold: headerHeight,
   });
 
   useEffect(() => {
