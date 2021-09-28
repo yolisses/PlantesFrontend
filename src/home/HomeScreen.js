@@ -62,7 +62,7 @@ export function HomeScreen() {
   }
 
   return (
-    <FooterNavigationLayout selected={'Home'}>
+    <View>
       <View style={styles.topWrapper}>
         {!searching ? (
           <CustomHeader
@@ -101,7 +101,7 @@ export function HomeScreen() {
           contentContainerStyle={{paddingTop: headerHeight}}
         />
       )}
-    </FooterNavigationLayout>
+    </View>
   );
 }
 

@@ -59,7 +59,7 @@ export function PublishImagesScreen() {
   }, [album, refresh]);
 
   return (
-    <FooterNavigationLayout selected="Publish">
+    <View>
       <ValidatedHeader images={images} />
       <FlatList
         data={foundImages || (refresh && false)}
@@ -99,7 +99,7 @@ export function PublishImagesScreen() {
           />
         )}
       />
-    </FooterNavigationLayout>
+    </View>
   );
 }
 

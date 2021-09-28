@@ -1,8 +1,10 @@
 import React from 'react';
 import {FlatList} from 'react-native';
-import {ChatListItem} from 'chat/ChatListItem';
-import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
+
+import {View} from 'react-native';
 import {useChats} from './ChatsContext';
+import {ChatListItem} from 'chat/ChatListItem';
+import {CustomHeader} from 'publish/CustomHeader';
 
 export function ChatsListScreen() {
   const {chats} = useChats();
@@ -12,7 +14,8 @@ export function ChatsListScreen() {
   const messageCountHigher = (a, b) => a.message_count < b.message_count;
 
   return (
-    <FooterNavigationLayout selected="ChatsList">
+    <View>
+      <CustomHeader title="Conversas" />
       {chats ? (
         <FlatList
           data={Object.entries(chats)
@@ -21,6 +24,6 @@ export function ChatsListScreen() {
           renderItem={renderItem}
         />
       ) : null}
-    </FooterNavigationLayout>
+    </View>
   );
 }
