@@ -16,13 +16,11 @@ import {imagesLimit} from 'publish/imagesLimit';
 
 import RNGRP from 'react-native-get-real-path';
 import {selectedImages} from 'publish/selectedImages';
-import {useShallowData} from 'publish/ShallowDataContext';
 
 export function CameraScreen() {
   const cameraRef = useRef();
   const [uri, setUri] = useState();
   const {goBack} = useNavigation();
-  const {data} = useShallowData();
   const [pictureTook, setPictureTook] = useState(false);
 
   const takePicture = async () => {
@@ -33,25 +31,17 @@ export function CameraScreen() {
 
   const resume = () => setPictureTook(false);
 
-  function approve() {
-    CameraRoll.save(uri, {type: 'photo', album: 'Plantei'}).then(uri =>
-      RNGRP.getRealPathFromURI(uri).then(filePath => {
-        const uri = 'file://' + filePath;
-        if (Object.keys(selectedImages || {}).length < imagesLimit) {
-          const copy = {};
-          let counter = 1;
-          for (let item in selectedImages) {
-            copy[item] = counter;
-            counter++;
-          }
-          if (counter < imagesLimit) {
-            copy[uri] = counter;
-            data.images = copy;
-            selectedImages = copy;
-          }
-        }
-      }),
-    );
+  async function approve() {
+    const savedUri = await CameraRoll.save(uri, {
+      type: 'photo',
+      album: 'Plantei',
+    });
+    const filePath = await RNGRP.getRealPathFromURI(savedUri);
+    const newUri = 'file://' + filePath;
+    const pos = Object.keys(selectedImages).length;
+    if (pos < imagesLimit) {
+      selectedImages[newUri] = pos;
+    }
     goBack();
   }
 
