@@ -5,7 +5,6 @@ import React from 'react';
 import {Routes} from './Routes';
 import {StatusBar} from 'react-native';
 
-import {ChatsContextProvider} from 'chat/ChatsContext';
 import {AlertContextProvider} from 'alert/AlertContext';
 import {ModalContextProvider} from 'modal/ModalContext';
 import {SendingContextProvider} from 'send/SendingContext';
@@ -20,18 +19,16 @@ const App = () => (
     <PermissionsContextProvider>
       <AlertContextProvider>
         <ModalContextProvider>
-          <ChatsContextProvider>
-            <UsersByIdContextProvider>
-              <MessagesContextProvider>
-                <CameraPreferencesProvider>
-                  <SendingContextProvider>
-                    <StatusBar barStyle={'default'} hidden={true} />
-                    <Routes />
-                  </SendingContextProvider>
-                </CameraPreferencesProvider>
-              </MessagesContextProvider>
-            </UsersByIdContextProvider>
-          </ChatsContextProvider>
+          <UsersByIdContextProvider>
+            <MessagesContextProvider>
+              <CameraPreferencesProvider>
+                <SendingContextProvider>
+                  <StatusBar barStyle={'default'} hidden={true} />
+                  <Routes />
+                </SendingContextProvider>
+              </CameraPreferencesProvider>
+            </MessagesContextProvider>
+          </UsersByIdContextProvider>
         </ModalContextProvider>
       </AlertContextProvider>
     </PermissionsContextProvider>

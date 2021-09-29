@@ -1,11 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {FlatList} from 'react-native';
 import {ChatListItem} from 'chat/ChatListItem';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
-import {useChats} from './ChatsContext';
+import {chats} from './chats';
+import {api} from 'api';
 
 export function ChatsListScreen() {
-  const {chats} = useChats();
+  useEffect(() => {
+    api
+      .get('/chats')
+      .then(res => {
+        Object.assign(chats, res.data);
+      })
+      .catch(err => console.error(err.response));
+  }, []);
 
   const renderItem = ({item: chat}) => <ChatListItem key={chat} chat={chat} />;
 

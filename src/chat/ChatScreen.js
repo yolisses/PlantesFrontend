@@ -36,7 +36,7 @@ export function ChatScreen({route}) {
         })
         .catch(err => console.error(err.response));
     }
-  }, [auth.userId]);
+  }, []);
 
   async function getMessages() {
     if (chat) {
