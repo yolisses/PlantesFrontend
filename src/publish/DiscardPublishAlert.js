@@ -2,11 +2,10 @@ import React from 'react';
 import {Alert} from 'alert/Alert';
 import {AlertButton} from 'alert/AlertButton';
 import {useShallowData} from './ShallowDataContext';
-import {useImages} from './ImagesContext';
 
 export function DiscardPublishAlert() {
   const {discard: discardShallowData} = useShallowData();
-  const {discard: discardImagesSelection} = useImages();
+  const discardImagesSelection = () => {};
   function onPress() {
     discardShallowData();
     discardImagesSelection();

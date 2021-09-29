@@ -15,14 +15,13 @@ import {PictureConfirmButtons} from './PictureConfirmButtons';
 import {imagesLimit} from 'publish/imagesLimit';
 
 import RNGRP from 'react-native-get-real-path';
-import {useImages} from 'publish/ImagesContext';
+import {selectedImages} from 'publish/selectedImages';
 import {useShallowData} from 'publish/ShallowDataContext';
 
 export function CameraScreen() {
   const cameraRef = useRef();
   const [uri, setUri] = useState();
   const {goBack} = useNavigation();
-  const {images, setImages, setRefresh} = useImages();
   const {data} = useShallowData();
   const [pictureTook, setPictureTook] = useState(false);
 
@@ -38,22 +37,18 @@ export function CameraScreen() {
     CameraRoll.save(uri, {type: 'photo', album: 'Plantei'}).then(uri =>
       RNGRP.getRealPathFromURI(uri).then(filePath => {
         const uri = 'file://' + filePath;
-        if (Object.keys(images || {}).length < imagesLimit) {
-          setRefresh(Math.random());
-          setImages(images => {
-            const copy = {};
-            let counter = 1;
-            for (let item in images) {
-              copy[item] = counter;
-              counter++;
-            }
-            if (counter > imagesLimit) {
-              return images;
-            }
+        if (Object.keys(selectedImages || {}).length < imagesLimit) {
+          const copy = {};
+          let counter = 1;
+          for (let item in selectedImages) {
+            copy[item] = counter;
+            counter++;
+          }
+          if (counter < imagesLimit) {
             copy[uri] = counter;
             data.images = copy;
-            return copy;
-          });
+            selectedImages = copy;
+          }
         }
       }),
     );

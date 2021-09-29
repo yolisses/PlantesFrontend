@@ -7,14 +7,13 @@ import {useSending} from 'send/SendingContext';
 import {formatToPlant} from 'send/formatToPlant';
 
 import {NextButton} from './NextButton';
-import {useImages} from './ImagesContext';
 import {useShallowData} from './ShallowDataContext';
 
 export function FinishButton() {
   const {pushSending} = useSending();
   const {dispatch} = useNavigation();
 
-  const {discard: discardImagesSelection} = useImages();
+  const discardImagesSelection = () => {};
   const {data: shallowData, discard: discardShallowData} = useShallowData();
 
   function resetNavigation() {

@@ -1,6 +1,6 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import CameraRoll from '@react-native-community/cameraroll';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {Button, FlatList, StyleSheet, View} from 'react-native';
 
 import {width} from 'utils/width';
 
@@ -14,14 +14,16 @@ import {useShallowData} from '../ShallowDataContext';
 import {PublishImagesPreview} from '../PublishImagesPreview';
 import {SelectImageAlbumButton} from '../SelectImageAlbumButton';
 
-import {useImages} from 'publish/ImagesContext';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
+import {selectedImages} from 'publish/selectedImages';
+import {selectedAlbum} from 'publish/selectedAlbum';
+import {searchOptions} from 'search/searchOptions';
 
 const numberOfCollums = 3;
 
-function ValidatedHeader({images}) {
+function ValidatedHeader() {
   let canContinue = false;
-  for (let _ in images) {
+  for (let _ in selectedImages) {
     canContinue = true;
     break;
   }
@@ -39,13 +41,12 @@ function ValidatedHeader({images}) {
 }
 
 export function PublishImagesScreen() {
-  const {images, setImages, album, setAlbum, refresh} = useImages();
-  const [foundImages, setFoundImages] = useState([]);
   const {data} = useShallowData();
+  const [foundImages, setFoundImages] = useState([]);
 
   async function getPhotos() {
     CameraRoll.getPhotos({
-      groupName: album !== allPhotosAlbum ? album : undefined,
+      groupName: selectedAlbum !== allPhotosAlbum ? selectedAlbum : undefined,
       first: 100,
     })
       .then(res => {
@@ -56,24 +57,21 @@ export function PublishImagesScreen() {
 
   useEffect(() => {
     getPhotos();
-  }, [album, refresh]);
+  }, [selectedAlbum]);
 
   return (
     <FooterNavigationLayout selected="Publish">
-      <ValidatedHeader images={images} />
+      <ValidatedHeader />
+      <Button onPress={() => (selectedAlbum.sell = 'mas')} title="teste" />
       <FlatList
-        data={foundImages || (refresh && false)}
+        data={foundImages}
         numColumns={numberOfCollums}
         keyExtractor={item => item}
         ListHeaderComponent={
           <View style={{backgroundColor: 'white'}}>
             <PublishImagesPreview />
             <View style={styles.wrapper}>
-              <SelectImageAlbumButton
-                album={album}
-                setAlbum={setAlbum}
-                style={styles.button}
-              />
+              <SelectImageAlbumButton style={styles.button} />
               <TakePhotoButton style={styles.button} />
             </View>
           </View>
@@ -89,12 +87,10 @@ export function PublishImagesScreen() {
         }}
         renderItem={({item: uri}) => (
           <SelectableImage
-            id="images"
-            data={data}
             key={uri}
             uri={uri}
-            images={images}
-            refresh={refresh}
+            id="images"
+            data={data}
             setImages={setImages}
           />
         )}

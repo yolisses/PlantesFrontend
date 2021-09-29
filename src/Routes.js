@@ -35,7 +35,7 @@ export function Routes() {
       <Stack.Navigator>
         {/* <Stack.Screen
           name="development"
-          component={Dev}
+          component={PublishImagesScreen}
           options={{headerShown: false}}
         /> */}
         {!token ? (

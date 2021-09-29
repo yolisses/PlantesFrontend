@@ -12,7 +12,6 @@ import {PermissionsContextProvider} from 'permission/PermissionsContext';
 import {CameraPreferencesProvider} from 'camera/contexts/CameraPreferencesContext';
 
 import {ShallowDataContextProvider} from 'publish/ShallowDataContext';
-import {ImagesContextProvider} from 'publish/ImagesContext';
 import {SendingContextProvider} from 'send/SendingContext';
 
 import {GOOGLE_WEB_CLIENT_ID} from '@env';
@@ -33,18 +32,16 @@ const App = () => {
           <AlertContextProvider>
             <ModalContextProvider>
               <ChatsContextProvider>
-                <ImagesContextProvider>
-                  <UsersByIdContextProvider>
-                    <MessagesContextProvider>
-                      <CameraPreferencesProvider>
-                        <SendingContextProvider>
-                          <StatusBar barStyle={'default'} hidden={true} />
-                          <Routes />
-                        </SendingContextProvider>
-                      </CameraPreferencesProvider>
-                    </MessagesContextProvider>
-                  </UsersByIdContextProvider>
-                </ImagesContextProvider>
+                <UsersByIdContextProvider>
+                  <MessagesContextProvider>
+                    <CameraPreferencesProvider>
+                      <SendingContextProvider>
+                        <StatusBar barStyle={'default'} hidden={true} />
+                        <Routes />
+                      </SendingContextProvider>
+                    </CameraPreferencesProvider>
+                  </MessagesContextProvider>
+                </UsersByIdContextProvider>
               </ChatsContextProvider>
             </ModalContextProvider>
           </AlertContextProvider>
