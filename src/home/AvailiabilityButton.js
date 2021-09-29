@@ -1,21 +1,24 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
-export function AvailiabilityButton({text, style, ...rest}) {
-  const [active, setActive] = useState(false);
+import {useObserver} from 'mobx-react-lite';
+import {searchOptions} from 'search/searchOptions';
 
+export function AvailiabilityButton({text, id}) {
   const onPress = () => {
-    setActive(!active);
+    searchOptions[id] = !searchOptions[id];
   };
 
-  return (
+  return useObserver(() => (
     <TouchableOpacity
       activeOpacity={0.7}
-      style={[styles.container, active && styles.active]}
+      style={[styles.container, searchOptions[id] && styles.active]}
       onPress={onPress}>
-      <Text style={[styles.capsule, active && styles.activeText]}>{text}</Text>
+      <Text style={[styles.capsule, searchOptions[id] && styles.activeText]}>
+        {text}
+      </Text>
     </TouchableOpacity>
-  );
+  ));
 }
 
 const styles = StyleSheet.create({
