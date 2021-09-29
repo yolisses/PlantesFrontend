@@ -4,8 +4,8 @@ import {faAngleDown} from '@fortawesome/free-solid-svg-icons';
 import {useModal} from 'modal/ModalContext';
 
 import {BarButton} from './BarButton';
-import {selectedAlbum} from './selectedAlbum';
 import {SelectLocalImageAlbumModal} from './SelectImageAlbumModal';
+import {selectedAlbum} from './selectedAlbum';
 
 export function SelectImageAlbumButton({...res}) {
   const {showModal} = useModal();
@@ -13,8 +13,6 @@ export function SelectImageAlbumButton({...res}) {
   const onPress = () => {
     showModal(<SelectLocalImageAlbumModal />);
   };
-
-  console.error(selectedAlbum.name);
 
   return (
     <BarButton

@@ -11,9 +11,7 @@ export function SelectLocalImageAlbumModalButton({album}) {
   const {closeModal} = useModal();
 
   const changeToAlbum = () => {
-    console.error('foi aqui', album);
-    selectedAlbum.name = 'album';
-    console.error('pera', selectedAlbum.name);
+    selectedAlbum.name = album;
     closeModal();
   };
 
