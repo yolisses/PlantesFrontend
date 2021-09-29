@@ -38,6 +38,7 @@ module.exports = {
           camera: './src/camera',
           common: './src/common',
           global: './src/global',
+          search: './src/search',
           comment: './src/comment',
           publish: './src/publish',
           storage: './src/storage',

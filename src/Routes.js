@@ -38,7 +38,7 @@ export function Routes() {
           component={Dev}
           options={{headerShown: false}}
         /> */}
-        {token ? (
+        {!token ? (
           <>
             {/* <Stack.Screen
               name="ChatsList"
