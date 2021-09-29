@@ -14,11 +14,11 @@ export function CustomHeader({title, left, center, right, style}) {
 
 const styles = StyleSheet.create({
   container: {
-    height: 60,
-    paddingHorizontal: 10,
+    height: 55,
     elevation: 3,
     alignItems: 'center',
     flexDirection: 'row',
+    paddingHorizontal: 10,
     backgroundColor: 'white',
   },
   title: {

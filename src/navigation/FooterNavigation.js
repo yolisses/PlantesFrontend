@@ -24,8 +24,8 @@ export function FooterNavigation({selected}) {
 
 const styles = StyleSheet.create({
   container: {
+    height: 55,
     width: '100%',
-    paddingVertical: 12,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',

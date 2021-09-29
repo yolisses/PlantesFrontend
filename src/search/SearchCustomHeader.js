@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import {SearchButton} from 'home/SearchButton';
@@ -9,45 +9,48 @@ import {UserRoundImage} from 'common/UserRoundImage';
 import {AvailabilityButtons} from 'home/AvailabilityButtons';
 
 export function SearchCustomHeader({HidableHeader}) {
-  const [textSearc, setTextSearc] = useState(false);
+  const [textSearch, setTextSearch] = useState(false);
   const {user} = useUserContext();
 
   function onSearchPress() {
-    setTextSearc(true);
+    setTextSearch(true);
   }
 
   function onCloseSearchPress() {
-    setTextSearc(false);
+    setTextSearch(false);
   }
 
-  return (
-    <View>
-      <View style={styles.topWrapper}>
-        {!textSearc ? (
-          <CustomHeader
-            title="Plantei"
-            style={styles.header}
-            right={
-              <View style={styles.rightWrapper}>
-                <View style={styles.spacer}>
-                  <SearchButton onPress={onSearchPress} />
+  return useMemo(
+    () => (
+      <View>
+        <View style={styles.topWrapper}>
+          {!textSearch ? (
+            <CustomHeader
+              title="Plantei"
+              style={styles.header}
+              right={
+                <View style={styles.rightWrapper}>
+                  <View style={styles.spacer}>
+                    <SearchButton onPress={onSearchPress} />
+                  </View>
+                  <UserRoundImage
+                    size={40}
+                    userId={user?._id}
+                    image={user?.image}
+                  />
                 </View>
-                <UserRoundImage
-                  size={40}
-                  userId={user?._id}
-                  image={user?.image}
-                />
-              </View>
-            }
-          />
-        ) : (
-          <SearchingField onClosePress={onCloseSearchPress} />
-        )}
+              }
+            />
+          ) : (
+            <SearchingField onClosePress={onCloseSearchPress} />
+          )}
+        </View>
+        <HidableHeader>
+          <AvailabilityButtons />
+        </HidableHeader>
       </View>
-      <HidableHeader>
-        <AvailabilityButtons />
-      </HidableHeader>
-    </View>
+    ),
+    [textSearch, setTextSearch],
   );
 }
 

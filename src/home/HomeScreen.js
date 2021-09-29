@@ -15,7 +15,7 @@ import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 
 export function HomeScreen() {
   const {onScroll, HidableHeader} = createHidableHeader({
-    headerHeight: 60,
+    headerHeight: 55,
     unsafeArea: 25,
   });
 
@@ -67,7 +67,7 @@ export function HomeScreen() {
           data={loadPlants.plants}
           onEndReached={onEndReached}
           onEndReachedThreshold={0.5}
-          contentContainerStyle={{paddingTop: 100}}
+          contentContainerStyle={{paddingTop: 95}}
           renderItem={({item}) => <Card item={item} />}
         />
       )}
