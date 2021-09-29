@@ -1,9 +1,12 @@
 import React, {useEffect} from 'react';
 import {FlatList} from 'react-native';
+
+import {useObserver} from 'mobx-react-lite';
+
+import {api} from 'api';
+import {chats} from './chats';
 import {ChatListItem} from 'chat/ChatListItem';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
-import {chats} from './chats';
-import {api} from 'api';
 
 export function ChatsListScreen() {
   useEffect(() => {
@@ -19,7 +22,7 @@ export function ChatsListScreen() {
 
   const messageCountHigher = (a, b) => a.message_count < b.message_count;
 
-  return (
+  return useObserver(() => (
     <FooterNavigationLayout selected="ChatsList">
       {chats ? (
         <FlatList
@@ -30,5 +33,5 @@ export function ChatsListScreen() {
         />
       ) : null}
     </FooterNavigationLayout>
-  );
+  ));
 }
