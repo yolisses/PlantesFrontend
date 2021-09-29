@@ -46,14 +46,13 @@ export function HomeScreen() {
     loadPlants.loading = false;
   }
 
-  useEffect(
-    () =>
-      observe(searchOptions, () => {
-        reset();
-        getPlants();
-      }),
-    [],
-  );
+  useEffect(() => {
+    observe(searchOptions, () => {
+      reset();
+      getPlants();
+    });
+    getPlants();
+  }, []);
 
   return useObserver(() => (
     <FooterNavigationLayout selected={'Home'}>
