@@ -36,7 +36,7 @@ export function Routes() {
           />
         ) : (
           <>
-            <Stack.Screen name="Dev" component={Dev} />
+            {/* <Stack.Screen name="Dev" component={Dev} /> */}
             <Stack.Screen
               name="Home"
               component={HomeScreen}

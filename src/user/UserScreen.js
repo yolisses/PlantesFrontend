@@ -1,4 +1,4 @@
-import {FlatList} from 'react-native';
+import {Button, FlatList} from 'react-native';
 import React, {useEffect, useState} from 'react';
 
 import {api} from 'api';
@@ -9,6 +9,7 @@ import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import {UserInfo} from './UserInfo';
 import {SendingCard} from './SendingCard';
 import {auth} from 'auth/auth';
+import {signOut} from 'auth/signOut';
 
 const numberOfCollums = 3;
 
@@ -46,13 +47,16 @@ export function UserScreen({route}) {
   function ListHeaderComponent() {
     if (userId === auth.userId) {
       return (
-        <FlatList
-          numColumns={numberOfCollums}
-          data={Object.values(sendings)}
-          renderItem={renderSendingItem}
-          keyExtractor={sendingKeyExtractor}
-          ListHeaderComponent={<UserInfo user={user} />}
-        />
+        <>
+          <Button title="sair" onPress={signOut} />
+          <FlatList
+            numColumns={numberOfCollums}
+            data={Object.values(sendings)}
+            renderItem={renderSendingItem}
+            keyExtractor={sendingKeyExtractor}
+            ListHeaderComponent={<UserInfo user={user} />}
+          />
+        </>
       );
     } else {
       return <UserInfo user={user} />;
