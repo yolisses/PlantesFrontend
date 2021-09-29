@@ -2,8 +2,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import Dev from './dev/Dev';
-import {SendSomeImage} from 'dev/SendSomeImage';
+import {Dev} from './dev/Dev';
 
 import {MapScreen} from 'map/MapScreen';
 import {ChatScreen} from 'chat/ChatScreen';
@@ -14,50 +13,35 @@ import {ShowItemScreen} from 'show/ShowItemScreen';
 import {ChatsListScreen} from 'chat/ChatsListScreen';
 import {CommunityScreen} from 'post/CommunityScreen';
 import {PublishScreen} from 'publish/screens/PublishScreen';
-import {RequestLocationPermissionScreen} from 'permission/RequestLocationPermissionScreen';
 
 import {AlertDisplay} from 'alert/AlertDisplay';
 import {ModalDisplay} from 'modal/ModalDisplay';
 
-import {useUserContext} from 'auth/userContext';
 import {CommentsScreen} from 'comment/CommentsScreen';
-import {usePermissions} from 'permission/PermissionsContext';
 import {MapUserLocationButton} from 'map/MapUserLocationButton';
+import {auth} from 'auth/auth';
+import {useObserver} from 'mobx-react-lite';
 
 const Stack = createNativeStackNavigator();
 
 export function Routes() {
-  const {token} = useUserContext();
-  const {grantedLocation} = usePermissions();
-
-  return (
+  return useObserver(() => (
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen
-          name="development"
-          component={PublishImagesScreen}
-          options={{headerShown: false}}
-        /> */}
-        {!token ? (
+        {!auth.token ? (
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{headerShown: false}}
+          />
+        ) : (
           <>
-            {/* <Stack.Screen
-              name="ChatsList"
-              component={ChatScreen}
+            <Stack.Screen name="Dev" component={Dev} />
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
               options={{headerShown: false}}
-            /> */}
-            {grantedLocation || grantedLocation === null ? (
-              <Stack.Screen
-                name="Home"
-                component={HomeScreen}
-                options={{headerShown: false}}
-              />
-            ) : (
-              <Stack.Screen
-                name="Home"
-                component={RequestLocationPermissionScreen}
-                options={{headerShown: false}}
-              />
-            )}
+            />
             <Stack.Screen
               name="Map"
               component={MapScreen}
@@ -102,16 +86,10 @@ export function Routes() {
               options={{title: 'Comunidade'}}
             />
           </>
-        ) : (
-          <Stack.Screen
-            name="Login"
-            component={LoginScreen}
-            options={{headerShown: false}}
-          />
         )}
       </Stack.Navigator>
       <AlertDisplay />
       <ModalDisplay />
     </NavigationContainer>
-  );
+  ));
 }

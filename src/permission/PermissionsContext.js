@@ -1,13 +1,10 @@
 import React, {useContext, createContext, useEffect, useState} from 'react';
 import {PermissionsAndroid} from 'react-native';
-import {useUserContext} from 'auth/userContext';
 
 const PermissionsContext = createContext();
 
 export function PermissionsContextProvider({children}) {
   const [grantedLocation, setGrantedLocation] = useState(null);
-
-  const {updateLocation} = useUserContext();
 
   const requestLocationPermission = () => {
     PermissionsAndroid.request(
@@ -25,12 +22,6 @@ export function PermissionsContextProvider({children}) {
   useEffect(() => {
     refresh();
   }, []);
-
-  useEffect(() => {
-    if (grantedLocation) {
-      // updateLocation();
-    }
-  }, [grantedLocation]);
 
   return (
     <PermissionsContext.Provider

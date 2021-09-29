@@ -1,5 +1,5 @@
 import {api} from 'api';
-import {useUserContext} from 'auth/userContext';
+import {auth} from 'auth/auth';
 import React, {createContext, useContext, useState} from 'react';
 
 const MessagesContext = createContext();
@@ -8,8 +8,6 @@ let adtionalMessages = {};
 const sendingMessages = {};
 export function MessagesContextProvider({children}) {
   const [refreshValue, setRefreshValue] = useState();
-
-  const {userId} = useUserContext();
 
   function refresh() {
     setRefreshValue(Math.random());
@@ -20,10 +18,10 @@ export function MessagesContextProvider({children}) {
     const message = {
       text,
       chatId,
-      userId,
       toUserId,
       _id: fakeId,
       status: 'sending',
+      userId: auth.userId,
     };
     sendingMessages[fakeId] = message;
     refresh();

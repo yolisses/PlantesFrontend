@@ -4,11 +4,11 @@ import React, {useEffect, useState} from 'react';
 import {api} from 'api';
 import {Card} from 'home/Card';
 import {useSending} from 'send/SendingContext';
-import {useUserContext} from 'auth/userContext';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 
 import {UserInfo} from './UserInfo';
 import {SendingCard} from './SendingCard';
+import {auth} from 'auth/auth';
 
 const numberOfCollums = 3;
 
@@ -19,8 +19,6 @@ export function UserScreen({route}) {
   const {userId} = route.params;
 
   const {sendings, removeFinisheds} = useSending();
-
-  const {userId: currentUserId} = useUserContext();
 
   function renderItem({item}) {
     return <Card item={item} fraction={3} />;
@@ -46,7 +44,7 @@ export function UserScreen({route}) {
   }, []);
 
   function ListHeaderComponent() {
-    if (userId === currentUserId) {
+    if (userId === auth.userId) {
       return (
         <FlatList
           numColumns={numberOfCollums}

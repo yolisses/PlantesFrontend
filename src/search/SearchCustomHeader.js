@@ -2,15 +2,14 @@ import React, {useMemo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import {SearchButton} from 'home/SearchButton';
-import {useUserContext} from 'auth/userContext';
 import {CustomHeader} from 'publish/CustomHeader';
 import {SearchingField} from 'home/SearchingField';
 import {UserRoundImage} from 'common/UserRoundImage';
 import {AvailabilityButtons} from 'home/AvailabilityButtons';
+import {auth} from 'auth/auth';
 
 export function SearchCustomHeader({HidableHeader}) {
   const [textSearch, setTextSearch] = useState(false);
-  const {user} = useUserContext();
 
   function onSearchPress() {
     setTextSearch(true);
@@ -35,8 +34,8 @@ export function SearchCustomHeader({HidableHeader}) {
                   </View>
                   <UserRoundImage
                     size={40}
-                    userId={user?._id}
-                    image={user?.image}
+                    userId={auth.userId}
+                    image={auth.user?.image}
                   />
                 </View>
               }

@@ -1,12 +1,10 @@
 import {api} from 'api';
-import {useUserContext} from 'auth/userContext';
+import {auth} from 'auth/auth';
 import React, {createContext, useContext, useEffect, useState} from 'react';
 
 const ChatsContext = createContext();
 export function ChatsContextProvider({children}) {
   const [chats, setChats] = useState({});
-
-  const {token} = useUserContext();
 
   useEffect(() => {
     api
@@ -15,7 +13,7 @@ export function ChatsContextProvider({children}) {
         setChats(res.data);
       })
       .catch(err => console.error(err.response));
-  }, [token]);
+  }, [auth.token]);
 
   return (
     <ChatsContext.Provider value={{chats}}>{children}</ChatsContext.Provider>

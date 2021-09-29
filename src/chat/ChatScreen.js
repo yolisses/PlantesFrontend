@@ -3,18 +3,16 @@ import {Message} from 'chat/Message';
 import {useMessages} from './MessagesContext';
 import {BackButton} from 'publish/BackButton';
 import {MessageInput} from 'chat/MessageInput';
-import {useUserContext} from 'auth/userContext';
 import React, {useEffect, useState} from 'react';
 import {CustomHeader} from 'publish/CustomHeader';
 import {FlatList} from 'react-native-gesture-handler';
 import {Button, StyleSheet, View} from 'react-native';
 import {UserImageAndName} from 'user/UserImageAndName';
 import {useUserById} from 'common/UsersByIdContext';
+import {auth} from 'auth/auth';
 
 export function ChatScreen({route}) {
   const {user: userParam, chat: chatParam, userId} = route.params;
-
-  const {user: currentUser, token} = useUserContext();
 
   const [messages, setMessages] = useState([]);
 
@@ -38,7 +36,7 @@ export function ChatScreen({route}) {
         })
         .catch(err => console.error(err.response));
     }
-  }, [userId]);
+  }, [auth.userId]);
 
   async function getMessages() {
     if (chat) {
@@ -53,18 +51,18 @@ export function ChatScreen({route}) {
   }
 
   useEffect(() => {
-    if (token) {
+    if (auth.token) {
       getMessages();
       return getMessages;
     }
-  }, [token, chat]);
+  }, [auth.token, chat]);
 
   function renderItem({item: message}) {
     return (
       <Message
         key={message.id}
         message={message}
-        fromUser={currentUser._id === message.userId}
+        fromUser={auth.userId === message.userId}
         // moreMargin={actualLastUserId !== message.userId}
       />
     );
