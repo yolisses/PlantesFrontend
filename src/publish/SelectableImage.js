@@ -1,45 +1,38 @@
 import React from 'react';
 import FastImage from 'react-native-fast-image';
-
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
-import {width} from 'utils/width';
-import {SelectableImageNumber} from './SelectableImageNumber';
-import {useAlert} from 'alert/AlertContext';
-import {ImagesLimitAlert} from './ImagesLimitAlert';
+import {useObserver} from 'mobx-react-lite';
+
 import {imagesLimit} from './imagesLimit';
 import {selectedImages} from './selectedImages';
-import {useObserver} from 'mobx-react-lite';
+import {ImagesLimitAlert} from './ImagesLimitAlert';
+import {SelectableImageNumber} from './SelectableImageNumber';
+
+import {width} from 'utils/width';
+import {useAlert} from 'alert/AlertContext';
+
 const numberOfCollums = 3;
 
 export function SelectableImage({uri, imagesReachedLimit}) {
   const {showAlert} = useAlert();
 
   function pushImage(uri) {
-    let counter = Object.keys(selectedImages).length;
-    // if (counter > imagesLimit) {
-    //   showAlert(<ImagesLimitAlert />);
-    //   return;
-    // }
+    let counter = Object.keys(selectedImages).length + 1;
+    if (counter > imagesLimit) {
+      showAlert(<ImagesLimitAlert />);
+      return;
+    }
     selectedImages[uri] = counter;
-    console.error(selectedImages);
   }
 
   function removeImage(uri) {
-    console.error('remove');
-    // setImages(images => {
-    //   const copy = {};
-    //   let counter = 1;
-    //   for (let item in images) {
-    //     if (item === uri) {
-    //       continue;
-    //     }
-    //     copy[item] = counter;
-    //     counter++;
-    //   }
-    //   data[id] = copy;
-    //   return copy;
-    // });
+    delete selectedImages[uri];
+    let counter = 1;
+    for (let key in selectedImages) {
+      selectedImages[key] = counter;
+      counter += 1;
+    }
   }
 
   function onPress() {
