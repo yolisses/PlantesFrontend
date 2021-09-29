@@ -54,13 +54,12 @@ export function PublishImagesScreen() {
       .catch(err => console.error(err));
   }
 
-  useEffect(
-    () =>
-      observe(selectedAlbum, () => {
-        getPhotos();
-      }),
-    [],
-  );
+  useEffect(() => {
+    observe(selectedAlbum, () => {
+      getPhotos();
+    });
+    getPhotos();
+  }, []);
 
   return useObserver(() => (
     <FooterNavigationLayout selected="Publish">
