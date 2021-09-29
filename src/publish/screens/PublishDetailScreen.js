@@ -1,5 +1,7 @@
-import React, {useMemo, useReducer, useRef, useState} from 'react';
-import {ScrollView, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import React from 'react';
+import {ScrollView, StyleSheet} from 'react-native';
+
+import {useObserver} from 'mobx-react-lite';
 
 import {TextInput} from 'form/TextInput';
 import {TagsSelector} from 'form/TagsSelector';
@@ -9,59 +11,37 @@ import {BackButton} from 'publish/BackButton';
 import {NextButton} from 'publish/NextButton';
 import {ProgressBar} from 'publish/ProgressBar';
 import {CustomHeader} from 'publish/CustomHeader';
-import {useShallowData} from 'publish/ShallowDataContext';
+import {publishData} from 'publish/publishData';
 
-function ValidatedHeader({hasName}) {
-  const canContinue = hasName;
-  return useMemo(
-    () => (
-      <CustomHeader
-        title="Publicar"
-        left={<BackButton />}
-        right={canContinue && <NextButton route="Price" />}
-      />
-    ),
-    [canContinue],
-  );
+function ValidatedHeader() {
+  return useObserver(() => (
+    <CustomHeader
+      title="Publicar"
+      left={<BackButton />}
+      right={!!publishData.name && <NextButton route="Price" />}
+    />
+  ));
 }
 
 export function PublishDetailScreen() {
-  const {data} = useShallowData();
-  const [hasName, setHasName] = useState(!!data.name);
-  const [hasType, setHasType] = useState(!!data.type);
-
-  function validateName(value) {
-    setHasName(!!value);
-  }
-
-  function validateType(value) {
-    setHasType(!!value);
-  }
-
   return (
     <>
-      <ValidatedHeader hasName={hasName} hasType={hasType} />
+      <ValidatedHeader />
       <ProgressBar ratio={2 / 3} />
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-        <TextInput
-          id="name"
-          data={data}
-          label="Nome"
-          onChangeValue={validateName}
-          autoFocus
-        />
+        <TextInput id="name" label="Nome" data={publishData} autoFocus />
         <TagsSelector
           id="tags"
-          data={data}
-          label="Marcar como"
           options={tags}
+          data={publishData}
+          label="Marcar como"
         />
         <TextInput
-          id="description"
-          data={data}
-          label="Descrição"
           optional
           multiline
+          id="description"
+          label="Descrição"
+          data={publishData}
         />
       </ScrollView>
     </>

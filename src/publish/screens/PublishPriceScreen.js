@@ -13,8 +13,8 @@ import {
 
 import {PriceInput} from 'form/PriceInput';
 import {TagsSelector} from 'form/TagsSelector';
-import {useShallowData} from 'publish/ShallowDataContext';
 
+import {publishData} from 'publish/publishData';
 import {FinishButton} from 'publish/FinishButton';
 
 function ValidatedHeader({sell, hasPrice, hasAvailability}) {
@@ -32,13 +32,11 @@ function ValidatedHeader({sell, hasPrice, hasAvailability}) {
 }
 
 export function PublishPriceScreen() {
-  const {data} = useShallowData();
-
   const [hasAvailability, setHasAvailability] = useState(
-    validAvailability(data.availabilities),
+    validAvailability(publishData.availabilities),
   );
-  const [sell, setSell] = useState(!!data?.availabilities?.sell);
-  const [hasPrice, setHasPrice] = useState(!!data.price);
+  const [sell, setSell] = useState(!!publishData?.availabilities?.sell);
+  const [hasPrice, setHasPrice] = useState(!!publishData.price);
 
   function validAvailability(obj) {
     return obj && (obj.swap || obj.sell || obj.donate);
@@ -72,7 +70,7 @@ export function PublishPriceScreen() {
       <ScrollView showsVerticalScrollIndicator={false} style={{padding: 10}}>
         <TagsSelector
           id="availabilities"
-          data={data}
+          data={publishData}
           label="Disponível para"
           options={availabilities}
           buttonStyle={styles.button}
@@ -82,12 +80,12 @@ export function PublishPriceScreen() {
         {sell && (
           <PriceInput
             id="price"
-            data={data}
+            data={publishData}
             label="Preço"
             onChangeValue={validatePrice}
           />
         )}
-        <IntInput id="amount" data={data} label="Quantidade" optional />
+        <IntInput id="amount" data={publishData} label="Quantidade" optional />
       </ScrollView>
     </>
   );
