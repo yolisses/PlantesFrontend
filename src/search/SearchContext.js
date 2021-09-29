@@ -5,9 +5,9 @@ const SearchContext = createContext();
 export function SearchContextProvider({children}) {
   const [sell, setSell] = useState();
   const [swap, setSwap] = useState();
-  const [price, setPrice] = useState();
+  const [donate, setDonate] = useState();
   return (
-    <SearchContext.Provider value={{sell, swap, price}}>
+    <SearchContext.Provider value={{sell, swap, donate}}>
       {children}
     </SearchContext.Provider>
   );
