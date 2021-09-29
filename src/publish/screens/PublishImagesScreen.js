@@ -1,8 +1,11 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import CameraRoll from '@react-native-community/cameraroll';
-import {Button, FlatList, StyleSheet, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 
 import {width} from 'utils/width';
+
+import {observe} from 'mobx';
+import {useObserver} from 'mobx-react-lite';
 
 import {NextButton} from '../NextButton';
 import {CustomHeader} from '../CustomHeader';
@@ -10,12 +13,12 @@ import {DiscardButton} from '../DiscardButton';
 import {allPhotosAlbum} from '../allPhotosAlbum';
 import {SelectableImage} from '../SelectableImage';
 import {TakePhotoButton} from '../TakePhotoButton';
-import {useShallowData} from '../ShallowDataContext';
 import {PublishImagesPreview} from '../PublishImagesPreview';
 import {SelectImageAlbumButton} from '../SelectImageAlbumButton';
 
-import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
+import {selectedAlbum} from 'publish/selectedAlbum';
 import {selectedImages} from 'publish/selectedImages';
+import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 
 const numberOfCollums = 3;
 
@@ -39,28 +42,31 @@ function ValidatedHeader() {
 }
 
 export function PublishImagesScreen() {
-  const {data} = useShallowData();
   const [foundImages, setFoundImages] = useState([]);
 
-  // async function getPhotos() {
-  //   CameraRoll.getPhotos({
-  //     groupName: selectedAlbum !== allPhotosAlbum ? selectedAlbum : undefined,
-  //     first: 100,
-  //   })
-  //     .then(res => {
-  //       setFoundImages(res.edges.map(edge => edge.node.image.uri));
-  //     })
-  //     .catch(err => console.error(err));
-  // }
+  async function getPhotos() {
+    CameraRoll.getPhotos({
+      groupName:
+        selectedAlbum.name !== allPhotosAlbum ? selectedAlbum.name : undefined,
+      first: 100,
+    })
+      .then(res => {
+        setFoundImages(res.edges.map(edge => edge.node.image.uri));
+      })
+      .catch(err => console.error(err));
+  }
 
-  // useEffect(() => {
-  //   getPhotos();
-  // }, [selectedAlbum]);
+  useEffect(
+    () =>
+      observe(selectedAlbum, () => {
+        getPhotos();
+      }),
+    [],
+  );
 
-  return (
+  return useObserver(() => (
     <FooterNavigationLayout selected="Publish">
       <ValidatedHeader />
-      {/* <Button onPress={() => (selectedAlbum.sell = 'mas')} title="teste" /> */}
       <FlatList
         data={foundImages}
         numColumns={numberOfCollums}
@@ -83,12 +89,10 @@ export function PublishImagesScreen() {
             index,
           };
         }}
-        renderItem={({item: uri}) => (
-          <SelectableImage key={uri} uri={uri} id="images" data={data} />
-        )}
+        renderItem={({item: uri}) => <SelectableImage key={uri} uri={uri} />}
       />
     </FooterNavigationLayout>
-  );
+  ));
 }
 
 const styles = StyleSheet.create({

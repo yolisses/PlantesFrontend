@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 import FastImage from 'react-native-fast-image';
 
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
@@ -8,59 +8,42 @@ import {SelectableImageNumber} from './SelectableImageNumber';
 import {useAlert} from 'alert/AlertContext';
 import {ImagesLimitAlert} from './ImagesLimitAlert';
 import {imagesLimit} from './imagesLimit';
+import {selectedImages} from './selectedImages';
+import {useObserver} from 'mobx-react-lite';
 const numberOfCollums = 3;
 
-export function SelectableImage({
-  id,
-  uri,
-  data,
-  images,
-  refresh,
-  setImages,
-  imagesReachedLimit,
-}) {
+export function SelectableImage({uri, imagesReachedLimit}) {
   const {showAlert} = useAlert();
 
-  function getImageIndex(uri) {
-    return images[uri];
-  }
-
   function pushImage(uri) {
-    setImages(images => {
-      const copy = {};
-      let counter = 1;
-      for (let item in images) {
-        copy[item] = counter;
-        counter++;
-      }
-      if (counter > imagesLimit) {
-        showAlert(<ImagesLimitAlert />);
-        return images;
-      }
-      copy[uri] = counter;
-      data[id] = copy;
-      return copy;
-    });
+    let counter = Object.keys(selectedImages).length;
+    // if (counter > imagesLimit) {
+    //   showAlert(<ImagesLimitAlert />);
+    //   return;
+    // }
+    selectedImages[uri] = counter;
+    console.error(selectedImages);
   }
 
   function removeImage(uri) {
-    setImages(images => {
-      const copy = {};
-      let counter = 1;
-      for (let item in images) {
-        if (item === uri) {
-          continue;
-        }
-        copy[item] = counter;
-        counter++;
-      }
-      data[id] = copy;
-      return copy;
-    });
+    console.error('remove');
+    // setImages(images => {
+    //   const copy = {};
+    //   let counter = 1;
+    //   for (let item in images) {
+    //     if (item === uri) {
+    //       continue;
+    //     }
+    //     copy[item] = counter;
+    //     counter++;
+    //   }
+    //   data[id] = copy;
+    //   return copy;
+    // });
   }
 
   function onPress() {
-    if (!index) {
+    if (!selectedImages[uri]) {
       if (imagesReachedLimit) {
         showAlert(<ImagesLimitAlert />);
         return;
@@ -71,26 +54,21 @@ export function SelectableImage({
     }
   }
 
-  const index = getImageIndex(uri);
-
-  return useMemo(
-    () => (
-      <TouchableOpacity onPress={onPress} activeOpacity={0.9}>
-        <View style={styles.wrapper}>
-          <FastImage
-            style={[styles.image, index && styles.selected]}
-            source={{uri}}
-          />
-          {!!index && (
-            <View style={styles.numberWrapper}>
-              <SelectableImageNumber number={index} />
-            </View>
-          )}
-        </View>
-      </TouchableOpacity>
-    ),
-    [index, refresh],
-  );
+  return useObserver(() => (
+    <TouchableOpacity onPress={onPress} activeOpacity={0.9}>
+      <View style={styles.wrapper}>
+        <FastImage
+          style={[styles.image, selectedImages[uri] && styles.selected]}
+          source={{uri}}
+        />
+        {!!selectedImages[uri] && (
+          <View style={styles.numberWrapper}>
+            <SelectableImageNumber number={selectedImages[uri]} />
+          </View>
+        )}
+      </View>
+    </TouchableOpacity>
+  ));
 }
 
 const styles = StyleSheet.create({
