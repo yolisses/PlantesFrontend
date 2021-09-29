@@ -1,101 +1,49 @@
-import {api} from 'api';
-import {Message} from 'chat/Message';
-import {useMessages} from './MessagesContext';
-import {BackButton} from 'publish/BackButton';
-import {MessageInput} from 'chat/MessageInput';
-import React, {useEffect, useState} from 'react';
-import {CustomHeader} from 'publish/CustomHeader';
-import {FlatList} from 'react-native-gesture-handler';
-import {Button, StyleSheet, View} from 'react-native';
-import {UserImageAndName} from 'user/UserImageAndName';
-import {useUserById} from 'common/UsersByIdContext';
+import React, {useEffect} from 'react';
+import {FlatList, StyleSheet, View} from 'react-native';
+
+import {useObserver} from 'mobx-react-lite';
+
 import {auth} from 'auth/auth';
-
+import {Message} from './Message';
+import {MessageInput} from './MessageInput';
+import {BackButton} from 'publish/BackButton';
+import {CustomHeader} from 'publish/CustomHeader';
+import {UserImageAndName} from 'user/UserImageAndName';
+import {api} from 'api/api';
 export function ChatScreen({route}) {
-  const {user: userParam, chat: chatParam, userId} = route.params;
+  const {chat} = route.params;
 
-  const [messages, setMessages] = useState([]);
-
-  const {sendingMessages, adtionalMessages, cleanAdtionalMessages} =
-    useMessages();
-
-  const [chat, setChat] = useState(chatParam);
-  const chatId = chat?._id;
-
-  const {getUserById} = useUserById();
-  const userById = getUserById(userId);
-
-  const user = userParam || userById;
-
-  useEffect(() => {
-    if (userId && !chatParam) {
-      api
-        .post('/privatechatbyuser', {userId})
-        .then(res => {
-          setChat(res.data);
-        })
-        .catch(err => console.error(err.response));
-    }
-  }, []);
-
-  async function getMessages() {
-    if (chat) {
-      try {
-        const res = await api.get('chatmessages/' + chatId);
-        cleanAdtionalMessages();
-        setMessages(res.data);
-      } catch (err) {
-        console.error(err.response);
-      }
-    }
-  }
-
-  useEffect(() => {
-    if (auth.token) {
-      getMessages();
-      return getMessages;
-    }
-  }, [auth.token, chat]);
-
-  function renderItem({item: message}) {
+  function renderItem({item}) {
     return (
       <Message
-        key={message.id}
-        message={message}
-        fromUser={auth.userId === message.userId}
+        key={item.id}
+        message={item}
+        fromUser={auth.userId === item.userId}
         // moreMargin={actualLastUserId !== message.userId}
       />
     );
   }
 
-  function newer(a, b) {
-    return a.createdAt < b.createdAt;
+  async function getMessages() {
+    try {
+      const res = await api.get('/chatmessages/' + chat._id);
+      chat.messages = res.data;
+    } catch (err) {
+      console.error(err.response);
+    }
   }
 
-  function isFromThisChat(message) {
-    return (
-      (!!message.chatId && message.chatId === chatId) ||
-      (!!message.toUserId && message.toUserId === userId)
-    );
-  }
+  useEffect(() => {
+    getMessages();
+  }, []);
 
-  const renderMessages = Object.values(sendingMessages)
-    .filter(isFromThisChat)
-    .concat(Object.values(adtionalMessages).sort(newer))
-    .filter(isFromThisChat)
-    .concat(messages);
-
-  return (
+  return useObserver(() => (
     <View style={styles.screen}>
-      <CustomHeader
-        left={<BackButton />}
-        center={<UserImageAndName image={user?.image} name={user?.name} />}
-      />
-      <FlatList inverted data={renderMessages} renderItem={renderItem} />
-      <Button title="refresh" onPress={getMessages} />
-      <MessageInput chatId={chatId} toUserId={userId} />
+      <CustomHeader left={<BackButton />} center={<UserImageAndName />} />
+      <FlatList inverted data={chat.messages} renderItem={renderItem} />
+      <MessageInput />
     </View>
-  );
+  ));
 }
 
 const styles = StyleSheet.create({

@@ -13,12 +13,14 @@ export function ChatsListScreen() {
     api
       .get('/chats')
       .then(res => {
-        Object.assign(chats, res.data);
+        for (let chat of res.data) {
+          chats[chat._id] = chat;
+        }
       })
       .catch(err => console.error(err.response));
   }, []);
 
-  const renderItem = ({item: chat}) => <ChatListItem key={chat} chat={chat} />;
+  const renderItem = ({item}) => <ChatListItem key={item._id} chat={item} />;
 
   const messageCountHigher = (a, b) => a.message_count < b.message_count;
 
