@@ -7,6 +7,7 @@ import {CardsListLoading} from 'home/CardsListLoading';
 import {SearchCustomHeader} from 'search/SearchCustomHeader';
 import {createHidableHeader} from 'common/createHidableHeader';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
+import {useSearch} from 'search/SearchContext';
 
 export function HomeScreen() {
   const [page, setPage] = useState(0);
@@ -14,13 +15,15 @@ export function HomeScreen() {
   const [ended, setEnded] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const {sell, swap, donate} = useSearch();
+
   const getPlants = async () => {
     if (loading || ended) {
       return;
     }
     setLoading(true);
     try {
-      const res = await api.get('/plants/' + page);
+      const res = await api.get('/plants/' + page, {params});
       if (res.data.length === 0) {
         setEnded(true);
       }
