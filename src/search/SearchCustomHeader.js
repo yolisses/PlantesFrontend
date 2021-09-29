@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     width: '100%',
     position: 'absolute',
     backgroundColor: 'white',
+    elevation: 0,
   },
   header: {
     elevation: 0,

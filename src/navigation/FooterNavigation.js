@@ -18,24 +18,17 @@ export function FooterNavigation({selected}) {
         icon={faComments}
         selected={selected}
       />
-      {/*<FooterButton*/}
-      {/*  route="Community"*/}
-      {/*  text="Postagens"*/}
-      {/*  icon={faUserFriends}*/}
-      {/*  selected={selected}*/}
-      {/*/>*/}
-      {/*<FooterButton route="Map" text="Mapa" icon={faMap} selected={selected} />*/}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    width: '100%',
     flexDirection: 'row',
     paddingVertical: 12,
-    width: '100%',
-    backgroundColor: 'white',
     alignItems: 'center',
+    backgroundColor: 'white',
     justifyContent: 'space-evenly',
   },
 });

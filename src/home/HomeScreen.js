@@ -56,7 +56,9 @@ export function HomeScreen() {
   );
 
   return useObserver(() => (
-    <FooterNavigationLayout selected={'Home'}>
+    <FooterNavigationLayout
+      selected={'Home'}
+      style={{backgroundColor: 'white'}}>
       <SearchCustomHeader HidableHeader={HidableHeader} />
       {!loadPlants.plants ? (
         <CardsListLoading />
@@ -67,7 +69,7 @@ export function HomeScreen() {
           data={loadPlants.plants}
           onEndReached={onEndReached}
           onEndReachedThreshold={0.5}
-          contentContainerStyle={{paddingTop: 100}}
+          contentContainerStyle={{marginTop: 100}}
           renderItem={({item}) => <Card item={item} />}
         />
       )}
