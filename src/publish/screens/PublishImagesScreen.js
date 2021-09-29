@@ -23,22 +23,20 @@ import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 const numberOfCollums = 3;
 
 function ValidatedHeader() {
-  let canContinue = false;
-  for (let _ in selectedImages) {
-    canContinue = true;
-    break;
-  }
-
-  return useMemo(
-    () => (
+  return useObserver(() => {
+    let canContinue = false;
+    for (let _ in selectedImages) {
+      canContinue = true;
+      break;
+    }
+    return (
       <CustomHeader
         title="Publicar"
         left={canContinue && <DiscardButton />}
         right={canContinue && <NextButton route="Detail" />}
       />
-    ),
-    [canContinue],
-  );
+    );
+  });
 }
 
 export function PublishImagesScreen() {
