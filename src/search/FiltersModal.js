@@ -17,7 +17,7 @@ export function FiltersModal() {
       <ScrollView style={styles.container}>
         <TagsSelector
           id="availabilities"
-          data={filtersData.availabilities}
+          data={filtersData}
           label="Disponível para"
           showIcon={false}
           options={availabilities}
@@ -26,7 +26,7 @@ export function FiltersModal() {
         />
         <TagsSelector
           id="tags"
-          data={filtersData.tags}
+          data={filtersData}
           label="De preferência"
           options={tags}
         />

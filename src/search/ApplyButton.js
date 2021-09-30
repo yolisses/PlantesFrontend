@@ -12,7 +12,10 @@ export function ApplyButton() {
 
   return (
     <View style={styles.facade}>
-      <TouchableOpacity style={styles.button} onPress={onPress}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={onPress}
+        activeOpacity={0.7}>
         <Text style={styles.text}>Aplicar</Text>
       </TouchableOpacity>
     </View>
@@ -24,7 +27,6 @@ const styles = StyleSheet.create({
     margin: 5,
     borderRadius: 10,
     padding: 12,
-
     backgroundColor: 'green',
     bottom: 0,
   },
