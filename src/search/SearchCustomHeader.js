@@ -5,8 +5,11 @@ import {SearchButton} from 'home/SearchButton';
 import {CustomHeader} from 'publish/CustomHeader';
 import {SearchingField} from 'home/SearchingField';
 import {UserRoundImage} from 'common/UserRoundImage';
-import {AvailabilityButtons} from 'home/AvailabilityButtons';
 import {auth} from 'auth/auth';
+import {AvailiabilityButton} from 'home/AvailiabilityButton';
+import {OptionsButton} from 'home/OptionsButton';
+import {useModal} from 'modal/ModalContext';
+import {FiltersModal} from './FiltersModal';
 
 export function SearchCustomHeader() {
   const [textSearch, setTextSearch] = useState(false);
@@ -17,6 +20,12 @@ export function SearchCustomHeader() {
 
   function onCloseSearchPress() {
     setTextSearch(false);
+  }
+
+  const {showModal} = useModal();
+
+  function onFiltersPress() {
+    showModal(<FiltersModal />);
   }
 
   return (
@@ -42,7 +51,12 @@ export function SearchCustomHeader() {
           <SearchingField onClosePress={onCloseSearchPress} />
         )}
       </View>
-      <AvailabilityButtons />
+      <View style={styles.container}>
+        <AvailiabilityButton text="Doação" id="donate" />
+        <AvailiabilityButton text="Troca" id="swap" />
+        <AvailiabilityButton text="Venda" id="sell" />
+        <OptionsButton text="Filtrar" onPress={onFiltersPress} />
+      </View>
     </View>
   );
 }
@@ -59,5 +73,13 @@ const styles = StyleSheet.create({
   },
   spacer: {
     marginRight: 20,
+  },
+  container: {
+    height: 40,
+    elevation: 3,
+    flexDirection: 'row',
+    alignItems: 'stretch',
+    backgroundColor: 'white',
+    justifyContent: 'space-evenly',
   },
 });
