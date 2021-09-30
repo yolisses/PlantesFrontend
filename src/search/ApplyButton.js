@@ -15,7 +15,7 @@ export function ApplyButton() {
       <TouchableOpacity
         style={styles.button}
         onPress={onPress}
-        activeOpacity={0.7}>
+        activeOpacity={0.9}>
         <Text style={styles.text}>Aplicar</Text>
       </TouchableOpacity>
     </View>
