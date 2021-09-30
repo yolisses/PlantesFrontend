@@ -24,8 +24,14 @@ export function UsersByIdContextProvider({children}) {
       .catch(err => console.error(err.response));
   }
 
+  function setCurrentUser(user) {
+    usersById[user._id] = user;
+    setRefreshValue(Math.random());
+  }
+
   return (
-    <UsersByIdContext.Provider value={{getUserById, refreshValue}}>
+    <UsersByIdContext.Provider
+      value={{getUserById, refreshValue, setCurrentUser}}>
       {children}
     </UsersByIdContext.Provider>
   );

@@ -1,25 +1,26 @@
 import {FlatList} from 'react-native';
 import React, {useEffect, useState} from 'react';
 
-import {api} from 'api';
-import {Card} from 'home/Card';
-import {useSending} from 'send/SendingContext';
-import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
-
 import {UserInfo} from './UserInfo';
 import {SendingCard} from './SendingCard';
-import {auth} from 'auth/auth';
-import {CustomHeader} from 'publish/CustomHeader';
-import {BackButton} from 'publish/BackButton';
 import {ConfigButton} from './ConfigButton';
+
+import {api} from 'api';
+import {auth} from 'auth/auth';
+import {Card} from 'home/Card';
+import {BackButton} from 'publish/BackButton';
+import {useSending} from 'send/SendingContext';
+import {CustomHeader} from 'publish/CustomHeader';
+import {useUserById} from 'common/UsersByIdContext';
+import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 
 const numberOfCollums = 3;
 
 export function UserScreen({route}) {
-  const [user, setUser] = useState();
   const [plants, setPlants] = useState();
 
-  console.error(user);
+  const {getUserById} = useUserById();
+  const user = getUserById(route.params.userId);
 
   const {userId} = route.params;
 
@@ -32,11 +33,6 @@ export function UserScreen({route}) {
     return <SendingCard item={item} fraction={3} />;
   }
 
-  async function getUser() {
-    const res = await api.get('user/' + userId);
-    setUser(res.data);
-  }
-
   async function getPlants() {
     const res = await api.get('user-plants/' + userId);
     setPlants(res.data);
@@ -44,7 +40,6 @@ export function UserScreen({route}) {
   }
 
   useEffect(() => {
-    getUser();
     getPlants();
   }, []);
 

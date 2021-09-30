@@ -12,9 +12,13 @@ import {api} from 'api';
 import {useObserver} from 'mobx-react-lite';
 import {editProfileData} from './editProfileData';
 import {useNavigation} from '@react-navigation/core';
+import {useUserById} from 'common/UsersByIdContext';
 
 export function EditProfileScreen() {
   const {goBack} = useNavigation();
+
+  const {setCurrentUser} = useUserById();
+
   return useObserver(() => {
     function updateProfile() {
       console.error(editProfileData);
@@ -23,6 +27,7 @@ export function EditProfileScreen() {
         .then(res => {
           console.error(res.data);
           auth.user = res.data;
+          setCurrentUser(res.data);
           goBack();
         })
         .catch(err => console.error(err.response));
@@ -62,7 +67,7 @@ export function EditProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-    paddingVertical: 30,
+    paddingVertical: 20,
     backgroundColor: 'white',
   },
   image: {
