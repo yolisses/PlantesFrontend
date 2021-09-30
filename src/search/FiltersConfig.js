@@ -7,7 +7,7 @@ import {FiltersModal} from './FiltersModal';
 export function FiltersConfig() {
   const {showModal} = useModal();
   function onFiltersPress() {
-    showModal(<FiltersModal />);
+    showModal(<FiltersModal />, 400);
   }
   return (
     <View style={styles.container}>

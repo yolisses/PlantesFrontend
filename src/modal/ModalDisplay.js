@@ -4,7 +4,7 @@ import {Modalize} from 'react-native-modalize';
 import {StyleSheet, Text} from 'react-native';
 
 export function ModalDisplay() {
-  const {currentModal, modalActive} = useModal();
+  const {currentModal, modalActive, snapPoint} = useModal();
 
   const ref = useRef();
 
@@ -19,7 +19,7 @@ export function ModalDisplay() {
       {modalActive && currentModal ? (
         <Modalize
           ref={ref}
-          snapPoint={200}
+          snapPoint={snapPoint}
           handlePosition={'inside'}
           handleStyle={styles.handle}>
           {currentModal}
