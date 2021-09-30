@@ -5,7 +5,7 @@ import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import {StyleSheet, Text} from 'react-native';
 
-export function NextButton({route, text, customOnPress}) {
+export function NextButton({route, text, customOnPress, hideIcon}) {
   const {navigate} = useNavigation();
 
   function onPress() {
@@ -22,12 +22,14 @@ export function NextButton({route, text, customOnPress}) {
       activeOpacity={0.8}
       onPress={onPress}>
       <Text style={styles.text}>{text || 'Próximo'}</Text>
-      <FontAwesomeIcon
-        style={styles.icon}
-        icon={faArrowRight}
-        color={'green'}
-        size={26}
-      />
+      {!hideIcon && (
+        <FontAwesomeIcon
+          style={styles.icon}
+          icon={faArrowRight}
+          color={'green'}
+          size={26}
+        />
+      )}
     </TouchableOpacity>
   );
 }

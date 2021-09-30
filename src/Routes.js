@@ -21,6 +21,7 @@ import {CommentsScreen} from 'comment/CommentsScreen';
 import {MapUserLocationButton} from 'map/MapUserLocationButton';
 import {auth} from 'auth/auth';
 import {useObserver} from 'mobx-react-lite';
+import {EditProfileScreen} from 'user/EditProfileScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +29,11 @@ export function Routes() {
   return useObserver(() => (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen
+          name="dev"
+          component={EditProfileScreen}
+          options={{headerShown: false}}
+        />
         {!auth.token ? (
           <Stack.Screen
             name="Login"
@@ -79,6 +85,11 @@ export function Routes() {
               name="Comments"
               component={CommentsScreen}
               options={{title: 'Comentários'}}
+            />
+            <Stack.Screen
+              name="EditProfile"
+              component={EditProfileScreen}
+              options={{headerShown: false}}
             />
             <Stack.Screen
               name="Community"

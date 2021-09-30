@@ -34,10 +34,6 @@ export function PublishDetailScreen() {
     setHasName(!!value);
   }
 
-  function validateType(value) {
-    setHasType(!!value);
-  }
-
   return (
     <>
       <ValidatedHeader hasName={hasName} hasType={hasType} />

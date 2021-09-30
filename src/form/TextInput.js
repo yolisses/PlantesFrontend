@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 10,
     transform: [{translateY: 0}],
-    backgroundColor: '#eee',
+    backgroundColor: 'white',
   },
   multiline: {
     paddingBottom: 35,

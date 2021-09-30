@@ -1,9 +1,19 @@
+import {useNavigation} from '@react-navigation/core';
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 export function EditProfileButton() {
+  const {navigate} = useNavigation();
+
+  function onPress() {
+    navigate('EditProfile');
+  }
+
   return (
-    <TouchableOpacity style={styles.container} activeOpacity={0.7}>
+    <TouchableOpacity
+      onPress={onPress}
+      activeOpacity={0.7}
+      style={styles.container}>
       <Text style={styles.text}>Editar perfil</Text>
     </TouchableOpacity>
   );
