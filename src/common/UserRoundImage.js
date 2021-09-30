@@ -7,10 +7,14 @@ export function UserRoundImage({userId, image, size, style}) {
   const {navigate} = useNavigation();
   size = size || 35;
 
+  function onPress() {
+    if (userId) {
+      navigate('UserScreen', {userId});
+    }
+  }
+
   return (
-    <TouchableOpacity
-      onPress={() => navigate('UserScreen', {userId})}
-      activeOpacity={0.8}>
+    <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
       <FastImage
         style={[styles.image, {width: size, height: size}, style]}
         source={{uri: image}}
