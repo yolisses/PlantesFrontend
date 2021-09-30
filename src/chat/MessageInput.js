@@ -1,22 +1,25 @@
+import {useObserver} from 'mobx-react-lite';
 import React, {useState} from 'react';
 import {StyleSheet, TextInput, View} from 'react-native';
 
 import {ChatReference} from './ChatReference';
+import {pushMessage} from './chats';
 import {SendMessageButton} from './SendMessageButton';
 
-export function MessageInput({chatId, toUserId, reference}) {
+export function MessageInput({chat, reference}) {
   const [text, setText] = useState();
 
   async function onSendPress() {
     if (!text) {
       return;
     }
+    pushMessage({text, chat});
     setText(null);
   }
 
   function onPressCloseButton() {}
 
-  return (
+  return useObserver(() => (
     <View style={styles.textButtonContainer}>
       <View style={styles.container}>
         {reference && (
@@ -43,35 +46,35 @@ export function MessageInput({chatId, toUserId, reference}) {
       </View>
       <SendMessageButton onPress={onSendPress} />
     </View>
-  );
+  ));
 }
 
 const styles = StyleSheet.create({
   textButtonContainer: {
-    flexDirection: 'row',
-    width: '100%',
-    alignItems: 'flex-end',
     padding: 5,
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'flex-end',
   },
   container: {
-    backgroundColor: '#fff',
     flex: 1,
     elevation: 2,
     borderRadius: 20,
+    backgroundColor: '#fff',
   },
   horizontal: {
     padding: 4,
-    flexDirection: 'row',
     alignItems: 'center',
+    flexDirection: 'row',
   },
   input: {
-    flexDirection: 'row',
-    padding: 10,
-    borderStyle: 'solid',
-    // borderWidth: 1,
-    borderColor: '#aaa',
     flex: 1,
+    padding: 10,
     fontSize: 18,
+    borderColor: '#aaa',
+    borderStyle: 'solid',
+    flexDirection: 'row',
+    // borderWidth: 1,
   },
   reference: {
     padding: 5,

@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {Button, FlatList, StyleSheet, View} from 'react-native';
 
 import {useObserver} from 'mobx-react-lite';
 
@@ -10,40 +10,48 @@ import {BackButton} from 'publish/BackButton';
 import {CustomHeader} from 'publish/CustomHeader';
 import {UserImageAndName} from 'user/UserImageAndName';
 import {api} from 'api/api';
-export function ChatScreen({route}) {
-  const {chat} = route.params;
+import {chats} from './chats';
 
+export function ChatScreen({route}) {
   function renderItem({item}) {
     return (
       <Message
-        key={item.id}
+        key={item._id}
         message={item}
         fromUser={auth.userId === item.userId}
-        // moreMargin={actualLastUserId !== message.userId}
       />
     );
   }
+  const {
+    chat: {_id: id},
+  } = route.params;
 
   async function getMessages() {
     try {
-      const res = await api.get('/chatmessages/' + chat._id);
-      chat.messages = res.data;
+      const res = await api.get('/chatmessages/' + chats[id]._id);
+      chats[id].messages = res.data;
     } catch (err) {
       console.error(err.response);
     }
   }
 
-  useEffect(() => {
-    getMessages();
-  }, []);
+  console.error(chats[id].messages);
 
-  return useObserver(() => (
-    <View style={styles.screen}>
-      <CustomHeader left={<BackButton />} center={<UserImageAndName />} />
-      <FlatList inverted data={chat.messages} renderItem={renderItem} />
-      <MessageInput />
-    </View>
-  ));
+  // useEffect(() => {
+  //   getMessages();
+  // }, []);
+
+  return useObserver(() => {
+    return (
+      <View style={styles.screen}>
+        <CustomHeader left={<BackButton />} center={<UserImageAndName />} />
+        <FlatList inverted data={chats[id].messages} renderItem={renderItem} />
+        <Button title="refresh" onPress={getMessages} />
+        <Button title="log" onPress={() => console.error(chats[id].messages)} />
+        <MessageInput chat={chats[id]} />
+      </View>
+    );
+  });
 }
 
 const styles = StyleSheet.create({

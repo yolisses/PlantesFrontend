@@ -27,11 +27,6 @@ const Stack = createNativeStackNavigator();
 export function Routes() {
   return useObserver(() => (
     <NavigationContainer>
-      <Stack.Screen
-        name="development"
-        component={ChatScreen}
-        options={{headerShown: false}}
-      />
       <Stack.Navigator>
         {!auth.token ? (
           <Stack.Screen
@@ -41,6 +36,11 @@ export function Routes() {
           />
         ) : (
           <>
+            <Stack.Screen
+              name="development"
+              component={ChatsListScreen}
+              options={{headerShown: false}}
+            />
             {/* <Stack.Screen name="Dev" component={Dev} /> */}
             <Stack.Screen
               name="Home"
