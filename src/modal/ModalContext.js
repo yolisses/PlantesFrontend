@@ -5,11 +5,11 @@ const ModalContext = createContext();
 
 export function ModalContextProvider({children}) {
   const [modalActive, setModalActive] = useState(false);
-  const [snapPoint, setSnapPoint] = useState(200);
+  const [modalOptions, setModalOptions] = useState({});
   const [currentModal, setCurrentModal] = useState(false);
 
-  const showModal = (modal, snapPoint) => {
-    setSnapPoint(snapPoint);
+  const showModal = (modal, modalOptions = {}) => {
+    setModalOptions(modalOptions);
     setCurrentModal(modal);
   };
 
@@ -25,10 +25,10 @@ export function ModalContextProvider({children}) {
     <ModalContext.Provider
       value={{
         showModal,
-        snapPoint,
         closeModal,
         modalActive,
         currentModal,
+        modalOptions,
         setModalActive,
       }}>
       {children}
