@@ -10,6 +10,7 @@ import {UserImageAndName} from 'user/UserImageAndName';
 import {useUserById} from 'common/UsersByIdContext';
 import {auth} from 'auth/auth';
 import {cleanAdtionalMessages, messagesData} from './messages';
+import {useObserver} from 'mobx-react-lite';
 
 export function ChatScreen({route}) {
   const {user: userParam, chat: chatParam, userId} = route.params;
@@ -76,23 +77,25 @@ export function ChatScreen({route}) {
     );
   }
 
-  const renderMessages = Object.values(messagesData.sendingMessages)
-    .filter(isFromThisChat)
-    .concat(Object.values(messagesData.adtionalMessages).sort(newer))
-    .filter(isFromThisChat)
-    .concat(messages);
+  return useObserver(() => {
+    const renderMessages = Object.values(messagesData.sendingMessages)
+      .filter(isFromThisChat)
+      .concat(Object.values(messagesData.adtionalMessages).sort(newer))
+      .filter(isFromThisChat)
+      .concat(messages);
 
-  return (
-    <View style={styles.screen}>
-      <CustomHeader
-        left={<BackButton />}
-        center={<UserImageAndName image={user?.image} name={user?.name} />}
-      />
-      <FlatList inverted data={renderMessages} renderItem={renderItem} />
-      <Button title="refresh" onPress={getMessages} />
-      <MessageInput chatId={chatId} toUserId={userId} />
-    </View>
-  );
+    return (
+      <View style={styles.screen}>
+        <CustomHeader
+          left={<BackButton />}
+          center={<UserImageAndName image={user?.image} name={user?.name} />}
+        />
+        <FlatList inverted data={renderMessages} renderItem={renderItem} />
+        <Button title="refresh" onPress={getMessages} />
+        <MessageInput chatId={chatId} toUserId={userId} />
+      </View>
+    );
+  });
 }
 
 const styles = StyleSheet.create({
