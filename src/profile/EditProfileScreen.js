@@ -21,18 +21,15 @@ export function EditProfileScreen() {
 
   return useObserver(() => {
     async function updateProfile() {
-      console.error(editProfileData);
       api
         .put('/update-profile', editProfileData)
         .then(res => {
-          console.error(res.data);
           auth.user = res.data;
           setCurrentUser(res.data);
           goBack();
         })
         .catch(err => console.error(err.response));
     }
-    console.error(auth);
 
     return (
       <>
