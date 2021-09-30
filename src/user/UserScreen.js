@@ -12,6 +12,8 @@ import {auth} from 'auth/auth';
 import {signOut} from 'auth/signOut';
 import {CustomHeader} from 'publish/CustomHeader';
 import {BackButton} from 'publish/BackButton';
+import {ConfigButton} from './ConfigButton';
+import {EditProfileButton} from './EditProfileButton';
 
 const numberOfCollums = 3;
 
@@ -60,7 +62,6 @@ export function UserScreen({route}) {
             ListHeaderComponent={
               <>
                 <UserInfo user={user} />
-                <Button title="sair" onPress={signOut} />
               </>
             }
           />
@@ -82,7 +83,11 @@ export function UserScreen({route}) {
   return (
     <>
       <FooterNavigationLayout selected="Home">
-        <CustomHeader left={<BackButton />} title={user?.name} />
+        <CustomHeader
+          left={<BackButton />}
+          title={user?.name}
+          right={<ConfigButton />}
+        />
         <FlatList
           data={plants}
           renderItem={renderItem}
