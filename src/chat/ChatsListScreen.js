@@ -1,26 +1,29 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {FlatList} from 'react-native';
 import {ChatListItem} from 'chat/ChatListItem';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
-import {useChats} from './ChatsContext';
+import {chatsData} from './chats';
+import {api} from 'api';
+import {useObserver} from 'mobx-react-lite';
 
 export function ChatsListScreen() {
-  const {chats} = useChats();
+  const renderItem = ({item}) => <ChatListItem key={item._id} chat={item} />;
 
-  const renderItem = ({item: chat}) => <ChatListItem key={chat} chat={chat} />;
+  const messageCountHigher = (a, b) => a?.message_count < b?.message_count;
 
-  const messageCountHigher = (a, b) => a.message_count < b.message_count;
+  useEffect(() => {
+    api
+      .get('/chats')
+      .then(res => {
+        console.error(res.data);
+        chatsData.chats = res.data;
+      })
+      .catch(err => console.error(err));
+  }, []);
 
-  return (
+  return useObserver(() => (
     <FooterNavigationLayout selected="ChatsList">
-      {chats ? (
-        <FlatList
-          data={Object.entries(chats)
-            .sort(messageCountHigher)
-            .map(entry => entry[1])}
-          renderItem={renderItem}
-        />
-      ) : null}
+      <FlatList data={chatsData.chats} renderItem={renderItem} />
     </FooterNavigationLayout>
-  );
+  ));
 }

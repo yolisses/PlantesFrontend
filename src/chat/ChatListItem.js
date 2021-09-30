@@ -8,7 +8,7 @@ import {auth} from 'auth/auth';
 export function ChatListItem({chat}) {
   const {navigate} = useNavigation();
 
-  const userId = chat.users.filter(user => user !== auth.userId)[0];
+  const userId = chat?.users?.filter(user => user !== auth.userId)[0];
 
   const {getUserById} = useUserById(userId);
   const user = getUserById(userId);
