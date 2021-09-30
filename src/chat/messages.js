@@ -7,7 +7,7 @@ export const messagesData = observable({
   messages: [],
 });
 
-export async function pushMessage({chatId, text, toUserId}) {
+export async function pushMessage({chatId, chat, text, toUserId}) {
   const fakeId = Math.random();
   const message = {
     text,
@@ -22,7 +22,7 @@ export async function pushMessage({chatId, text, toUserId}) {
     .post('/send-message', message)
     .then(res => {
       const message = res.data;
-      messagesData.messages.unshift(message);
+      chat.messages.unshift(message);
       delete messagesData.sendingMessages[fakeId];
     })
     .catch(err => console.error(JSON.stringify(err.response)));

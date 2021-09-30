@@ -5,7 +5,7 @@ import {MessageInput} from 'chat/MessageInput';
 import React, {useEffect, useState} from 'react';
 import {CustomHeader} from 'publish/CustomHeader';
 import {FlatList} from 'react-native-gesture-handler';
-import {Button, StyleSheet, View} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 import {UserImageAndName} from 'user/UserImageAndName';
 import {useUserById} from 'common/UsersByIdContext';
 import {auth} from 'auth/auth';
@@ -13,9 +13,12 @@ import {messagesData} from './messages';
 import {useObserver} from 'mobx-react-lite';
 
 export function ChatScreen({route}) {
-  const {user: userParam, chat: chatParam, userId} = route.params;
+  const {user: userParam, chat, userId} = route.params;
 
-  const [chat, setChat] = useState(chatParam);
+  if (!chat.messages) {
+    chat.messages = [];
+  }
+
   const chatId = chat?._id;
 
   const {getUserById} = useUserById();
@@ -23,22 +26,11 @@ export function ChatScreen({route}) {
 
   const user = userParam || userById;
 
-  useEffect(() => {
-    if (userId && !chatParam) {
-      api
-        .post('/private-chat-by-user', {userId})
-        .then(res => {
-          setChat(res.data);
-        })
-        .catch(err => console.error(err.response));
-    }
-  }, []);
-
   async function getMessages() {
     if (chat) {
       try {
         const res = await api.get('chat-messages/' + chatId);
-        messagesData.messages = res.data;
+        chat.messages = res.data;
       } catch (err) {
         console.error(err.response);
       }
@@ -46,25 +38,19 @@ export function ChatScreen({route}) {
   }
 
   useEffect(() => {
-    if (auth.token) {
-      getMessages();
-      return getMessages;
-    }
+    getMessages();
+    return getMessages;
   }, []);
 
   function renderItem({item: message}) {
     return (
       <Message
-        key={message.id}
+        key={message?.id}
         message={message}
         fromUser={auth.userId === message.userId}
         // moreMargin={actualLastUserId !== message.userId}
       />
     );
-  }
-
-  function newer(a, b) {
-    return a.createdAt < b.createdAt;
   }
 
   function isFromThisChat(message) {
@@ -78,7 +64,7 @@ export function ChatScreen({route}) {
     const renderMessages = Object.values(messagesData.sendingMessages)
       .filter(isFromThisChat)
       .reverse()
-      .concat(messagesData.messages);
+      .concat(chat.messages);
 
     return (
       <View style={styles.screen}>
@@ -88,7 +74,7 @@ export function ChatScreen({route}) {
         />
         <FlatList inverted data={renderMessages} renderItem={renderItem} />
         <Button title="refresh" onPress={getMessages} />
-        <MessageInput chatId={chatId} toUserId={userId} />
+        <MessageInput chatId={chatId} toUserId={userId} chat={chat} />
       </View>
     );
   });

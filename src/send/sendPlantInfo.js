@@ -16,6 +16,6 @@ export async function sendPlantInfo(sending) {
     delete sending.localData;
     sending.plantInfoSent = true;
   } catch (err) {
-    console.error(err.message);
+    console.error(err.response);
   }
 }

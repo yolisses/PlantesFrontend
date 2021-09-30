@@ -10,7 +10,6 @@ import {NextButton} from 'publish/NextButton';
 import {CustomHeader} from 'publish/CustomHeader';
 
 export function EditProfileScreen() {
-  console.error(auth.user);
   return (
     <>
       <CustomHeader

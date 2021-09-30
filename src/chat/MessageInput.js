@@ -5,7 +5,7 @@ import {pushMessage} from './messages';
 import {ChatReference} from './ChatReference';
 import {SendMessageButton} from './SendMessageButton';
 
-export function MessageInput({chatId, toUserId, reference}) {
+export function MessageInput({chatId, chat, toUserId, reference}) {
   const [text, setText] = useState();
 
   async function onSendPress() {
@@ -13,7 +13,7 @@ export function MessageInput({chatId, toUserId, reference}) {
       return;
     }
     setText(null);
-    await pushMessage({text, toUserId, chatId});
+    await pushMessage({text, toUserId, chat, chatId});
   }
 
   function onPressCloseButton() {}
