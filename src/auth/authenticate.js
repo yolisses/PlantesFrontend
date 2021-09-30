@@ -4,7 +4,7 @@ import {auth} from './auth';
 
 export async function authenticate(idToken) {
   try {
-    const res = await api.post('/googlesignin', {idToken});
+    const res = await api.post('/google-sign-in', {idToken});
     const {token, user, email, emailAuthToken, id, idAuthToken} = res.data;
     auth.user = user;
     auth.userId = id;

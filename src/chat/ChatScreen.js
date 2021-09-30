@@ -30,7 +30,7 @@ export function ChatScreen({route}) {
   useEffect(() => {
     if (userId && !chatParam) {
       api
-        .post('/privatechatbyuser', {userId})
+        .post('/private-chat-by-user', {userId})
         .then(res => {
           setChat(res.data);
         })
@@ -41,7 +41,7 @@ export function ChatScreen({route}) {
   async function getMessages() {
     if (chat) {
       try {
-        const res = await api.get('chatmessages/' + chatId);
+        const res = await api.get('chat-messages/' + chatId);
         cleanAdtionalMessages();
         setMessages(res.data);
       } catch (err) {

@@ -26,7 +26,7 @@ export function MessagesContextProvider({children}) {
     sendingMessages[fakeId] = message;
     refresh();
     api
-      .post('/sendmessage', message)
+      .post('/send-message', message)
       .then(res => {
         const message = res.data;
         adtionalMessages[fakeId] = message;

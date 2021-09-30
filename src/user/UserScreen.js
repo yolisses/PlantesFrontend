@@ -1,4 +1,4 @@
-import {Button, FlatList} from 'react-native';
+import {FlatList} from 'react-native';
 import React, {useEffect, useState} from 'react';
 
 import {api} from 'api';
@@ -9,11 +9,9 @@ import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import {UserInfo} from './UserInfo';
 import {SendingCard} from './SendingCard';
 import {auth} from 'auth/auth';
-import {signOut} from 'auth/signOut';
 import {CustomHeader} from 'publish/CustomHeader';
 import {BackButton} from 'publish/BackButton';
 import {ConfigButton} from './ConfigButton';
-import {EditProfileButton} from './EditProfileButton';
 
 const numberOfCollums = 3;
 
@@ -40,7 +38,7 @@ export function UserScreen({route}) {
   }
 
   async function getPlants() {
-    const res = await api.get('userplants/' + userId);
+    const res = await api.get('user-plants/' + userId);
     setPlants(res.data);
     removeFinisheds();
   }
