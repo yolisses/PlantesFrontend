@@ -17,20 +17,8 @@ export function FiltersConfig() {
 }
 
 const styles = StyleSheet.create({
-  topWrapper: {
-    width: '100%',
-    backgroundColor: 'white',
-    elevation: 0,
-  },
-  rightWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  spacer: {
-    marginRight: 20,
-  },
   container: {
-    height: 45,
+    height: 40,
     elevation: 3,
     flexDirection: 'row',
     alignItems: 'stretch',

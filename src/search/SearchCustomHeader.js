@@ -64,12 +64,4 @@ const styles = StyleSheet.create({
   spacer: {
     marginRight: 20,
   },
-  container: {
-    height: 45,
-    elevation: 3,
-    flexDirection: 'row',
-    alignItems: 'stretch',
-    backgroundColor: 'white',
-    justifyContent: 'space-evenly',
-  },
 });
