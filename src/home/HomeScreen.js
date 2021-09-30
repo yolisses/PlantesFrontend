@@ -10,15 +10,9 @@ import {loadPlants} from 'home/loadPlants';
 import {searchOptions} from 'search/searchOptions';
 import {CardsListLoading} from 'home/CardsListLoading';
 import {SearchCustomHeader} from 'search/SearchCustomHeader';
-import {createHidableHeader} from 'common/createHidableHeader';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 
 export function HomeScreen() {
-  const {onScroll, HidableHeader} = createHidableHeader({
-    headerHeight: 55,
-    unsafeArea: 25,
-  });
-
   async function getPlants() {
     if (loadPlants.loading || loadPlants.ended) {
       return;
@@ -56,18 +50,16 @@ export function HomeScreen() {
 
   return useObserver(() => (
     <FooterNavigationLayout selected={'Home'}>
-      <SearchCustomHeader HidableHeader={HidableHeader} />
+      <SearchCustomHeader />
       {!loadPlants.plants ? (
         <CardsListLoading />
       ) : (
         <FlatList
           numColumns={2}
-          onScroll={onScroll}
           data={loadPlants.plants}
           onEndReached={onEndReached}
           onEndReachedThreshold={0.5}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{paddingTop: 95}}
           renderItem={({item}) => <Card item={item} />}
         />
       )}

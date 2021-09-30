@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import {SearchButton} from 'home/SearchButton';
@@ -8,7 +8,7 @@ import {UserRoundImage} from 'common/UserRoundImage';
 import {AvailabilityButtons} from 'home/AvailabilityButtons';
 import {auth} from 'auth/auth';
 
-export function SearchCustomHeader({HidableHeader}) {
+export function SearchCustomHeader() {
   const [textSearch, setTextSearch] = useState(false);
 
   function onSearchPress() {
@@ -19,37 +19,32 @@ export function SearchCustomHeader({HidableHeader}) {
     setTextSearch(false);
   }
 
-  return useMemo(
-    () => (
-      <View>
-        <View style={styles.topWrapper}>
-          {!textSearch ? (
-            <CustomHeader
-              title="Plantei"
-              style={styles.header}
-              right={
-                <View style={styles.rightWrapper}>
-                  <View style={styles.spacer}>
-                    <SearchButton onPress={onSearchPress} />
-                  </View>
-                  <UserRoundImage
-                    size={40}
-                    userId={auth.userId}
-                    image={auth.user?.image}
-                  />
+  return (
+    <View>
+      <View style={styles.topWrapper}>
+        {!textSearch ? (
+          <CustomHeader
+            title="Plantei"
+            style={styles.header}
+            right={
+              <View style={styles.rightWrapper}>
+                <View style={styles.spacer}>
+                  <SearchButton onPress={onSearchPress} />
                 </View>
-              }
-            />
-          ) : (
-            <SearchingField onClosePress={onCloseSearchPress} />
-          )}
-        </View>
-        <HidableHeader>
-          <AvailabilityButtons />
-        </HidableHeader>
+                <UserRoundImage
+                  size={40}
+                  userId={auth.userId}
+                  image={auth.user?.image}
+                />
+              </View>
+            }
+          />
+        ) : (
+          <SearchingField onClosePress={onCloseSearchPress} />
+        )}
       </View>
-    ),
-    [textSearch, setTextSearch],
+      <AvailabilityButtons />
+    </View>
   );
 }
 
