@@ -53,7 +53,7 @@ export function Routes() {
             <Stack.Screen
               name="UserScreen"
               component={UserScreen}
-              options={{headerTitle: ''}}
+              options={{headerShown: false}}
             />
             <Stack.Screen
               name="Publish"

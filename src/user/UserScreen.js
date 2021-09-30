@@ -10,12 +10,16 @@ import {UserInfo} from './UserInfo';
 import {SendingCard} from './SendingCard';
 import {auth} from 'auth/auth';
 import {signOut} from 'auth/signOut';
+import {CustomHeader} from 'publish/CustomHeader';
+import {BackButton} from 'publish/BackButton';
 
 const numberOfCollums = 3;
 
 export function UserScreen({route}) {
   const [user, setUser] = useState();
   const [plants, setPlants] = useState();
+
+  console.error(user);
 
   const {userId} = route.params;
 
@@ -48,13 +52,17 @@ export function UserScreen({route}) {
     if (userId === auth.userId) {
       return (
         <>
-          <Button title="sair" onPress={signOut} />
           <FlatList
             numColumns={numberOfCollums}
             data={Object.values(sendings)}
             renderItem={renderSendingItem}
             keyExtractor={sendingKeyExtractor}
-            ListHeaderComponent={<UserInfo user={user} />}
+            ListHeaderComponent={
+              <>
+                <UserInfo user={user} />
+                <Button title="sair" onPress={signOut} />
+              </>
+            }
           />
         </>
       );
@@ -72,14 +80,17 @@ export function UserScreen({route}) {
   }
 
   return (
-    <FooterNavigationLayout selected="Home">
-      <FlatList
-        data={plants}
-        renderItem={renderItem}
-        keyExtractor={keyExtractor}
-        numColumns={numberOfCollums}
-        ListHeaderComponent={ListHeaderComponent}
-      />
-    </FooterNavigationLayout>
+    <>
+      <FooterNavigationLayout selected="Home">
+        <CustomHeader left={<BackButton />} title={user?.name} />
+        <FlatList
+          data={plants}
+          renderItem={renderItem}
+          keyExtractor={keyExtractor}
+          numColumns={numberOfCollums}
+          ListHeaderComponent={ListHeaderComponent}
+        />
+      </FooterNavigationLayout>
+    </>
   );
 }
