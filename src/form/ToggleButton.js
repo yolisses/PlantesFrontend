@@ -12,6 +12,7 @@ export function ToggleButton({
   data,
   label,
   style,
+  showIcon = true,
   onChangeCallback,
   ...rest
 }) {
@@ -30,21 +31,22 @@ export function ToggleButton({
       {...rest}
       onPress={onPress}
       style={[styles.input, style, active && styles.active]}>
-      {active ? (
-        <FontAwesomeIcon
-          size={15}
-          icon={faCheck}
-          style={styles.icon}
-          color={activeColor}
-        />
-      ) : (
-        <FontAwesomeIcon
-          size={15}
-          color={'#ccc'}
-          icon={faCircle}
-          style={styles.icon}
-        />
-      )}
+      {showIcon &&
+        (active ? (
+          <FontAwesomeIcon
+            size={15}
+            icon={faCheck}
+            style={styles.icon}
+            color={activeColor}
+          />
+        ) : (
+          <FontAwesomeIcon
+            size={15}
+            color={'#ccc'}
+            icon={faCircle}
+            style={styles.icon}
+          />
+        ))}
       <Text style={[styles.text, active && styles.activeText]}>{label}</Text>
     </Pressable>
   );

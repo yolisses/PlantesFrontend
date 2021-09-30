@@ -11,6 +11,7 @@ export function TagsSelector({
   value,
   style,
   options,
+  showIcon,
   buttonStyle,
   onValueChange,
 }) {
@@ -31,6 +32,7 @@ export function TagsSelector({
           id={option}
           data={data[id]}
           key={option}
+          showIcon={showIcon}
           label={labels ? labels[option] : option}
           style={buttonStyle}
           onChangeCallback={onChangeCallback}

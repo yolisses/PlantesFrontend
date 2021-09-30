@@ -2,6 +2,10 @@ import {Fieldset} from 'form/Fieldset';
 import {TagsSelector} from 'form/TagsSelector';
 import {AvailiabilityButton} from 'home/AvailiabilityButton';
 import {useObserver} from 'mobx-react-lite';
+import {
+  availabilities,
+  availabilitiesLabels,
+} from 'publish/data/availiabilities';
 import {tags} from 'publish/data/tags';
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
@@ -11,23 +15,15 @@ export function FiltersModal() {
   return useObserver(() => (
     <View>
       <ScrollView style={styles.container}>
-        <Fieldset label="Pesquisar por" style={styles.wrapper} disableBorder>
-          <AvailiabilityButton
-            data={filtersData.availabilities}
-            text="Doação"
-            id="donate"
-          />
-          <AvailiabilityButton
-            data={filtersData.availabilities}
-            text="Troca"
-            id="swap"
-          />
-          <AvailiabilityButton
-            data={filtersData.availabilities}
-            text="Venda"
-            id="sell"
-          />
-        </Fieldset>
+        <TagsSelector
+          id="availabilities"
+          data={filtersData.availabilities}
+          label="Disponível para"
+          showIcon={false}
+          options={availabilities}
+          buttonStyle={styles.button}
+          labels={availabilitiesLabels}
+        />
         <TagsSelector
           id="tags"
           data={filtersData.tags}
@@ -51,5 +47,10 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 24,
     flex: 1,
+  },
+  button: {
+    flex: 1,
+    paddingVertical: 9,
+    justifyContent: 'center',
   },
 });
