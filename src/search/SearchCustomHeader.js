@@ -24,6 +24,7 @@ export function SearchCustomHeader() {
       <View style={styles.topWrapper}>
         {!textSearch ? (
           <CustomHeader
+            style={styles.header}
             title="Plantei"
             right={
               <View style={styles.rightWrapper}>
@@ -48,6 +49,9 @@ export function SearchCustomHeader() {
 }
 
 const styles = StyleSheet.create({
+  header: {
+    elevation: 0,
+  },
   topWrapper: {
     width: '100%',
     backgroundColor: 'white',

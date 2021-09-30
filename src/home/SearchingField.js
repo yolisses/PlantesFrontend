@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 20,
+    paddingVertical: 7.5,
   },
   container: {
     margin: 4,
