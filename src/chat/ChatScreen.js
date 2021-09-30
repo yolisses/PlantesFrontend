@@ -78,10 +78,13 @@ export function ChatScreen({route}) {
   }
 
   return useObserver(() => {
-    const renderMessages = Object.values(messagesData.sendingMessages)
+    const renderMessages = Object.values(messagesData.adtionalMessages)
+      .sort(newer)
       .filter(isFromThisChat)
-      .concat(Object.values(messagesData.adtionalMessages).sort(newer))
+      .reverse()
+      .concat(Object.values(messagesData.sendingMessages))
       .filter(isFromThisChat)
+      .reverse()
       .concat(messages);
 
     return (
