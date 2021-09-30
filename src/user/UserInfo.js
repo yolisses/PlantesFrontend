@@ -3,6 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {EditProfileButton} from 'profile/EditProfileButton';
 import {UserDescription} from './UserDescription';
+import {auth} from 'auth/auth';
 
 export function UserInfo({user}) {
   return (
@@ -11,7 +12,7 @@ export function UserInfo({user}) {
         <FastImage style={styles.image} source={{uri: user?.image}} />
       </View>
       {!!user && <UserDescription text={user?.description} />}
-      <EditProfileButton />
+      {user?._id === auth.userId && <EditProfileButton />}
     </View>
   );
 }
