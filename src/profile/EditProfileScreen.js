@@ -32,6 +32,7 @@ export function EditProfileScreen() {
         })
         .catch(err => console.error(err.response));
     }
+    console.error(auth);
 
     return (
       <>
@@ -51,12 +52,18 @@ export function EditProfileScreen() {
           <TouchableOpacity activeOpacity={0.7}>
             <Text style={styles.link}>Alterar foto do perfil</Text>
           </TouchableOpacity>
-          <TextInput label="Nome" id="name" data={editProfileData} />
+          <TextInput
+            label="Nome"
+            id="name"
+            data={editProfileData}
+            customGetInitialValue={() => auth?.user?.name}
+          />
           <TextInput
             multiline
             id="description"
             label="Descrição"
             data={editProfileData}
+            customGetInitialValue={() => auth?.user?.description}
           />
         </ScrollView>
       </>
