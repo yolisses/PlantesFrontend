@@ -1,11 +1,12 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useModal} from 'modal/ModalContext';
 import {Modalize} from 'react-native-modalize';
-import {StyleSheet, Text} from 'react-native';
-import {ApplyButton} from 'search/ApplyButton';
+import {StyleSheet} from 'react-native';
 
 export function ModalDisplay() {
   const {currentModal, modalActive, modalOptions} = useModal();
+
+  const [showFloating, setShowFloating] = useState(true);
 
   const ref = useRef();
 
@@ -15,15 +16,20 @@ export function ModalDisplay() {
     }
   }, [modalActive, currentModal]);
 
+  const {FloatingComponent, ...rest} = modalOptions;
+
   return (
     <>
       {modalActive && currentModal ? (
         <Modalize
           ref={ref}
+          onClose={() => setShowFloating(false)}
+          onClosed={() => setShowFloating(true)}
           snapPoint={modalOptions.snapPoint || 200}
           handlePosition={'inside'}
+          FloatingComponent={showFloating && FloatingComponent}
           handleStyle={styles.handle}
-          {...modalOptions}>
+          {...rest}>
           {currentModal}
         </Modalize>
       ) : null}
