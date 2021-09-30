@@ -6,10 +6,6 @@ import {CustomHeader} from 'publish/CustomHeader';
 import {SearchingField} from 'home/SearchingField';
 import {UserRoundImage} from 'common/UserRoundImage';
 import {auth} from 'auth/auth';
-import {AvailiabilityButton} from 'home/AvailiabilityButton';
-import {OptionsButton} from 'home/OptionsButton';
-import {useModal} from 'modal/ModalContext';
-import {FiltersModal} from './FiltersModal';
 import {FiltersConfig} from './FiltersConfig';
 
 export function SearchCustomHeader() {

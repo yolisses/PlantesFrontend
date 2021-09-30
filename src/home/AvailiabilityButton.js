@@ -2,19 +2,18 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 import {useObserver} from 'mobx-react-lite';
-import {searchOptions} from 'search/searchOptions';
 
-export function AvailiabilityButton({text, id}) {
+export function AvailiabilityButton({text, data, id}) {
   const onPress = () => {
-    searchOptions[id] = !searchOptions[id];
+    data[id] = !data[id];
   };
 
   return useObserver(() => (
     <TouchableOpacity
       activeOpacity={0.7}
-      style={[styles.container, searchOptions[id] && styles.active]}
+      style={[styles.container, data[id] && styles.active]}
       onPress={onPress}>
-      <Text style={[styles.capsule, searchOptions[id] && styles.activeText]}>
+      <Text style={[styles.capsule, data[id] && styles.activeText]}>
         {text}
       </Text>
     </TouchableOpacity>
@@ -37,7 +36,7 @@ const styles = StyleSheet.create({
     margin: 2,
   },
   activeText: {
-    color: '#080',
+    color: 'black',
   },
   active: {
     borderColor: '#0a0',
