@@ -5,6 +5,7 @@ import {observable} from 'mobx';
 export const messagesData = observable({
   adtionalMessages: {},
   sendingMessages: {},
+  messages: [],
 });
 
 export function cleanAdtionalMessages() {

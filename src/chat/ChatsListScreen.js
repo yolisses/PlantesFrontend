@@ -15,7 +15,6 @@ export function ChatsListScreen() {
     api
       .get('/chats')
       .then(res => {
-        console.error(res.data);
         chatsData.chats = res.data;
       })
       .catch(err => console.error(err));

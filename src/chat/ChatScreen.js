@@ -15,8 +15,6 @@ import {useObserver} from 'mobx-react-lite';
 export function ChatScreen({route}) {
   const {user: userParam, chat: chatParam, userId} = route.params;
 
-  const [messages, setMessages] = useState([]);
-
   const [chat, setChat] = useState(chatParam);
   const chatId = chat?._id;
 
@@ -41,7 +39,7 @@ export function ChatScreen({route}) {
       try {
         const res = await api.get('chat-messages/' + chatId);
         cleanAdtionalMessages();
-        setMessages(res.data);
+        messagesData.messages = res.data;
       } catch (err) {
         console.error(err.response);
       }
@@ -85,7 +83,7 @@ export function ChatScreen({route}) {
       .concat(Object.values(messagesData.sendingMessages))
       .filter(isFromThisChat)
       .reverse()
-      .concat(messages);
+      .concat(messagesData.messages);
 
     return (
       <View style={styles.screen}>
