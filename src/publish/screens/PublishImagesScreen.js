@@ -46,7 +46,7 @@ export function PublishImagesScreen() {
     CameraRoll.getPhotos({
       groupName:
         selectedAlbum.name !== allPhotosAlbum ? selectedAlbum.name : undefined,
-      first: 100,
+      first: 78,
     })
       .then(res => {
         setFoundImages(res.edges.map(edge => edge.node.image.uri));
@@ -54,13 +54,12 @@ export function PublishImagesScreen() {
       .catch(err => console.error(err));
   }
 
-  useEffect(
-    () =>
-      observe(selectedAlbum, () => {
-        getPhotos();
-      }),
-    [],
-  );
+  useEffect(() => {
+    observe(selectedAlbum, () => {
+      getPhotos();
+    });
+    getPhotos();
+  }, []);
 
   return useObserver(() => (
     <FooterNavigationLayout selected="Publish">
