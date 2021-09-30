@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {api} from 'api';
 import {GoogleSignInButton} from 'auth/GoogleSignInButton';
 import React, {useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
@@ -12,6 +13,8 @@ export function LoginScreen() {
         auth.user = user;
         auth.userId = user._id;
         auth.token = token;
+
+        api.defaults.headers.common.auth = `Bearer ${token}`;
       } catch (err) {
         console.error(err);
       }
