@@ -66,6 +66,7 @@ export function HomeScreen() {
           data={loadPlants.plants}
           onEndReached={onEndReached}
           onEndReachedThreshold={0.5}
+          showsVerticalScrollIndicator={false}
           contentContainerStyle={{paddingTop: 95}}
           renderItem={({item}) => <Card item={item} />}
         />
