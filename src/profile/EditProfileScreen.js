@@ -1,15 +1,13 @@
-import {faCheck} from '@fortawesome/free-solid-svg-icons';
-import {auth} from 'auth/auth';
-import {UserRoundImage} from 'common/UserRoundImage';
-import {TextInput} from 'form/TextInput';
-import {BackButton} from 'publish/BackButton';
-import {CustomHeader} from 'publish/CustomHeader';
-import {NextButton} from 'publish/NextButton';
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {width} from 'utils/width';
+import {ScrollView, StyleSheet, Text} from 'react-native';
+
+import {auth} from 'auth/auth';
+import {TextInput} from 'form/TextInput';
+import {BackButton} from 'publish/BackButton';
+import {NextButton} from 'publish/NextButton';
+import {CustomHeader} from 'publish/CustomHeader';
 
 export function EditProfileScreen() {
   console.error(auth.user);
@@ -29,8 +27,19 @@ export function EditProfileScreen() {
         <TouchableOpacity activeOpacity={0.7}>
           <Text style={styles.link}>Alterar foto do perfil</Text>
         </TouchableOpacity>
-        <TextInput id="userName" data={{}} label="Nome" />
-        <TextInput id="description" data={{}} label="Descrição" multiline />
+        <TextInput
+          data={{}}
+          label="Nome"
+          id="userName"
+          customGetInitialValue={() => auth.user.name}
+        />
+        <TextInput
+          multiline
+          data={{}}
+          id="description"
+          label="Descrição"
+          customGetInitialValue={() => auth.user.description}
+        />
       </ScrollView>
     </>
   );

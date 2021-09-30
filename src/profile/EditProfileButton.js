@@ -1,5 +1,5 @@
-import {useNavigation} from '@react-navigation/core';
 import React from 'react';
+import {useNavigation} from '@react-navigation/core';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 export function EditProfileButton() {
@@ -26,9 +26,9 @@ const styles = StyleSheet.create({
   },
   container: {
     margin: 10,
-    marginTop: 0,
     padding: 10,
     elevation: 3,
+    marginTop: 0,
     borderRadius: 10,
     backgroundColor: 'white',
   },

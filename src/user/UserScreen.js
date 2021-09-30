@@ -57,6 +57,7 @@ export function UserScreen({route}) {
             data={Object.values(sendings)}
             renderItem={renderSendingItem}
             keyExtractor={sendingKeyExtractor}
+            showsVerticalScrollIndicator={false}
             ListHeaderComponent={
               <>
                 <UserInfo user={user} />
@@ -91,6 +92,7 @@ export function UserScreen({route}) {
           renderItem={renderItem}
           keyExtractor={keyExtractor}
           numColumns={numberOfCollums}
+          showsVerticalScrollIndicator={false}
           ListHeaderComponent={ListHeaderComponent}
         />
       </FooterNavigationLayout>

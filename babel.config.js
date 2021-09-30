@@ -40,6 +40,7 @@ module.exports = {
           global: './src/global',
           search: './src/search',
           comment: './src/comment',
+          profile: './src/profile',
           publish: './src/publish',
           storage: './src/storage',
           permission: './src/permission',

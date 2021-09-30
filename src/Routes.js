@@ -4,6 +4,12 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {Dev} from './dev/Dev';
 
+import {auth} from 'auth/auth';
+import {useObserver} from 'mobx-react-lite';
+
+import {AlertDisplay} from 'alert/AlertDisplay';
+import {ModalDisplay} from 'modal/ModalDisplay';
+
 import {MapScreen} from 'map/MapScreen';
 import {ChatScreen} from 'chat/ChatScreen';
 import {UserScreen} from 'user/UserScreen';
@@ -12,16 +18,10 @@ import {HomeScreen} from 'home/HomeScreen';
 import {ShowItemScreen} from 'show/ShowItemScreen';
 import {ChatsListScreen} from 'chat/ChatsListScreen';
 import {CommunityScreen} from 'post/CommunityScreen';
-import {PublishScreen} from 'publish/screens/PublishScreen';
-
-import {AlertDisplay} from 'alert/AlertDisplay';
-import {ModalDisplay} from 'modal/ModalDisplay';
-
 import {CommentsScreen} from 'comment/CommentsScreen';
+import {PublishScreen} from 'publish/screens/PublishScreen';
+import {EditProfileScreen} from 'profile/EditProfileScreen';
 import {MapUserLocationButton} from 'map/MapUserLocationButton';
-import {auth} from 'auth/auth';
-import {useObserver} from 'mobx-react-lite';
-import {EditProfileScreen} from 'user/EditProfileScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,11 +29,11 @@ export function Routes() {
   return useObserver(() => (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="dev"
           component={EditProfileScreen}
           options={{headerShown: false}}
-        />
+        /> */}
         {!auth.token ? (
           <Stack.Screen
             name="Login"

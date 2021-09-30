@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {EditProfileButton} from './EditProfileButton';
+import {EditProfileButton} from 'profile/EditProfileButton';
 import {UserDescription} from './UserDescription';
 
 export function UserInfo({user}) {
