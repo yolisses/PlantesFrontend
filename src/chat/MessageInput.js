@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import {StyleSheet, TextInput, View} from 'react-native';
 
-import {pushMessage} from './messages';
+import {pushMessage} from './pushMessage';
 import {ChatReference} from './ChatReference';
 import {SendMessageButton} from './SendMessageButton';
+import {useObserver} from 'mobx-react-lite';
 
 export function MessageInput({chatId, chat, toUserId, reference}) {
   const [text, setText] = useState();
@@ -18,7 +19,7 @@ export function MessageInput({chatId, chat, toUserId, reference}) {
 
   function onPressCloseButton() {}
 
-  return (
+  return useObserver(() => (
     <View style={styles.textButtonContainer}>
       <View style={styles.container}>
         {reference && (
@@ -45,7 +46,7 @@ export function MessageInput({chatId, chat, toUserId, reference}) {
       </View>
       <SendMessageButton onPress={onSendPress} />
     </View>
-  );
+  ));
 }
 
 const styles = StyleSheet.create({

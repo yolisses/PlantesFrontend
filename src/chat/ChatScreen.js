@@ -9,7 +9,6 @@ import {StyleSheet, View} from 'react-native';
 import {UserImageAndName} from 'user/UserImageAndName';
 import {useUserById} from 'common/UsersByIdContext';
 import {auth} from 'auth/auth';
-import {messagesData} from './messages';
 import {useObserver} from 'mobx-react-lite';
 
 export function ChatScreen({route}) {
@@ -17,6 +16,9 @@ export function ChatScreen({route}) {
 
   if (!chat.messages) {
     chat.messages = [];
+  }
+  if (!chat.sendingMessages) {
+    chat.sendingMessages = {};
   }
 
   const chatId = chat?._id;
@@ -61,7 +63,7 @@ export function ChatScreen({route}) {
   }
 
   return useObserver(() => {
-    const renderMessages = Object.values(messagesData.sendingMessages)
+    const renderMessages = Object.values(chat.sendingMessages)
       .filter(isFromThisChat)
       .reverse()
       .concat(chat.messages);
