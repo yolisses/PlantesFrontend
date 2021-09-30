@@ -15,9 +15,8 @@ export function AvailabilityButtons() {
 }
 const styles = StyleSheet.create({
   container: {
-    height: 100,
+    height: 40,
     elevation: 3,
-    paddingTop: 60,
     flexDirection: 'row',
     alignItems: 'stretch',
     backgroundColor: 'white',
