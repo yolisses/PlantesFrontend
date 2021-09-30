@@ -15,7 +15,7 @@ export function FiltersConfig() {
   }
   return (
     <View style={styles.container}>
-      <OptionsButton text="Filtrar" onPress={onFiltersPress} />
+      <OptionsButton text="Filtros" onPress={onFiltersPress} />
     </View>
   );
 }
