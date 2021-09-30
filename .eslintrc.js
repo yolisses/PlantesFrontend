@@ -23,6 +23,7 @@ module.exports = {
           ['trash', './src/trash'],
           ['utils', './src/utils'],
           ['camera', './src/camera'],
+          ['config', './src/config'],
           ['common', './src/common'],
           ['global', './src/global'],
           ['search', './src/search'],

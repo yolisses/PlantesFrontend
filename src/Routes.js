@@ -15,6 +15,7 @@ import {ChatScreen} from 'chat/ChatScreen';
 import {UserScreen} from 'user/UserScreen';
 import {LoginScreen} from 'auth/LoginScreen';
 import {HomeScreen} from 'home/HomeScreen';
+import {ConfigScreen} from 'config/ConfigScreen';
 import {ShowItemScreen} from 'show/ShowItemScreen';
 import {ChatsListScreen} from 'chat/ChatsListScreen';
 import {CommunityScreen} from 'post/CommunityScreen';
@@ -34,6 +35,8 @@ export function Routes() {
           component={EditProfileScreen}
           options={{headerShown: false}}
         /> */}
+        {/* <Stack.Screen name="dev" component={ConfigScreen} /> */}
+
         {!auth.token ? (
           <Stack.Screen
             name="Login"
@@ -60,6 +63,11 @@ export function Routes() {
               name="UserScreen"
               component={UserScreen}
               options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="Config"
+              component={ConfigScreen}
+              options={{title: 'Configurações'}}
             />
             <Stack.Screen
               name="Publish"
