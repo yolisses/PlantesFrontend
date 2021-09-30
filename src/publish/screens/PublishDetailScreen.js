@@ -28,7 +28,6 @@ function ValidatedHeader({hasName}) {
 export function PublishDetailScreen() {
   const {data} = useShallowData();
   const [hasName, setHasName] = useState(!!data.name);
-  const [hasType, setHasType] = useState(!!data.type);
 
   function validateName(value) {
     setHasName(!!value);
@@ -36,7 +35,7 @@ export function PublishDetailScreen() {
 
   return (
     <>
-      <ValidatedHeader hasName={hasName} hasType={hasType} />
+      <ValidatedHeader hasName={hasName} />
       <ProgressBar ratio={2 / 3} />
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
         <TextInput
