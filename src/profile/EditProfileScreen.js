@@ -20,7 +20,7 @@ export function EditProfileScreen() {
   const {setCurrentUser} = useUserById();
 
   return useObserver(() => {
-    function updateProfile() {
+    async function updateProfile() {
       console.error(editProfileData);
       api
         .put('/update-profile', editProfileData)
