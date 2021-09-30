@@ -3,16 +3,9 @@ import {auth} from 'auth/auth';
 import {observable} from 'mobx';
 
 export const messagesData = observable({
-  adtionalMessages: {},
   sendingMessages: {},
   messages: [],
 });
-
-export function cleanAdtionalMessages() {
-  for (let key in messagesData.adtionalMessages) {
-    delete messagesData.adtionalMessages[key];
-  }
-}
 
 export async function pushMessage({chatId, text, toUserId}) {
   const fakeId = Math.random();
@@ -29,7 +22,7 @@ export async function pushMessage({chatId, text, toUserId}) {
     .post('/send-message', message)
     .then(res => {
       const message = res.data;
-      messagesData.adtionalMessages[fakeId] = message;
+      messagesData.messages.unshift(message);
       delete messagesData.sendingMessages[fakeId];
     })
     .catch(err => console.error(JSON.stringify(err.response)));

@@ -9,7 +9,7 @@ import {Button, StyleSheet, View} from 'react-native';
 import {UserImageAndName} from 'user/UserImageAndName';
 import {useUserById} from 'common/UsersByIdContext';
 import {auth} from 'auth/auth';
-import {cleanAdtionalMessages, messagesData} from './messages';
+import {messagesData} from './messages';
 import {useObserver} from 'mobx-react-lite';
 
 export function ChatScreen({route}) {
@@ -38,7 +38,6 @@ export function ChatScreen({route}) {
     if (chat) {
       try {
         const res = await api.get('chat-messages/' + chatId);
-        cleanAdtionalMessages();
         messagesData.messages = res.data;
       } catch (err) {
         console.error(err.response);
@@ -76,11 +75,7 @@ export function ChatScreen({route}) {
   }
 
   return useObserver(() => {
-    const renderMessages = Object.values(messagesData.adtionalMessages)
-      .sort(newer)
-      .filter(isFromThisChat)
-      .reverse()
-      .concat(Object.values(messagesData.sendingMessages))
+    const renderMessages = Object.values(messagesData.sendingMessages)
       .filter(isFromThisChat)
       .reverse()
       .concat(messagesData.messages);
