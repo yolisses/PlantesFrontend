@@ -1,6 +1,5 @@
 import {api} from 'api';
 import {Message} from 'chat/Message';
-import {useMessages} from './MessagesContext';
 import {BackButton} from 'publish/BackButton';
 import {MessageInput} from 'chat/MessageInput';
 import React, {useEffect, useState} from 'react';
@@ -10,14 +9,12 @@ import {Button, StyleSheet, View} from 'react-native';
 import {UserImageAndName} from 'user/UserImageAndName';
 import {useUserById} from 'common/UsersByIdContext';
 import {auth} from 'auth/auth';
+import {cleanAdtionalMessages, messagesData} from './messages';
 
 export function ChatScreen({route}) {
   const {user: userParam, chat: chatParam, userId} = route.params;
 
   const [messages, setMessages] = useState([]);
-
-  const {sendingMessages, adtionalMessages, cleanAdtionalMessages} =
-    useMessages();
 
   const [chat, setChat] = useState(chatParam);
   const chatId = chat?._id;
@@ -36,7 +33,7 @@ export function ChatScreen({route}) {
         })
         .catch(err => console.error(err.response));
     }
-  }, [auth.userId]);
+  }, []);
 
   async function getMessages() {
     if (chat) {
@@ -55,7 +52,7 @@ export function ChatScreen({route}) {
       getMessages();
       return getMessages;
     }
-  }, [auth.token, chat]);
+  }, []);
 
   function renderItem({item: message}) {
     return (
@@ -79,9 +76,9 @@ export function ChatScreen({route}) {
     );
   }
 
-  const renderMessages = Object.values(sendingMessages)
+  const renderMessages = Object.values(messagesData.sendingMessages)
     .filter(isFromThisChat)
-    .concat(Object.values(adtionalMessages).sort(newer))
+    .concat(Object.values(messagesData.adtionalMessages).sort(newer))
     .filter(isFromThisChat)
     .concat(messages);
 
