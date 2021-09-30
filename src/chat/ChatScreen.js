@@ -2,10 +2,10 @@ import {api} from 'api';
 import {Message} from 'chat/Message';
 import {BackButton} from 'publish/BackButton';
 import {MessageInput} from 'chat/MessageInput';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {CustomHeader} from 'publish/CustomHeader';
 import {FlatList} from 'react-native-gesture-handler';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {UserImageAndName} from 'user/UserImageAndName';
 import {useUserById} from 'common/UsersByIdContext';
 import {auth} from 'auth/auth';
@@ -73,7 +73,6 @@ export function ChatScreen({route}) {
           center={<UserImageAndName image={user?.image} name={user?.name} />}
         />
         <FlatList inverted data={renderMessages} renderItem={renderItem} />
-        <Button title="refresh" onPress={getMessages} />
         <MessageInput chatId={chatId} toUserId={userId} chat={chat} />
       </View>
     );

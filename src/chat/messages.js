@@ -4,7 +4,6 @@ import {observable} from 'mobx';
 
 export const messagesData = observable({
   sendingMessages: {},
-  messages: [],
 });
 
 export async function pushMessage({chatId, chat, text, toUserId}) {
@@ -21,8 +20,7 @@ export async function pushMessage({chatId, chat, text, toUserId}) {
   api
     .post('/send-message', message)
     .then(res => {
-      const message = res.data;
-      chat.messages.unshift(message);
+      chat.messages.unshift(res.data);
       delete messagesData.sendingMessages[fakeId];
     })
     .catch(err => console.error(JSON.stringify(err.response)));
