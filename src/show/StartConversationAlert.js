@@ -11,7 +11,7 @@ export function StartConversationAlert({item, onSendPress}) {
   return (
     <Alert
       title="Fazer pedido"
-      description={`Mande um mensagem${
+      description={`Mande um mensagem ${
         user?.name ? 'para ' + user.name : ''
       } para combinar a entrega`}>
       <AlertButton text="Cancelar" />

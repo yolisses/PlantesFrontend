@@ -18,19 +18,29 @@ export function ItemInfo({scrollTo, item}) {
       <Text style={styles.title}>{item?.name}</Text>
       <UserLink id={item?.userId} />
       <View style={styles.section}>
-        <Pressable
-          style={styles.aboutWrapper}
-          onPress={() => scrollTo(width + 80)}>
-          <FontAwesomeIcon icon={faChevronDown} color={'gray'} />
-          <Text style={styles.about}>Detalhes</Text>
-        </Pressable>
-        <TagsList tags={item?.tags || []} />
+        {!!(item?.tags && item.tags.length) && (
+          <>
+            <Pressable
+              style={styles.aboutWrapper}
+              onPress={() => scrollTo(width + 80)}>
+              <FontAwesomeIcon icon={faChevronDown} color={'gray'} />
+              <Text style={styles.about}>Detalhes</Text>
+            </Pressable>
+            <TagsList tags={item?.tags || []} />
+          </>
+        )}
       </View>
-      <View style={styles.aboutWrapper}>
-        <FontAwesomeIcon icon={faChevronDown} color={'gray'} />
-        <Text style={styles.about}>Descrição</Text>
-      </View>
-      <Text style={styles.about}>{item?.description}</Text>
+      {item?.description ? (
+        <View>
+          <View style={styles.aboutWrapper}>
+            <FontAwesomeIcon icon={faChevronDown} color={'gray'} />
+            <Text style={styles.about}>Descrição</Text>
+          </View>
+          <Text style={styles.about}>{item?.description}</Text>
+        </View>
+      ) : (
+        <Text style={styles.notProvided}>Sem descrição</Text>
+      )}
     </View>
   );
 }
@@ -71,5 +81,11 @@ const styles = StyleSheet.create({
   },
   section: {
     marginBottom: 20,
+  },
+  notProvided: {
+    textAlign: 'center',
+    color: 'gray',
+    fontSize: 16,
+    padding: 10,
   },
 });
