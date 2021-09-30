@@ -28,7 +28,7 @@ const Stack = createNativeStackNavigator();
 export function Routes() {
   return useObserver(() => (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator o>
         {/* <Stack.Screen
           name="dev"
           component={EditProfileScreen}
