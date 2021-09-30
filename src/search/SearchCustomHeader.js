@@ -10,6 +10,7 @@ import {AvailiabilityButton} from 'home/AvailiabilityButton';
 import {OptionsButton} from 'home/OptionsButton';
 import {useModal} from 'modal/ModalContext';
 import {FiltersModal} from './FiltersModal';
+import {FiltersConfig} from './FiltersConfig';
 
 export function SearchCustomHeader() {
   const [textSearch, setTextSearch] = useState(false);
@@ -20,12 +21,6 @@ export function SearchCustomHeader() {
 
   function onCloseSearchPress() {
     setTextSearch(false);
-  }
-
-  const {showModal} = useModal();
-
-  function onFiltersPress() {
-    showModal(<FiltersModal />);
   }
 
   return (
@@ -51,12 +46,7 @@ export function SearchCustomHeader() {
           <SearchingField onClosePress={onCloseSearchPress} />
         )}
       </View>
-      <View style={styles.container}>
-        <AvailiabilityButton text="Doação" id="donate" />
-        <AvailiabilityButton text="Troca" id="swap" />
-        <AvailiabilityButton text="Venda" id="sell" />
-        <OptionsButton text="Filtrar" onPress={onFiltersPress} />
-      </View>
+      <FiltersConfig />
     </View>
   );
 }
@@ -75,7 +65,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   container: {
-    height: 40,
+    height: 45,
     elevation: 3,
     flexDirection: 'row',
     alignItems: 'stretch',
