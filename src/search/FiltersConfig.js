@@ -37,6 +37,9 @@ export function FiltersConfig() {
           {showText.map(text => (
             <Text style={styles.indicator}>{text}, </Text>
           ))}
+          {showText.length === 0 && (
+            <Text style={styles.withoutIndicators}>Nenhum filtro </Text>
+          )}
         </Text>
       </ScrollView>
       <OptionsButton text="Filtros" onPress={onFiltersPress} />
@@ -46,18 +49,22 @@ export function FiltersConfig() {
 
 const styles = StyleSheet.create({
   indicator: {
-    fontSize: 18,
+    fontSize: 16,
     color: 'green',
+  },
+  withoutIndicators: {
+    fontSize: 16,
+    color: 'gray',
   },
   indicatorsWrapper: {
     alignItems: 'center',
     padding: 10,
+    marginRight: 10,
     flexDirection: 'row',
   },
   container: {
     flexDirection: 'row',
     alignItems: 'stretch',
-    backgroundColor: 'white',
     justifyContent: 'space-evenly',
   },
 });

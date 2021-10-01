@@ -24,10 +24,10 @@ export function FooterNavigation({selected}) {
 
 const styles = StyleSheet.create({
   container: {
-    height: 55,
+    height: 50,
     width: '100%',
-    flexDirection: 'row',
     alignItems: 'center',
+    flexDirection: 'row',
     backgroundColor: 'white',
     justifyContent: 'space-evenly',
   },

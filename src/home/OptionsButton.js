@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
-    marginHorizontal: 10,
   },
   text: {
     fontSize: 18,
