@@ -1,9 +1,11 @@
 import {faSearch, faTimes} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {basicHitSlop} from 'common/basicHitSlop';
+import {reset} from 'home/loadPlants';
 import React, {useRef, useState} from 'react';
 import {StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 import {Text} from 'react-native';
+import {searchOptions} from './searchOptions';
 
 export function SearchBox() {
   const [active, setActive] = useState(false);
@@ -16,8 +18,15 @@ export function SearchBox() {
   }
 
   function onClosePress() {
+    searchOptions.text = null;
+    reset();
     ref?.current?.blur();
     setActive(false);
+  }
+
+  function onSubmit(e) {
+    searchOptions.text = e.nativeEvent.text;
+    reset();
   }
 
   return (
@@ -34,8 +43,9 @@ export function SearchBox() {
         <>
           <TextInput
             ref={ref}
-            style={styles.input}
             autoFocus
+            onSubmitEditing={onSubmit}
+            style={styles.input}
             returnKeyType="search"
             placeholder="Pesquisar"
           />
