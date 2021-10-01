@@ -1,7 +1,7 @@
 import {chatsData} from 'chat/chats';
 
 export function lookForChatByUserId(userId) {
-  const chatArray = chatsData.chats.filter(
+  const chatArray = Object.values(chatsData.chats).filter(
     chat => chat.users.indexOf(userId) !== -1,
   );
 

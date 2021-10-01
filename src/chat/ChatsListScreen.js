@@ -9,20 +9,18 @@ import {useObserver} from 'mobx-react-lite';
 export function ChatsListScreen() {
   const renderItem = ({item}) => <ChatListItem key={item._id} chat={item} />;
 
-  const messageCountHigher = (a, b) => a?.message_count < b?.message_count;
-
-  useEffect(() => {
-    api
-      .get('/chats')
-      .then(res => {
-        chatsData.chats = res.data;
-      })
-      .catch(err => console.error(err));
-  }, []);
+  // useEffect(() => {
+  //   api
+  //     .get('/chats')
+  //     .then(res => {
+  //       chatsData.chats = res.data;
+  //     })
+  //     .catch(err => console.error(err));
+  // }, []);
 
   return useObserver(() => (
     <FooterNavigationLayout selected="ChatsList">
-      <FlatList data={chatsData.chats} renderItem={renderItem} />
+      <FlatList data={Object.values(chatsData.chats)} renderItem={renderItem} />
     </FooterNavigationLayout>
   ));
 }
