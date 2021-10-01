@@ -6,6 +6,9 @@ import {FloatingButton} from 'show/FloatingButton';
 import {AvailabilityInfo} from 'show/AvailabilityInfo';
 import {StartConversetionButton} from 'show/StartConversationButton';
 import {useNavigation} from '@react-navigation/core';
+import {lookForChatByUserId} from './lookForChatByUserId';
+import {useUserById} from 'common/UsersByIdContext';
+import {auth} from 'auth/auth';
 
 export function ShowItemScreen({route}) {
   const {preImage, item} = route.params;
@@ -16,13 +19,18 @@ export function ShowItemScreen({route}) {
     scrollRef.current.scrollTo({y: pos, animated: true});
   };
 
+  const {getUserById} = useUserById();
+  const user = getUserById(item?.userId);
+
   const {navigate} = useNavigation();
 
   function onPress() {
     if (!item) {
       return;
     }
-    navigate('Chat', {userId: item.userId});
+
+    const chat = lookForChatByUserId(item.userId);
+    navigate('Chat', {chat, user});
   }
 
   return (
@@ -35,7 +43,9 @@ export function ShowItemScreen({route}) {
       <View style={styles.bottomWrapper}>
         <AvailabilityInfo onModalConfirmPress={onPress} item={item} />
         <View style={{flex: 1, justifyContent: 'center'}}>
-          <StartConversetionButton onPress={onPress} loading={!item} />
+          {item?.userId !== auth.userId && (
+            <StartConversetionButton onPress={onPress} loading={!item} />
+          )}
         </View>
       </View>
     </View>
