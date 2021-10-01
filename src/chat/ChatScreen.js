@@ -24,6 +24,7 @@ export function ChatScreen({route}) {
       users: [auth.userId, userId],
     };
     chatsData.chats[fakeChat._id] = fakeChat;
+
     return fakeChat;
   }
 
@@ -98,11 +99,7 @@ export function ChatScreen({route}) {
           center={<UserImageAndName image={user?.image} name={user?.name} />}
         />
         <FlatList inverted data={renderMessages} renderItem={renderItem} />
-        <MessageInput
-          chatId={chatId}
-          toUserId={userId}
-          chat={chatsData.chats[chatId]}
-        />
+        <MessageInput toUserId={userId} chat={chat} />
       </View>
     );
   });
