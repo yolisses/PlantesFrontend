@@ -7,8 +7,6 @@ import {useObserver} from 'mobx-react-lite';
 import {api} from 'api';
 import {Card} from 'home/Card';
 import {loadPlants} from 'home/loadPlants';
-import {searchOptions} from 'search/searchOptions';
-import {CardsListLoading} from 'home/CardsListLoading';
 import {SearchCustomHeader} from 'search/SearchCustomHeader';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 
@@ -18,9 +16,7 @@ export function HomeScreen() {
       return;
     }
     loadPlants.loading = true;
-    const res = await api.get('/plants/' + loadPlants.page, {
-      params: searchOptions,
-    });
+    const res = await api.get('/plants/' + loadPlants.page);
     loadPlants.plants = loadPlants.plants.concat(res.data);
     if (res.data.length === 0) {
       loadPlants.ended = true;
@@ -33,17 +29,13 @@ export function HomeScreen() {
     getPlants();
   }
 
-  function reset() {
-    loadPlants.page = 0;
-    loadPlants.plants = [];
-    loadPlants.ended = false;
-    loadPlants.loading = false;
-  }
-
   useEffect(() => {
-    observe(searchOptions, () => {
-      reset();
-      getPlants();
+    observe(loadPlants, () => {
+      if (loadPlants.reset) {
+        getPlants();
+        console.error('chama');
+        loadPlants.reset = false;
+      }
     });
     getPlants();
   }, []);
@@ -51,18 +43,14 @@ export function HomeScreen() {
   return useObserver(() => (
     <FooterNavigationLayout selected={'Home'}>
       <SearchCustomHeader />
-      {!loadPlants.plants ? (
-        <CardsListLoading />
-      ) : (
-        <FlatList
-          numColumns={2}
-          data={loadPlants.plants}
-          onEndReached={onEndReached}
-          onEndReachedThreshold={0.5}
-          showsVerticalScrollIndicator={false}
-          renderItem={({item}) => <Card item={item} />}
-        />
-      )}
+      <FlatList
+        numColumns={2}
+        data={loadPlants.plants}
+        onEndReached={onEndReached}
+        onEndReachedThreshold={0.5}
+        showsVerticalScrollIndicator={false}
+        renderItem={({item}) => <Card item={item} />}
+      />
     </FooterNavigationLayout>
   ));
 }

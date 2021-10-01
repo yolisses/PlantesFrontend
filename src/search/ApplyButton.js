@@ -6,14 +6,12 @@ import {Text, TouchableOpacity} from 'react-native';
 export function ApplyButton({onPress}) {
   const {closeModal} = useModal();
 
-  const useNavigatio
-
   function onPressAndClose(e) {
     if (onPress) {
       onPress(e);
     }
     closeModal();
-    navi
+    navi;
   }
 
   return (

@@ -1,5 +1,5 @@
+import {reset} from 'home/loadPlants';
 import {OptionsButton} from 'home/OptionsButton';
-import {useObserver} from 'mobx-react-lite';
 import {useModal} from 'modal/ModalContext';
 import {availabilitiesLabels} from 'publish/data/availiabilities';
 import React from 'react';
@@ -10,10 +10,15 @@ import {filtersData} from './filtersData';
 import {FiltersModal} from './FiltersModal';
 
 export function FiltersConfig() {
+  function onApplyPress() {
+    console.error('oi');
+    reset();
+  }
+
   const {showModal} = useModal();
   function onFiltersPress() {
     showModal(<FiltersModal />, {
-      FloatingComponent: <ApplyButton />,
+      FloatingComponent: <ApplyButton onPress={onApplyPress} />,
       snapPoint: 400,
     });
   }
