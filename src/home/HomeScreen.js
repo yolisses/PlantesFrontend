@@ -16,7 +16,9 @@ export function HomeScreen() {
       return;
     }
     loadPlants.loading = true;
-    const res = await api.get('/plants/' + loadPlants.page);
+    const res = await api.get('/plants/' + loadPlants.page, {
+      // params: {swap: true},
+    });
     loadPlants.plants = loadPlants.plants.concat(res.data);
     if (res.data.length === 0) {
       loadPlants.ended = true;
@@ -33,7 +35,6 @@ export function HomeScreen() {
     observe(loadPlants, () => {
       if (loadPlants.reset) {
         getPlants();
-        console.error('chama');
         loadPlants.reset = false;
       }
     });

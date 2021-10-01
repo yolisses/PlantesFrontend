@@ -11,7 +11,6 @@ export function ApplyButton({onPress}) {
       onPress(e);
     }
     closeModal();
-    navi;
   }
 
   return (

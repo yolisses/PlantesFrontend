@@ -22,11 +22,11 @@ export function Card({item, fraction, postComponent}) {
         style={styles.card}
       />
       {postComponent}
-      {/* <View style={styles.textContainer}>
+      <View style={styles.textContainer}>
         <Text style={styles.text}>{item.donate ? 'Doação ' : ''}</Text>
         <Text style={styles.text}>{item.swap ? 'Troca ' : ''}</Text>
         <Text style={styles.text}>{item.price ? 'R$' + item.price : ''}</Text>
-      </View> */}
+      </View>
     </TouchableOpacity>
   );
 }
