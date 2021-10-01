@@ -6,7 +6,7 @@ import {ChatReference} from './ChatReference';
 import {SendMessageButton} from './SendMessageButton';
 import {useObserver} from 'mobx-react-lite';
 
-export function MessageInput({chatId, chat, toUserId, reference}) {
+export function MessageInput({chat, toUserId, reference}) {
   const [text, setText] = useState();
 
   async function onSendPress() {
@@ -14,7 +14,7 @@ export function MessageInput({chatId, chat, toUserId, reference}) {
       return;
     }
     setText(null);
-    await pushMessage({text, toUserId, chat, chatId});
+    await pushMessage({text, toUserId, chat});
   }
 
   function onPressCloseButton() {}
