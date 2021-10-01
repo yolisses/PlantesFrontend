@@ -13,49 +13,65 @@ import {chatsData} from './chats';
 
 export function ChatScreen({route}) {
   const {user, chat: chatParam} = route.params;
-  const [chat, setChat] = useState(chatParam);
+  const userId = user?._id;
 
-  if (chat && !chat?.messages) {
+  function createFakeChat() {
+    const fakeChat = {
+      fake: true,
+      _id: userId,
+      private: true,
+      creator: auth.userId,
+      users: [auth.userId, userId],
+    };
+    chatsData.chats[fakeChat._id] = fakeChat;
+    return fakeChat;
+  }
+
+  const [chat, setChat] = useState(chatParam || createFakeChat());
+  const chatId = chat?._id;
+
+  if (!chat?.messages) {
     chat.messages = [];
   }
-  if (chat && !chat?.sendingMessages) {
+  if (!chat?.sendingMessages) {
     chat.sendingMessages = {};
   }
 
-  const chatId = chat?._id;
-  const userId = user?._id;
-
-  async function getMessages() {
+  const getMessages = async () => {
+    console.error('get messaages');
     try {
       const res = await api.get('chat-messages/' + chatId);
       chat.messages = res.data;
+      console.error(res.data);
+      console.error(chat);
     } catch (err) {
-      console.error(err.response);
+      console.error(err);
     }
-  }
+  };
 
   async function getChat() {
     try {
       const res = await api.post('private-chat-by-user', {userId});
       const newChat = res.data;
-      chatsData.chats[newChat._id] = newChat;
-      setChat(chatsData.chats[newChat._id]);
+      if (newChat) {
+        chatsData.chats[newChat._id] = newChat;
+        console.error(newChat);
+        setChat(chatsData.chats[newChat._id]);
+      }
     } catch (err) {
-      console.error(err.response);
+      console.error('sim', err);
     }
   }
 
   function load() {
-    if (!chat) {
+    if (chat.fake) {
       getChat();
     } else {
       getMessages();
     }
   }
 
-  useEffect(() => {
-    load();
-  }, [chat]);
+  useEffect(load, [chat]);
 
   function renderItem({item: message}) {
     return (
