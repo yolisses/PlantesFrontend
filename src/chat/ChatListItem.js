@@ -26,6 +26,7 @@ export function ChatListItem({chat}) {
         </View>
         <View style={styles.detailsWrapper}>
           <Text style={styles.name}>{user?.name}</Text>
+          <Text>{chat.fake ? 'fake' : 'nao fake'}</Text>
         </View>
       </TouchableOpacity>
       <View style={styles.lineSeparator} />
