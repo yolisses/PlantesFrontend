@@ -3,18 +3,24 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text, TouchableOpacity} from 'react-native';
 
-export function ApplyButton() {
+export function ApplyButton({onPress}) {
   const {closeModal} = useModal();
 
-  function onPress() {
+  const useNavigatio
+
+  function onPressAndClose(e) {
+    if (onPress) {
+      onPress(e);
+    }
     closeModal();
+    navi
   }
 
   return (
     <View style={styles.facade}>
       <TouchableOpacity
         style={styles.button}
-        onPress={onPress}
+        onPress={onPressAndClose}
         activeOpacity={0.9}>
         <Text style={styles.text}>Aplicar</Text>
       </TouchableOpacity>
