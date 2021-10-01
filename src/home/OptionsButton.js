@@ -14,10 +14,10 @@ export function OptionsButton({text, ...rest}) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 5,
     alignItems: 'center',
-    justifyContent: 'center',
     flexDirection: 'row',
+    paddingHorizontal: 5,
+    justifyContent: 'center',
   },
   text: {
     fontSize: 18,
