@@ -37,8 +37,9 @@ export function ChatScreen({route}) {
   async function getChat() {
     try {
       const res = await api.post('private-chat-by-user', {userId});
-      const chat = res.data;
-      chatsData.chats[chat._id] = chat;
+      const newChat = res.data;
+      chatsData.chats[newChat._id] = newChat;
+      setChat(chatsData.chats[newChat._id]);
     } catch (err) {
       console.error(err.response);
     }
