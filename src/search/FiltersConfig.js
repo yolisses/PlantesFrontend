@@ -55,8 +55,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   container: {
-    height: 45,
-    elevation: 3,
     flexDirection: 'row',
     alignItems: 'stretch',
     backgroundColor: 'white',
