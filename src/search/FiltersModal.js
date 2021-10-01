@@ -1,6 +1,4 @@
-import {Fieldset} from 'form/Fieldset';
 import {TagsSelector} from 'form/TagsSelector';
-import {AvailiabilityButton} from 'home/AvailiabilityButton';
 import {useObserver} from 'mobx-react-lite';
 import {
   availabilities,
@@ -9,26 +7,26 @@ import {
 import {tags} from 'publish/data/tags';
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
-import {filtersData} from './filtersData';
+import {unappliedSearchOptions} from './unappliedSearchOptions';
 
 export function FiltersModal() {
   return useObserver(() => (
     <View>
       <ScrollView style={styles.container}>
         <TagsSelector
-          id="availabilities"
-          data={filtersData}
-          label="Disponível para"
           showIcon={false}
+          id="availabilities"
+          label="Disponível para"
           options={availabilities}
           buttonStyle={styles.button}
+          data={unappliedSearchOptions}
           labels={availabilitiesLabels}
         />
         <TagsSelector
           id="tags"
-          data={filtersData}
-          label="De preferência"
           options={tags}
+          label="De preferência"
+          data={unappliedSearchOptions}
         />
       </ScrollView>
     </View>

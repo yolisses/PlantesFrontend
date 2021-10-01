@@ -1,4 +1,3 @@
-import {reset} from 'home/loadPlants';
 import {OptionsButton} from 'home/OptionsButton';
 import {useModal} from 'modal/ModalContext';
 import {availabilitiesLabels} from 'publish/data/availiabilities';
@@ -6,28 +5,23 @@ import React from 'react';
 import {ScrollView} from 'react-native';
 import {StyleSheet, Text, View} from 'react-native';
 import {ApplyButton} from './ApplyButton';
-import {filtersData} from './filtersData';
 import {FiltersModal} from './FiltersModal';
+import {searchOptions} from './searchOptions';
 
 export function FiltersConfig() {
-  function onApplyPress() {
-    console.error('oi');
-    reset();
-  }
-
   const {showModal} = useModal();
   function onFiltersPress() {
     showModal(<FiltersModal />, {
-      FloatingComponent: <ApplyButton onPress={onApplyPress} />,
+      FloatingComponent: <ApplyButton />,
       snapPoint: 400,
     });
   }
 
-  const showText = Object.entries(filtersData.availabilities)
+  const showText = Object.entries(searchOptions.availabilities)
     .filter(entry => entry[1])
     .map(entry => availabilitiesLabels[entry[0]].toLowerCase())
     .concat(
-      Object.entries(filtersData.tags)
+      Object.entries(searchOptions.tags)
         .filter(entry => entry[1])
         .map(entry => entry[0]),
     );
