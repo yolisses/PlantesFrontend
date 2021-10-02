@@ -13,14 +13,14 @@ import {ModalDisplay} from 'modal/ModalDisplay';
 import {MapScreen} from 'map/MapScreen';
 import {ChatScreen} from 'chat/ChatScreen';
 import {UserScreen} from 'user/UserScreen';
-import {LoginScreen} from 'auth/LoginScreen';
 import {HomeScreen} from 'home/HomeScreen';
+import {LoginScreen} from 'auth/LoginScreen';
 import {ConfigScreen} from 'config/ConfigScreen';
 import {ShowItemScreen} from 'show/ShowItemScreen';
+import {PublishScreen} from 'publish/PublishScreen';
 import {ChatsListScreen} from 'chat/ChatsListScreen';
 import {CommunityScreen} from 'post/CommunityScreen';
 import {CommentsScreen} from 'comment/CommentsScreen';
-import {PublishScreen} from 'publish/screens/PublishScreen';
 import {EditProfileScreen} from 'profile/EditProfileScreen';
 import {MapUserLocationButton} from 'map/MapUserLocationButton';
 
@@ -29,14 +29,13 @@ const Stack = createNativeStackNavigator();
 export function Routes() {
   return useObserver(() => (
     <NavigationContainer>
-      <Stack.Navigator o>
-        {/* <Stack.Screen
-          name="dev"
-          component={EditProfileScreen}
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Publish1"
+          component={PublishScreen}
           options={{headerShown: false}}
-        /> */}
+        />
         {/* <Stack.Screen name="dev" component={ConfigScreen} /> */}
-
         {!auth.token ? (
           <Stack.Screen
             name="Login"
