@@ -80,7 +80,7 @@ export function UserScreen({route}) {
         <CustomHeader
           left={<BackButton />}
           title={user?.name}
-          right={<ConfigButton />}
+          right={userId === auth.userId && <ConfigButton />}
         />
         <FlatList
           data={plants}
