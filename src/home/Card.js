@@ -19,22 +19,22 @@ export function Card({item, fraction, postComponent}) {
       <SquareImage
         uri={item?.card}
         fraction={fraction || 2}
-        style={styles.card}
+        // style={styles.card}
       />
       {postComponent}
-      <View style={styles.textContainer}>
+      {/* <View style={styles.textContainer}>
         <Text style={styles.text}>{item.donate ? 'Doação ' : ''}</Text>
         <Text style={styles.text}>{item.swap ? 'Troca ' : ''}</Text>
         <Text style={styles.text}>{item.price ? 'R$' + item.price : ''}</Text>
-      </View>
+      </View> */}
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  card: {
-    borderRadius: 10,
-  },
+  // card: {
+  //   borderRadius: 10,
+  // },
   textContainer: {
     width: width / 2,
     justifyContent: 'center',
