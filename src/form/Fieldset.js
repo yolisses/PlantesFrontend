@@ -40,6 +40,6 @@ const styles = StyleSheet.create({
   border: {
     borderStyle: 'solid',
     borderWidth: 2,
-    borderColor: '#aaa',
+    borderColor: '#bbb',
   },
 });

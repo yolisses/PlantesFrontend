@@ -1,11 +1,11 @@
-import {faSeedling} from '@fortawesome/free-solid-svg-icons';
+import {faImage} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {useNavigation} from '@react-navigation/core';
-import {SquareImage} from 'common/SquareImage';
 import {Fieldset} from 'form/Fieldset';
+import {observe} from 'mobx';
 import {useObserver} from 'mobx-react-lite';
-import React from 'react';
-import {ScrollView, TouchableOpacity} from 'react-native';
+import React, {useEffect, useRef} from 'react';
+import {FlatList, TouchableOpacity} from 'react-native';
 import {StyleSheet, Text, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {selectedImages} from './selectedImages';
@@ -17,38 +17,39 @@ export function SelectImagesField() {
     navigate('Images');
   }
 
+  const renderItem = ({item: uri}) => (
+    <FastImage source={{uri}} fraction={4} style={styles.image} key={uri} />
+  );
+
   return useObserver(() => (
-    //   <Text style={styles.text}>Selecionar imagens</Text>
     <View style={styles.container}>
       <Fieldset label="Fotos" styleLabel={styles.label}>
-        <ScrollView
-          horizontal
-          style={{flex: 1}}
-          contentContainerStyle={[
-            styles.inner,
-            !Object.keys(selectedImages).length && {flex: 1},
-          ]}
-          showsHorizontalScrollIndicator={false}>
-          {/* {!Object.keys(selectedImages).length && (
-            <View style={styles.imagePlaceholder}>
-              <FontAwesomeIcon icon={faSeedling} size={60} color="#aaa" />
-            </View>
-          )} */}
-          {Object.keys(selectedImages).map(uri => (
-            <FastImage
-              source={{uri}}
-              fraction={4}
-              style={styles.image}
-              key={uri}
-            />
-          ))}
+        {Object.keys(selectedImages).length !== 0 ? (
+          <FlatList
+            horizontal
+            contentContainerStyle={[styles.inner]}
+            showsHorizontalScrollIndicator={false}
+            data={Object.keys(selectedImages)}
+            renderItem={renderItem}
+            ListFooterComponent={
+              <TouchableOpacity
+                style={styles.select}
+                activeOpacity={0.7}
+                onPress={onPress}>
+                <FontAwesomeIcon icon={faImage} size={20} />
+                <Text style={styles.text}>Selecionar</Text>
+              </TouchableOpacity>
+            }
+          />
+        ) : (
           <TouchableOpacity
             style={styles.select}
             activeOpacity={0.7}
             onPress={onPress}>
+            <FontAwesomeIcon icon={faImage} size={20} />
             <Text style={styles.text}>Selecionar</Text>
           </TouchableOpacity>
-        </ScrollView>
+        )}
       </Fieldset>
     </View>
   ));
@@ -65,15 +66,13 @@ const styles = StyleSheet.create({
     height: 160,
     backgroundColor: '#eee',
     padding: 10,
-    flex: 1,
     alignItems: 'center',
     borderRadius: 10,
     margin: offset,
+    flex: 1,
     justifyContent: 'center',
   },
   inner: {
-    flexDirection: 'row',
-    alignItems: 'stretch',
     padding: offset,
   },
   container: {
