@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Pressable, StyleSheet, Text} from 'react-native';
 
 import {faCheck} from '@fortawesome/free-solid-svg-icons';
 import {faCircle} from '@fortawesome/free-regular-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {useObserver} from 'mobx-react-lite';
 
 const activeColor = '#0a0';
 
@@ -16,23 +17,20 @@ export function ToggleButton({
   onChangeCallback,
   ...rest
 }) {
-  const [active, setActive] = useState(data[id]);
-
   function onPress() {
-    data[id] = !active;
-    setActive(!active);
+    data[id] = !data[id];
     if (onChangeCallback) {
       onChangeCallback();
     }
   }
 
-  return (
+  return useObserver(() => (
     <Pressable
       {...rest}
       onPress={onPress}
-      style={[styles.input, style, active && styles.active]}>
+      style={[styles.input, style, !!data[id] && styles.active]}>
       {showIcon &&
-        (active ? (
+        (data[id] ? (
           <FontAwesomeIcon
             size={15}
             icon={faCheck}
@@ -47,9 +45,11 @@ export function ToggleButton({
             style={styles.icon}
           />
         ))}
-      <Text style={[styles.text, active && styles.activeText]}>{label}</Text>
+      <Text style={[styles.text, !!data[id] && styles.activeText]}>
+        {label}
+      </Text>
     </Pressable>
-  );
+  ));
 }
 
 const styles = StyleSheet.create({

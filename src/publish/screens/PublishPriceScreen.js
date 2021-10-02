@@ -71,8 +71,8 @@ export function PublishPriceScreen() {
       <ProgressBar ratio={3 / 3} />
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
         <TagsSelector
-          id="availabilities"
           data={data}
+          id="availabilities"
           label="Disponível para"
           options={availabilities}
           buttonStyle={styles.button}

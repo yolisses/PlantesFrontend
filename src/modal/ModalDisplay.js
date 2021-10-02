@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {useModal} from 'modal/ModalContext';
 import {Modalize} from 'react-native-modalize';
 import {StyleSheet} from 'react-native';
+import {useObserver} from 'mobx-react-lite';
 
 export function ModalDisplay() {
   const {currentModal, modalActive, modalOptions} = useModal();
@@ -18,7 +19,7 @@ export function ModalDisplay() {
 
   const {FloatingComponent, ...rest} = modalOptions;
 
-  return (
+  return useObserver(() => (
     <>
       {modalActive && currentModal ? (
         <Modalize
@@ -34,7 +35,7 @@ export function ModalDisplay() {
         </Modalize>
       ) : null}
     </>
-  );
+  ));
 }
 
 const styles = StyleSheet.create({
