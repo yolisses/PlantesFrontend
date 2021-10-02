@@ -10,14 +10,20 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {CustomHeader} from './CustomHeader';
 import {availabilities, availabilitiesLabels} from './data/availiabilities';
 import {tags} from './data/tags';
+import {DiscardButton} from './DiscardButton';
 import {FinishButton} from './FinishButton';
 import {publishData} from './publishData';
 import {SelectImagesField} from './SelectImagesField';
 
 export function PublishScreen() {
+  console.error(Object.keys(publishData));
   return useObserver(() => (
     <FooterNavigationLayout selected="Publish">
-      <CustomHeader title="Publicar" right={<FinishButton />} />
+      <CustomHeader
+        left={<DiscardButton />}
+        title="Publicar"
+        right={<FinishButton />}
+      />
       <ScrollView style={styles.container}>
         <SelectImagesField />
         <TextInput id="name" data={publishData} label="Nome" />

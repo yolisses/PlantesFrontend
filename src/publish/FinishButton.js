@@ -5,6 +5,7 @@ import {useNavigation} from '@react-navigation/native';
 
 import {useSending} from 'send/SendingContext';
 import {NextButton} from './NextButton';
+import {reset} from './publishData';
 
 export function FinishButton() {
   const {pushSending} = useSending();
@@ -25,6 +26,7 @@ export function FinishButton() {
     resetNavigation();
     pushSending();
     discardImagesSelection();
+    reset();
   }
 
   return <NextButton route="Home" text="Enviar" customOnPress={onPress} />;
