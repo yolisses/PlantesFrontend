@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     paddingTop: 0,
   },
   text: {
-    fontSize: 18,
+    fontSize: 17,
   },
   notProvided: {
     textAlign: 'center',
@@ -36,6 +36,6 @@ const styles = StyleSheet.create({
   },
   showMore: {
     color: '#666',
-    fontSize: 18,
+    fontSize: 17,
   },
 });

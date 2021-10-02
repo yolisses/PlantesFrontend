@@ -14,6 +14,8 @@ export function LoginScreen() {
         auth.userId = user._id;
         auth.token = token;
 
+        console.error(token);
+
         api.defaults.headers.common.auth = `Bearer ${token}`;
       } catch (err) {
         console.error(err);

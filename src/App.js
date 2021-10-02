@@ -11,6 +11,9 @@ import {SendingContextProvider} from 'send/SendingContext';
 import {UsersByIdContextProvider} from 'common/UsersByIdContext';
 import {PermissionsContextProvider} from 'permission/PermissionsContext';
 import {CameraPreferencesProvider} from 'camera/contexts/CameraPreferencesContext';
+import moment from 'moment/min/moment-with-locales';
+
+moment.locale('pt');
 
 const App = () => (
   <PermissionsContextProvider>

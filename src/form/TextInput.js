@@ -13,6 +13,7 @@ export function TextInput({
   optional,
   multiline,
   leftChild,
+  description,
   customOnBlur,
   onChangeValue,
   customOnChangeText,
@@ -62,36 +63,34 @@ export function TextInput({
 
   const isValueShowable = value !== null && value !== undefined && value !== '';
 
-  return useMemo(
-    () => (
-      <View>
-        <Fieldset
-          error={error}
-          label={label}
-          style={[styles.fieldset, focused && styles.focused]}
-          styleLabel={[styles.label, focused && styles.focusedLabel]}>
-          <View style={styles.horizontalWrapper}>
-            {leftChild}
-            {optional && !focused && !isValueShowable && (
-              <Text style={styles.optionalText}>Opcional </Text>
-            )}
-            <react_native.TextInput
-              {...rest}
-              {...input}
-              value={isValueShowable ? '' + value : ''}
-              ref={inputRef}
-              onBlur={onBlur}
-              onFocus={onFocus}
-              multiline={multiline}
-              onChangeText={onChangeText}
-              style={[styles.input, multiline && styles.multiline, style]}
-              // onChangeText={text => setValue(text)}
-            />
-          </View>
-        </Fieldset>
-      </View>
-    ),
-    [value, focused],
+  return (
+    <View>
+      <Fieldset
+        error={error}
+        label={label}
+        description={description}
+        style={[styles.fieldset, focused && styles.focused]}
+        styleLabel={[styles.label, focused && styles.focusedLabel]}>
+        <View style={styles.horizontalWrapper}>
+          {leftChild}
+          {optional && !focused && !isValueShowable && (
+            <Text style={styles.optionalText}>Opcional </Text>
+          )}
+          <react_native.TextInput
+            {...rest}
+            {...input}
+            value={isValueShowable ? '' + value : ''}
+            ref={inputRef}
+            onBlur={onBlur}
+            onFocus={onFocus}
+            multiline={multiline}
+            onChangeText={onChangeText}
+            style={[styles.input, multiline && styles.multiline, style]}
+            // onChangeText={text => setValue(text)}
+          />
+        </View>
+      </Fieldset>
+    </View>
   );
 }
 

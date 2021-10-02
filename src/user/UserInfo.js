@@ -1,15 +1,27 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {EditProfileButton} from 'profile/EditProfileButton';
 import {UserDescription} from './UserDescription';
 import {auth} from 'auth/auth';
+import {cepToString} from 'common/cepToString';
+import moment from 'moment/min/moment-with-locales';
 
 export function UserInfo({user}) {
   return (
     <View style={styles.container}>
       <View style={styles.imageNameWrapper}>
         <FastImage style={styles.image} source={{uri: user?.image}} />
+        <View style={styles.dataWrapper}>
+          <Text style={styles.location}>
+            {user?.cep ? cepToString(user.cep) : 'Sem localização'}
+          </Text>
+          {user?.createdAt ? (
+            <Text style={styles.location}>
+              No Plantes desde {moment(user.createdAt).format('LL')}
+            </Text>
+          ) : null}
+        </View>
       </View>
       {!!user && <UserDescription text={user?.description} />}
       {user?._id === auth.userId && <EditProfileButton />}
@@ -30,5 +42,15 @@ const styles = StyleSheet.create({
     width: 70,
     aspectRatio: 1,
     borderRadius: 100,
+  },
+  location: {
+    paddingLeft: 10,
+    paddingVertical: 4,
+    flexWrap: 'wrap',
+    width: '100%',
+    fontSize: 18,
+  },
+  dataWrapper: {
+    flex: 1,
   },
 });

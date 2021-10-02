@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {ScrollView, StyleSheet, Text} from 'react-native';
@@ -13,7 +13,8 @@ import {useObserver} from 'mobx-react-lite';
 import {editProfileData} from './editProfileData';
 import {useNavigation} from '@react-navigation/core';
 import {useUserById} from 'common/UsersByIdContext';
-
+import {observe} from 'mobx';
+import {CepInput} from 'form/CepInput';
 export function EditProfileScreen() {
   const {goBack} = useNavigation();
 
@@ -30,6 +31,12 @@ export function EditProfileScreen() {
         })
         .catch(err => console.error(err.response));
     }
+
+    console.error(editProfileData);
+
+    useEffect(() => {
+      observe(editProfileData, () => {});
+    }, []);
 
     return (
       <>
@@ -54,6 +61,11 @@ export function EditProfileScreen() {
             id="name"
             data={editProfileData}
             customGetInitialValue={() => auth?.user?.name}
+          />
+          <CepInput
+            id="cep"
+            data={editProfileData}
+            customGetInitialValue={() => auth?.user?.cepRaw}
           />
           <TextInput
             multiline

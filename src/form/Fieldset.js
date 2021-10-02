@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {ErrorMessage} from './ErrorMessage';
+import {MiniMessage} from './MiniMessage';
 import {Label} from './Label';
 
 export function Fieldset({
@@ -9,6 +9,7 @@ export function Fieldset({
   style,
   children,
   styleLabel,
+  description,
   disableBorder,
   ...rest
 }) {
@@ -21,7 +22,11 @@ export function Fieldset({
           {...rest}>
           {children}
         </View>
-        {error && <ErrorMessage text={error} />}
+        {error ? (
+          <MiniMessage isError text={error} />
+        ) : (
+          !!description && <MiniMessage text={description} />
+        )}
       </View>
     </>
   );
