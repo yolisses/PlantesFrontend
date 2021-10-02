@@ -46,9 +46,9 @@ export function EditProfileScreen() {
             style={styles.image}
             source={{uri: auth?.user?.image}}
           />
-          <TouchableOpacity activeOpacity={0.7}>
+          {/* <TouchableOpacity activeOpacity={0.7}>
             <Text style={styles.link}>Alterar foto do perfil</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TextInput
             label="Nome"
             id="name"
