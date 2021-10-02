@@ -27,7 +27,7 @@ export function PublishScreen() {
           buttonStyle={styles.button}
           labels={availabilitiesLabels}
         />
-        {publishData.sell && (
+        {publishData.availabilities?.sell && (
           <PriceInput id="price" data={publishData} label="Preço" />
         )}
         <TagsSelector
