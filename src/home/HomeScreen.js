@@ -10,6 +10,7 @@ import {loadPlants} from 'home/loadPlants';
 import {SearchCustomHeader} from 'search/SearchCustomHeader';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import {searchOptions} from 'search/searchOptions';
+import {formatSearch} from 'search/formatSearch';
 
 export function HomeScreen() {
   async function getPlants() {
@@ -17,7 +18,10 @@ export function HomeScreen() {
       return;
     }
     loadPlants.loading = true;
-    const res = await api.post('/plants/' + loadPlants.page, searchOptions);
+    const res = await api.post(
+      '/plants/' + loadPlants.page,
+      formatSearch(searchOptions),
+    );
     loadPlants.plants = loadPlants.plants.concat(res.data);
     if (res.data.length === 0) {
       loadPlants.ended = true;
