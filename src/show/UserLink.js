@@ -1,3 +1,4 @@
+import {cepToString} from 'common/cepToString';
 import {UserRoundImage} from 'common/UserRoundImage';
 import {useUserById} from 'common/UsersByIdContext';
 import React from 'react';
@@ -15,7 +16,12 @@ export function UserLink({id}) {
         userId={user?._id}
         image={user?.image}
       />
-      <Text style={styles.name}>{user?.name}</Text>
+      <View>
+        {!!user.name && <Text style={styles.name}>{user?.name}</Text>}
+        {!!user.cep && (
+          <Text style={styles.local}>{cepToString(user?.cep)}</Text>
+        )}
+      </View>
     </View>
   );
 }
@@ -31,5 +37,9 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 18,
+  },
+  local: {
+    fontSize: 16,
+    color: 'gray',
   },
 });
