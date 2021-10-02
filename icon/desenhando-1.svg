@@ -14,8 +14,11 @@
    viewBox="0 0 54.406387 54.406387"
    version="1.1"
    id="svg8"
-   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
-   sodipodi:docname="desenhando-1.svg">
+   sodipodi:docname="desenhando-1.svg"
+   inkscape:export-filename="/home/ulisses/Plantei/icon/maxsize.png"
+   inkscape:export-xdpi="478.06149"
+   inkscape:export-ydpi="478.06149"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)">
   <defs
      id="defs2">
     <marker
@@ -108,11 +111,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="6.2743504"
-     inkscape:cy="179.24134"
+     inkscape:zoom="0.175"
+     inkscape:cx="-1252.8864"
+     inkscape:cy="869.09736"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g2189"
      showgrid="false"
      showguides="false"
      fit-margin-top="0"
@@ -140,15 +143,15 @@
      inkscape:label="Camada 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(1.3414543,-185.49719)">
+     transform="translate(1.0620849,-184.26154)">
     <g
        id="g2189"
        transform="translate(-18.493737,-31.782821)">
       <rect
          rx="11.339286"
          ry="11.339286"
-         y="218.78001"
-         x="18.652283"
+         y="217.54436"
+         x="18.931652"
          height="51.406387"
          width="51.406387"
          id="rect867"
@@ -168,7 +171,7 @@
            ry="11.339274" />
         <path
            style="opacity:0.98999999;fill:#00ff00;fill-opacity:1;stroke:#004a32;stroke-width:5;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
-           d="m 35.546848,237.23929 v 30.52905"
+           d="m 35.546848,237.11296 v 28.98633"
            id="path923"
            inkscape:connector-curvature="0" />
         <path
@@ -193,7 +196,7 @@
            ry="11.339274" />
         <path
            style="opacity:0.98999999;fill:#00ff00;fill-opacity:1;stroke:#00fe3f;stroke-width:5;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
-           d="M 35.546848,237.35496 V 269.3607"
+           d="m 35.546848,237.22729 v 30.3712"
            id="path923-3"
            inkscape:connector-curvature="0" />
         <path
@@ -206,8 +209,8 @@
       <rect
          rx="11.339286"
          ry="11.339286"
-         y="218.78001"
-         x="18.652285"
+         y="217.54436"
+         x="18.931652"
          height="51.406387"
          width="51.406387"
          id="rect867-6"
