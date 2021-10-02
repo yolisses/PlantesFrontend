@@ -76,7 +76,7 @@ export function UserScreen({route}) {
 
   return (
     <>
-      <FooterNavigationLayout selected="Home">
+      <FooterNavigationLayout>
         <CustomHeader
           left={<BackButton />}
           title={user?.name}

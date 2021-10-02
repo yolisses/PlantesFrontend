@@ -11,11 +11,6 @@ export function SearchCustomHeader() {
     <View style={styles.container}>
       <View style={styles.top}>
         <SearchBox />
-        <UserRoundImage
-          size={40}
-          userId={auth.userId}
-          image={auth.user?.image}
-        />
       </View>
       <FiltersConfig />
     </View>
