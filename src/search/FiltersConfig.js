@@ -7,6 +7,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import {ApplyButton} from './ApplyButton';
 import {FiltersModal} from './FiltersModal';
 import {searchOptions} from './searchOptions';
+import {reHydrate} from './unappliedSearchOptions';
 
 export function FiltersConfig() {
   const {showModal} = useModal();
@@ -14,6 +15,7 @@ export function FiltersConfig() {
     showModal(<FiltersModal />, {
       FloatingComponent: <ApplyButton />,
       snapPoint: 400,
+      onClosed: reHydrate,
     });
   }
 

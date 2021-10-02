@@ -1,5 +1,4 @@
 export function formatSearch(data) {
-  console.error(data);
   const result = {};
   const {tags, availabilities, text} = data;
 
@@ -14,6 +13,5 @@ export function formatSearch(data) {
   result.tags = Object.entries(tags)
     .filter(entry => entry[1])
     .map(entry => entry[0]);
-  console.error(result);
   return result;
 }

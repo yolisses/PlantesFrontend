@@ -17,7 +17,7 @@ export function ModalDisplay() {
     }
   }, [modalActive, currentModal]);
 
-  const {FloatingComponent, ...rest} = modalOptions;
+  const {FloatingComponent, onClosed, ...rest} = modalOptions;
 
   return useObserver(() => (
     <>
@@ -25,7 +25,12 @@ export function ModalDisplay() {
         <Modalize
           ref={ref}
           onClose={() => setShowFloating(false)}
-          onClosed={() => setShowFloating(true)}
+          onClosed={e => {
+            setShowFloating(true);
+            if (onClosed) {
+              onClosed(e);
+            }
+          }}
           snapPoint={modalOptions.snapPoint || 200}
           handlePosition={'inside'}
           FloatingComponent={showFloating && FloatingComponent}

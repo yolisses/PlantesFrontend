@@ -12,7 +12,6 @@ export async function pushImage(image) {
     },
     body: file,
   });
-  console.error(data);
   if (data.status === 403) {
     throw brokenSendLink;
   } else if (data.status === 200) {

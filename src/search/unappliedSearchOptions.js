@@ -1,4 +1,5 @@
 import {observable} from 'mobx';
+import {searchOptions} from './searchOptions';
 
 export const unappliedSearchOptions = observable({
   availabilities: {},
@@ -8,4 +9,9 @@ export const unappliedSearchOptions = observable({
 export function reset() {
   unappliedSearchOptions.availabilities = {};
   unappliedSearchOptions.tags = {};
+}
+
+export function reHydrate() {
+  unappliedSearchOptions.availabilities = {...searchOptions.availabilities};
+  unappliedSearchOptions.tags = {...searchOptions.tags};
 }
