@@ -17,8 +17,8 @@ export function UserLink({id}) {
         image={user?.image}
       />
       <View>
-        {!!user.name && <Text style={styles.name}>{user?.name}</Text>}
-        {!!user.cep && (
+        {!!user?.name && <Text style={styles.name}>{user?.name}</Text>}
+        {!!user?.cep && (
           <Text style={styles.local}>{cepToString(user?.cep)}</Text>
         )}
       </View>
