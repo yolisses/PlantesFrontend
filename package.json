@@ -44,7 +44,7 @@
     "react-native-get-location": "^2.1.2",
     "react-native-get-random-values": "^1.7.0",
     "react-native-get-real-path": "https://github.com/Wraptime/react-native-get-real-path.git",
-    "react-native-image-crop-picker": "^0.36.2",
+    "react-native-image-crop-picker": "^0.36.4",
     "react-native-maps": "^0.28.0",
     "react-native-modalize": "^2.0.8",
     "react-native-onesignal": "^4.3.1",
