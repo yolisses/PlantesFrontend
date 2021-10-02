@@ -31,7 +31,7 @@ export function Routes() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="Publish1"
+          name="dev"
           component={PublishScreen}
           options={{headerShown: false}}
         />

@@ -11,12 +11,14 @@ import {CustomHeader} from './CustomHeader';
 import {availabilities, availabilitiesLabels} from './data/availiabilities';
 import {tags} from './data/tags';
 import {publishData} from './publishData';
+import {SelectImagesField} from './SelectImagesField';
 
 export function PublishScreen() {
   return useObserver(() => (
     <FooterNavigationLayout selected="Publish">
       <CustomHeader title="Publicar" />
       <ScrollView style={styles.container}>
+        <SelectImagesField />
         <TextInput id="name" data={publishData} label="Nome" />
         <TagsSelector
           showIcon={false}
