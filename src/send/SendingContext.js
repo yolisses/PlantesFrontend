@@ -1,5 +1,6 @@
 import React, {createContext, useContext, useState} from 'react';
 import {v4} from 'uuid';
+import {formatToPlant} from './formatToPlant';
 import {sendPlant} from './sendPlant';
 const SendingContext = createContext();
 
@@ -20,10 +21,10 @@ export function SendingContextProvider({children}) {
     setRefresh(() => Math.random());
   }
 
-  function pushSending(plant) {
+  function pushSending() {
     const id = v4();
     const sending = {};
-    sending.localData = plant;
+    sending.localData = formatToPlant();
     sendings[id] = sending;
     sendPlant(sending, () => {
       onFinish(id);

@@ -1,3 +1,6 @@
+import {publishData} from 'publish/publishData';
+import {selectedImages} from 'publish/selectedImages';
+
 function getTrueValuedKeys(obj) {
   return Object.keys(obj).filter(key => obj[key] === true);
 }
@@ -8,7 +11,9 @@ function getOrderValuedKeys(obj) {
     .map(entry => entry[0]);
 }
 
-export function formatToPlant(item) {
+export function formatToPlant() {
+  const item = publishData;
+  item.images = selectedImages;
   const {
     name,
     price,
@@ -18,6 +23,8 @@ export function formatToPlant(item) {
     images: imagesObj,
     availabilities: {donate, swap},
   } = item;
+
+  console.error(item);
 
   const tags = getTrueValuedKeys(tagsObj);
   const images = getOrderValuedKeys(imagesObj);

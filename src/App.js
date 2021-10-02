@@ -9,27 +9,24 @@ import {AlertContextProvider} from 'alert/AlertContext';
 import {ModalContextProvider} from 'modal/ModalContext';
 import {SendingContextProvider} from 'send/SendingContext';
 import {UsersByIdContextProvider} from 'common/UsersByIdContext';
-import {ShallowDataContextProvider} from 'publish/ShallowDataContext';
 import {PermissionsContextProvider} from 'permission/PermissionsContext';
 import {CameraPreferencesProvider} from 'camera/contexts/CameraPreferencesContext';
 
 const App = () => (
-  <ShallowDataContextProvider>
-    <PermissionsContextProvider>
-      <AlertContextProvider>
-        <ModalContextProvider>
-          <UsersByIdContextProvider>
-            <CameraPreferencesProvider>
-              <SendingContextProvider>
-                <StatusBar barStyle={'default'} hidden={true} />
-                <Routes />
-              </SendingContextProvider>
-            </CameraPreferencesProvider>
-          </UsersByIdContextProvider>
-        </ModalContextProvider>
-      </AlertContextProvider>
-    </PermissionsContextProvider>
-  </ShallowDataContextProvider>
+  <PermissionsContextProvider>
+    <AlertContextProvider>
+      <ModalContextProvider>
+        <UsersByIdContextProvider>
+          <CameraPreferencesProvider>
+            <SendingContextProvider>
+              <StatusBar barStyle={'default'} hidden={true} />
+              <Routes />
+            </SendingContextProvider>
+          </CameraPreferencesProvider>
+        </UsersByIdContextProvider>
+      </ModalContextProvider>
+    </AlertContextProvider>
+  </PermissionsContextProvider>
 );
 
 export default App;
