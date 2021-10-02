@@ -11,7 +11,7 @@ export function SelectImageAlbumButton({...res}) {
   const {showModal} = useModal();
 
   const onPress = () => {
-    showModal(<SelectLocalImageAlbumModal />);
+    showModal(<SelectLocalImageAlbumModal />, {snapPoint: 300});
   };
 
   return (

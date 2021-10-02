@@ -1,16 +1,26 @@
-import {faImage, faSeedling} from '@fortawesome/free-solid-svg-icons';
+import {faSeedling} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {useNavigation} from '@react-navigation/core';
 import {Fieldset} from 'form/Fieldset';
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import {StyleSheet, Text, View} from 'react-native';
 
 export function SelectImagesField() {
+  const {navigate} = useNavigation();
+
+  function onPress() {
+    navigate('Images');
+  }
+
   return (
     //   <Text style={styles.text}>Selecionar imagens</Text>
     <View style={styles.container}>
       <Fieldset label="Fotos" styleLabel={styles.label}>
-        <TouchableOpacity style={styles.inner} activeOpacity={0.7}>
+        <TouchableOpacity
+          style={styles.inner}
+          activeOpacity={0.7}
+          onPress={onPress}>
           <View style={styles.imagePlaceholder}>
             <FontAwesomeIcon icon={faSeedling} size={60} color="#aaa" />
           </View>

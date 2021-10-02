@@ -10,7 +10,6 @@ import {useObserver} from 'mobx-react-lite';
 import {AlertDisplay} from 'alert/AlertDisplay';
 import {ModalDisplay} from 'modal/ModalDisplay';
 
-import {MapScreen} from 'map/MapScreen';
 import {ChatScreen} from 'chat/ChatScreen';
 import {UserScreen} from 'user/UserScreen';
 import {HomeScreen} from 'home/HomeScreen';
@@ -22,7 +21,7 @@ import {ChatsListScreen} from 'chat/ChatsListScreen';
 import {CommunityScreen} from 'post/CommunityScreen';
 import {CommentsScreen} from 'comment/CommentsScreen';
 import {EditProfileScreen} from 'profile/EditProfileScreen';
-import {MapUserLocationButton} from 'map/MapUserLocationButton';
+import {SelectImagesScreen} from 'publish/SelectImagesScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,11 +29,11 @@ export function Routes() {
   return useObserver(() => (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="dev"
           component={PublishScreen}
           options={{headerShown: false}}
-        />
+        /> */}
         {/* <Stack.Screen name="dev" component={ConfigScreen} /> */}
         {!auth.token ? (
           <Stack.Screen
@@ -51,14 +50,6 @@ export function Routes() {
               options={{headerShown: false}}
             />
             <Stack.Screen
-              name="Map"
-              component={MapScreen}
-              options={{
-                headerTitle: 'Mapa',
-                headerRight: () => <MapUserLocationButton />,
-              }}
-            />
-            <Stack.Screen
               name="UserScreen"
               component={UserScreen}
               options={{headerShown: false}}
@@ -67,6 +58,11 @@ export function Routes() {
               name="Config"
               component={ConfigScreen}
               options={{title: 'Configurações'}}
+            />
+            <Stack.Screen
+              name="Images"
+              component={SelectImagesScreen}
+              options={{headerShown: false}}
             />
             <Stack.Screen
               name="Publish"
