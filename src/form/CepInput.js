@@ -3,7 +3,6 @@ import React, {useState} from 'react';
 import {TextInput} from 'form/TextInput';
 import axios from 'axios';
 import {useObserver} from 'mobx-react-lite';
-import {concatWithCommas} from 'common/concatWithCommas';
 import {cepToString} from 'common/cepToString';
 
 export function CepInput({id, data, ...rest}) {
@@ -43,6 +42,7 @@ export function CepInput({id, data, ...rest}) {
       customOnChangeText={customOnChangeText}
       autoCompleteType={'off'}
       keyboardType="number-pad"
+      {...rest}
     />
   ));
 }

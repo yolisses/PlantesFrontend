@@ -32,8 +32,6 @@ export function EditProfileScreen() {
         .catch(err => console.error(err.response));
     }
 
-    console.error(editProfileData);
-
     useEffect(() => {
       observe(editProfileData, () => {});
     }, []);
