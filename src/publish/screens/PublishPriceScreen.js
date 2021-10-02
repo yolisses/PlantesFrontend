@@ -69,7 +69,7 @@ export function PublishPriceScreen() {
         hasAvailability={hasAvailability}
       />
       <ProgressBar ratio={3 / 3} />
-      <ScrollView showsVerticalScrollIndicator={false} style={{padding: 10}}>
+      <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
         <TagsSelector
           id="availabilities"
           data={data}
@@ -94,6 +94,11 @@ export function PublishPriceScreen() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+    marginBottom: 0,
+    backgroundColor: 'white',
+  },
   button: {
     flex: 1,
     paddingVertical: 15,

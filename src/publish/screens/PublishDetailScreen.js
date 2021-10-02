@@ -67,5 +67,6 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
     marginBottom: 0,
+    backgroundColor: 'white',
   },
 });
