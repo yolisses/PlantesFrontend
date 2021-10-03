@@ -1,48 +1,59 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {Pressable, StyleSheet, Text} from 'react-native';
 
 import {faCheck} from '@fortawesome/free-solid-svg-icons';
 import {faCircle} from '@fortawesome/free-regular-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {useObserver} from 'mobx-react-lite';
+import {RerenderTester} from 'dev/rerenderTester';
 
 const activeColor = '#0a0';
 
 export function ToggleButton({
   label,
+  id,
   style,
-  value,
-  onValueChange,
+  value: obj,
+  select,
+  option,
+  setFieldValue,
   showIcon = true,
+
   ...rest
 }) {
-  function onPress(e) {
-    onValueChange(!value);
+  const value = obj[option];
+  function onPress() {
+    setFieldValue(id + '.' + option, !value);
+    // select(option, !value);
   }
-  return useObserver(() => (
-    <Pressable
-      {...rest}
-      onPress={onPress}
-      style={[styles.input, style, value && styles.active]}>
-      {showIcon &&
-        (value ? (
-          <FontAwesomeIcon
-            size={15}
-            icon={faCheck}
-            style={styles.icon}
-            color={activeColor}
-          />
-        ) : (
-          <FontAwesomeIcon
-            size={15}
-            color={'#ccc'}
-            icon={faCircle}
-            style={styles.icon}
-          />
-        ))}
-      <Text style={[styles.text, value && styles.activeText]}>{label}</Text>
-    </Pressable>
-  ));
+
+  return useMemo(
+    () => (
+      <Pressable
+        {...rest}
+        onPress={onPress}
+        style={[styles.input, style, value && styles.active]}>
+        {showIcon &&
+          (value ? (
+            <FontAwesomeIcon
+              size={15}
+              icon={faCheck}
+              style={styles.icon}
+              color={activeColor}
+            />
+          ) : (
+            <FontAwesomeIcon
+              size={15}
+              color={'#ccc'}
+              icon={faCircle}
+              style={styles.icon}
+            />
+          ))}
+        <RerenderTester />
+        <Text style={[styles.text, value && styles.activeText]}>{label}</Text>
+      </Pressable>
+    ),
+    [value],
+  );
 }
 
 const styles = StyleSheet.create({

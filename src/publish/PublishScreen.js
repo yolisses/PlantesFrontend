@@ -27,7 +27,11 @@ export function PublishScreen() {
       onSubmit={values => {
         console.error(values);
       }}
-      initialValues={{name: '', amount: ''}}
+      initialValues={{
+        name: '',
+        amount: '',
+        availabilities: {swap: true, sell: true},
+      }}
       validationSchema={FormSchema}>
       {({
         values,
@@ -36,6 +40,7 @@ export function PublishScreen() {
         errors,
         touched,
         setFieldTouched,
+        setFieldValue,
       }) => (
         <FooterNavigationLayout selected="Publish">
           <CustomHeader
@@ -53,12 +58,14 @@ export function PublishScreen() {
               onBlur={() => setFieldTouched('name', true)}
             />
             <TagsSelector
+              value={values}
               showIcon={false}
               id="availabilities"
               label="Disponível para"
               options={availabilities}
               buttonStyle={styles.button}
               labels={availabilitiesLabels}
+              setFieldValue={setFieldValue}
             />
             <IntInput
               ref={amount}
