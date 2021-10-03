@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {ScrollView, StyleSheet, Text} from 'react-native';
@@ -17,17 +17,19 @@ import {observe} from 'mobx';
 import {CepInput} from 'form/CepInput';
 
 export function EditProfileScreen() {
+  const [saving, setSaving] = useState(false);
   const {goBack} = useNavigation();
-
   const {setCurrentUser} = useUserById();
 
   return useObserver(() => {
     async function updateProfile() {
+      setSaving(true);
       api
         .put('/update-profile', editProfileData)
         .then(res => {
           auth.user = res.data;
           setCurrentUser(res.data);
+          setSaving(false);
           goBack();
         })
         .catch(err => console.error(err.response));
@@ -55,7 +57,11 @@ export function EditProfileScreen() {
           left={<BackButton />}
           title="Editar perfil"
           right={
-            <NextButton text="Salvar" hideIcon customOnPress={updateProfile} />
+            <NextButton
+              text={saving ? 'Salvando...' : 'Salvar'}
+              hideIcon
+              customOnPress={updateProfile}
+            />
           }
         />
         <ScrollView style={styles.container}>
