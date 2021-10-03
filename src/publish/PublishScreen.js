@@ -1,5 +1,4 @@
 import {TextInput} from 'form/TextInput';
-import {useObserver} from 'mobx-react-lite';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import React, {useRef} from 'react';
 import {StyleSheet} from 'react-native';
@@ -9,6 +8,8 @@ import {FinishButton} from './FinishButton';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {IntInput} from 'form/IntInput';
+import {TagsSelector} from 'form/TagsSelector';
+import {availabilities, availabilitiesLabels} from './data/availiabilities';
 
 export function PublishScreen() {
   const name = useRef(null);
@@ -47,6 +48,14 @@ export function PublishScreen() {
               onChangeText={handleChange('name')}
               error={touched.name && errors.name}
               onBlur={() => setFieldTouched('name', true)}
+            />
+            <TagsSelector
+              showIcon={false}
+              id="availabilities"
+              label="Disponível para"
+              options={availabilities}
+              buttonStyle={styles.button}
+              labels={availabilitiesLabels}
             />
             <IntInput
               ref={amount}
