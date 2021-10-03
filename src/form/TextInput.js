@@ -46,7 +46,7 @@ export function TextInput({
 
   function onBlur(e) {
     setFocused(false);
-    // setShowError(true);
+    setShowError(true);
   }
 
   const [error, setError] = useState();
