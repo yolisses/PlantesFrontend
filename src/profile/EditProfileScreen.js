@@ -40,7 +40,6 @@ export function EditProfileScreen() {
     }, []);
 
     function validateName({setError, value}) {
-      console.error(value);
       if (!value || value.length < 3) {
         setError('O nome precisa de no mínimo 3 letras');
       } else {
@@ -87,6 +86,7 @@ export function EditProfileScreen() {
             customGetInitialValue={() => auth?.user?.cep}
           />
           <TextInput
+            optional
             multiline
             id="description"
             maxLength={400}
