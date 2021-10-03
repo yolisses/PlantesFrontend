@@ -38,7 +38,10 @@ export function PublishScreen() {
         setFieldTouched,
       }) => (
         <FooterNavigationLayout selected="Publish">
-          <CustomHeader title="Publicar" right={<FinishButton />} />
+          <CustomHeader
+            title="Publicar"
+            right={<FinishButton onPress={handleSubmit} />}
+          />
           <ScrollView style={styles.container}>
             <TextInput
               ref={name}

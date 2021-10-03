@@ -29,12 +29,12 @@ export function Routes() {
   return useObserver(() => (
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen
+        <Stack.Screen
           name="dev"
           component={PublishScreen}
           options={{headerShown: false}}
-        /> */}
-        <Stack.Screen name="dev" component={Dev} />
+        />
+        {/* <Stack.Screen name="dev" component={Dev} /> */}
         {!auth.token ? (
           <Stack.Screen
             name="Login"
