@@ -12,10 +12,10 @@ import {
 
 export function Input({
   id,
-  errorObj,
+  errorsObj,
   validate,
   value: customValue,
-  forceValidation,
+  forceValidate,
   ...rest
 }) {
   const [value, setValue] = useState();
@@ -29,7 +29,7 @@ export function Input({
 
   useEffect(() => {
     setShowError(true);
-  }, [forceValidation]);
+  }, [forceValidate]);
 
   function onBlur(e) {
     Keyboard.dismiss();
@@ -44,7 +44,7 @@ export function Input({
     if (validate) {
       const error = validate(value);
       setError(error);
-      errorObj[id] = error;
+      errorsObj[id] = error;
     }
   }
 
@@ -72,10 +72,10 @@ export function Input({
 }
 
 export function Dev() {
-  const errorObj = {};
+  const errorsObj = {};
 
   const [lastResult, setLastResult] = useState();
-  const [forceValidation, setCheckValidation] = useState();
+  const [forceValidate, setCheckValidate] = useState();
   const [canContinue, setCanContinue] = useState();
 
   const validateText = text => {
@@ -88,10 +88,10 @@ export function Dev() {
   };
 
   function checkItsValid() {
-    setCheckValidation(Math.random());
-    setLastResult(errorObj);
-    for (let key in errorObj) {
-      if (errorObj[key]) {
+    setCheckValidate(Math.random());
+    setLastResult(errorsObj);
+    for (let key in errorsObj) {
+      if (errorsObj[key]) {
         setCanContinue(false);
         return;
       }
@@ -103,9 +103,9 @@ export function Dev() {
     <ScrollView>
       <Input
         label="escreva plz"
-        errorObj={errorObj}
+        errorsObj={errorsObj}
         id="oi"
-        forceValidation={forceValidation}
+        forceValidate={forceValidate}
         style={styles.input}
         validate={validateText}
       />

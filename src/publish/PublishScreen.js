@@ -4,7 +4,7 @@ import {TagsSelector} from 'form/TagsSelector';
 import {TextInput} from 'form/TextInput';
 import {useObserver} from 'mobx-react-lite';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {CustomHeader} from './CustomHeader';
@@ -15,19 +15,21 @@ import {publishData} from './publishData';
 import {SelectImagesField} from './SelectImagesField';
 
 export function PublishScreen() {
+  const errorsObj = {};
+  const [forceValidate, setForceValidate] = useState();
+
   if (!publishData.errors) {
     publishData.errors = {};
   }
 
-  function validateName({setError, id, data, text}) {
-    if (!text || text.length < 3) {
-      data.errors[id] = true;
-      setError('O nome precisa de no mínimo 3 letras');
-    } else {
-      setError();
-      data.errors[id] = false;
+  const validateText = text => {
+    if (!text) {
+      return 'por favor informe o nome';
     }
-  }
+    if (text.trim().length < 3) {
+      return 'precisa ter pelo menos tres letras';
+    }
+  };
 
   return useObserver(() => (
     <FooterNavigationLayout selected="Publish">
@@ -40,9 +42,10 @@ export function PublishScreen() {
         <SelectImagesField />
         <TextInput
           id="name"
+          errorsObj={errorsObj}
           label="Nome"
           maxLength={32}
-          textValidate={validateName}
+          validate={validateText}
           data={publishData}
         />
         <TagsSelector

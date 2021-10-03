@@ -12,11 +12,12 @@ export function TextInput({
   optional,
   multiline,
   leftChild,
-  blurValidate,
+  validate,
+  errorsObj,
   textValidate,
   customOnBlur,
   onChangeValue,
-  customOnChangeText,
+  forceValidate,
   customGetInitialValue,
   ...rest
 }) {
@@ -34,34 +35,10 @@ export function TextInput({
   const keyboardDidHide = () => {
     inputRef?.current?.blur();
   };
+
   useEffect(() => {
     Keyboard.addListener('keyboardDidHide', keyboardDidHide);
   }, []);
-
-  function onChangeText(text) {
-    if (textValidate) {
-      textValidate({
-        id,
-        data,
-        text,
-        value,
-        error,
-        setError,
-        setValue,
-        description,
-        setDescription,
-      });
-    }
-    if (customOnChangeText) {
-      customOnChangeText(text, setValue);
-    } else {
-      setValue(text);
-      data[id] = text;
-      if (onChangeValue) {
-        onChangeValue(text);
-      }
-    }
-  }
 
   function onFocus() {
     setFocused(true);
@@ -69,25 +46,36 @@ export function TextInput({
 
   function onBlur(e) {
     setFocused(false);
-    if (blurValidate) {
-      blurValidate({
-        e,
-        id,
-        data,
-        value,
-        error,
-        setError,
-        setValue,
-        description,
-        setDescription,
-      });
-    }
-    if (customOnBlur) {
-      customOnBlur(e, value, setValue);
-    }
+    setShowError(true);
   }
 
   const [error, setError] = useState();
+  const [showError, setShowError] = useState(false);
+
+  function runValidation(value) {
+    if (validate) {
+      const error = validate(value);
+      setError(error);
+      errorsObj[id] = error;
+    }
+  }
+
+  useEffect(() => {
+    runValidation(value);
+  }, []);
+
+  useEffect(() => {
+    if (forceValidate) {
+      setShowError(true);
+    }
+  }, [forceValidate]);
+
+  function onChangeText(text) {
+    setValue(text);
+    setShowError(false);
+    runValidation(text);
+  }
+
   const [description, setDescription] = useState();
 
   const isValueShowable = value !== null && value !== undefined && value !== '';
@@ -95,7 +83,7 @@ export function TextInput({
   return (
     <View>
       <Fieldset
-        error={error}
+        error={showError ? error : null}
         label={label}
         description={description}
         style={[styles.fieldset, focused && styles.focused]}
@@ -108,12 +96,12 @@ export function TextInput({
           <react_native.TextInput
             {...rest}
             {...input}
-            value={isValueShowable ? '' + value : ''}
             ref={inputRef}
             onBlur={onBlur}
             onFocus={onFocus}
             multiline={multiline}
             onChangeText={onChangeText}
+            value={isValueShowable ? '' + value : ''}
             style={[styles.input, multiline && styles.multiline, style]}
             // onChangeText={text => setValue(text)}
           />
