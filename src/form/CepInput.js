@@ -6,14 +6,6 @@ import {useObserver} from 'mobx-react-lite';
 import {locationToString} from 'common/locationToString';
 
 export function CepInput({id, data, ...rest}) {
-  function validateCep({setError, value}) {
-    console.error(value);
-
-    if (value && value.length !== 8) {
-      setError('O CEP precisa de 8 algarismos');
-    }
-  }
-
   function validateOnType({setError, setDescription, setValue, text}) {
     console.error(text);
     setError();
@@ -23,13 +15,17 @@ export function CepInput({id, data, ...rest}) {
         console.error(res.data);
         if (res.data.erro) {
           setError('O CEP digitado não existe');
+          data.errors[id] = true;
           setDescription();
         } else {
           setValue(text);
+          data.errors[id] = false;
           setDescription(locationToString(res.data));
         }
       });
-    } else {
+    } else if (text) {
+      setError('O CEP precisa de 8 algarismos');
+      data.errors[id] = true;
       setDescription();
     }
   }
@@ -44,7 +40,6 @@ export function CepInput({id, data, ...rest}) {
       placeholder="00000000"
       autoCompleteType={'off'}
       keyboardType="number-pad"
-      blurValidate={validateCep}
       textValidate={validateOnType}
       {...rest}
     />

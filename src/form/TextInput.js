@@ -41,6 +41,8 @@ export function TextInput({
   function onChangeText(text) {
     if (textValidate) {
       textValidate({
+        id,
+        data,
         text,
         value,
         error,
@@ -70,6 +72,8 @@ export function TextInput({
     if (blurValidate) {
       blurValidate({
         e,
+        id,
+        data,
         value,
         error,
         setError,
