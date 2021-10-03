@@ -2,8 +2,12 @@ import {SquareImage} from 'common/SquareImage';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-export function SendingCard({item, fraction, ...rest}) {
+export function SendingCard({item, fraction}) {
   const backgroundColor = item?.sent ? '#060b' : '#000a';
+
+  if (!item?.images) {
+    return null;
+  }
 
   return (
     <View>
