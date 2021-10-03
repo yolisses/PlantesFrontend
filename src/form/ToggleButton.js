@@ -12,47 +12,41 @@ export function ToggleButton({
   label,
   id,
   style,
-  value: obj,
+  value,
   select,
-  option,
+  onValueChange,
   setFieldValue,
   showIcon = true,
-
   ...rest
 }) {
-  const value = obj[option];
   function onPress() {
-    setFieldValue(id + '.' + option, !value);
-    // select(option, !value);
+    onValueChange(!value);
   }
 
-  return useMemo(
-    () => (
-      <Pressable
-        {...rest}
-        onPress={onPress}
-        style={[styles.input, style, value && styles.active]}>
-        {showIcon &&
-          (value ? (
-            <FontAwesomeIcon
-              size={15}
-              icon={faCheck}
-              style={styles.icon}
-              color={activeColor}
-            />
-          ) : (
-            <FontAwesomeIcon
-              size={15}
-              color={'#ccc'}
-              icon={faCircle}
-              style={styles.icon}
-            />
-          ))}
-        <RerenderTester />
-        <Text style={[styles.text, value && styles.activeText]}>{label}</Text>
-      </Pressable>
-    ),
-    [value],
+  return (
+    <Pressable
+      {...rest}
+      onPress={onPress}
+      style={[styles.input, style, value && styles.active]}>
+      {showIcon &&
+        (value ? (
+          <FontAwesomeIcon
+            size={15}
+            icon={faCheck}
+            style={styles.icon}
+            color={activeColor}
+          />
+        ) : (
+          <FontAwesomeIcon
+            size={15}
+            color={'#ccc'}
+            icon={faCircle}
+            style={styles.icon}
+          />
+        ))}
+      <RerenderTester />
+      <Text style={[styles.text, value && styles.activeText]}>{label}</Text>
+    </Pressable>
   );
 }
 

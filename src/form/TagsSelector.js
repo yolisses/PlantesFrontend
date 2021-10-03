@@ -5,37 +5,29 @@ import {Fieldset} from './Fieldset';
 import {ToggleButton} from './ToggleButton';
 
 export function TagsSelector({
-  id,
   label,
   style,
   value,
   labels,
   options,
+  setFieldValue,
   showIcon,
   buttonStyle,
-  setFieldValue,
 }) {
-  // function select(option, part) {
-  //   setFieldValue(id + '.' + option, part);
-  // }
-
-  return useObserver(() => (
+  return (
     <Fieldset label={label} style={[styles.fieldset, style]} disableBorder>
       {options.map(option => (
         <ToggleButton
-          id={id}
           key={option}
-          setFieldValue={setFieldValue}
-          option={option}
-          // select={select}
           showIcon={showIcon}
           style={buttonStyle}
-          value={value}
+          value={value[option]}
           label={labels ? labels[option] : option}
+          onValueChange={value => setFieldValue('option', value)}
         />
       ))}
     </Fieldset>
-  ));
+  );
 }
 
 const styles = StyleSheet.create({
