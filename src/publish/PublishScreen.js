@@ -18,8 +18,14 @@ export function PublishScreen() {
   const errorsObj = {};
   const [forceValidate, setForceValidate] = useState();
 
-  if (!publishData.errors) {
-    publishData.errors = {};
+  function checkItsValid() {
+    setForceValidate(Math.random());
+    for (let key in errorsObj) {
+      if (errorsObj[key]) {
+        return false;
+      }
+    }
+    return true;
   }
 
   const validateText = text => {
@@ -36,12 +42,13 @@ export function PublishScreen() {
       <CustomHeader
         // left={<DiscardButton />}
         title="Publicar"
-        right={<FinishButton />}
+        right={<FinishButton checkItsValid={checkItsValid} />}
       />
       <ScrollView style={styles.container}>
         <SelectImagesField />
         <TextInput
           id="name"
+          forceValidate={forceValidate}
           errorsObj={errorsObj}
           label="Nome"
           maxLength={32}

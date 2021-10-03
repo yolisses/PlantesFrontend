@@ -75,7 +75,7 @@ export function Dev() {
   const errorsObj = {};
 
   const [lastResult, setLastResult] = useState();
-  const [forceValidate, setCheckValidate] = useState();
+  const [forceValidate, setForceValidate] = useState();
   const [canContinue, setCanContinue] = useState();
 
   const validateText = text => {
@@ -88,7 +88,7 @@ export function Dev() {
   };
 
   function checkItsValid() {
-    setCheckValidate(Math.random());
+    setForceValidate(Math.random());
     setLastResult(errorsObj);
     for (let key in errorsObj) {
       if (errorsObj[key]) {

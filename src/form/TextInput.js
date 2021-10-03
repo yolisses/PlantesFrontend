@@ -46,7 +46,7 @@ export function TextInput({
 
   function onBlur(e) {
     setFocused(false);
-    setShowError(true);
+    // setShowError(true);
   }
 
   const [error, setError] = useState();
@@ -65,6 +65,7 @@ export function TextInput({
   }, []);
 
   useEffect(() => {
+    console.error('chama');
     if (forceValidate) {
       setShowError(true);
     }
@@ -72,6 +73,7 @@ export function TextInput({
 
   function onChangeText(text) {
     setValue(text);
+    data[id] = text;
     setShowError(false);
     runValidation(text);
   }

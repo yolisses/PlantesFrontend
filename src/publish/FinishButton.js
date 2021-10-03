@@ -7,7 +7,7 @@ import {useSending} from 'send/SendingContext';
 import {NextButton} from './NextButton';
 import {reset} from './publishData';
 
-export function FinishButton() {
+export function FinishButton({checkItsValid}) {
   const {pushSending} = useSending();
   const {dispatch} = useNavigation();
 
@@ -23,6 +23,11 @@ export function FinishButton() {
   }
 
   function onPress() {
+    const canContinue = checkItsValid();
+    console.error(canContinue);
+    if (!canContinue) {
+      return;
+    }
     resetNavigation();
     pushSending();
     discardImagesSelection();
