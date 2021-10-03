@@ -10,11 +10,10 @@ import * as Yup from 'yup';
 import {IntInput} from 'form/IntInput';
 import {TagsSelector} from 'form/TagsSelector';
 import {availabilities, availabilitiesLabels} from './data/availiabilities';
+import {Fieldset} from 'form/Fieldset';
+import {ToggleButton} from 'form/ToggleButton';
 
 export function PublishScreen() {
-  const name = useRef(null);
-  const amount = useRef(null);
-
   const FormSchema = Yup.object().shape({
     name: Yup.string()
       .required('por favor escreva o nome')
@@ -29,6 +28,9 @@ export function PublishScreen() {
       }}
       initialValues={{
         name: '',
+        sell: false,
+        swap: false,
+        donate: false,
         amount: '',
         availabilities: {swap: true, sell: true},
       }}
@@ -49,7 +51,6 @@ export function PublishScreen() {
           />
           <ScrollView style={styles.container}>
             <TextInput
-              ref={name}
               label="Nome"
               maxLength={32}
               value={values.name}
@@ -57,18 +58,14 @@ export function PublishScreen() {
               error={touched.name && errors.name}
               onBlur={() => setFieldTouched('name', true)}
             />
-            <TagsSelector
-              value={values}
-              showIcon={false}
-              id="availabilities"
-              label="Disponível para"
-              options={availabilities}
-              buttonStyle={styles.button}
-              labels={availabilitiesLabels}
-              setFieldValue={setFieldValue}
+            {/* <Fieldset> */}
+            <ToggleButton
+              label="Doação"
+              value={values.donate}
+              onValueChange={value => setFieldValue('donate', value)}
             />
+            {/* </Fieldset> */}
             <IntInput
-              ref={amount}
               label="Quantidade"
               value={values.amount}
               onChangeText={handleChange('amount')}

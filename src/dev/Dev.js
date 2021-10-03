@@ -4,11 +4,9 @@ import {Formik} from 'formik';
 import {ToggleButton} from 'form/ToggleButton';
 
 export function Dev() {
-  const valor = useRef();
   return (
     <Formik
       initialValues={{
-        valor: true,
         coisa: [],
       }}
       onSubmit={(values, {resetForm}) => {
@@ -17,12 +15,40 @@ export function Dev() {
       {({handleChange, handleSubmit, values, setFieldValue}) => (
         <View>
           <ToggleButton
-            ref={valor}
             label="marca"
             value={values.coisa.valor}
-            onValueChange={value => setFieldValue('coisa.valor', value)}>
-            Financially Responsible
-          </ToggleButton>
+            onValueChange={value => setFieldValue('coisa.valor', value)}
+          />
+          <ToggleButton
+            label="marca"
+            value={values.coisa.valor1}
+            onValueChange={value => setFieldValue('coisa.valor1', value)}
+          />
+          <ToggleButton
+            label="marca"
+            value={values.coisa.valor2}
+            onValueChange={value => setFieldValue('coisa.valor2', value)}
+          />
+          <ToggleButton
+            label="marca"
+            value={values.coisa.valor3}
+            onValueChange={value => setFieldValue('coisa.valor3', value)}
+          />
+          <ToggleButton
+            label="marca"
+            value={values.coisa.valor4}
+            onValueChange={value => setFieldValue('coisa.valor4', value)}
+          />
+          <ToggleButton
+            label="marca"
+            value={values.coisa.valor5}
+            onValueChange={value => setFieldValue('coisa.valor5', value)}
+          />
+          <ToggleButton
+            label="marca"
+            value={values.coisa.valor6}
+            onValueChange={value => setFieldValue('coisa.valor6', value)}
+          />
           <Button onPress={handleSubmit} title="Submit" />
         </View>
       )}
