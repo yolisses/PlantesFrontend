@@ -16,7 +16,10 @@ export async function sendPlant(sending, callback) {
         sending.sent = true;
       }
     } catch (err) {
-      console.error(err);
+      console.error(err.response);
+      if (err.response.status === 401 || err.response.status === 400) {
+        return;
+      }
     }
   }
   console.error('fim');

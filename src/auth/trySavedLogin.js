@@ -9,7 +9,7 @@ AsyncStorage.getItem('userInfo').then(res => {
     auth.userId = user._id;
     auth.token = token;
 
-    console.error(token);
+    // console.error(token);
 
     api.defaults.headers.common.auth = `Bearer ${token}`;
   } catch (err) {
