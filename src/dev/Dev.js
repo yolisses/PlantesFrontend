@@ -1,127 +1,64 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {
-  Button,
-  Keyboard,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-
-export function Input({
-  id,
-  errorsObj,
-  validate,
-  value: customValue,
-  forceValidate,
-  ...rest
-}) {
-  const [value, setValue] = useState();
-  const [error, setError] = useState();
-  const [showError, setShowError] = useState(false);
-  const ref = useRef();
-
-  useEffect(() => {
-    runValidation(value);
-  }, []);
-
-  useEffect(() => {
-    setShowError(true);
-  }, [forceValidate]);
-
-  function onBlur(e) {
-    Keyboard.dismiss();
-    setShowError(true);
-  }
-
-  function onPress(e) {
-    ref?.current?.focus();
-  }
-
-  function runValidation(value) {
-    if (validate) {
-      const error = validate(value);
-      setError(error);
-      errorsObj[id] = error;
-    }
-  }
-
-  function onChangeText(text) {
-    setValue(text);
-    setShowError(false);
-    runValidation(text);
-  }
-
-  return (
-    <View>
-      <TouchableOpacity onPress={onPress}>
-        <TextInput
-          ref={ref}
-          {...rest}
-          value={value}
-          onBlur={onBlur}
-          onChangeText={onChangeText}
-        />
-      </TouchableOpacity>
-
-      {!!error && showError && <Text>{error}</Text>}
-    </View>
-  );
-}
+import React, {useRef} from 'react';
+import {Formik} from 'formik';
+import {Button, StyleSheet, ScrollView} from 'react-native';
+import * as Yup from 'yup';
+import {TextInput} from 'form/TextInput';
 
 export function Dev() {
-  const errorsObj = {};
+  const user = useRef(null);
+  const password = useRef(null);
 
-  const [lastResult, setLastResult] = useState();
-  const [forceValidate, setForceValidate] = useState();
-  const [canContinue, setCanContinue] = useState();
-
-  const validateText = text => {
-    if (!text) {
-      return 'por favor informe o nome';
-    }
-    if (text.length < 3) {
-      return 'precisa ter pelo menos tres letras';
-    }
-  };
-
-  function checkItsValid() {
-    setForceValidate(Math.random());
-    setLastResult(errorsObj);
-    for (let key in errorsObj) {
-      if (errorsObj[key]) {
-        setCanContinue(false);
-        return;
-      }
-    }
-    setCanContinue(true);
-  }
+  const FormSchema = Yup.object().shape({
+    user: Yup.string().required('Campo obrigatório'),
+    password: Yup.string()
+      .required('Campo obrigatório')
+      .min(8, 'Digite pelo menos 8 caracteres'),
+  });
 
   return (
-    <ScrollView>
-      <Input
-        label="escreva plz"
-        errorsObj={errorsObj}
-        id="oi"
-        forceValidate={forceValidate}
-        style={styles.input}
-        validate={validateText}
-      />
-      <Button title="verifica se pode pa" onPress={checkItsValid} />
-      <Text>{JSON.stringify(lastResult)}</Text>
-      <Text>{JSON.stringify(canContinue)}</Text>
-    </ScrollView>
+    <Formik
+      initialValues={{
+        user: '',
+        password: '',
+      }}
+      onSubmit={values => {
+        console.error(values);
+      }}
+      validationSchema={FormSchema}>
+      {({
+        values,
+        handleChange,
+        handleSubmit,
+        errors,
+        touched,
+        setFieldTouched,
+      }) => (
+        <ScrollView style={styles.container}>
+          <TextInput
+            ref={user}
+            label={'Usuário'}
+            value={values.user}
+            onChangeText={handleChange('user')}
+            error={touched.user && errors.user}
+            onBlur={() => setFieldTouched('user', true)}
+          />
+          <TextInput
+            ref={password}
+            label={'Senha'}
+            value={values.password}
+            onChangeText={handleChange('password')}
+            error={touched.password && errors.password}
+            onBlur={() => setFieldTouched('password', true)}
+          />
+          <Button title="Entrar" onPress={handleSubmit} />
+        </ScrollView>
+      )}
+    </Formik>
   );
 }
 
 const styles = StyleSheet.create({
-  input: {
+  container: {
     backgroundColor: 'white',
-    borderStyle: 'solid',
-    borderWidth: 2,
-    borderColor: 'gray',
-    borderRadius: 10,
   },
 });
