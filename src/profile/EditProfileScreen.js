@@ -15,6 +15,7 @@ import {useNavigation} from '@react-navigation/core';
 import {useUserById} from 'common/UsersByIdContext';
 import {observe} from 'mobx';
 import {CepInput} from 'form/CepInput';
+
 export function EditProfileScreen() {
   const {goBack} = useNavigation();
 
@@ -36,6 +37,18 @@ export function EditProfileScreen() {
       observe(editProfileData, () => {});
     }, []);
 
+    function validateName({setError, value}) {
+      console.error(value);
+      if (!value || value.length < 3) {
+        setError('O nome precisa de no mínimo 3 letras');
+      } else {
+        setError();
+      }
+    }
+
+    function relieveName({setError}) {
+      setError();
+    }
     return (
       <>
         <CustomHeader
@@ -55,8 +68,10 @@ export function EditProfileScreen() {
             <Text style={styles.link}>Alterar foto do perfil</Text>
           </TouchableOpacity> */}
           <TextInput
-            label="Nome"
             id="name"
+            label="Nome"
+            blurValidate={validateName}
+            textValidate={relieveName}
             data={editProfileData}
             customGetInitialValue={() => auth?.user?.name}
           />
@@ -68,6 +83,7 @@ export function EditProfileScreen() {
           <TextInput
             multiline
             id="description"
+            maxLength={400}
             label="Descrição"
             data={editProfileData}
             customGetInitialValue={() => auth?.user?.description}

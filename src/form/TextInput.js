@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import react_native, {Keyboard, StyleSheet, Text, View} from 'react-native';
 
 import {Fieldset} from './Fieldset';
@@ -6,14 +6,14 @@ import {Fieldset} from './Fieldset';
 export function TextInput({
   id,
   data,
-  error,
   input,
   label,
   style,
   optional,
   multiline,
   leftChild,
-  description,
+  blurValidate,
+  textValidate,
   customOnBlur,
   onChangeValue,
   customOnChangeText,
@@ -39,6 +39,17 @@ export function TextInput({
   }, []);
 
   function onChangeText(text) {
+    if (textValidate) {
+      textValidate({
+        text,
+        value,
+        error,
+        setError,
+        setValue,
+        description,
+        setDescription,
+      });
+    }
     if (customOnChangeText) {
       customOnChangeText(text, setValue);
     } else {
@@ -56,10 +67,24 @@ export function TextInput({
 
   function onBlur(e) {
     setFocused(false);
+    if (blurValidate) {
+      blurValidate({
+        e,
+        value,
+        error,
+        setError,
+        setValue,
+        description,
+        setDescription,
+      });
+    }
     if (customOnBlur) {
       customOnBlur(e, value, setValue);
     }
   }
+
+  const [error, setError] = useState();
+  const [description, setDescription] = useState();
 
   const isValueShowable = value !== null && value !== undefined && value !== '';
 

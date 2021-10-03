@@ -6,27 +6,32 @@ import {useObserver} from 'mobx-react-lite';
 import {cepToString} from 'common/cepToString';
 
 export function CepInput({id, data, ...rest}) {
-  const [found, setFound] = useState();
-  const [error, setError] = useState();
+  function validateCep({setError, value}) {
+    console.error(value);
 
-  function customOnChangeText(text, setValue) {
+    if (value && value.length !== 8) {
+      setError('O CEP precisa de 8 algarismos');
+    }
+  }
+
+  function validateOnType({setError, setDescription, setValue, text}) {
+    console.error(text);
+    setError();
     if (text.length === 8) {
-      data[id] = text;
-      setFound('carregando');
+      setDescription('carregando...');
       axios.get('https://viacep.com.br/ws/' + text + '/json/').then(res => {
         console.error(res.data);
         if (res.data.erro) {
-          setError(true);
+          setError('O CEP digitado não existe');
+          setDescription();
         } else {
-          setError(false);
-          setFound(cepToString(res.data));
+          setValue(text);
+          setDescription(cepToString(res.data));
         }
       });
     } else {
-      setError(false);
-      setFound(false);
+      setDescription();
     }
-    setValue(text);
   }
 
   return useObserver(() => (
@@ -36,12 +41,11 @@ export function CepInput({id, data, ...rest}) {
       label="CEP"
       maxLength={8}
       autoCorrect={false}
-      error={error && 'Esse CEP não existe'}
-      description={found}
       placeholder="00000000"
-      customOnChangeText={customOnChangeText}
       autoCompleteType={'off'}
       keyboardType="number-pad"
+      blurValidate={validateCep}
+      textValidate={validateOnType}
       {...rest}
     />
   ));
