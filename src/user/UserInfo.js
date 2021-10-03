@@ -13,11 +13,13 @@ export function UserInfo({user}) {
       <View style={styles.imageNameWrapper}>
         <FastImage style={styles.image} source={{uri: user?.image}} />
         <View style={styles.dataWrapper}>
-          <Text style={styles.location}>
-            {user?.location
-              ? locationToString(user.location)
-              : 'Sem localização'}
-          </Text>
+          {!!user && (
+            <Text style={styles.location}>
+              {user?.location
+                ? locationToString(user.location)
+                : 'Sem localização'}
+            </Text>
+          )}
           {user?.createdAt ? (
             <Text style={styles.location}>
               No Plantes desde {moment(user.createdAt).format('LL')}
