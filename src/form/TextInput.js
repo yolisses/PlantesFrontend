@@ -4,7 +4,6 @@ import react_native, {Keyboard, StyleSheet, Text, View} from 'react-native';
 import {Fieldset} from './Fieldset';
 
 export function TextInput({
-  input,
   label,
   value,
   error,
@@ -12,13 +11,8 @@ export function TextInput({
   optional,
   multiline,
   leftChild,
-  validate,
-  errorsObj,
-  textValidate,
-  customOnBlur,
-  onChangeValue,
-  forceValidate,
-  customGetInitialValue,
+  onBlur: customOnBlur,
+  onFocus: customOnFocus,
   ...rest
 }) {
   const [focused, setFocused] = useState(false);
@@ -31,12 +25,18 @@ export function TextInput({
     Keyboard.addListener('keyboardDidHide', keyboardDidHide);
   }, []);
 
-  function onFocus() {
+  function onFocus(e) {
     setFocused(true);
+    if (customOnFocus) {
+      customOnFocus(e);
+    }
   }
 
   function onBlur(e) {
     setFocused(false);
+    if (customOnBlur) {
+      customOnBlur(e);
+    }
   }
 
   const isValueShowable = value !== null && value !== undefined && value !== '';
@@ -51,18 +51,16 @@ export function TextInput({
         <View style={styles.horizontalWrapper}>
           {leftChild}
           {optional && !focused && !isValueShowable && (
-            <Text style={styles.optionalText}>Opcional </Text>
+            <Text style={styles.optionalText}>Opcional</Text>
           )}
           <react_native.TextInput
             {...rest}
-            {...input}
+            value={value}
             ref={inputRef}
             onBlur={onBlur}
             onFocus={onFocus}
             multiline={multiline}
-            value={isValueShowable ? '' + value : ''}
             style={[styles.input, multiline && styles.multiline, style]}
-            // onChangeText={text => setValue(text)}
           />
         </View>
       </Fieldset>
