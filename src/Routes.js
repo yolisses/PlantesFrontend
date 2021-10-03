@@ -34,7 +34,7 @@ export function Routes() {
           component={EditProfileScreen}
           options={{headerShown: false}}
         /> */}
-        {/* <Stack.Screen name="dev" component={ConfigScreen} /> */}
+        {/* <Stack.Screen name="dev" component={Dev} /> */}
         {!auth.token ? (
           <Stack.Screen
             name="Login"

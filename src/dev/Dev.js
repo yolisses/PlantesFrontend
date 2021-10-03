@@ -1,86 +1,127 @@
-import React, {Component} from 'react';
-import {View, StyleSheet, Text, TextInput, Button, Linking} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {
+  Button,
+  Keyboard,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
-export class Dev extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      mobileNo: '',
-      message: '',
-    };
+export function Input({
+  id,
+  errorObj,
+  validate,
+  value: customValue,
+  forceValidation,
+  ...rest
+}) {
+  const [value, setValue] = useState();
+  const [error, setError] = useState();
+  const [showError, setShowError] = useState(false);
+  const ref = useRef();
+
+  useEffect(() => {
+    runValidation(value);
+  }, []);
+
+  useEffect(() => {
+    setShowError(true);
+  }, [forceValidation]);
+
+  function onBlur(e) {
+    Keyboard.dismiss();
+    setShowError(true);
   }
 
-  openWhatsApp = () => {
-    // let msg = this.state.message;
-    // let mobile = this.state.mobileNo;
-    // if (mobile) {
-    // if (msg) {
-    let url =
-      'whatsapp://send?text=' +
-      'https://plantei-dev.s3.sa-east-1.amazonaws.com/compressed/25c34f01-11f4-495d-a762-f17d13b058c2.webp' +
-      // this.state.message +
-      '&phone=' +
-      '+55 83 9925 9907';
-    // this.state.mobileNo;
-    Linking.openURL(url)
-      .then(data => {
-        console.log('WhatsApp Opened successfully ' + data);
-      })
-      .catch(() => {
-        alert('Make sure WhatsApp installed on your device');
-      });
-    // } else {
-    //   alert('Please enter message to send');
-    // }
-    // } else {
-    //   alert('Please enter mobile no');
-    // }
+  function onPress(e) {
+    ref?.current?.focus();
+  }
+
+  function runValidation(value) {
+    if (validate) {
+      const error = validate(value);
+      setError(error);
+      errorObj[id] = error;
+    }
+  }
+
+  function onChangeText(text) {
+    setValue(text);
+    setShowError(false);
+    runValidation(text);
+  }
+
+  return (
+    <View>
+      <TouchableOpacity onPress={onPress}>
+        <TextInput
+          ref={ref}
+          {...rest}
+          value={value}
+          onBlur={onBlur}
+          onChangeText={onChangeText}
+        />
+      </TouchableOpacity>
+
+      {!!error && showError && <Text>{error}</Text>}
+    </View>
+  );
+}
+
+export function Dev() {
+  const errorObj = {};
+
+  const [lastResult, setLastResult] = useState();
+  const [forceValidation, setCheckValidation] = useState();
+  const [canContinue, setCanContinue] = useState();
+
+  const validateText = text => {
+    if (!text) {
+      return 'por favor informe o nome';
+    }
+    if (text.length < 3) {
+      return 'precisa ter pelo menos tres letras';
+    }
   };
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={{textAlign: 'center', fontSize: 20, paddingVertical: 30}}>
-          Open WhatsApp chat box from React-native App
-        </Text>
 
-        <TextInput
-          value={this.state.message}
-          onChangeText={message => this.setState({message})}
-          placeholder={'Enter message'}
-          multiline={true}
-          style={[styles.input, {height: 90}]}
-        />
-
-        <TextInput
-          value={this.state.mobileNo}
-          onChangeText={mobileNo => this.setState({mobileNo})}
-          placeholder={'Enter Mobile'}
-          style={styles.input}
-          keyboardType={'numeric'}
-        />
-        <View style={{marginTop: 20}}>
-          <Button onPress={this.openWhatsApp} title="Open WhatsApp message" />
-        </View>
-      </View>
-    );
+  function checkItsValid() {
+    setCheckValidation(Math.random());
+    setLastResult(errorObj);
+    for (let key in errorObj) {
+      if (errorObj[key]) {
+        setCanContinue(false);
+        return;
+      }
+    }
+    setCanContinue(true);
   }
+
+  return (
+    <ScrollView>
+      <Input
+        label="escreva plz"
+        errorObj={errorObj}
+        id="oi"
+        forceValidation={forceValidation}
+        style={styles.input}
+        validate={validateText}
+      />
+      <Button title="verifica se pode pa" onPress={checkItsValid} />
+      <Text>{JSON.stringify(lastResult)}</Text>
+      <Text>{JSON.stringify(canContinue)}</Text>
+    </ScrollView>
+  );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    padding: 30,
-    backgroundColor: '#ffffff',
-  },
   input: {
-    width: 255,
-    height: 44,
-    padding: 10,
-    margin: 10,
-    backgroundColor: '#FFF',
-    borderColor: '#000',
-    borderRadius: 0.5,
-    borderWidth: 0.5,
+    backgroundColor: 'white',
+    borderStyle: 'solid',
+    borderWidth: 2,
+    borderColor: 'gray',
+    borderRadius: 10,
   },
 });
