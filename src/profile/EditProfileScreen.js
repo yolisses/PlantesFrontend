@@ -66,9 +66,6 @@ export function EditProfileScreen() {
       }
     }
 
-    function relieveName({setError}) {
-      setError();
-    }
     return (
       <>
         <CustomHeader
