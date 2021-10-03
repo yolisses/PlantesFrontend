@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler'; // prevent modal error
 import 'auth/configureGoogleSignIn'; // self explanatory
+import 'auth/trySavedLogin'; // After this one ^^^
 
 import React from 'react';
 import {Routes} from './Routes';
