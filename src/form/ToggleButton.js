@@ -12,12 +12,18 @@ export function ToggleButton({
   label,
   style,
   value,
+  onValueChange,
   showIcon = true,
-  onChangeCallback,
   ...rest
 }) {
+  function onPress(e) {
+    onValueChange(!value);
+  }
   return useObserver(() => (
-    <Pressable {...rest} style={[styles.input, style, value && styles.active]}>
+    <Pressable
+      {...rest}
+      onPress={onPress}
+      style={[styles.input, style, value && styles.active]}>
       {showIcon &&
         (value ? (
           <FontAwesomeIcon
