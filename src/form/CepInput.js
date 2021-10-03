@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import {TextInput} from 'form/TextInput';
 import axios from 'axios';
 import {useObserver} from 'mobx-react-lite';
-import {cepToString} from 'common/cepToString';
+import {locationToString} from 'common/locationToString';
 
 export function CepInput({id, data, ...rest}) {
   function validateCep({setError, value}) {
@@ -26,7 +26,7 @@ export function CepInput({id, data, ...rest}) {
           setDescription();
         } else {
           setValue(text);
-          setDescription(cepToString(res.data));
+          setDescription(locationToString(res.data));
         }
       });
     } else {

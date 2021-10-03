@@ -1,6 +1,6 @@
 import {concatWithCommas} from './concatWithCommas';
 
-export function cepToString(cep) {
-  const {logradouro, complemento, bairro, localidade, uf} = cep;
+export function locationToString(location) {
+  const {logradouro, complemento, bairro, localidade, uf} = location;
   return concatWithCommas(logradouro, complemento, bairro, localidade, uf);
 }

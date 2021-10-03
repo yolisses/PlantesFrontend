@@ -78,7 +78,7 @@ export function EditProfileScreen() {
           <CepInput
             id="cep"
             data={editProfileData}
-            customGetInitialValue={() => auth?.user?.cepRaw}
+            customGetInitialValue={() => auth?.user?.cep}
           />
           <TextInput
             multiline

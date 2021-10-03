@@ -1,4 +1,4 @@
-import {cepToString} from 'common/cepToString';
+import {locationToString} from 'common/locationToString';
 import {UserRoundImage} from 'common/UserRoundImage';
 import {useUserById} from 'common/UsersByIdContext';
 import React from 'react';
@@ -18,8 +18,8 @@ export function UserLink({id}) {
       />
       <View>
         {!!user?.name && <Text style={styles.name}>{user?.name}</Text>}
-        {!!user?.cep && (
-          <Text style={styles.local}>{cepToString(user?.cep)}</Text>
+        {!!user?.location && (
+          <Text style={styles.local}>{locationToString(user?.location)}</Text>
         )}
       </View>
     </View>

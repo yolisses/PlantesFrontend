@@ -4,7 +4,7 @@ import FastImage from 'react-native-fast-image';
 import {EditProfileButton} from 'profile/EditProfileButton';
 import {UserDescription} from './UserDescription';
 import {auth} from 'auth/auth';
-import {cepToString} from 'common/cepToString';
+import {locationToString} from 'common/locationToString';
 import moment from 'moment/min/moment-with-locales';
 
 export function UserInfo({user}) {
@@ -14,7 +14,9 @@ export function UserInfo({user}) {
         <FastImage style={styles.image} source={{uri: user?.image}} />
         <View style={styles.dataWrapper}>
           <Text style={styles.location}>
-            {user?.cep ? cepToString(user.cep) : 'Sem localização'}
+            {user?.location
+              ? locationToString(user.location)
+              : 'Sem localização'}
           </Text>
           {user?.createdAt ? (
             <Text style={styles.location}>
