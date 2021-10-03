@@ -15,6 +15,20 @@ import {publishData} from './publishData';
 import {SelectImagesField} from './SelectImagesField';
 
 export function PublishScreen() {
+  if (!publishData.errors) {
+    publishData.errors = {};
+  }
+
+  function validateName({setError, id, data, text}) {
+    if (!text || text.length < 3) {
+      data.errors[id] = true;
+      setError('O nome precisa de no mínimo 3 letras');
+    } else {
+      setError();
+      data.errors[id] = false;
+    }
+  }
+
   return useObserver(() => (
     <FooterNavigationLayout selected="Publish">
       <CustomHeader
@@ -24,7 +38,13 @@ export function PublishScreen() {
       />
       <ScrollView style={styles.container}>
         <SelectImagesField />
-        <TextInput id="name" data={publishData} label="Nome" />
+        <TextInput
+          id="name"
+          label="Nome"
+          maxLength={32}
+          textValidate={validateName}
+          data={publishData}
+        />
         <TagsSelector
           showIcon={false}
           data={publishData}
