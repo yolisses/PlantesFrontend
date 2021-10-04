@@ -10,14 +10,28 @@ const activeColor = '#0a0';
 
 export function ToggleButton({
   label,
+  option,
   style,
-  value,
+  value: obj,
   showIcon = true,
   onChangeCallback,
+  onChange,
   ...rest
 }) {
+  const value = obj[option];
+  function handlePress() {
+    if (onChange) {
+      const copy = {...obj};
+      copy[option] = !copy[option];
+      onChange(copy);
+    }
+  }
+
   return useObserver(() => (
-    <Pressable {...rest} style={[styles.input, style, value && styles.active]}>
+    <Pressable
+      {...rest}
+      onPress={handlePress}
+      style={[styles.input, style, value && styles.active]}>
       {showIcon &&
         (value ? (
           <FontAwesomeIcon

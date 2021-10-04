@@ -7,9 +7,11 @@ import {ToggleButton} from './ToggleButton';
 export function TagsSelector({
   label,
   style,
+  value = {},
   labels,
   options,
   showIcon,
+  onChange,
   buttonStyle,
 }) {
   return useObserver(() => (
@@ -17,7 +19,10 @@ export function TagsSelector({
       {options.map(option => (
         <ToggleButton
           key={option}
+          option={option}
+          onChange={onChange}
           showIcon={showIcon}
+          value={value}
           label={labels ? labels[option] : option}
           style={buttonStyle}
         />

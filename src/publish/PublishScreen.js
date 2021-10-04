@@ -34,7 +34,6 @@ export function PublishScreen() {
       />
       <ScrollView style={styles.container}>
         {/* <SelectImagesField /> */}
-
         <Controller
           control={control}
           rules={{
@@ -58,12 +57,22 @@ export function PublishScreen() {
           name="name"
           defaultValue=""
         />
-        <TagsSelector
-          showIcon={false}
-          label="Disponível para"
-          options={availabilities}
-          buttonStyle={styles.button}
-          labels={availabilitiesLabels}
+        <Controller
+          control={control}
+          render={({field: {onChange, onBlur, value}}) => (
+            <TagsSelector
+              value={value}
+              showIcon={false}
+              label="Disponível para"
+              options={availabilities}
+              onChange={onChange}
+              onBlur={onBlur}
+              buttonStyle={styles.button}
+              labels={availabilitiesLabels}
+            />
+          )}
+          name="availabilities"
+          defaultValue={{}}
         />
         <PriceInput label="Preço" />
         <TagsSelector label="Marcar como" options={tags} />
