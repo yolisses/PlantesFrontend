@@ -36,6 +36,7 @@ export function TextInput({
     <View>
       <Fieldset
         label={label}
+        error={error}
         style={[styles.fieldset, focused && styles.focused]}
         styleLabel={[styles.label, focused && styles.focusedLabel]}>
         <View style={styles.horizontalWrapper}>

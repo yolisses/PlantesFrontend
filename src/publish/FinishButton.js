@@ -7,32 +7,32 @@ import {useSending} from 'send/SendingContext';
 import {NextButton} from './NextButton';
 import {reset} from './publishData';
 
-export function FinishButton({checkItsValid}) {
-  const {pushSending} = useSending();
-  const {dispatch} = useNavigation();
+export function FinishButton({onPress}) {
+  // const {pushSending} = useSending();
+  // const {dispatch} = useNavigation();
 
-  const discardImagesSelection = () => {};
+  // const discardImagesSelection = () => {};
 
-  function resetNavigation() {
-    dispatch({
-      ...CommonActions.reset({
-        index: 0,
-        routes: [{name: 'Home'}],
-      }),
-    });
-  }
+  // function resetNavigation() {
+  //   dispatch({
+  //     ...CommonActions.reset({
+  //       index: 0,
+  //       routes: [{name: 'Home'}],
+  //     }),
+  //   });
+  // }
 
-  function onPress() {
-    const canContinue = checkItsValid();
-    console.error(canContinue);
-    if (!canContinue) {
-      return;
-    }
-    resetNavigation();
-    pushSending();
-    discardImagesSelection();
-    reset();
-  }
+  // function onPress() {
+  //   const canContinue = checkItsValid();
+  //   console.error(canContinue);
+  //   if (!canContinue) {
+  //     return;
+  //   }
+  //   resetNavigation();
+  //   pushSending();
+  //   discardImagesSelection();
+  //   reset();
+  // }
 
   return <NextButton route="Home" text="Enviar" customOnPress={onPress} />;
 }

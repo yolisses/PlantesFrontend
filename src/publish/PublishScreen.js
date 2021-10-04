@@ -5,22 +5,59 @@ import {TextInput} from 'form/TextInput';
 import {useObserver} from 'mobx-react-lite';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {Controller, useForm} from 'react-hook-form';
+import {StyleSheet, Text} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {CustomHeader} from './CustomHeader';
 import {availabilities, availabilitiesLabels} from './data/availiabilities';
 import {tags} from './data/tags';
 import {FinishButton} from './FinishButton';
-import {publishData} from './publishData';
 import {SelectImagesField} from './SelectImagesField';
 
 export function PublishScreen() {
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm();
+
+  function onSubmit(coisa) {
+    console.error('oi');
+    console.error(coisa);
+  }
+
   return useObserver(() => (
     <FooterNavigationLayout selected="Publish">
-      <CustomHeader title="Publicar" right={<FinishButton />} />
+      <CustomHeader
+        title="Publicar"
+        right={<FinishButton onPress={handleSubmit(onSubmit)} />}
+      />
       <ScrollView style={styles.container}>
-        <SelectImagesField />
-        <TextInput id="name" label="Nome" maxLength={32} data={publishData} />
+        {/* <SelectImagesField /> */}
+
+        <Controller
+          control={control}
+          rules={{
+            required: {value: true, message: 'Esse campo é obrigatório'},
+            minLength: {
+              value: 3,
+              message: 'Por favor, nome com pelo menos 3 letras',
+            },
+          }}
+          render={({field: {onChange, onBlur, value}}) => (
+            <TextInput
+              label="Nome"
+              value={value}
+              maxLength={32}
+              onBlur={onBlur}
+              error={errors.name?.message}
+              style={styles.input}
+              onChangeText={onChange}
+            />
+          )}
+          name="name"
+          defaultValue=""
+        />
         <TagsSelector
           showIcon={false}
           label="Disponível para"
