@@ -1,63 +1,33 @@
-import {faImage} from '@fortawesome/free-solid-svg-icons';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {useNavigation} from '@react-navigation/core';
-import {Fieldset} from 'form/Fieldset';
+import {Label} from 'form/Label';
 import React from 'react';
-import {FlatList, TouchableOpacity} from 'react-native';
-import {StyleSheet, Text, View} from 'react-native';
+import {FlatList} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
+import {SelectImagesButton} from './SelectImagesButton';
 
-export function SelectImagesField({
-  label,
-  value,
-  onChange,
-  control,
-  disableBorder,
-}) {
-  const {navigate} = useNavigation();
-
-  function onPress() {
-    navigate('Images', {value, control, onChange});
-  }
-
+export function SelectImagesField({label, value, onChange, control}) {
   const renderItem = ({item: uri}) => (
     <FastImage source={{uri}} fraction={4} style={styles.image} key={uri} />
   );
 
+  const uris = typeof value === 'object' ? Object.keys(value) : [];
+
   return (
     <View style={styles.container}>
-      <Fieldset
-        label={label}
-        disableBorder
-        style={styles.fieldset}
-        styleLabel={styles.label}>
-        {Object.keys(value).length !== 0 ? (
-          <FlatList
-            horizontal
-            contentContainerStyle={[styles.inner]}
-            showsHorizontalScrollIndicator={false}
-            data={Object.keys(value)}
-            renderItem={renderItem}
-            ListFooterComponent={
-              <TouchableOpacity
-                style={styles.select}
-                activeOpacity={0.7}
-                onPress={onPress}>
-                <FontAwesomeIcon icon={faImage} size={20} />
-                <Text style={styles.text}>Selecionar</Text>
-              </TouchableOpacity>
-            }
-          />
-        ) : (
-          <TouchableOpacity
-            style={styles.select}
-            activeOpacity={0.7}
-            onPress={onPress}>
-            <FontAwesomeIcon icon={faImage} size={20} />
-            <Text style={styles.text}>Selecionar</Text>
-          </TouchableOpacity>
-        )}
-      </Fieldset>
+      <Label text={label} style={styles.label} />
+      <FlatList
+        horizontal
+        data={uris}
+        renderItem={renderItem}
+        contentContainerStyle={[styles.inner]}
+        showsHorizontalScrollIndicator={false}
+      />
+      <SelectImagesButton
+        value={value}
+        control={control}
+        onChange={onChange}
+        reduced={!!uris.length}
+      />
     </View>
   );
 }
@@ -65,19 +35,6 @@ export function SelectImagesField({
 const offset = 2;
 
 const styles = StyleSheet.create({
-  text: {
-    fontSize: 18,
-    flexWrap: 'wrap',
-  },
-  select: {
-    height: 160,
-    backgroundColor: '#eee',
-    alignItems: 'center',
-    borderRadius: 10,
-    marginHorizontal: offset,
-    flex: 1,
-    justifyContent: 'center',
-  },
   inner: {
     padding: offset,
   },
@@ -87,25 +44,10 @@ const styles = StyleSheet.create({
   label: {
     backgroundColor: 'white',
   },
-  imagePlaceholder: {
-    width: 90,
-    borderWidth: 4,
-    aspectRatio: 1,
-    borderRadius: 10,
-    borderColor: '#aaa',
-    margin: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   image: {
     height: 160,
     borderRadius: 10,
     marginHorizontal: offset,
     aspectRatio: 1,
-  },
-  fieldset: {
-    padding: 0,
-    borderRadius: 0,
-    overflow: 'hidden',
   },
 });
