@@ -34,6 +34,12 @@ export function PublishScreen() {
     return 'Por favor marque uma disponibilidade';
   }
 
+  function validatePrice({value, sell}) {
+    if (sell && !value) {
+      return 'Informe o preço ou desmarque venda';
+    }
+  }
+
   return useObserver(() => (
     <FooterNavigationLayout selected="Publish">
       <CustomHeader
@@ -43,6 +49,8 @@ export function PublishScreen() {
       <ScrollView style={styles.container}>
         {/* <SelectImagesField /> */}
         <Controller
+          name="name"
+          defaultValue=""
           control={control}
           rules={{
             required: {
@@ -60,36 +68,58 @@ export function PublishScreen() {
               value={value}
               maxLength={32}
               onBlur={onBlur}
-              error={errors.name?.message}
-              style={styles.input}
               onChangeText={onChange}
+              error={errors.name?.message}
             />
           )}
-          name="name"
-          defaultValue=""
         />
         <Controller
           control={control}
-          render={({field: {onChange, onBlur, value}}) => (
-            <TagsSelector
-              value={value}
-              showIcon={false}
-              label="Disponível para"
-              options={availabilities}
-              onChange={onChange}
-              onBlur={onBlur}
-              error={errors.availabilities?.message}
-              buttonStyle={styles.button}
-              labels={availabilitiesLabels}
-            />
-          )}
+          defaultValue={{}}
           name="availabilities"
           rules={{
-            validate: obj => validateAvailabilities(obj),
+            validate: validateAvailabilities,
           }}
-          defaultValue={{}}
+          render={({field: {onChange, onBlur, value: availabillitesValue}}) => (
+            <>
+              <TagsSelector
+                onBlur={onBlur}
+                showIcon={false}
+                onChange={onChange}
+                label="Disponível para"
+                options={availabilities}
+                value={availabillitesValue}
+                buttonStyle={styles.button}
+                labels={availabilitiesLabels}
+                error={errors.availabilities?.message}
+              />
+              {availabillitesValue.sell && (
+                <Controller
+                  name="price"
+                  defaultValue=""
+                  control={control}
+                  rules={{
+                    validate: price =>
+                      validatePrice({
+                        value: price,
+                        sell: availabillitesValue.sell,
+                      }),
+                  }}
+                  render={({field: {onChange, onBlur, value}}) => (
+                    <PriceInput
+                      label="Preço"
+                      value={value}
+                      maxLength={4}
+                      onBlur={onBlur}
+                      onChangeText={onChange}
+                      error={errors.price?.message}
+                    />
+                  )}
+                />
+              )}
+            </>
+          )}
         />
-        <PriceInput label="Preço" />
         <TagsSelector label="Marcar como" options={tags} />
         <TextInput label="Descrição" optional multiline />
         <IntInput label="Quantidade" optional />
