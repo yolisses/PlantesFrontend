@@ -22,8 +22,16 @@ export function PublishScreen() {
   } = useForm();
 
   function onSubmit(coisa) {
-    console.error('oi');
-    console.error(coisa);
+    console.error('foi', coisa);
+  }
+
+  function validateAvailabilities(obj) {
+    for (let key in obj) {
+      if (obj[key]) {
+        return;
+      }
+    }
+    return 'Por favor marque uma disponibilidade';
   }
 
   return useObserver(() => (
@@ -37,7 +45,10 @@ export function PublishScreen() {
         <Controller
           control={control}
           rules={{
-            required: {value: true, message: 'Esse campo é obrigatório'},
+            required: {
+              value: true,
+              message: 'Por favor, nome com pelo menos 3 letras',
+            },
             minLength: {
               value: 3,
               message: 'Por favor, nome com pelo menos 3 letras',
@@ -67,11 +78,15 @@ export function PublishScreen() {
               options={availabilities}
               onChange={onChange}
               onBlur={onBlur}
+              error={errors.availabilities?.message}
               buttonStyle={styles.button}
               labels={availabilitiesLabels}
             />
           )}
           name="availabilities"
+          rules={{
+            validate: obj => validateAvailabilities(obj),
+          }}
           defaultValue={{}}
         />
         <PriceInput label="Preço" />

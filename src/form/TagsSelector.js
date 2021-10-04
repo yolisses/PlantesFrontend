@@ -13,9 +13,14 @@ export function TagsSelector({
   showIcon,
   onChange,
   buttonStyle,
+  ...rest
 }) {
   return useObserver(() => (
-    <Fieldset label={label} style={[styles.fieldset, style]} disableBorder>
+    <Fieldset
+      label={label}
+      style={[styles.fieldset, style]}
+      disableBorder
+      {...rest}>
       {options.map(option => (
         <ToggleButton
           key={option}
