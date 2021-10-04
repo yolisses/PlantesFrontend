@@ -7,7 +7,7 @@ import {useObserver} from 'mobx-react-lite';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import React from 'react';
 import {Controller, useForm} from 'react-hook-form';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {CustomHeader} from './CustomHeader';
 import {availabilities, availabilitiesLabels} from './data/availiabilities';

@@ -5,24 +5,58 @@ import {
 } from 'publish/data/availiabilities';
 import {tags} from 'publish/data/tags';
 import React from 'react';
+import {Controller, useForm} from 'react-hook-form';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {CleanFiltersButton} from './CleanFiltersButton';
 
 export function FiltersModal() {
+  const {
+    reset,
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm();
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.cleanWrapper}>
-        <CleanFiltersButton text="Limpar" />
+        <CleanFiltersButton
+          text="Limpar"
+          // Must use no parameters
+          onPress={() => reset()}
+        />
       </View>
-      <TagsSelector
-        showIcon={false}
+      <Controller
+        control={control}
+        defaultValue={{}}
         name="availabilities"
-        label="Disponível para"
-        options={availabilities}
-        buttonStyle={styles.button}
-        labels={availabilitiesLabels}
+        render={({field: {onChange, onBlur, value}}) => (
+          <TagsSelector
+            value={value}
+            onBlur={onBlur}
+            showIcon={false}
+            onChange={onChange}
+            label="Disponível para"
+            options={availabilities}
+            buttonStyle={styles.button}
+            labels={availabilitiesLabels}
+          />
+        )}
       />
-      <TagsSelector name="tags" options={tags} label="De preferência" />
+      <Controller
+        name="tags"
+        control={control}
+        defaultValue={{}}
+        render={({field: {onChange, onBlur, value}}) => (
+          <TagsSelector
+            value={value}
+            options={tags}
+            onBlur={onBlur}
+            label="De preferência"
+            onChange={onChange}
+          />
+        )}
+      />
     </ScrollView>
   );
 }
