@@ -74,9 +74,9 @@ export function EditProfileScreen() {
           right={
             <NextButton
               ref={ref}
-              text={saving ? 'Salvando...' : 'Salvar'}
               hideIcon
-              customOnPress={updateProfile}
+              onPress={updateProfile}
+              text={saving ? 'Salvando...' : 'Salvar'}
             />
           }
         />

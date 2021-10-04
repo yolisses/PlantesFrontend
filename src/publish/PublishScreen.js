@@ -1,3 +1,4 @@
+import {useNavigation} from '@react-navigation/core';
 import {EmphasisButton} from 'common/EmphasisButton';
 import {IntInput} from 'form/IntInput';
 import {PriceInput} from 'form/PriceInput';
@@ -9,21 +10,30 @@ import React from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {StyleSheet} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
+import {useSending} from 'send/SendingContext';
 import {CustomHeader} from './CustomHeader';
 import {availabilities, availabilitiesLabels} from './data/availiabilities';
 import {tags} from './data/tags';
-import {FinishButton} from './FinishButton';
+import {NextButton} from './NextButton';
 import {SelectImagesField} from './SelectImagesField';
 
 export function PublishScreen() {
   const {
+    reset,
     control,
     handleSubmit,
     formState: {errors},
   } = useForm();
 
+  const {navigate} = useNavigation();
+
+  const {pushSending} = useSending();
+
   function onSubmit(coisa) {
     console.error('foi', coisa);
+    // pushSending();
+    navigate('Home');
+    reset();
   }
 
   function validateAvailabilities(obj) {
@@ -45,10 +55,10 @@ export function PublishScreen() {
     <FooterNavigationLayout selected="Publish" style={styles.screen}>
       <CustomHeader
         title="Publicar"
-        right={<FinishButton onPress={handleSubmit(onSubmit)} />}
+        right={<NextButton text="Enviar" onPress={handleSubmit(onSubmit)} />}
       />
       <ScrollView contentContainerStyle={styles.container}>
-        {/* <SelectImagesField /> */}
+        <SelectImagesField />
         <Controller
           name="name"
           defaultValue=""
