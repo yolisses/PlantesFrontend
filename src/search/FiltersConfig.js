@@ -1,4 +1,5 @@
 import {concatWithCommas} from 'common/concatWithCommas';
+import {getTrueValuedKeys} from 'common/getTrueValuedKeys';
 import {OptionsButton} from 'home/OptionsButton';
 import {useModal} from 'modal/ModalContext';
 import {availabilitiesLabels} from 'publish/data/availiabilities';
@@ -29,14 +30,9 @@ export function FiltersConfig() {
     });
   }
 
-  const showText = Object.entries(searchOptions.availabilities)
-    .filter(entry => entry[1])
-    .map(entry => availabilitiesLabels[entry[0]].toLowerCase())
-    .concat(
-      Object.entries(searchOptions.tags)
-        .filter(entry => entry[1])
-        .map(entry => entry[0]),
-    );
+  const showText = getTrueValuedKeys(searchOptions.availabilities)
+    .map(value => availabilitiesLabels[value])
+    .concat(getTrueValuedKeys(searchOptions.tags));
 
   return (
     <View style={styles.container}>
@@ -45,9 +41,10 @@ export function FiltersConfig() {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.indicatorsWrapper}>
         <Text numberOfLines={1}>
-          <Text style={styles.indicator}>{concatWithCommas(showText)}</Text>
-          {showText.length === 0 && (
+          {showText.length === 0 ? (
             <Text style={styles.withoutIndicators}>Nenhum filtro </Text>
+          ) : (
+            <Text style={styles.indicator}>{concatWithCommas(showText)}</Text>
           )}
         </Text>
       </ScrollView>
