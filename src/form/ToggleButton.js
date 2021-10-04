@@ -4,30 +4,25 @@ import {Pressable, StyleSheet, Text} from 'react-native';
 import {faCheck} from '@fortawesome/free-solid-svg-icons';
 import {faCircle} from '@fortawesome/free-regular-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {useObserver} from 'mobx-react-lite';
-
 const activeColor = '#0a0';
 
 export function ToggleButton({
   label,
-  option,
   style,
-  value: obj,
+  value,
+  change,
+  option,
   showIcon = true,
   onChangeCallback,
-  onChange,
   ...rest
 }) {
-  const value = obj[option];
   function handlePress() {
-    if (onChange) {
-      const copy = {...obj};
-      copy[option] = !copy[option];
-      onChange(copy);
+    if (change) {
+      change(option, !value);
     }
   }
 
-  return useObserver(() => (
+  return (
     <Pressable
       {...rest}
       onPress={handlePress}
@@ -50,7 +45,7 @@ export function ToggleButton({
         ))}
       <Text style={[styles.text, value && styles.activeText]}>{label}</Text>
     </Pressable>
-  ));
+  );
 }
 
 const styles = StyleSheet.create({

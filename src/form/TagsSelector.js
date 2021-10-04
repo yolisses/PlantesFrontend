@@ -15,6 +15,12 @@ export function TagsSelector({
   buttonStyle,
   ...rest
 }) {
+  function change(option, newValue) {
+    const copy = {...value};
+    copy[option] = newValue;
+    onChange(copy);
+  }
+
   return useObserver(() => (
     <Fieldset
       label={label}
@@ -25,11 +31,12 @@ export function TagsSelector({
         <ToggleButton
           key={option}
           option={option}
+          change={change}
           onChange={onChange}
           showIcon={showIcon}
-          value={value}
-          label={labels ? labels[option] : option}
           style={buttonStyle}
+          value={value[option]}
+          label={labels ? labels[option] : option}
         />
       ))}
     </Fieldset>
