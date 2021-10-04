@@ -1,7 +1,7 @@
 import {faSearch, faTimes} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {basicHitSlop} from 'common/basicHitSlop';
-import {reset} from 'home/loadPlants';
+import {refreshPlants} from 'home/loadPlants';
 import React, {useRef, useState} from 'react';
 import {StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 import {Text} from 'react-native';
@@ -19,14 +19,14 @@ export function SearchBox() {
 
   function onClosePress() {
     searchOptions.text = null;
-    reset();
+    refreshPlants();
     ref?.current?.blur();
     setActive(false);
   }
 
   function onSubmit(e) {
     searchOptions.text = e.nativeEvent.text;
-    reset();
+    refreshPlants();
   }
 
   return (

@@ -1,5 +1,6 @@
 import {concatWithCommas} from 'common/concatWithCommas';
 import {getTrueValuedKeys} from 'common/getTrueValuedKeys';
+import {refreshPlants} from 'home/loadPlants';
 import {OptionsButton} from 'home/OptionsButton';
 import {useModal} from 'modal/ModalContext';
 import {availabilitiesLabels} from 'publish/data/availiabilities';
@@ -16,9 +17,9 @@ export function FiltersConfig() {
   const {showModal, closeModal} = useModal();
 
   function onSubmit(value) {
-    console.error(value);
     searchOptions.availabilities = value.availabilities;
     searchOptions.tags = value.tags;
+    refreshPlants();
     closeModal();
   }
 
