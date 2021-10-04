@@ -134,7 +134,22 @@ export function PublishScreen() {
             />
           )}
         />
-        <TextInput label="Descrição" optional multiline />
+        <Controller
+          optional
+          multiline
+          defaultValue=""
+          control={control}
+          name="description"
+          render={({field: {onChange, onBlur, value}}) => (
+            <TextInput
+              value={value}
+              maxLength={512}
+              onBlur={onBlur}
+              label="Descrição"
+              onChangeText={onChange}
+            />
+          )}
+        />
         <IntInput label="Quantidade" optional />
       </ScrollView>
     </FooterNavigationLayout>
