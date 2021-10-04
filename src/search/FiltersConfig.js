@@ -1,21 +1,31 @@
+import {concatWithCommas} from 'common/concatWithCommas';
 import {OptionsButton} from 'home/OptionsButton';
 import {useModal} from 'modal/ModalContext';
 import {availabilitiesLabels} from 'publish/data/availiabilities';
 import React from 'react';
+import {useForm} from 'react-hook-form';
 import {ScrollView} from 'react-native';
 import {StyleSheet, Text, View} from 'react-native';
 import {ApplyButton} from './ApplyButton';
 import {FiltersModal} from './FiltersModal';
 import {searchOptions} from './searchOptions';
-import {reHydrate} from './unappliedSearchOptions';
 
 export function FiltersConfig() {
-  const {showModal} = useModal();
-  function onFiltersPress() {
-    showModal(<FiltersModal />, {
-      FloatingComponent: <ApplyButton />,
+  const {reset, control, handleSubmit} = useForm();
+  const {showModal, closeModal} = useModal();
+
+  function onSubmit(value) {
+    console.error(value);
+    searchOptions.availabilities = value.availabilities;
+    searchOptions.tags = value.tags;
+    closeModal();
+  }
+
+  function showFiltersModal() {
+    showModal(<FiltersModal reset={reset} control={control} />, {
+      FloatingComponent: <ApplyButton onPress={handleSubmit(onSubmit)} />,
       snapPoint: 400,
-      onClosed: reHydrate,
+      onClosed: reset,
     });
   }
 
@@ -35,15 +45,13 @@ export function FiltersConfig() {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.indicatorsWrapper}>
         <Text numberOfLines={1}>
-          {showText.map(text => (
-            <Text style={styles.indicator}>{text}, </Text>
-          ))}
+          <Text style={styles.indicator}>{concatWithCommas(showText)}</Text>
           {showText.length === 0 && (
             <Text style={styles.withoutIndicators}>Nenhum filtro </Text>
           )}
         </Text>
       </ScrollView>
-      <OptionsButton text="Filtros" onPress={onFiltersPress} />
+      <OptionsButton text="Filtros" onPress={showFiltersModal} />
     </View>
   );
 }

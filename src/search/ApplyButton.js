@@ -1,26 +1,13 @@
-import {reset} from 'home/loadPlants';
-import {useModal} from 'modal/ModalContext';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text, TouchableOpacity} from 'react-native';
-import {searchOptions} from './searchOptions';
-import {unappliedSearchOptions} from './unappliedSearchOptions';
 
 export function ApplyButton({onPress}) {
-  const {closeModal} = useModal();
-
-  function onPressAndClose(e) {
-    searchOptions.availabilities = unappliedSearchOptions.availabilities;
-    searchOptions.tags = unappliedSearchOptions.tags;
-    reset();
-    closeModal();
-  }
-
   return (
     <View style={styles.facade}>
       <TouchableOpacity
         style={styles.button}
-        onPress={onPressAndClose}
+        onPress={onPress}
         activeOpacity={0.9}>
         <Text style={styles.text}>Aplicar</Text>
       </TouchableOpacity>

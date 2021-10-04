@@ -5,18 +5,12 @@ import {
 } from 'publish/data/availiabilities';
 import {tags} from 'publish/data/tags';
 import React from 'react';
-import {Controller, useForm} from 'react-hook-form';
+import {Controller} from 'react-hook-form';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {CleanFiltersButton} from './CleanFiltersButton';
+import {searchOptions} from './searchOptions';
 
-export function FiltersModal() {
-  const {
-    reset,
-    control,
-    handleSubmit,
-    formState: {errors},
-  } = useForm();
-
+export function FiltersModal({reset, control}) {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.cleanWrapper}>
@@ -28,8 +22,8 @@ export function FiltersModal() {
       </View>
       <Controller
         control={control}
-        defaultValue={{}}
         name="availabilities"
+        defaultValue={searchOptions.availabilities}
         render={({field: {onChange, onBlur, value}}) => (
           <TagsSelector
             value={value}
@@ -46,7 +40,7 @@ export function FiltersModal() {
       <Controller
         name="tags"
         control={control}
-        defaultValue={{}}
+        defaultValue={searchOptions.tags}
         render={({field: {onChange, onBlur, value}}) => (
           <TagsSelector
             value={value}
