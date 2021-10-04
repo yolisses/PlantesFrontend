@@ -1,4 +1,3 @@
-import {publishData} from 'publish/publishData';
 import {selectedImages} from 'publish/selectedImages';
 
 function getTrueValuedKeys(obj) {
@@ -11,8 +10,7 @@ function getOrderValuedKeys(obj) {
     .map(entry => entry[0]);
 }
 
-export function formatToPlant() {
-  const item = publishData;
+export function formatToPlant(item) {
   item.images = selectedImages;
   const {
     name,

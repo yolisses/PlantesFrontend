@@ -29,10 +29,10 @@ export function PublishScreen() {
 
   const {pushSending} = useSending();
 
-  function onSubmit(coisa) {
-    console.error('foi', coisa);
-    // pushSending();
-    navigate('Home');
+  function onSubmit(item) {
+    console.error('foi', item);
+    pushSending(item);
+    // navigate('Home');
     reset();
   }
 
@@ -58,7 +58,7 @@ export function PublishScreen() {
         right={<NextButton text="Enviar" onPress={handleSubmit(onSubmit)} />}
       />
       <ScrollView contentContainerStyle={styles.container}>
-        <SelectImagesField />
+        {/* <SelectImagesField /> */}
         <Controller
           name="name"
           defaultValue=""
@@ -104,7 +104,7 @@ export function PublishScreen() {
                 labels={availabilitiesLabels}
                 error={errors.availabilities?.message}
               />
-              {availabillitesValue.sell && (
+              {availabillitesValue?.sell && (
                 <Controller
                   name="price"
                   defaultValue=""
