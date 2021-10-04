@@ -5,7 +5,6 @@ import {ImagesSwiper} from 'show/ImagesSwiper';
 import {FloatingButton} from 'show/FloatingButton';
 import {AvailabilityInfo} from 'show/AvailabilityInfo';
 import {StartConversetionButton} from 'show/StartConversationButton';
-import {useNavigation} from '@react-navigation/core';
 
 export function ShowItemScreen({route}) {
   const {preImage, item} = route.params;
@@ -16,14 +15,7 @@ export function ShowItemScreen({route}) {
     scrollRef.current.scrollTo({y: pos, animated: true});
   };
 
-  const {navigate} = useNavigation();
-
-  function onPress() {
-    if (!item) {
-      return;
-    }
-    navigate('Chat', {userId: item.userId});
-  }
+  function onPress() {}
 
   return (
     <View style={styles.screen}>
