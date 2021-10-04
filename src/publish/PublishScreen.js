@@ -120,7 +120,20 @@ export function PublishScreen() {
             </>
           )}
         />
-        <TagsSelector label="Marcar como" options={tags} />
+        <Controller
+          name="tags"
+          control={control}
+          defaultValue={{}}
+          render={({field: {onChange, onBlur, value}}) => (
+            <TagsSelector
+              value={value}
+              options={tags}
+              onBlur={onBlur}
+              label="Marcar como"
+              onChange={onChange}
+            />
+          )}
+        />
         <TextInput label="Descrição" optional multiline />
         <IntInput label="Quantidade" optional />
       </ScrollView>
