@@ -8,32 +8,23 @@ import {tags} from 'publish/data/tags';
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {CleanFiltersButton} from './CleanFiltersButton';
-import {unappliedSearchOptions} from './unappliedSearchOptions';
 
 export function FiltersModal() {
   return useObserver(() => (
-    <View>
-      <ScrollView style={styles.container}>
-        <View style={styles.cleanWrapper}>
-          <CleanFiltersButton text="Limpar" />
-        </View>
-        <TagsSelector
-          showIcon={false}
-          id="availabilities"
-          label="Disponível para"
-          options={availabilities}
-          buttonStyle={styles.button}
-          data={unappliedSearchOptions}
-          labels={availabilitiesLabels}
-        />
-        <TagsSelector
-          id="tags"
-          options={tags}
-          label="De preferência"
-          data={unappliedSearchOptions}
-        />
-      </ScrollView>
-    </View>
+    <ScrollView style={styles.container}>
+      <View style={styles.cleanWrapper}>
+        <CleanFiltersButton text="Limpar" />
+      </View>
+      <TagsSelector
+        showIcon={false}
+        name="availabilities"
+        label="Disponível para"
+        options={availabilities}
+        buttonStyle={styles.button}
+        labels={availabilitiesLabels}
+      />
+      <TagsSelector name="tags" options={tags} label="De preferência" />
+    </ScrollView>
   ));
 }
 
@@ -48,6 +39,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    paddingHorizontal: 5,
   },
   button: {
     flex: 1,
