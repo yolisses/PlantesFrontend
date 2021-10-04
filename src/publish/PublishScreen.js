@@ -15,6 +15,7 @@ import {CustomHeader} from './CustomHeader';
 import {availabilities, availabilitiesLabels} from './data/availiabilities';
 import {tags} from './data/tags';
 import {NextButton} from './NextButton';
+import {selectedImages} from './selectedImages';
 import {SelectImagesField} from './SelectImagesField';
 
 export function PublishScreen() {
@@ -31,6 +32,7 @@ export function PublishScreen() {
 
   function onSubmit(item) {
     console.error('foi', item);
+    item.images = selectedImages;
     pushSending(item);
     // navigate('Home');
     reset();
@@ -58,7 +60,7 @@ export function PublishScreen() {
         right={<NextButton text="Enviar" onPress={handleSubmit(onSubmit)} />}
       />
       <ScrollView contentContainerStyle={styles.container}>
-        {/* <SelectImagesField /> */}
+        <SelectImagesField />
         <Controller
           name="name"
           defaultValue=""
