@@ -36,9 +36,9 @@ export function HomeScreen() {
 
   useEffect(() => {
     observe(loadPlants, () => {
-      if (loadPlants.reset) {
+      if (loadPlants.refresh) {
         getPlants();
-        loadPlants.reset = false;
+        loadPlants.refresh = false;
       }
     });
     getPlants();
