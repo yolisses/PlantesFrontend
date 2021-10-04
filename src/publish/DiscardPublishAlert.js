@@ -1,12 +1,9 @@
 import React from 'react';
 import {Alert} from 'alert/Alert';
 import {AlertButton} from 'alert/AlertButton';
-import {reset} from './publishData';
 
 export function DiscardPublishAlert() {
-  function onPress() {
-    reset();
-  }
+  function onPress() {}
 
   return (
     <Alert title="Descartar publicação?">

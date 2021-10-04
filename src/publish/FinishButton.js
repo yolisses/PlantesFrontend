@@ -5,7 +5,6 @@ import {useNavigation} from '@react-navigation/native';
 
 import {useSending} from 'send/SendingContext';
 import {NextButton} from './NextButton';
-import {reset} from './publishData';
 
 export function FinishButton({onPress}) {
   // const {pushSending} = useSending();
