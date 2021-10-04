@@ -4,32 +4,15 @@ import react_native, {Keyboard, StyleSheet, Text, View} from 'react-native';
 import {Fieldset} from './Fieldset';
 
 export function TextInput({
-  id,
-  data,
-  input,
   label,
+  value,
+  error,
   style,
   optional,
   multiline,
   leftChild,
-  validate,
-  errorsObj,
-  textValidate,
-  customOnBlur,
-  onChangeValue,
-  forceValidate,
-  customGetInitialValue,
   ...rest
 }) {
-  function getInitialValue() {
-    if (customGetInitialValue) {
-      return customGetInitialValue();
-    } else {
-      return data[id];
-    }
-  }
-
-  const [value, setValue] = useState(getInitialValue());
   const [focused, setFocused] = useState(false);
   const inputRef = useRef();
   const keyboardDidHide = () => {
@@ -46,48 +29,14 @@ export function TextInput({
 
   function onBlur(e) {
     setFocused(false);
-    setShowError(true);
   }
-
-  const [error, setError] = useState();
-  const [showError, setShowError] = useState(false);
-
-  function runValidation(value) {
-    if (validate) {
-      const error = validate(value);
-      setError(error);
-      errorsObj[id] = error;
-    }
-  }
-
-  useEffect(() => {
-    runValidation(value);
-  }, []);
-
-  useEffect(() => {
-    console.error('chama');
-    if (forceValidate) {
-      setShowError(true);
-    }
-  }, [forceValidate]);
-
-  function onChangeText(text) {
-    setValue(text);
-    data[id] = text;
-    setShowError(false);
-    runValidation(text);
-  }
-
-  const [description, setDescription] = useState();
 
   const isValueShowable = value !== null && value !== undefined && value !== '';
 
   return (
     <View>
       <Fieldset
-        error={showError ? error : null}
         label={label}
-        description={description}
         style={[styles.fieldset, focused && styles.focused]}
         styleLabel={[styles.label, focused && styles.focusedLabel]}>
         <View style={styles.horizontalWrapper}>
@@ -97,13 +46,10 @@ export function TextInput({
           )}
           <react_native.TextInput
             {...rest}
-            {...input}
             ref={inputRef}
             onBlur={onBlur}
             onFocus={onFocus}
             multiline={multiline}
-            onChangeText={onChangeText}
-            value={isValueShowable ? '' + value : ''}
             style={[styles.input, multiline && styles.multiline, style]}
             // onChangeText={text => setValue(text)}
           />
