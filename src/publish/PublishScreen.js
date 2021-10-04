@@ -1,3 +1,4 @@
+import {EmphasisButton} from 'common/EmphasisButton';
 import {IntInput} from 'form/IntInput';
 import {PriceInput} from 'form/PriceInput';
 import {TagsSelector} from 'form/TagsSelector';
@@ -6,7 +7,7 @@ import {useObserver} from 'mobx-react-lite';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import React from 'react';
 import {Controller, useForm} from 'react-hook-form';
-import {StyleSheet, Text} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {CustomHeader} from './CustomHeader';
 import {availabilities, availabilitiesLabels} from './data/availiabilities';
@@ -41,12 +42,12 @@ export function PublishScreen() {
   }
 
   return useObserver(() => (
-    <FooterNavigationLayout selected="Publish">
+    <FooterNavigationLayout selected="Publish" style={styles.screen}>
       <CustomHeader
         title="Publicar"
         right={<FinishButton onPress={handleSubmit(onSubmit)} />}
       />
-      <ScrollView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
         {/* <SelectImagesField /> */}
         <Controller
           name="name"
@@ -135,13 +136,13 @@ export function PublishScreen() {
           )}
         />
         <Controller
-          optional
-          multiline
           defaultValue=""
           control={control}
           name="description"
           render={({field: {onChange, onBlur, value}}) => (
             <TextInput
+              optional
+              multiline
               value={value}
               maxLength={512}
               onBlur={onBlur}
@@ -150,16 +151,35 @@ export function PublishScreen() {
             />
           )}
         />
-        <IntInput label="Quantidade" optional />
+        <Controller
+          name="amount"
+          defaultValue=""
+          control={control}
+          render={({field: {onChange, onBlur, value}}) => (
+            <IntInput
+              optional
+              value={value}
+              maxLength={4}
+              onBlur={onBlur}
+              label="Quantidade"
+              onChangeText={onChange}
+            />
+          )}
+        />
+        <EmphasisButton text="Enviar" />
       </ScrollView>
     </FooterNavigationLayout>
   ));
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 10,
+  screen: {
     backgroundColor: '#fff',
+  },
+  container: {
+    paddingHorizontal: 10,
+    paddingBottom: 40,
+    paddingTop: 5,
   },
   button: {
     flex: 1,
