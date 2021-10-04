@@ -166,7 +166,7 @@ export function PublishScreen() {
             />
           )}
         />
-        <EmphasisButton text="Enviar" />
+        <EmphasisButton text="Enviar" onPress={handleSubmit(onSubmit)} />
       </ScrollView>
     </FooterNavigationLayout>
   ));
