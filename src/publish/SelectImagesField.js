@@ -2,33 +2,31 @@ import {faImage} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {useNavigation} from '@react-navigation/core';
 import {Fieldset} from 'form/Fieldset';
-import {useObserver} from 'mobx-react-lite';
 import React from 'react';
 import {FlatList, TouchableOpacity} from 'react-native';
 import {StyleSheet, Text, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {selectedImages} from './selectedImages';
 
-export function SelectImagesField() {
+export function SelectImagesField({label, value, control}) {
   const {navigate} = useNavigation();
 
   function onPress() {
-    navigate('Images');
+    navigate('Images', {value, control});
   }
 
   const renderItem = ({item: uri}) => (
     <FastImage source={{uri}} fraction={4} style={styles.image} key={uri} />
   );
 
-  return useObserver(() => (
+  return (
     <View style={styles.container}>
-      <Fieldset label="Fotos" styleLabel={styles.label}>
-        {Object.keys(selectedImages).length !== 0 ? (
+      <Fieldset label={label} styleLabel={styles.label}>
+        {Object.keys(value).length !== 0 ? (
           <FlatList
             horizontal
             contentContainerStyle={[styles.inner]}
             showsHorizontalScrollIndicator={false}
-            data={Object.keys(selectedImages)}
+            data={Object.keys(value)}
             renderItem={renderItem}
             ListFooterComponent={
               <TouchableOpacity
@@ -51,7 +49,7 @@ export function SelectImagesField() {
         )}
       </Fieldset>
     </View>
-  ));
+  );
 }
 
 const offset = 2;
@@ -76,12 +74,8 @@ const styles = StyleSheet.create({
   },
   container: {
     alignItems: 'stretch',
-    // marginTop: 20,
   },
   label: {
-    // position: 'absolute',
-    // zIndex: 10,
-    // transform: [{translateY: -20}],
     backgroundColor: 'white',
   },
   imagePlaceholder: {

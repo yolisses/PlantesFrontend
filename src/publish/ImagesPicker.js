@@ -1,0 +1,118 @@
+import React, {useEffect, useState} from 'react';
+import CameraRoll from '@react-native-community/cameraroll';
+import {FlatList, StyleSheet, View} from 'react-native';
+
+import {width} from 'utils/width';
+
+import {allPhotosAlbum} from './allPhotosAlbum';
+import {SelectableImage} from './SelectableImage';
+import {SelectImageAlbumButton} from './SelectImageAlbumButton';
+
+import {selectedAlbum} from 'publish/selectedAlbum';
+import {BackButton} from './BackButton';
+import {ImagesLimitAlert} from './ImagesLimitAlert';
+import {imagesLimit} from './imagesLimit';
+import {useAlert} from 'alert/AlertContext';
+
+const numberOfCollums = 3;
+
+export function ImagesPicker({value, onChange}) {
+  const [foundImages, setFoundImages] = useState([]);
+
+  async function getPhotos() {
+    CameraRoll.getPhotos({
+      groupName:
+        selectedAlbum.name !== allPhotosAlbum ? selectedAlbum.name : undefined,
+      first: 78,
+    })
+      .then(res => {
+        setFoundImages(res.edges.map(edge => edge.node.image.uri));
+      })
+      .catch(err => console.error(err));
+  }
+
+  const {showAlert} = useAlert();
+
+  function pushImage({value, uri}) {
+    let counter = Object.keys(value).length + 1;
+    if (counter > imagesLimit) {
+      showAlert(<ImagesLimitAlert />);
+      return;
+    }
+    value[uri] = counter;
+  }
+
+  function removeImage({value, uri}) {
+    delete value[uri];
+    let counter = 1;
+    for (let key in value) {
+      value[key] = counter;
+      counter += 1;
+    }
+  }
+
+  function change(uri) {
+    if (!value[uri]) {
+      if (false) {
+        showAlert(<ImagesLimitAlert />);
+        return;
+      }
+      pushImage({uri, value});
+      onChange(coisa => {
+        return {...value};
+      });
+    } else {
+      removeImage({uri, value});
+      onChange(coisa => {
+        return {...value};
+      });
+    }
+  }
+
+  useEffect(() => {
+    getPhotos();
+  }, [selectedAlbum]);
+
+  return (
+    <>
+      <View style={{backgroundColor: 'white'}}>
+        <View style={styles.wrapper}>
+          <BackButton />
+          <SelectImageAlbumButton style={styles.button} />
+        </View>
+      </View>
+      <FlatList
+        data={foundImages}
+        numColumns={numberOfCollums}
+        keyExtractor={item => item}
+        showsVerticalScrollIndicator={false}
+        getItemLayout={(data, index) => {
+          const size = width / numberOfCollums;
+          return {
+            length: size,
+            offset: (size * index) % numberOfCollums,
+            index,
+          };
+        }}
+        renderItem={({item: uri}) => (
+          <SelectableImage
+            key={uri}
+            uri={uri}
+            change={change}
+            index={value[uri]}
+            selectedImages={value}
+          />
+        )}
+      />
+    </>
+  );
+}
+
+const styles = StyleSheet.create({
+  wrapper: {
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    backgroundColor: 'white',
+    flexDirection: 'row',
+  },
+});

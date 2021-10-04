@@ -1,5 +1,3 @@
-import {selectedImages} from 'publish/selectedImages';
-
 function getTrueValuedKeys(obj) {
   return Object.keys(obj).filter(key => obj[key] === true);
 }
@@ -11,7 +9,6 @@ function getOrderValuedKeys(obj) {
 }
 
 export function formatToPlant(item) {
-  item.images = selectedImages;
   const {
     name,
     price,
