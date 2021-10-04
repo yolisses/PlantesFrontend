@@ -1,5 +1,4 @@
 import {TagsSelector} from 'form/TagsSelector';
-import {useObserver} from 'mobx-react-lite';
 import {
   availabilities,
   availabilitiesLabels,
@@ -10,7 +9,7 @@ import {ScrollView, StyleSheet, View} from 'react-native';
 import {CleanFiltersButton} from './CleanFiltersButton';
 
 export function FiltersModal() {
-  return useObserver(() => (
+  return (
     <ScrollView style={styles.container}>
       <View style={styles.cleanWrapper}>
         <CleanFiltersButton text="Limpar" />
@@ -25,7 +24,7 @@ export function FiltersModal() {
       />
       <TagsSelector name="tags" options={tags} label="De preferência" />
     </ScrollView>
-  ));
+  );
 }
 
 const styles = StyleSheet.create({
