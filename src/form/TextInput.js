@@ -45,6 +45,7 @@ export function TextInput({
           )}
           <react_native.TextInput
             {...rest}
+            value={isValueShowable ? value : ''}
             ref={inputRef}
             onBlur={onBlur}
             onFocus={onFocus}

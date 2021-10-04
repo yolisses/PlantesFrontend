@@ -1,127 +1,55 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {
-  Button,
-  Keyboard,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React from 'react';
+import {Text, View, TextInput, Button, Alert} from 'react-native';
+import {useForm, Controller} from 'react-hook-form';
 
-export function Input({
-  id,
-  errorsObj,
-  validate,
-  value: customValue,
-  forceValidate,
-  ...rest
-}) {
-  const [value, setValue] = useState();
-  const [error, setError] = useState();
-  const [showError, setShowError] = useState(false);
-  const ref = useRef();
-
-  useEffect(() => {
-    runValidation(value);
-  }, []);
-
-  useEffect(() => {
-    setShowError(true);
-  }, [forceValidate]);
-
-  function onBlur(e) {
-    Keyboard.dismiss();
-    setShowError(true);
-  }
-
-  function onPress(e) {
-    ref?.current?.focus();
-  }
-
-  function runValidation(value) {
-    if (validate) {
-      const error = validate(value);
-      setError(error);
-      errorsObj[id] = error;
-    }
-  }
-
-  function onChangeText(text) {
-    setValue(text);
-    setShowError(false);
-    runValidation(text);
-  }
+export function Dev() {
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm();
+  const onSubmit = data => console.log(data);
 
   return (
     <View>
-      <TouchableOpacity onPress={onPress}>
-        <TextInput
-          ref={ref}
-          {...rest}
-          value={value}
-          onBlur={onBlur}
-          onChangeText={onChangeText}
-        />
-      </TouchableOpacity>
+      <Controller
+        control={control}
+        rules={{
+          required: true,
+        }}
+        render={({field: {onChange, onBlur, value}}) => (
+          <TextInput
+            style={styles.input}
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+          />
+        )}
+        name="firstName"
+        defaultValue=""
+      />
+      {errors.firstName && <Text>This is required.</Text>}
 
-      {!!error && showError && <Text>{error}</Text>}
+      <Controller
+        control={control}
+        rules={{
+          maxLength: 100,
+        }}
+        render={({field: {onChange, onBlur, value}}) => (
+          <TextInput
+            style={styles.input}
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+          />
+        )}
+        name="lastName"
+        defaultValue=""
+      />
+
+      <Button title="Submit" onPress={handleSubmit(onSubmit)} />
     </View>
   );
 }
 
-export function Dev() {
-  const errorsObj = {};
-
-  const [lastResult, setLastResult] = useState();
-  const [forceValidate, setForceValidate] = useState();
-  const [canContinue, setCanContinue] = useState();
-
-  const validateText = text => {
-    if (!text) {
-      return 'por favor informe o nome';
-    }
-    if (text.length < 3) {
-      return 'precisa ter pelo menos tres letras';
-    }
-  };
-
-  function checkItsValid() {
-    setForceValidate(Math.random());
-    setLastResult(errorsObj);
-    for (let key in errorsObj) {
-      if (errorsObj[key]) {
-        setCanContinue(false);
-        return;
-      }
-    }
-    setCanContinue(true);
-  }
-
-  return (
-    <ScrollView>
-      <Input
-        label="escreva plz"
-        errorsObj={errorsObj}
-        id="oi"
-        forceValidate={forceValidate}
-        style={styles.input}
-        validate={validateText}
-      />
-      <Button title="verifica se pode pa" onPress={checkItsValid} />
-      <Text>{JSON.stringify(lastResult)}</Text>
-      <Text>{JSON.stringify(canContinue)}</Text>
-    </ScrollView>
-  );
-}
-
-const styles = StyleSheet.create({
-  input: {
-    backgroundColor: 'white',
-    borderStyle: 'solid',
-    borderWidth: 2,
-    borderColor: 'gray',
-    borderRadius: 10,
-  },
-});
+const styles = {};

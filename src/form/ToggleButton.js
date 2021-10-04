@@ -9,28 +9,17 @@ import {useObserver} from 'mobx-react-lite';
 const activeColor = '#0a0';
 
 export function ToggleButton({
-  id,
-  data,
   label,
   style,
+  value,
   showIcon = true,
   onChangeCallback,
   ...rest
 }) {
-  function onPress() {
-    data[id] = !data[id];
-    if (onChangeCallback) {
-      onChangeCallback();
-    }
-  }
-
   return useObserver(() => (
-    <Pressable
-      {...rest}
-      onPress={onPress}
-      style={[styles.input, style, !!data[id] && styles.active]}>
+    <Pressable {...rest} style={[styles.input, style, value && styles.active]}>
       {showIcon &&
-        (data[id] ? (
+        (value ? (
           <FontAwesomeIcon
             size={15}
             icon={faCheck}
@@ -45,9 +34,7 @@ export function ToggleButton({
             style={styles.icon}
           />
         ))}
-      <Text style={[styles.text, !!data[id] && styles.activeText]}>
-        {label}
-      </Text>
+      <Text style={[styles.text, value && styles.activeText]}>{label}</Text>
     </Pressable>
   ));
 }
