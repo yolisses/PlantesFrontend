@@ -15,12 +15,11 @@ export function TextInput({
 }) {
   const [focused, setFocused] = useState(false);
   const inputRef = useRef();
-  const keyboardDidHide = () => {
-    inputRef?.current?.blur();
-  };
 
   useEffect(() => {
-    Keyboard.addListener('keyboardDidHide', keyboardDidHide);
+    Keyboard.addListener('keyboardDidHide', () => {
+      inputRef?.current?.blur();
+    });
   }, []);
 
   function onFocus() {
