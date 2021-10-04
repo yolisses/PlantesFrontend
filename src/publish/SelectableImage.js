@@ -5,14 +5,17 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {SelectableImageNumber} from './SelectableImageNumber';
 
 import {width} from 'utils/width';
-import {RerenderTester} from 'dev/rerenderTester';
 
 const numberOfCollums = 3;
 
 export function SelectableImage({uri, change, index}) {
+  function handlePress() {
+    change(() => uri);
+  }
+
   return useMemo(
     () => (
-      <TouchableOpacity onPress={() => change(uri)} activeOpacity={0.9}>
+      <TouchableOpacity onPress={handlePress} activeOpacity={0.9}>
         <View style={styles.wrapper}>
           <FastImage
             style={[styles.image, index && styles.selected]}
@@ -24,7 +27,6 @@ export function SelectableImage({uri, change, index}) {
             </View>
           )}
         </View>
-        <RerenderTester />
       </TouchableOpacity>
     ),
     [index],

@@ -33,39 +33,40 @@ export function ImagesPicker({value, onChange}) {
 
   const {showAlert} = useAlert();
 
-  function pushImage({value, uri}) {
-    let counter = Object.keys(value).length + 1;
+  function pushImage({value, uri, limitCallback}) {
+    const newValue = {...value};
+    let counter = Object.keys(newValue).length + 1;
     if (counter > imagesLimit) {
-      showAlert(<ImagesLimitAlert />);
-      return;
+      limitCallback();
+      return newValue;
     }
-    value[uri] = counter;
+    newValue[uri] = counter;
+    return newValue;
   }
 
   function removeImage({value, uri}) {
-    delete value[uri];
+    const newValue = {...value};
+    delete newValue[uri];
     let counter = 1;
-    for (let key in value) {
-      value[key] = counter;
+    for (let key in newValue) {
+      newValue[key] = counter;
       counter += 1;
     }
+    return newValue;
   }
 
-  function change(uri) {
+  function change(getUri) {
+    const uri = getUri();
     if (!value[uri]) {
-      if (false) {
-        showAlert(<ImagesLimitAlert />);
-        return;
-      }
-      pushImage({uri, value});
-      onChange(coisa => {
-        return {...value};
-      });
+      onChange(value =>
+        pushImage({
+          uri,
+          value,
+          limitCallback: () => showAlert(<ImagesLimitAlert />),
+        }),
+      );
     } else {
-      removeImage({uri, value});
-      onChange(coisa => {
-        return {...value};
-      });
+      onChange(value => removeImage({uri, value}));
     }
   }
 
