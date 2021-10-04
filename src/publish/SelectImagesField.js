@@ -7,11 +7,17 @@ import {FlatList, TouchableOpacity} from 'react-native';
 import {StyleSheet, Text, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 
-export function SelectImagesField({label, value, control}) {
+export function SelectImagesField({
+  label,
+  value,
+  onChange,
+  control,
+  disableBorder,
+}) {
   const {navigate} = useNavigation();
 
   function onPress() {
-    navigate('Images', {value, control});
+    navigate('Images', {value, control, onChange});
   }
 
   const renderItem = ({item: uri}) => (
@@ -20,7 +26,11 @@ export function SelectImagesField({label, value, control}) {
 
   return (
     <View style={styles.container}>
-      <Fieldset label={label} styleLabel={styles.label}>
+      <Fieldset
+        label={label}
+        disableBorder
+        style={styles.fieldset}
+        styleLabel={styles.label}>
         {Object.keys(value).length !== 0 ? (
           <FlatList
             horizontal
@@ -62,10 +72,9 @@ const styles = StyleSheet.create({
   select: {
     height: 160,
     backgroundColor: '#eee',
-    padding: 10,
     alignItems: 'center',
     borderRadius: 10,
-    margin: offset,
+    marginHorizontal: offset,
     flex: 1,
     justifyContent: 'center',
   },
@@ -91,7 +100,12 @@ const styles = StyleSheet.create({
   image: {
     height: 160,
     borderRadius: 10,
-    margin: offset,
+    marginHorizontal: offset,
     aspectRatio: 1,
+  },
+  fieldset: {
+    padding: 0,
+    borderRadius: 0,
+    overflow: 'hidden',
   },
 });
