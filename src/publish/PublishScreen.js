@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {useNavigation} from '@react-navigation/core';
 
 import {useObserver} from 'mobx-react-lite';
@@ -27,19 +27,30 @@ export function PublishScreen() {
     reset();
   }
 
+  function onError() {
+    console.error('oi');
+    scrollRef.current.scrollTo({y: 0, animated: true});
+  }
+
+  const scrollRef = useRef();
+
   return useObserver(() => (
     <View style={styles.screen}>
       <CustomHeader
         left={isDirty && <DiscardButton reset={reset} />}
         title="Publicar"
-        right={<NextButton text="Enviar" onPress={handleSubmit(onSubmit)} />}
+        right={
+          <NextButton text="Enviar" onPress={handleSubmit(onSubmit, onError)} />
+        }
       />
       <ScrollView
+        ref={scrollRef}
         contentContainerStyle={styles.container}
         style={styles.scroll}>
         <ItemEdit
           reset={reset}
           errors={errors}
+          onError={onError}
           control={control}
           onSubmit={onSubmit}
           handleSubmit={handleSubmit}

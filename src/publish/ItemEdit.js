@@ -16,7 +16,14 @@ import {TagsSelector} from 'form/TagsSelector';
 import {EmphasisButton} from 'common/EmphasisButton';
 import {hasSomeTrueValuedKey} from 'common/hasSomeTrueValuedKey';
 
-export function ItemEdit({item, errors, control, onSubmit, handleSubmit}) {
+export function ItemEdit({
+  item,
+  errors,
+  control,
+  onError,
+  onSubmit,
+  handleSubmit,
+}) {
   function validateAvailabilities(obj) {
     if (!hasSomeTrueValuedKey(obj)) {
       return 'Por favor marque pelo menos uma disponibilidade';
@@ -169,7 +176,7 @@ export function ItemEdit({item, errors, control, onSubmit, handleSubmit}) {
           />
         )}
       />
-      <EmphasisButton text="Enviar" onPress={handleSubmit(onSubmit)} />
+      <EmphasisButton text="Enviar" onPress={handleSubmit(onSubmit, onError)} />
     </>
   ));
 }
