@@ -6,6 +6,7 @@ export const loadPlants = observable({
   ended: false,
   refresh: true,
   loading: false,
+  networkError: false,
 });
 
 export function refreshPlants() {
@@ -13,6 +14,7 @@ export function refreshPlants() {
   loadPlants.plants = [];
   loadPlants.ended = false;
   loadPlants.loading = false;
-
+  loadPlants.networkError = false;
+  // Must be the last one
   loadPlants.refresh = true;
 }

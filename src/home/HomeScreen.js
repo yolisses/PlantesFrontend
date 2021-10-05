@@ -14,23 +14,35 @@ import {formatSearch} from 'search/formatSearch';
 import {SendingList} from 'send/SendingList';
 import {LoadingScrollFooter} from 'common/LoadingScrollFooter';
 import {NotFound} from './NotFound';
+import {NetworkError} from './NetworkError';
 
 export function HomeScreen() {
   async function getPlants() {
-    if (loadPlants.loading || loadPlants.ended) {
-      return;
+    try {
+      if (loadPlants.loading || loadPlants.ended) {
+        return;
+      }
+      loadPlants.loading = true;
+      const res = await api.post(
+        '/plants/' + loadPlants.page,
+        formatSearch(searchOptions),
+      );
+      loadPlants.plants = loadPlants.plants.concat(res.data);
+      if (res.data.length === 0) {
+        loadPlants.ended = true;
+      }
+      loadPlants.loading = false;
+      loadPlants.page = loadPlants.page + 1;
+    } catch (err) {
+      loadPlants.networkError = true;
+      loadPlants.loading = false;
+      console.error('aqui', err);
     }
-    loadPlants.loading = true;
-    const res = await api.post(
-      '/plants/' + loadPlants.page,
-      formatSearch(searchOptions),
-    );
-    loadPlants.plants = loadPlants.plants.concat(res.data);
-    if (res.data.length === 0) {
-      loadPlants.ended = true;
-    }
-    loadPlants.loading = false;
-    loadPlants.page = loadPlants.page + 1;
+  }
+
+  function retry() {
+    loadPlants.networkError = false;
+    getPlants();
   }
 
   function onEndReached() {
@@ -56,9 +68,13 @@ export function HomeScreen() {
             loading: loadPlants.loading,
             page: loadPlants.page,
             ended: loadPlants.ended,
+            networkError: loadPlants.networkError,
           })}
         </Text>
       </ScrollView>
+      {loadPlants.plants.length === 0 && loadPlants.networkError && (
+        <NetworkError retry={retry} />
+      )}
       {loadPlants.plants.length === 0 && loadPlants.ended ? (
         <NotFound />
       ) : (
@@ -69,6 +85,7 @@ export function HomeScreen() {
           onEndReachedThreshold={0.5}
           ListHeaderComponent={<SendingList />}
           showsVerticalScrollIndicator={false}
+          contentContainerStyle={{paddingBottom: !loadPlants.loading ? 60 : 0}}
           ListFooterComponent={loadPlants.loading && <LoadingScrollFooter />}
           renderItem={({item}) => <Card item={item} />}
         />
