@@ -9,6 +9,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {CustomHeader} from './CustomHeader';
 import {NextButton} from './NextButton';
 import {useForm} from 'react-hook-form';
+import {DiscardButton} from './DiscardButton';
 
 export function PublishScreen() {
   const {navigate} = useNavigation();
@@ -29,6 +30,7 @@ export function PublishScreen() {
   return useObserver(() => (
     <View style={styles.screen}>
       <CustomHeader
+        left={<DiscardButton reset={reset} />}
         title="Publicar"
         right={<NextButton text="Enviar" onPress={handleSubmit(onSubmit)} />}
       />

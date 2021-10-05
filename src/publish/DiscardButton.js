@@ -5,10 +5,10 @@ import {DiscardPublishAlert} from './DiscardPublishAlert';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
 
-export function DiscardButton() {
+export function DiscardButton({reset}) {
   const {showAlert} = useAlert();
   const onPress = () => {
-    showAlert(<DiscardPublishAlert />);
+    showAlert(<DiscardPublishAlert reset={reset} />);
   };
 
   return (
