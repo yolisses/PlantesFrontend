@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#0008',
     padding: 8,
     right: 3,
-    top: 0,
+    top: 3,
 
     position: 'absolute',
     zIndex: 10,
@@ -52,6 +52,6 @@ const styles = StyleSheet.create({
     height: 160,
     aspectRatio: 1,
     borderRadius: 10,
-    marginHorizontal: offset,
+    margin: offset,
   },
 });

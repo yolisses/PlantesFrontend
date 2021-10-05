@@ -17,13 +17,15 @@ export function SelectImagesField({label, value, error, control, onChange}) {
   return (
     <View style={styles.container}>
       <Label text={label} style={styles.label} />
-      <FlatList
-        horizontal
-        data={uris}
-        renderItem={renderItem}
-        contentContainerStyle={[styles.inner]}
-        showsHorizontalScrollIndicator={false}
-      />
+      <View style={!!uris.length && styles.wrapper}>
+        <FlatList
+          horizontal
+          data={uris}
+          renderItem={renderItem}
+          contentContainerStyle={[styles.inner]}
+          showsHorizontalScrollIndicator={false}
+        />
+      </View>
       <SelectImagesButton
         value={value}
         control={control}
@@ -48,6 +50,15 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
   },
   label: {
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
+  },
+  wrapper: {
+    borderBottomWidth: 0,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    borderStyle: 'solid',
+    borderColor: '#bbb',
   },
 });
