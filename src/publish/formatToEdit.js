@@ -31,8 +31,8 @@ export function formatToEdit(item) {
 
   const tags = convertToIdentityObject(tagsArray);
   const images = convertToIndexesObject(imagesArray);
-  const price = '' + priceNumber;
-  const amount = '' + amountNumber;
+  const price = priceNumber ? '' + priceNumber : null;
+  const amount = amountNumber ? '' + amountNumber : null;
 
   const availabilities = {
     swap,
