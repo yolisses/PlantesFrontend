@@ -1,11 +1,13 @@
+import {hasSomeTrueValuedKey} from 'common/hasSomeTrueValuedKey';
 import {Label} from 'form/Label';
+import {MiniMessage} from 'form/MiniMessage';
 import React from 'react';
 import {FlatList} from 'react-native';
 import {StyleSheet, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {SelectImagesButton} from './SelectImagesButton';
 
-export function SelectImagesField({label, value, onChange, control}) {
+export function SelectImagesField({label, value, error, control, onChange}) {
   const renderItem = ({item: uri}) => (
     <FastImage source={{uri}} fraction={4} style={styles.image} key={uri} />
   );
@@ -28,6 +30,9 @@ export function SelectImagesField({label, value, onChange, control}) {
         onChange={onChange}
         reduced={!!uris.length}
       />
+      {error && !hasSomeTrueValuedKey(value) && (
+        <MiniMessage isError text={error} />
+      )}
     </View>
   );
 }
@@ -40,6 +45,7 @@ const styles = StyleSheet.create({
   },
   container: {
     alignItems: 'stretch',
+    marginBottom: 10,
   },
   label: {
     backgroundColor: 'white',

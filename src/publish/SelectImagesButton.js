@@ -5,7 +5,7 @@ import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import {StyleSheet, Text} from 'react-native';
 
-export function SelectImagesButton({value, onChange, reduced, control}) {
+export function SelectImagesButton({value, control, reduced, onChange}) {
   const {navigate} = useNavigation();
 
   function onPress() {
@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     borderRadius: 10,
-    marginBottom: 10,
     alignItems: 'center',
     backgroundColor: '#eee',
     justifyContent: 'center',

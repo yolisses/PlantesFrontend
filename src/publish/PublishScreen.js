@@ -18,6 +18,7 @@ import {pushSending} from 'send/sendings';
 import {PriceInput} from 'form/PriceInput';
 import {TagsSelector} from 'form/TagsSelector';
 import {EmphasisButton} from 'common/EmphasisButton';
+import {hasSomeTrueValuedKey} from 'common/hasSomeTrueValuedKey';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 
 export function PublishScreen() {
@@ -35,14 +36,16 @@ export function PublishScreen() {
     navigate('Home');
     reset();
   }
-
   function validateAvailabilities(obj) {
-    for (let key in obj) {
-      if (obj[key]) {
-        return;
-      }
+    if (!hasSomeTrueValuedKey(obj)) {
+      return 'Por favor marque pelo menos uma disponibilidade';
     }
-    return 'Por favor marque pelo menos uma disponibilidade';
+  }
+
+  function validateImages(obj) {
+    if (!hasSomeTrueValuedKey(obj)) {
+      return 'Por favor selecione pelo menos uma foto';
+    }
   }
 
   function validatePrice({value, sell}) {
@@ -62,11 +65,12 @@ export function PublishScreen() {
           name="images"
           control={control}
           defaultValue={{}}
+          rules={{validate: validateImages}}
           render={({field: {onChange, onBlur, value}}) => (
             <SelectImagesField
               label="Fotos"
+              error={errors.images?.message}
               value={value}
-              onBlur={onBlur}
               control={control}
               onChange={onChange}
             />
