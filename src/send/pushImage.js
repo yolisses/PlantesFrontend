@@ -4,7 +4,7 @@ export async function pushImage(image) {
   const file = {
     uri: image.localImage,
   };
-  console.error('sending: ', image.localImage);
+  // console.error('sending: ', image.localImage);
   const data = await fetch(image.sendLink, {
     method: 'PUT',
     headers: {
