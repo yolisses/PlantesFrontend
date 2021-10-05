@@ -1,7 +1,10 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faCamera, faHome, faUser} from '@fortawesome/free-solid-svg-icons';
 
 import {Dev} from './dev/Dev';
 
@@ -14,15 +17,13 @@ import {ModalDisplay} from 'modal/ModalDisplay';
 import {UserScreen} from 'user/UserScreen';
 import {HomeScreen} from 'home/HomeScreen';
 import {LoginScreen} from 'auth/LoginScreen';
+import {EditScreen} from 'publish/EditScreen';
 import {ConfigScreen} from 'config/ConfigScreen';
 import {ShowItemScreen} from 'show/ShowItemScreen';
 import {PublishScreen} from 'publish/PublishScreen';
+import {UserRoundImage} from 'common/UserRoundImage';
 import {EditProfileScreen} from 'profile/EditProfileScreen';
 import {SelectImagesScreen} from 'publish/SelectImagesScreen';
-import {EditScreen} from 'publish/EditScreen';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faCamera, faHome, faUser} from '@fortawesome/free-solid-svg-icons';
-import {UserRoundImage} from 'common/UserRoundImage';
 
 const Stack = createNativeStackNavigator();
 
@@ -70,14 +71,12 @@ export function Routes() {
   return useObserver(() => (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="default" component={Main} />
-        <Stack.Screen name="dev" component={PublishScreen} />
-        {/* <Stack.Screen name="dev" component={Dev} /> */}
         {!auth.token ? (
           <Stack.Screen name="Login" component={LoginScreen} />
         ) : (
           <>
-            {/* <Stack.Screen name="Dev" component={Dev} /> */}
+            <Stack.Screen name="default" component={Main} />
+            <Stack.Screen name="dev" component={PublishScreen} />
             <Stack.Screen name="Edit" component={EditScreen} />
             <Stack.Screen name="Config" component={ConfigScreen} />
             <Stack.Screen name="ShowItem" component={ShowItemScreen} />
