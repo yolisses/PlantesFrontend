@@ -31,9 +31,8 @@ export function PublishScreen() {
   const {navigate} = useNavigation();
 
   function onSubmit(item) {
-    console.error('foi', item);
     pushSending(item);
-    navigate('UserScreen');
+    navigate('Home');
     reset();
   }
 

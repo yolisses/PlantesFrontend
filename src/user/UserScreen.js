@@ -8,7 +8,6 @@ import {api} from 'api';
 import {auth} from 'auth/auth';
 import {Card} from 'home/Card';
 import {BackButton} from 'publish/BackButton';
-import {removeFinisheds} from 'send/sendings';
 import {CustomHeader} from 'publish/CustomHeader';
 import {useUserById} from 'common/UsersByIdContext';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
@@ -27,7 +26,6 @@ export function UserScreen({route}) {
   async function getPlants() {
     const res = await api.get('user-plants/' + userId);
     setPlants(res.data);
-    removeFinisheds();
   }
 
   function renderItem({item}) {
@@ -41,7 +39,6 @@ export function UserScreen({route}) {
   async function getPlants() {
     const res = await api.get('user-plants/' + userId);
     setPlants(res.data);
-    removeFinisheds();
   }
 
   useEffect(() => {

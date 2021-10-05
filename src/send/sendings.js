@@ -7,6 +7,7 @@ export const send = observable({sendings: {}});
 export function pushSending(item) {
   const id = Math.random();
   const sending = {};
+  sending.sendingId = id;
   sending.localData = formatToPlant(item);
   send.sendings[id] = sending;
   sendPlant(sending, () => {
@@ -15,10 +16,6 @@ export function pushSending(item) {
   });
 }
 
-export function removeFinisheds() {
-  //   for (let key in send.sendings) {
-  //     if (send.sendings[key]?.sent) {
-  //       delete send.sendings[key];
-  //     }
-  //   }
+export function removeSending(id) {
+  delete send.sendings[id];
 }
