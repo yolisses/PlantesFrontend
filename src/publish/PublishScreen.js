@@ -43,7 +43,7 @@ export function PublishScreen() {
         return;
       }
     }
-    return 'Por favor marque uma disponibilidade';
+    return 'Por favor marque pelo menos uma disponibilidade';
   }
 
   function validatePrice({value, sell}) {
