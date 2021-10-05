@@ -18,63 +18,29 @@ import {ShowItemScreen} from 'show/ShowItemScreen';
 import {PublishScreen} from 'publish/PublishScreen';
 import {EditProfileScreen} from 'profile/EditProfileScreen';
 import {SelectImagesScreen} from 'publish/SelectImagesScreen';
+import {EditScreen} from 'publish/EditScreen';
 
 const Stack = createNativeStackNavigator();
 
 export function Routes() {
   return useObserver(() => (
     <NavigationContainer>
-      <Stack.Navigator>
-        {/* <Stack.Screen
-          name="dev"
-          component={PublishScreen}
-          options={{headerShown: false}}
-        /> */}
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="dev" component={PublishScreen} />
         {/* <Stack.Screen name="dev" component={Dev} /> */}
         {!auth.token ? (
-          <Stack.Screen
-            name="Login"
-            component={LoginScreen}
-            options={{headerShown: false}}
-          />
+          <Stack.Screen name="Login" component={LoginScreen} />
         ) : (
           <>
             {/* <Stack.Screen name="Dev" component={Dev} /> */}
-            <Stack.Screen
-              name="Home"
-              component={HomeScreen}
-              options={{headerShown: false}}
-            />
-            <Stack.Screen
-              name="UserScreen"
-              component={UserScreen}
-              options={{headerShown: false}}
-            />
-            <Stack.Screen
-              name="Config"
-              component={ConfigScreen}
-              options={{title: 'Configurações'}}
-            />
-            <Stack.Screen
-              name="Images"
-              component={SelectImagesScreen}
-              options={{headerShown: false}}
-            />
-            <Stack.Screen
-              name="Publish"
-              component={PublishScreen}
-              options={{headerShown: false}}
-            />
-            <Stack.Screen
-              name="ShowItem"
-              component={ShowItemScreen}
-              options={{headerShown: false}}
-            />
-            <Stack.Screen
-              name="EditProfile"
-              component={EditProfileScreen}
-              options={{headerShown: false}}
-            />
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Edit" component={EditScreen} />
+            <Stack.Screen name="Config" component={ConfigScreen} />
+            <Stack.Screen name="Publish" component={PublishScreen} />
+            <Stack.Screen name="UserScreen" component={UserScreen} />
+            <Stack.Screen name="ShowItem" component={ShowItemScreen} />
+            <Stack.Screen name="Images" component={SelectImagesScreen} />
+            <Stack.Screen name="EditProfile" component={EditProfileScreen} />
           </>
         )}
       </Stack.Navigator>

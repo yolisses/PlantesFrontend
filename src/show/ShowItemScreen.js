@@ -30,7 +30,7 @@ export function ShowItemScreen({route}) {
         <AvailabilityInfo onModalConfirmPress={onPress} item={item} />
         <View style={{flex: 1, justifyContent: 'center'}}>
           {item.userId === auth.userId ? (
-            <EditItemButton />
+            <EditItemButton item={item} />
           ) : (
             <StartConversetionButton onPress={onPress} loading={!item} />
           )}

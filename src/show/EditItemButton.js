@@ -3,8 +3,15 @@ import {StyleSheet, View} from 'react-native';
 
 import {LightButton} from 'common/LightButton';
 import {faEdit} from '@fortawesome/free-solid-svg-icons';
+import {useNavigation} from '@react-navigation/core';
 
-export function EditItemButton({onPress}) {
+export function EditItemButton({item}) {
+  const {navigate} = useNavigation();
+
+  function onPress() {
+    navigate('Edit', {item});
+  }
+
   return (
     <View style={{justifyContent: 'center'}}>
       <LightButton
