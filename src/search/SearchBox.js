@@ -18,8 +18,10 @@ export function SearchBox() {
   }
 
   function onClosePress() {
-    searchOptions.text = null;
-    refreshPlants();
+    if (searchOptions.text !== null) {
+      searchOptions.text = null;
+      refreshPlants();
+    }
     ref?.current?.blur();
     setActive(false);
   }
