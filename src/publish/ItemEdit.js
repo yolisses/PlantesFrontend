@@ -20,7 +20,7 @@ import {EmphasisButton} from 'common/EmphasisButton';
 import {hasSomeTrueValuedKey} from 'common/hasSomeTrueValuedKey';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 
-export function ItemEdit({onSubmit: customOnSubmit}) {
+export function ItemEdit({onSubmit: customOnSubmit, item}) {
   const {
     reset,
     control,
@@ -61,7 +61,7 @@ export function ItemEdit({onSubmit: customOnSubmit}) {
         <Controller
           name="images"
           control={control}
-          defaultValue={{}}
+          defaultValue={item?.images || {}}
           rules={{validate: validateImages}}
           render={({field: {onChange, onBlur, value}}) => (
             <SelectImagesField
@@ -75,8 +75,8 @@ export function ItemEdit({onSubmit: customOnSubmit}) {
         />
         <Controller
           name="name"
-          defaultValue=""
           control={control}
+          defaultValue={item?.name || ''}
           rules={{
             required: {
               value: true,
@@ -100,8 +100,8 @@ export function ItemEdit({onSubmit: customOnSubmit}) {
         />
         <Controller
           control={control}
-          defaultValue={{}}
           name="availabilities"
+          defaultValue={item?.availabilities || {}}
           rules={{
             validate: validateAvailabilities,
           }}
@@ -121,7 +121,7 @@ export function ItemEdit({onSubmit: customOnSubmit}) {
               {availabillitesValue?.sell && (
                 <Controller
                   name="price"
-                  defaultValue=""
+                  defaultValue={item?.price || ''}
                   control={control}
                   rules={{
                     validate: price =>
@@ -160,9 +160,9 @@ export function ItemEdit({onSubmit: customOnSubmit}) {
           )}
         />
         <Controller
-          defaultValue=""
           control={control}
           name="description"
+          defaultValue={item?.description || ''}
           render={({field: {onChange, onBlur, value}}) => (
             <TextInput
               optional
@@ -177,7 +177,7 @@ export function ItemEdit({onSubmit: customOnSubmit}) {
         />
         <Controller
           name="amount"
-          defaultValue=""
+          defaultValue={item?.amount || ''}
           control={control}
           render={({field: {onChange, onBlur, value}}) => (
             <IntInput
