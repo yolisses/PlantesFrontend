@@ -41,6 +41,7 @@ function getTabOptions({route}) {
 
       return route.name === 'UserScreen' ? (
         <UserRoundImage
+          ownUser
           size={30}
           userId={auth.userId}
           image={auth.user?.image}
@@ -83,6 +84,7 @@ export function Routes() {
             <Stack.Screen name="ShowItem" component={ShowItemScreen} />
             <Stack.Screen name="Images" component={SelectImagesScreen} />
             <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+            <Tab.Screen name="Profile" component={UserScreen} />
           </>
         )}
       </Stack.Navigator>
