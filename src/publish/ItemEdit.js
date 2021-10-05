@@ -1,6 +1,6 @@
 import React from 'react';
 import {Controller, useForm} from 'react-hook-form';
-import {ScrollView, StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {useNavigation} from '@react-navigation/core';
 
 import {useObserver} from 'mobx-react-lite';
@@ -18,21 +18,8 @@ import {PriceInput} from 'form/PriceInput';
 import {TagsSelector} from 'form/TagsSelector';
 import {EmphasisButton} from 'common/EmphasisButton';
 import {hasSomeTrueValuedKey} from 'common/hasSomeTrueValuedKey';
-import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 
-export function ItemEdit({onSubmit: customOnSubmit, item}) {
-  const {
-    reset,
-    control,
-    handleSubmit,
-    formState: {errors},
-  } = useForm();
-
-  function onSubmit(item) {
-    customOnSubmit(item);
-    reset();
-  }
-
+export function ItemEdit({item, errors, control, onSubmit, handleSubmit}) {
   function validateAvailabilities(obj) {
     if (!hasSomeTrueValuedKey(obj)) {
       return 'Por favor marque pelo menos uma disponibilidade';
@@ -52,159 +39,145 @@ export function ItemEdit({onSubmit: customOnSubmit, item}) {
   }
 
   return useObserver(() => (
-    <FooterNavigationLayout selected="Publish" style={styles.screen}>
-      <CustomHeader
-        title="Publicar"
-        right={<NextButton text="Enviar" onPress={handleSubmit(onSubmit)} />}
+    <>
+      <Controller
+        name="images"
+        control={control}
+        defaultValue={item?.images || {}}
+        rules={{validate: validateImages}}
+        render={({field: {onChange, onBlur, value}}) => (
+          <SelectImagesField
+            label="Fotos"
+            error={errors.images?.message}
+            value={value}
+            control={control}
+            onChange={onChange}
+          />
+        )}
       />
-      <ScrollView contentContainerStyle={styles.container}>
-        <Controller
-          name="images"
-          control={control}
-          defaultValue={item?.images || {}}
-          rules={{validate: validateImages}}
-          render={({field: {onChange, onBlur, value}}) => (
-            <SelectImagesField
-              label="Fotos"
-              error={errors.images?.message}
-              value={value}
-              control={control}
-              onChange={onChange}
-            />
-          )}
-        />
-        <Controller
-          name="name"
-          control={control}
-          defaultValue={item?.name || ''}
-          rules={{
-            required: {
-              value: true,
-              message: 'Por favor, nome com pelo menos 3 letras',
-            },
-            minLength: {
-              value: 3,
-              message: 'Por favor, nome com pelo menos 3 letras',
-            },
-          }}
-          render={({field: {onChange, onBlur, value}}) => (
-            <TextInput
-              label="Nome"
-              value={value}
-              maxLength={32}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              error={errors.name?.message}
-            />
-          )}
-        />
-        <Controller
-          control={control}
-          name="availabilities"
-          defaultValue={item?.availabilities || {}}
-          rules={{
-            validate: validateAvailabilities,
-          }}
-          render={({field: {onChange, onBlur, value: availabillitesValue}}) => (
-            <>
-              <TagsSelector
-                onBlur={onBlur}
-                showIcon={false}
-                onChange={onChange}
-                label="Disponível para"
-                options={availabilities}
-                value={availabillitesValue}
-                buttonStyle={styles.button}
-                labels={availabilitiesLabels}
-                error={errors.availabilities?.message}
-              />
-              {availabillitesValue?.sell && (
-                <Controller
-                  name="price"
-                  defaultValue={item?.price || ''}
-                  control={control}
-                  rules={{
-                    validate: price =>
-                      validatePrice({
-                        value: price,
-                        sell: availabillitesValue.sell,
-                      }),
-                  }}
-                  render={({field: {onChange, onBlur, value}}) => (
-                    <PriceInput
-                      label="Preço"
-                      value={value}
-                      maxLength={4}
-                      onBlur={onBlur}
-                      onChangeText={onChange}
-                      error={errors.price?.message}
-                    />
-                  )}
-                />
-              )}
-            </>
-          )}
-        />
-        <Controller
-          name="tags"
-          control={control}
-          defaultValue={{}}
-          render={({field: {onChange, onBlur, value}}) => (
+      <Controller
+        name="name"
+        control={control}
+        defaultValue={item?.name || ''}
+        rules={{
+          required: {
+            value: true,
+            message: 'Por favor, nome com pelo menos 3 letras',
+          },
+          minLength: {
+            value: 3,
+            message: 'Por favor, nome com pelo menos 3 letras',
+          },
+        }}
+        render={({field: {onChange, onBlur, value}}) => (
+          <TextInput
+            label="Nome"
+            value={value}
+            maxLength={32}
+            onBlur={onBlur}
+            onChangeText={onChange}
+            error={errors.name?.message}
+          />
+        )}
+      />
+      <Controller
+        control={control}
+        name="availabilities"
+        defaultValue={item?.availabilities || {}}
+        rules={{
+          validate: validateAvailabilities,
+        }}
+        render={({field: {onChange, onBlur, value: availabillitesValue}}) => (
+          <>
             <TagsSelector
-              value={value}
-              options={tags}
               onBlur={onBlur}
-              label="Marcar como"
+              showIcon={false}
               onChange={onChange}
+              label="Disponível para"
+              options={availabilities}
+              value={availabillitesValue}
+              buttonStyle={styles.button}
+              labels={availabilitiesLabels}
+              error={errors.availabilities?.message}
             />
-          )}
-        />
-        <Controller
-          control={control}
-          name="description"
-          defaultValue={item?.description || ''}
-          render={({field: {onChange, onBlur, value}}) => (
-            <TextInput
-              optional
-              multiline
-              value={value}
-              maxLength={512}
-              onBlur={onBlur}
-              label="Descrição"
-              onChangeText={onChange}
-            />
-          )}
-        />
-        <Controller
-          name="amount"
-          defaultValue={item?.amount || ''}
-          control={control}
-          render={({field: {onChange, onBlur, value}}) => (
-            <IntInput
-              optional
-              value={value}
-              maxLength={4}
-              onBlur={onBlur}
-              label="Quantidade"
-              onChangeText={onChange}
-            />
-          )}
-        />
-        <EmphasisButton text="Enviar" onPress={handleSubmit(onSubmit)} />
-      </ScrollView>
-    </FooterNavigationLayout>
+            {availabillitesValue?.sell && (
+              <Controller
+                name="price"
+                defaultValue={item?.price || ''}
+                control={control}
+                rules={{
+                  validate: price =>
+                    validatePrice({
+                      value: price,
+                      sell: availabillitesValue.sell,
+                    }),
+                }}
+                render={({field: {onChange, onBlur, value}}) => (
+                  <PriceInput
+                    label="Preço"
+                    value={value}
+                    maxLength={4}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    error={errors.price?.message}
+                  />
+                )}
+              />
+            )}
+          </>
+        )}
+      />
+      <Controller
+        name="tags"
+        control={control}
+        defaultValue={{}}
+        render={({field: {onChange, onBlur, value}}) => (
+          <TagsSelector
+            value={value}
+            options={tags}
+            onBlur={onBlur}
+            label="Marcar como"
+            onChange={onChange}
+          />
+        )}
+      />
+      <Controller
+        control={control}
+        name="description"
+        defaultValue={item?.description || ''}
+        render={({field: {onChange, onBlur, value}}) => (
+          <TextInput
+            optional
+            multiline
+            value={value}
+            maxLength={512}
+            onBlur={onBlur}
+            label="Descrição"
+            onChangeText={onChange}
+          />
+        )}
+      />
+      <Controller
+        name="amount"
+        defaultValue={item?.amount || ''}
+        control={control}
+        render={({field: {onChange, onBlur, value}}) => (
+          <IntInput
+            optional
+            value={value}
+            maxLength={4}
+            onBlur={onBlur}
+            label="Quantidade"
+            onChangeText={onChange}
+          />
+        )}
+      />
+      <EmphasisButton text="Enviar" onPress={handleSubmit(onSubmit)} />
+    </>
   ));
 }
 
 const styles = StyleSheet.create({
-  screen: {
-    backgroundColor: '#fff',
-  },
-  container: {
-    paddingHorizontal: 10,
-    paddingBottom: 40,
-    paddingTop: 5,
-  },
   button: {
     flex: 1,
     paddingVertical: 12,

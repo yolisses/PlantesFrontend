@@ -5,7 +5,7 @@ import {LightButton} from 'common/LightButton';
 import {faEdit} from '@fortawesome/free-solid-svg-icons';
 import {useNavigation} from '@react-navigation/core';
 
-export function EditItemButton({item}) {
+export function EditItemButton({item, ...rest}) {
   const {navigate} = useNavigation();
 
   function onPress() {
@@ -17,10 +17,11 @@ export function EditItemButton({item}) {
       <LightButton
         text="Editar"
         icon={faEdit}
-        style={styles.messageButton}
-        textStyle={styles.messageButtonText}
         onPress={onPress}
         iconColor="black"
+        style={styles.messageButton}
+        textStyle={styles.messageButtonText}
+        {...rest}
       />
     </View>
   );

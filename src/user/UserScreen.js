@@ -1,4 +1,4 @@
-import {FlatList} from 'react-native';
+import {FlatList, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 
 import {UserInfo} from './UserInfo';
@@ -10,7 +10,6 @@ import {Card} from 'home/Card';
 import {BackButton} from 'publish/BackButton';
 import {CustomHeader} from 'publish/CustomHeader';
 import {useUserById} from 'common/UsersByIdContext';
-import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 
 const numberOfCollums = 3;
 
@@ -46,22 +45,20 @@ export function UserScreen({route}) {
   }, []);
 
   return (
-    <>
-      <FooterNavigationLayout>
-        <CustomHeader
-          left={<BackButton />}
-          title={user?.name}
-          right={userId === auth.userId && <ConfigButton />}
-        />
-        <FlatList
-          data={plants}
-          renderItem={renderItem}
-          keyExtractor={keyExtractor}
-          numColumns={numberOfCollums}
-          showsVerticalScrollIndicator={false}
-          ListHeaderComponent={<UserInfo user={user} />}
-        />
-      </FooterNavigationLayout>
-    </>
+    <View style={{flex: 1}}>
+      <CustomHeader
+        left={<BackButton />}
+        title={user?.name}
+        right={userId === auth.userId && <ConfigButton />}
+      />
+      <FlatList
+        data={plants}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
+        numColumns={numberOfCollums}
+        showsVerticalScrollIndicator={false}
+        ListHeaderComponent={<UserInfo user={user} />}
+      />
+    </View>
   );
 }

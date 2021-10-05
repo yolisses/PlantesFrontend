@@ -30,9 +30,13 @@ export function ShowItemScreen({route}) {
         <AvailabilityInfo onModalConfirmPress={onPress} item={item} />
         <View style={{flex: 1, justifyContent: 'center'}}>
           {item.userId === auth.userId ? (
-            <EditItemButton item={item} />
+            <EditItemButton item={item} style={styles.button} />
           ) : (
-            <StartConversetionButton onPress={onPress} loading={!item} />
+            <StartConversetionButton
+              onPress={onPress}
+              loading={!item}
+              style={styles.button}
+            />
           )}
         </View>
       </View>
@@ -41,14 +45,18 @@ export function ShowItemScreen({route}) {
 }
 
 const styles = StyleSheet.create({
+  button: {
+    marginVertical: 10,
+  },
   screen: {
     height: '100%',
     backgroundColor: 'white',
   },
   bottomWrapper: {
+    alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-between',
     paddingHorizontal: 5,
+    justifyContent: 'space-between',
   },
   padding: {
     padding: 10,

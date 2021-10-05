@@ -1,4 +1,4 @@
-import {FlatList, ScrollView, Text} from 'react-native';
+import {FlatList, View} from 'react-native';
 import React, {useEffect} from 'react';
 
 import {observe} from 'mobx';
@@ -8,7 +8,6 @@ import {api} from 'api';
 import {Card} from 'home/Card';
 import {loadPlants} from 'home/loadPlants';
 import {SearchCustomHeader} from 'search/SearchCustomHeader';
-import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import {searchOptions} from 'search/searchOptions';
 import {formatSearch} from 'search/formatSearch';
 import {SendingList} from 'send/SendingList';
@@ -60,7 +59,7 @@ export function HomeScreen() {
   }, []);
 
   return useObserver(() => (
-    <FooterNavigationLayout selected={'Home'}>
+    <View style={{flex: 1}}>
       <SearchCustomHeader />
       {loadPlants.plants.length === 0 && loadPlants.networkError && (
         <NetworkError retry={retry} />
@@ -80,6 +79,6 @@ export function HomeScreen() {
           renderItem={({item}) => <Card item={item} />}
         />
       )}
-    </FooterNavigationLayout>
+    </View>
   ));
 }

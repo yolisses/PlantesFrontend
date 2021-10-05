@@ -1,6 +1,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {Dev} from './dev/Dev';
 
@@ -19,13 +20,57 @@ import {PublishScreen} from 'publish/PublishScreen';
 import {EditProfileScreen} from 'profile/EditProfileScreen';
 import {SelectImagesScreen} from 'publish/SelectImagesScreen';
 import {EditScreen} from 'publish/EditScreen';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faCamera, faHome, faUser} from '@fortawesome/free-solid-svg-icons';
+import {UserRoundImage} from 'common/UserRoundImage';
 
 const Stack = createNativeStackNavigator();
+
+const Tab = createBottomTabNavigator();
+
+function getTabOptions({route}) {
+  return {
+    tabBarIcon: ({color, size}) => {
+      const routeIcon = {
+        Home: faHome,
+        Publish: faCamera,
+        UserScreen: faUser,
+      };
+      const icon = routeIcon[route.name];
+
+      return route.name === 'UserScreen' ? (
+        <UserRoundImage
+          size={30}
+          userId={auth.userId}
+          image={auth.user?.image}
+        />
+      ) : (
+        <FontAwesomeIcon icon={icon} size={27} color={color} />
+      );
+    },
+    headerShown: false,
+    tabBarShowLabel: false,
+    tabBarHideOnKeyboard: true,
+    tabBarActiveTintColor: 'green',
+    tabBarInactiveTintColor: '#ddd',
+  };
+}
+
+function Main() {
+  return (
+    <Tab.Navigator screenOptions={getTabOptions}>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Publish" component={PublishScreen} />
+      <Tab.Screen name="UserScreen" component={UserScreen} />
+    </Tab.Navigator>
+  );
+}
 
 export function Routes() {
   return useObserver(() => (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="default" component={Main} />
         <Stack.Screen name="dev" component={PublishScreen} />
         {/* <Stack.Screen name="dev" component={Dev} /> */}
         {!auth.token ? (
@@ -33,11 +78,8 @@ export function Routes() {
         ) : (
           <>
             {/* <Stack.Screen name="Dev" component={Dev} /> */}
-            <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Edit" component={EditScreen} />
             <Stack.Screen name="Config" component={ConfigScreen} />
-            <Stack.Screen name="Publish" component={PublishScreen} />
-            <Stack.Screen name="UserScreen" component={UserScreen} />
             <Stack.Screen name="ShowItem" component={ShowItemScreen} />
             <Stack.Screen name="Images" component={SelectImagesScreen} />
             <Stack.Screen name="EditProfile" component={EditProfileScreen} />

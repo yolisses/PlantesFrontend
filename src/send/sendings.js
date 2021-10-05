@@ -19,5 +19,3 @@ export function pushSending(item) {
 export function removeSending(id) {
   delete send.sendings[id];
 }
-
-export function 
