@@ -1,21 +1,24 @@
-import {useNavigation} from '@react-navigation/core';
-import {EmphasisButton} from 'common/EmphasisButton';
-import {IntInput} from 'form/IntInput';
-import {PriceInput} from 'form/PriceInput';
-import {TagsSelector} from 'form/TagsSelector';
-import {TextInput} from 'form/TextInput';
-import {useObserver} from 'mobx-react-lite';
-import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import React from 'react';
 import {Controller, useForm} from 'react-hook-form';
-import {StyleSheet} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
-import {useSending} from 'send/SendingContext';
-import {CustomHeader} from './CustomHeader';
-import {availabilities, availabilitiesLabels} from './data/availiabilities';
-import {tags} from './data/tags';
+import {ScrollView, StyleSheet} from 'react-native';
+import {useNavigation} from '@react-navigation/core';
+
+import {useObserver} from 'mobx-react-lite';
+
 import {NextButton} from './NextButton';
+import {CustomHeader} from './CustomHeader';
 import {SelectImagesField} from './SelectImagesField';
+
+import {tags} from './data/tags';
+import {availabilities, availabilitiesLabels} from './data/availiabilities';
+
+import {IntInput} from 'form/IntInput';
+import {TextInput} from 'form/TextInput';
+import {pushSending} from 'send/sendings';
+import {PriceInput} from 'form/PriceInput';
+import {TagsSelector} from 'form/TagsSelector';
+import {EmphasisButton} from 'common/EmphasisButton';
+import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 
 export function PublishScreen() {
   const {
@@ -27,12 +30,10 @@ export function PublishScreen() {
 
   const {navigate} = useNavigation();
 
-  const {pushSending} = useSending();
-
   function onSubmit(item) {
     console.error('foi', item);
     pushSending(item);
-    // navigate('Home');
+    navigate('UserScreen');
     reset();
   }
 

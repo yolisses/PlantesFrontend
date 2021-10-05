@@ -8,7 +8,6 @@ import {StatusBar} from 'react-native';
 
 import {AlertContextProvider} from 'alert/AlertContext';
 import {ModalContextProvider} from 'modal/ModalContext';
-import {SendingContextProvider} from 'send/SendingContext';
 import {UsersByIdContextProvider} from 'common/UsersByIdContext';
 import {PermissionsContextProvider} from 'permission/PermissionsContext';
 import {CameraPreferencesProvider} from 'camera/contexts/CameraPreferencesContext';
@@ -22,10 +21,8 @@ const App = () => (
       <ModalContextProvider>
         <UsersByIdContextProvider>
           <CameraPreferencesProvider>
-            <SendingContextProvider>
-              <StatusBar barStyle={'default'} hidden={true} />
-              <Routes />
-            </SendingContextProvider>
+            <StatusBar barStyle={'default'} hidden={true} />
+            <Routes />
           </CameraPreferencesProvider>
         </UsersByIdContextProvider>
       </ModalContextProvider>

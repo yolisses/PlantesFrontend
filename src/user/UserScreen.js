@@ -9,10 +9,10 @@ import {api} from 'api';
 import {auth} from 'auth/auth';
 import {Card} from 'home/Card';
 import {BackButton} from 'publish/BackButton';
-import {useSending} from 'send/SendingContext';
 import {CustomHeader} from 'publish/CustomHeader';
 import {useUserById} from 'common/UsersByIdContext';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
+import {removeFinisheds, send} from 'send/sendings';
 
 const numberOfCollums = 3;
 
@@ -20,11 +20,10 @@ export function UserScreen({route}) {
   const [plants, setPlants] = useState();
 
   const {getUserById} = useUserById();
-  const user = getUserById(route.params.userId);
 
-  const {userId} = route.params;
-
-  const {sendings, removeFinisheds} = useSending();
+  const {userId: userIdParam} = route.params || {};
+  const userId = userIdParam || auth.userId;
+  const user = getUserById(userId);
 
   function renderItem({item}) {
     return <Card item={item} fraction={3} />;
@@ -49,7 +48,7 @@ export function UserScreen({route}) {
         <>
           <FlatList
             numColumns={numberOfCollums}
-            data={Object.values(sendings)}
+            data={Object.values(send.sendings)}
             renderItem={renderSendingItem}
             keyExtractor={sendingKeyExtractor}
             showsVerticalScrollIndicator={false}
