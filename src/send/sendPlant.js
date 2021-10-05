@@ -22,7 +22,6 @@ export async function sendPlant(sending, callback) {
       }
     }
   }
-  console.error('fim');
   if (callback) {
     callback(sending);
   }

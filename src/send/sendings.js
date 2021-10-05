@@ -7,17 +7,18 @@ export const send = observable({sendings: {}});
 export function pushSending(item) {
   const id = Math.random();
   const sending = {};
-  send.sendings[id] = sending;
   sending.localData = formatToPlant(item);
+  send.sendings[id] = sending;
   sendPlant(sending, () => {
+    send.sendings[id].sent = true;
     console.error('acabou', id);
   });
 }
 
 export function removeFinisheds() {
-  for (let key in send.sendings) {
-    if (send.sendings[key]?.sent) {
-      delete send.sendings[key];
-    }
-  }
+  //   for (let key in send.sendings) {
+  //     if (send.sendings[key]?.sent) {
+  //       delete send.sendings[key];
+  //     }
+  //   }
 }

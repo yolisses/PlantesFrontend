@@ -1,4 +1,4 @@
-import {FlatList} from 'react-native';
+import {FlatList, Text} from 'react-native';
 import React, {useEffect, useState} from 'react';
 
 import {UserInfo} from './UserInfo';
@@ -13,6 +13,8 @@ import {CustomHeader} from 'publish/CustomHeader';
 import {useUserById} from 'common/UsersByIdContext';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import {removeFinisheds, send} from 'send/sendings';
+
+import {useObserver} from 'mobx-react-lite';
 
 const numberOfCollums = 3;
 
@@ -29,7 +31,13 @@ export function UserScreen({route}) {
     return <Card item={item} fraction={3} />;
   }
   function renderSendingItem({item}) {
-    return <SendingCard item={item} fraction={3} />;
+    return (
+      <SendingCard
+        image={item?.localData?.images[0]}
+        sent={item?.sent}
+        fraction={3}
+      />
+    );
   }
 
   async function getPlants() {
@@ -42,23 +50,19 @@ export function UserScreen({route}) {
     getPlants();
   }, []);
 
+  console.error(send.sendings);
+
   function ListHeaderComponent() {
     if (userId === auth.userId) {
       return (
-        <>
-          <FlatList
-            numColumns={numberOfCollums}
-            data={Object.values(send.sendings)}
-            renderItem={renderSendingItem}
-            keyExtractor={sendingKeyExtractor}
-            showsVerticalScrollIndicator={false}
-            ListHeaderComponent={
-              <>
-                <UserInfo user={user} />
-              </>
-            }
-          />
-        </>
+        <FlatList
+          numColumns={numberOfCollums}
+          data={Object.values(send.sendings)}
+          renderItem={renderSendingItem}
+          keyExtractor={sendingKeyExtractor}
+          showsVerticalScrollIndicator={false}
+          ListHeaderComponent={<UserInfo user={user} />}
+        />
       );
     } else {
       return <UserInfo user={user} />;
@@ -73,7 +77,7 @@ export function UserScreen({route}) {
     return item?.plantId;
   }
 
-  return (
+  return useObserver(() => (
     <>
       <FooterNavigationLayout>
         <CustomHeader
@@ -91,5 +95,5 @@ export function UserScreen({route}) {
         />
       </FooterNavigationLayout>
     </>
-  );
+  ));
 }

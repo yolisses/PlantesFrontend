@@ -2,18 +2,18 @@ import {SquareImage} from 'common/SquareImage';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-export function SendingCard({item, fraction}) {
-  const backgroundColor = item?.sent ? '#060b' : '#000a';
+export function SendingCard({sent, image, fraction}) {
+  const backgroundColor = sent ? '#060b' : '#000a';
 
-  if (!item?.images) {
+  if (!image) {
     return null;
   }
 
   return (
     <View>
-      <SquareImage uri={item?.images[0]?.localImage} fraction={fraction} />
+      <SquareImage uri={image} fraction={fraction} />
       <Text style={[styles.text, {backgroundColor}]}>
-        {item?.sent ? 'enviado' : 'enviando...'}
+        {sent ? 'enviado' : 'enviando...'}
       </Text>
     </View>
   );
