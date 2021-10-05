@@ -18,7 +18,7 @@ export function PublishScreen() {
     reset,
     control,
     handleSubmit,
-    formState: {errors},
+    formState: {errors, isDirty},
   } = useForm();
 
   function onSubmit(item) {
@@ -30,7 +30,7 @@ export function PublishScreen() {
   return useObserver(() => (
     <View style={styles.screen}>
       <CustomHeader
-        left={<DiscardButton reset={reset} />}
+        left={isDirty && <DiscardButton reset={reset} />}
         title="Publicar"
         right={<NextButton text="Enviar" onPress={handleSubmit(onSubmit)} />}
       />
