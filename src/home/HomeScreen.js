@@ -1,4 +1,4 @@
-import {FlatList} from 'react-native';
+import {FlatList, ScrollView, Text} from 'react-native';
 import React, {useEffect} from 'react';
 
 import {observe} from 'mobx';
@@ -11,8 +11,8 @@ import {SearchCustomHeader} from 'search/SearchCustomHeader';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import {searchOptions} from 'search/searchOptions';
 import {formatSearch} from 'search/formatSearch';
-import {SendingWarn} from 'send/SendingWarn';
 import {SendingList} from 'send/SendingList';
+import {LoadingScrollFooter} from 'common/LoadingScrollFooter';
 
 export function HomeScreen() {
   async function getPlants() {
@@ -49,6 +49,15 @@ export function HomeScreen() {
   return useObserver(() => (
     <FooterNavigationLayout selected={'Home'}>
       <SearchCustomHeader />
+      <ScrollView>
+        <Text>
+          {JSON.stringify({
+            loading: loadPlants.loading,
+            page: loadPlants.page,
+            ended: loadPlants.ended,
+          })}
+        </Text>
+      </ScrollView>
       <FlatList
         numColumns={2}
         data={loadPlants.plants}
@@ -56,6 +65,7 @@ export function HomeScreen() {
         onEndReachedThreshold={0.5}
         ListHeaderComponent={<SendingList />}
         showsVerticalScrollIndicator={false}
+        ListFooterComponent={!loadPlants.ended && <LoadingScrollFooter />}
         renderItem={({item}) => <Card item={item} />}
       />
     </FooterNavigationLayout>
