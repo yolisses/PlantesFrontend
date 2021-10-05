@@ -9,9 +9,13 @@ import {ScrollView, StyleSheet, View} from 'react-native';
 import {NextButton} from './NextButton';
 import {CustomHeader} from './CustomHeader';
 import {formatToEdit} from './formatToEdit';
+import {BackButton} from './BackButton';
+import {useAlert} from 'alert/AlertContext';
+import {EditBackAlert} from './EditBackAlert';
 
 export function EditScreen({route}) {
   const {navigate} = useNavigation();
+  const {showAlert} = useAlert();
 
   const {item} = route.params;
 
@@ -27,9 +31,15 @@ export function EditScreen({route}) {
     navigate('Home');
     reset();
   }
+
+  function onBackPress() {
+    showAlert(<EditBackAlert />);
+  }
+
   return useObserver(() => (
     <View style={styles.screen}>
       <CustomHeader
+        left={<BackButton onPress={onBackPress} />}
         title="Editar"
         right={<NextButton text="Enviar" onPress={handleSubmit(onSubmit)} />}
       />

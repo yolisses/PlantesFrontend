@@ -1,12 +1,9 @@
 import React from 'react';
-import {Controller, useForm} from 'react-hook-form';
-import {ScrollView, StyleSheet, View} from 'react-native';
-import {useNavigation} from '@react-navigation/core';
+import {Controller} from 'react-hook-form';
+import {StyleSheet} from 'react-native';
 
 import {useObserver} from 'mobx-react-lite';
 
-import {NextButton} from './NextButton';
-import {CustomHeader} from './CustomHeader';
 import {SelectImagesField} from './SelectImagesField';
 
 import {tags} from './data/tags';

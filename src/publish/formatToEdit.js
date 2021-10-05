@@ -3,7 +3,6 @@ function convertToIdentityObject(array) {
   for (let item of array) {
     result[item] = true;
   }
-  console.error(result);
   return result;
 }
 
