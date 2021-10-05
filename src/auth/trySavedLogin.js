@@ -15,5 +15,5 @@ AsyncStorage.getItem('userInfo').then(res => {
   } catch (err) {
     console.error(err);
   }
-  console.error(JSON.parse(res));
+  // console.error(JSON.parse(res));
 });

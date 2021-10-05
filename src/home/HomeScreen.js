@@ -62,16 +62,6 @@ export function HomeScreen() {
   return useObserver(() => (
     <FooterNavigationLayout selected={'Home'}>
       <SearchCustomHeader />
-      <ScrollView>
-        <Text>
-          {JSON.stringify({
-            loading: loadPlants.loading,
-            page: loadPlants.page,
-            ended: loadPlants.ended,
-            networkError: loadPlants.networkError,
-          })}
-        </Text>
-      </ScrollView>
       {loadPlants.plants.length === 0 && loadPlants.networkError && (
         <NetworkError retry={retry} />
       )}
