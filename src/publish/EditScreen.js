@@ -8,6 +8,7 @@ import {useForm} from 'react-hook-form';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {NextButton} from './NextButton';
 import {CustomHeader} from './CustomHeader';
+import {formatToEdit} from './formatToEdit';
 
 export function EditScreen({route}) {
   const {navigate} = useNavigation();
@@ -36,11 +37,11 @@ export function EditScreen({route}) {
         contentContainerStyle={styles.container}
         style={styles.scroll}>
         <ItemEdit
-          item={item}
           reset={reset}
           errors={errors}
           control={control}
           onSubmit={onSubmit}
+          item={formatToEdit(item)}
           handleSubmit={handleSubmit}
         />
       </ScrollView>

@@ -130,7 +130,7 @@ export function ItemEdit({item, errors, control, onSubmit, handleSubmit}) {
       <Controller
         name="tags"
         control={control}
-        defaultValue={{}}
+        defaultValue={item?.tags || {}}
         render={({field: {onChange, onBlur, value}}) => (
           <TagsSelector
             value={value}

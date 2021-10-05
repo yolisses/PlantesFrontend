@@ -44,16 +44,16 @@ const styles = StyleSheet.create({
     padding: offset,
   },
   container: {
-    alignItems: 'stretch',
     marginBottom: 10,
+    alignItems: 'stretch',
   },
   label: {
     backgroundColor: 'white',
   },
   image: {
     height: 160,
+    aspectRatio: 1,
     borderRadius: 10,
     marginHorizontal: offset,
-    aspectRatio: 1,
   },
 });
