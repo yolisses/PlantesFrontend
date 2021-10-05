@@ -1,5 +1,3 @@
 export async function waitSomeTime() {
-  return new Promise((resolve, reject) =>
-    setTimeout(() => resolve(true), 1000),
-  );
+  return new Promise(resolve => setTimeout(() => resolve(true), 1000));
 }
