@@ -11,6 +11,8 @@ import {SearchCustomHeader} from 'search/SearchCustomHeader';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
 import {searchOptions} from 'search/searchOptions';
 import {formatSearch} from 'search/formatSearch';
+import {SendingWarn} from 'send/SendingWarn';
+import {SendingList} from 'send/SendingList';
 
 export function HomeScreen() {
   async function getPlants() {
@@ -52,6 +54,7 @@ export function HomeScreen() {
         data={loadPlants.plants}
         onEndReached={onEndReached}
         onEndReachedThreshold={0.5}
+        ListHeaderComponent={<SendingList />}
         showsVerticalScrollIndicator={false}
         renderItem={({item}) => <Card item={item} />}
       />
