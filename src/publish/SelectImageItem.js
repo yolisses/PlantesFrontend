@@ -6,10 +6,28 @@ import {TouchableOpacity} from 'react-native';
 import {StyleSheet, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 
-export function SelectImagesItem({uri}) {
+export function SelectImagesItem({uri, onChange}) {
+  function removeImage({value, uri}) {
+    const newValue = {...value};
+    delete newValue[uri];
+    let counter = 1;
+    for (let key in newValue) {
+      newValue[key] = counter;
+      counter += 1;
+    }
+    return newValue;
+  }
+
+  function onRemovePress() {
+    onChange(value => removeImage({uri, value}));
+  }
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity hitSlop={basicHitSlop} style={styles.closeButton}>
+      <TouchableOpacity
+        hitSlop={basicHitSlop}
+        onPress={onRemovePress}
+        style={styles.closeButton}>
         <FontAwesomeIcon icon={faTimes} size={20} color="#fff" />
       </TouchableOpacity>
       <FastImage source={{uri}} fraction={4} style={styles.image} key={uri} />

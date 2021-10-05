@@ -8,7 +8,9 @@ import {SelectImagesItem} from './SelectImageItem';
 import {SelectImagesButton} from './SelectImagesButton';
 
 export function SelectImagesField({label, value, error, control, onChange}) {
-  const renderItem = ({item: uri}) => <SelectImagesItem uri={uri} key={uri} />;
+  const renderItem = ({item: uri}) => (
+    <SelectImagesItem uri={uri} key={uri} onChange={onChange} />
+  );
 
   const uris = typeof value === 'object' ? Object.keys(value) : [];
 
