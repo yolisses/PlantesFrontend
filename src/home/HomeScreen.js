@@ -13,6 +13,7 @@ import {searchOptions} from 'search/searchOptions';
 import {formatSearch} from 'search/formatSearch';
 import {SendingList} from 'send/SendingList';
 import {LoadingScrollFooter} from 'common/LoadingScrollFooter';
+import {NotFound} from './NotFound';
 
 export function HomeScreen() {
   async function getPlants() {
@@ -58,16 +59,20 @@ export function HomeScreen() {
           })}
         </Text>
       </ScrollView>
-      <FlatList
-        numColumns={2}
-        data={loadPlants.plants}
-        onEndReached={onEndReached}
-        onEndReachedThreshold={0.5}
-        ListHeaderComponent={<SendingList />}
-        showsVerticalScrollIndicator={false}
-        ListFooterComponent={!loadPlants.ended && <LoadingScrollFooter />}
-        renderItem={({item}) => <Card item={item} />}
-      />
+      {loadPlants.plants.length === 0 && loadPlants.ended ? (
+        <NotFound />
+      ) : (
+        <FlatList
+          numColumns={2}
+          data={loadPlants.plants}
+          onEndReached={onEndReached}
+          onEndReachedThreshold={0.5}
+          ListHeaderComponent={<SendingList />}
+          showsVerticalScrollIndicator={false}
+          ListFooterComponent={loadPlants.loading && <LoadingScrollFooter />}
+          renderItem={({item}) => <Card item={item} />}
+        />
+      )}
     </FooterNavigationLayout>
   ));
 }
