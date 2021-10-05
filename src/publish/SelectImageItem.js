@@ -28,7 +28,7 @@ export function SelectImagesItem({uri, onChange}) {
         hitSlop={basicHitSlop}
         onPress={onRemovePress}
         style={styles.closeButton}>
-        <FontAwesomeIcon icon={faTimes} size={20} color="#fff" />
+        <FontAwesomeIcon icon={faTimes} size={18} color="#fff" />
       </TouchableOpacity>
       <FastImage source={{uri}} fraction={4} style={styles.image} key={uri} />
     </View>
