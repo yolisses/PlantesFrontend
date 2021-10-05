@@ -1,20 +1,17 @@
-import {FlatList, Text} from 'react-native';
+import {FlatList} from 'react-native';
 import React, {useEffect, useState} from 'react';
 
 import {UserInfo} from './UserInfo';
-import {SendingCard} from './SendingCard';
 import {ConfigButton} from './ConfigButton';
 
 import {api} from 'api';
 import {auth} from 'auth/auth';
 import {Card} from 'home/Card';
 import {BackButton} from 'publish/BackButton';
+import {removeFinisheds} from 'send/sendings';
 import {CustomHeader} from 'publish/CustomHeader';
 import {useUserById} from 'common/UsersByIdContext';
 import {FooterNavigationLayout} from 'navigation/FooterNavigationLayout';
-import {removeFinisheds, send} from 'send/sendings';
-
-import {useObserver} from 'mobx-react-lite';
 
 const numberOfCollums = 3;
 
@@ -27,17 +24,18 @@ export function UserScreen({route}) {
   const userId = userIdParam || auth.userId;
   const user = getUserById(userId);
 
+  async function getPlants() {
+    const res = await api.get('user-plants/' + userId);
+    setPlants(res.data);
+    removeFinisheds();
+  }
+
   function renderItem({item}) {
     return <Card item={item} fraction={3} />;
   }
-  function renderSendingItem({item}) {
-    return (
-      <SendingCard
-        image={item?.localData?.images[0]}
-        sent={item?.sent}
-        fraction={3}
-      />
-    );
+
+  function keyExtractor(item) {
+    return item?._id;
   }
 
   async function getPlants() {
@@ -50,34 +48,7 @@ export function UserScreen({route}) {
     getPlants();
   }, []);
 
-  console.error(send.sendings);
-
-  function ListHeaderComponent() {
-    if (userId === auth.userId) {
-      return (
-        <FlatList
-          numColumns={numberOfCollums}
-          data={Object.values(send.sendings)}
-          renderItem={renderSendingItem}
-          keyExtractor={sendingKeyExtractor}
-          showsVerticalScrollIndicator={false}
-          ListHeaderComponent={<UserInfo user={user} />}
-        />
-      );
-    } else {
-      return <UserInfo user={user} />;
-    }
-  }
-
-  function keyExtractor(item) {
-    return item?._id;
-  }
-
-  function sendingKeyExtractor(item) {
-    return item?.plantId;
-  }
-
-  return useObserver(() => (
+  return (
     <>
       <FooterNavigationLayout>
         <CustomHeader
@@ -91,9 +62,9 @@ export function UserScreen({route}) {
           keyExtractor={keyExtractor}
           numColumns={numberOfCollums}
           showsVerticalScrollIndicator={false}
-          ListHeaderComponent={ListHeaderComponent}
+          ListHeaderComponent={<UserInfo user={user} />}
         />
       </FooterNavigationLayout>
     </>
-  ));
+  );
 }
