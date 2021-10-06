@@ -10,6 +10,7 @@ import {Card} from 'home/Card';
 import {BackButton} from 'publish/BackButton';
 import {CustomHeader} from 'publish/CustomHeader';
 import {useUserById} from 'common/UsersByIdContext';
+import {FooterNavigation} from 'navigation/FooterNavigation';
 
 const numberOfCollums = 3;
 
@@ -45,20 +46,23 @@ export function UserScreen({route}) {
   }, []);
 
   return (
-    <View style={{flex: 1}}>
-      <CustomHeader
-        left={<BackButton />}
-        title={user?.name}
-        right={userId === auth.userId && <ConfigButton />}
-      />
-      <FlatList
-        data={plants}
-        renderItem={renderItem}
-        keyExtractor={keyExtractor}
-        numColumns={numberOfCollums}
-        showsVerticalScrollIndicator={false}
-        ListHeaderComponent={<UserInfo user={user} />}
-      />
-    </View>
+    <>
+      <View style={{flex: 1}}>
+        <CustomHeader
+          left={<BackButton />}
+          title={user?.name}
+          right={userId === auth.userId && <ConfigButton />}
+        />
+        <FlatList
+          data={plants}
+          renderItem={renderItem}
+          keyExtractor={keyExtractor}
+          numColumns={numberOfCollums}
+          showsVerticalScrollIndicator={false}
+          ListHeaderComponent={<UserInfo user={user} />}
+        />
+      </View>
+      <FooterNavigation />
+    </>
   );
 }

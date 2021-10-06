@@ -14,7 +14,12 @@ export function FooterNavigation({selected}) {
         selected={selected}
       />
       <FooterButton route="Publish" icon={faCamera} selected={selected} />
-      <UserRoundImage size={30} userId={auth.userId} image={auth.user?.image} />
+      <UserRoundImage
+        ownUser
+        size={30}
+        userId={auth.userId}
+        image={auth.user?.image}
+      />
     </View>
   );
 }

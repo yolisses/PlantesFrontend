@@ -15,6 +15,7 @@ import {LoadingScrollFooter} from 'common/LoadingScrollFooter';
 import {NotFound} from './NotFound';
 import {NetworkError} from './NetworkError';
 import {LocationOption} from './LocationOption';
+import {FooterNavigation} from 'navigation/FooterNavigation';
 
 export function HomeScreen() {
   async function getPlants() {
@@ -62,36 +63,41 @@ export function HomeScreen() {
   }, []);
 
   return useObserver(() => (
-    <View style={{flex: 1}}>
-      <SearchCustomHeader />
-      {loadPlants.plants.length === 0 && loadPlants.networkError ? (
-        <>
-          <LocationOption />
-          <NetworkError retry={retry} />
-        </>
-      ) : loadPlants.plants.length === 0 && loadPlants.ended ? (
-        <>
-          <LocationOption />
-          <NotFound />
-        </>
-      ) : (
-        <FlatList
-          numColumns={2}
-          data={loadPlants.plants}
-          onEndReached={onEndReached}
-          onEndReachedThreshold={0.5}
-          ListHeaderComponent={
-            <>
-              <LocationOption />
-              <SendingList />
-            </>
-          }
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{paddingBottom: !loadPlants.loading ? 60 : 0}}
-          ListFooterComponent={loadPlants.loading && <LoadingScrollFooter />}
-          renderItem={({item}) => <Card item={item} />}
-        />
-      )}
-    </View>
+    <>
+      <View style={{flex: 1}}>
+        <SearchCustomHeader />
+        {loadPlants.plants.length === 0 && loadPlants.networkError ? (
+          <>
+            <LocationOption />
+            <NetworkError retry={retry} />
+          </>
+        ) : loadPlants.plants.length === 0 && loadPlants.ended ? (
+          <>
+            <LocationOption />
+            <NotFound />
+          </>
+        ) : (
+          <FlatList
+            numColumns={2}
+            data={loadPlants.plants}
+            onEndReached={onEndReached}
+            onEndReachedThreshold={0.5}
+            ListHeaderComponent={
+              <>
+                <LocationOption />
+                <SendingList />
+              </>
+            }
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{
+              paddingBottom: !loadPlants.loading ? 60 : 0,
+            }}
+            ListFooterComponent={loadPlants.loading && <LoadingScrollFooter />}
+            renderItem={({item}) => <Card item={item} />}
+          />
+        )}
+      </View>
+      <FooterNavigation selected="Home" />
+    </>
   ));
 }

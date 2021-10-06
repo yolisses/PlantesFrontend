@@ -21,7 +21,6 @@ import {EditScreen} from 'publish/EditScreen';
 import {ConfigScreen} from 'config/ConfigScreen';
 import {ShowItemScreen} from 'show/ShowItemScreen';
 import {PublishScreen} from 'publish/PublishScreen';
-import {UserRoundImage} from 'common/UserRoundImage';
 import {EditProfileScreen} from 'profile/EditProfileScreen';
 import {SelectImagesScreen} from 'publish/SelectImagesScreen';
 import {SelectLocationScreen} from 'map/SelectLocationScreen';
@@ -30,38 +29,17 @@ const Stack = createNativeStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
-function getTabOptions({route}) {
-  return {
-    tabBarIcon: ({color, size}) => {
-      const routeIcon = {
-        Home: faHome,
-        Publish: faCamera,
-        UserScreen: faUser,
-      };
-      const icon = routeIcon[route.name];
-
-      return route.name === 'UserScreen' ? (
-        <UserRoundImage
-          ownUser
-          size={30}
-          userId={auth.userId}
-          image={auth.user?.image}
-        />
-      ) : (
-        <FontAwesomeIcon icon={icon} size={27} color={color} />
-      );
-    },
-    headerShown: false,
-    tabBarShowLabel: false,
-    tabBarHideOnKeyboard: true,
-    tabBarActiveTintColor: 'green',
-    tabBarInactiveTintColor: '#ccc',
-  };
+function Purge() {
+  return <></>;
 }
 
 function Main() {
   return (
-    <Tab.Navigator screenOptions={getTabOptions}>
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+      tabBar={Purge}>
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Publish" component={PublishScreen} />
       <Tab.Screen name="UserScreen" component={UserScreen} />

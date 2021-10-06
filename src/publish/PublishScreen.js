@@ -5,6 +5,7 @@ import {useObserver} from 'mobx-react-lite';
 import {pushSending} from 'send/sendings';
 import {ItemEdit} from './ItemEdit';
 import {useForm} from 'react-hook-form';
+import {FooterNavigation} from 'navigation/FooterNavigation';
 
 export function PublishScreen() {
   const {navigate} = useNavigation();
@@ -24,14 +25,17 @@ export function PublishScreen() {
   }
 
   return useObserver(() => (
-    <ItemEdit
-      reset={reset}
-      errors={errors}
-      title="Publicar"
-      control={control}
-      isDirty={isDirty}
-      onSubmit={onSubmit}
-      handleSubmit={handleSubmit}
-    />
+    <>
+      <ItemEdit
+        reset={reset}
+        errors={errors}
+        title="Publicar"
+        control={control}
+        isDirty={isDirty}
+        onSubmit={onSubmit}
+        handleSubmit={handleSubmit}
+      />
+      <FooterNavigation selected="Publish" />
+    </>
   ));
 }
