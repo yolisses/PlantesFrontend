@@ -63,9 +63,15 @@ export function HomeScreen() {
     <View style={{flex: 1}}>
       <SearchCustomHeader />
       {loadPlants.plants.length === 0 && loadPlants.networkError ? (
-        <NetworkError retry={retry} />
+        <>
+          <LocationOption />
+          <NetworkError retry={retry} />
+        </>
       ) : loadPlants.plants.length === 0 && loadPlants.ended ? (
-        <NotFound />
+        <>
+          <LocationOption />
+          <NotFound />
+        </>
       ) : (
         <FlatList
           numColumns={2}
