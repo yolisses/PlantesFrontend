@@ -6,9 +6,27 @@ import MapView from 'react-native-maps';
 import {ApplyButton} from 'search/ApplyButton';
 import {MapTarget} from './MapTarget';
 
+function getUserCordinates() {
+  return {
+    latitude: auth.user.location.coordinates[1],
+    longitude: auth.user.location.coordinates[0],
+  };
+}
+
+function getInitialLocation() {
+  const delta = 0.05;
+  return {
+    ...getUserCordinates(),
+    longitudeDelta: delta,
+    latitudeDelta: delta,
+  };
+}
+
 const location = {};
 
 export function SelectLocationScreen() {
+  console.error(auth.user.location.coordinates);
+
   function onPress() {
     console.error(location);
     if (!auth.user.location) {
@@ -32,12 +50,7 @@ export function SelectLocationScreen() {
           rotateEnabled={false}
           style={{height: '100%'}}
           onRegionChange={onRegionChange}
-          initialRegion={{
-            longitude: -54.3,
-            latitude: -14,
-            longitudeDelta: 39.5,
-            latitudeDelta: 50,
-          }}
+          initialRegion={getInitialLocation()}
         />
         <View style={styles.target} pointerEvents="none">
           <MapTarget />
