@@ -33,6 +33,7 @@ export function PublishScreen() {
         control={control}
         isDirty={isDirty}
         onSubmit={onSubmit}
+        showBackButton={false}
         handleSubmit={handleSubmit}
       />
       <FooterNavigation selected="Publish" />

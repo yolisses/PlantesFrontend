@@ -30,6 +30,7 @@ export function ItemEdit({
   onSubmit,
   headerLeft,
   handleSubmit,
+  showBackButton,
 }) {
   function validateAvailabilities(obj) {
     if (!hasSomeTrueValuedKey(obj)) {
@@ -58,8 +59,9 @@ export function ItemEdit({
   return useObserver(() => (
     <View style={styles.screen}>
       <CustomHeader
-        left={headerLeft || (isDirty && <DiscardButton reset={reset} />)}
         title={title}
+        showBackButton={showBackButton}
+        left={headerLeft || (isDirty && <DiscardButton reset={reset} />)}
         right={
           <NextButton text="Enviar" onPress={handleSubmit(onSubmit, onError)} />
         }
