@@ -10,7 +10,6 @@ import {CustomHeader} from 'publish/CustomHeader';
 import {api} from 'api';
 import {useNavigation} from '@react-navigation/core';
 import {useUserById} from 'common/UsersByIdContext';
-import {CepInput} from 'form/CepInput';
 import {Keyboard} from 'react-native';
 
 export function EditProfileScreen() {
