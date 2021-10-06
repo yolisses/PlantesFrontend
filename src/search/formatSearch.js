@@ -10,8 +10,11 @@ export function formatSearch(data) {
     result.sell = availabilities.sell;
     result.swap = availabilities.swap;
   }
-  result.tags = Object.entries(tags)
-    .filter(entry => entry[1])
-    .map(entry => entry[0]);
+
+  if (tags) {
+    result.tags = Object.entries(tags)
+      .filter(entry => entry[1])
+      .map(entry => entry[0]);
+  }
   return result;
 }

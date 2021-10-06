@@ -40,6 +40,8 @@ export function HomeScreen() {
     }
   }
 
+  console.error(searchOptions);
+
   function retry() {
     loadPlants.networkError = false;
     getPlants();
