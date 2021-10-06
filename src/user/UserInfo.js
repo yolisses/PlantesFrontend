@@ -4,8 +4,8 @@ import FastImage from 'react-native-fast-image';
 import {EditProfileButton} from 'profile/EditProfileButton';
 import {UserDescription} from './UserDescription';
 import {auth} from 'auth/auth';
-import {locationToString} from 'common/locationToString';
 import moment from 'moment/min/moment-with-locales';
+import {locationNameToString} from 'location/locationNameToString';
 
 export function UserInfo({user}) {
   return (
@@ -15,8 +15,8 @@ export function UserInfo({user}) {
         <View style={styles.dataWrapper}>
           {!!user && (
             <Text style={styles.location}>
-              {user?.location
-                ? locationToString(user.location)
+              {user.locationName
+                ? locationNameToString(user.locationName)
                 : 'Sem localização'}
             </Text>
           )}

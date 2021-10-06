@@ -1,6 +1,6 @@
-import {locationToString} from 'common/locationToString';
 import {UserRoundImage} from 'common/UserRoundImage';
 import {useUserById} from 'common/UsersByIdContext';
+import {locationNameToString} from 'location/locationNameToString';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
@@ -18,8 +18,10 @@ export function UserLink({id}) {
       />
       <View>
         {!!user?.name && <Text style={styles.name}>{user?.name}</Text>}
-        {!!user?.location && (
-          <Text style={styles.local}>{locationToString(user?.location)}</Text>
+        {!!user?.locationName && (
+          <Text style={styles.local}>
+            {locationNameToString(user.locationName)}
+          </Text>
         )}
       </View>
     </View>

@@ -1,7 +1,9 @@
 import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {useNavigation} from '@react-navigation/core';
+import {auth} from 'auth/auth';
 import {locationToString} from 'common/locationToString';
+import {locationNameToString} from 'location/locationNameToString';
 import React from 'react';
 
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
@@ -26,7 +28,7 @@ export function LocationOption({location}) {
           icon={faMapMarkerAlt}
         />
         <Text style={sytles.text}>
-          {locationToString(searchOptions.location)}
+          {locationNameToString(auth.user.locationName)}
         </Text>
       </TouchableOpacity>
     </View>

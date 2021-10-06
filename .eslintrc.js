@@ -30,6 +30,7 @@ module.exports = {
           ['comment', './src/comment'],
           ['profile', './src/profile'],
           ['publish', './src/publish'],
+          ['location', './src/location'],
           ['navigation', './src/navigation'],
         ],
         extensions: ['.ts', '.js', '.jsx', '.json'],

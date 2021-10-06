@@ -44,6 +44,7 @@ module.exports = {
           profile: './src/profile',
           publish: './src/publish',
           storage: './src/storage',
+          location: './src/location',
           permission: './src/permission',
           navigation: './src/navigation',
         },

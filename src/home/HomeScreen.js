@@ -62,10 +62,9 @@ export function HomeScreen() {
   return useObserver(() => (
     <View style={{flex: 1}}>
       <SearchCustomHeader />
-      {loadPlants.plants.length === 0 && loadPlants.networkError && (
+      {loadPlants.plants.length === 0 && loadPlants.networkError ? (
         <NetworkError retry={retry} />
-      )}
-      {loadPlants.plants.length === 0 && loadPlants.ended ? (
+      ) : loadPlants.plants.length === 0 && loadPlants.ended ? (
         <NotFound />
       ) : (
         <FlatList
