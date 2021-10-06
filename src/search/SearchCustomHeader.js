@@ -1,8 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
-import {UserRoundImage} from 'common/UserRoundImage';
-import {auth} from 'auth/auth';
 import {FiltersConfig} from './FiltersConfig';
 import {SearchBox} from './SearchBox';
 
