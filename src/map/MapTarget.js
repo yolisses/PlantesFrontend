@@ -44,12 +44,12 @@ const styles = StyleSheet.create({
   },
   squareV: {
     padding: 1.5,
-    paddingTop: 6,
+    paddingTop: 5,
     backgroundColor: color,
   },
   squareH: {
     padding: 1.5,
-    paddingLeft: 6,
+    paddingLeft: 5,
     backgroundColor: color,
   },
 });
