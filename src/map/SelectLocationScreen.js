@@ -49,7 +49,7 @@ export function SelectLocationScreen() {
 
   return (
     <View style={styles.screen}>
-      <CustomHeader title="Localização" />
+      <CustomHeader title="Sua localização" />
       <View style={{flex: 1}}>
         <MapView
           rotateEnabled={false}
