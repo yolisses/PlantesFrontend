@@ -2,21 +2,20 @@ import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {useNavigation} from '@react-navigation/core';
 import {auth} from 'auth/auth';
-import {locationToString} from 'common/locationToString';
 import {locationNameToString} from 'location/locationNameToString';
+import {useObserver} from 'mobx-react-lite';
 import React from 'react';
 
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
-import {searchOptions} from 'search/searchOptions';
 
-export function LocationOption({location}) {
+export function LocationOption() {
   const {navigate} = useNavigation();
 
   function onPress() {
     navigate('SelectLocation');
   }
 
-  return (
+  return useObserver(() => (
     <View>
       <TouchableOpacity
         onPress={onPress}
@@ -32,7 +31,7 @@ export function LocationOption({location}) {
         </Text>
       </TouchableOpacity>
     </View>
-  );
+  ));
 }
 
 const sytles = StyleSheet.create({

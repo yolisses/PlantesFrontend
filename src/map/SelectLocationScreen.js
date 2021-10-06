@@ -1,3 +1,5 @@
+import {useNavigation} from '@react-navigation/core';
+import {api} from 'api';
 import {auth} from 'auth/auth';
 import {CustomHeader} from 'publish/CustomHeader';
 import React from 'react';
@@ -25,13 +27,15 @@ function getInitialLocation() {
 const location = {};
 
 export function SelectLocationScreen() {
-  function onPress() {
+  const {navigate} = useNavigation();
+
+  async function onPress() {
     if (!auth.user.location) {
       auth.user.location = {};
     }
-    // user location include other information
-    auth.user.location.latitude = location.latitude;
-    auth.user.location.latitude = location.longitude;
+    const res = await api.put('/update-location-by-coordinates', location);
+    auth.user = res.data;
+    navigate('Home');
   }
 
   function onRegionChange(region) {
