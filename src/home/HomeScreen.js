@@ -14,6 +14,7 @@ import {SendingList} from 'send/SendingList';
 import {LoadingScrollFooter} from 'common/LoadingScrollFooter';
 import {NotFound} from './NotFound';
 import {NetworkError} from './NetworkError';
+import {LocationOption} from './LocationOption';
 
 export function HomeScreen() {
   async function getPlants() {
@@ -72,7 +73,12 @@ export function HomeScreen() {
           data={loadPlants.plants}
           onEndReached={onEndReached}
           onEndReachedThreshold={0.5}
-          ListHeaderComponent={<SendingList />}
+          ListHeaderComponent={
+            <>
+              <LocationOption />
+              <SendingList />
+            </>
+          }
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{paddingBottom: !loadPlants.loading ? 60 : 0}}
           ListFooterComponent={loadPlants.loading && <LoadingScrollFooter />}
