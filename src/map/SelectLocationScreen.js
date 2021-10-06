@@ -1,3 +1,4 @@
+import {auth} from 'auth/auth';
 import {CustomHeader} from 'publish/CustomHeader';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
@@ -5,14 +6,32 @@ import MapView from 'react-native-maps';
 import {ApplyButton} from 'search/ApplyButton';
 import {MapTarget} from './MapTarget';
 
+const location = {};
+
 export function SelectLocationScreen() {
+  function onPress() {
+    console.error(location);
+    if (!auth.user.location) {
+      auth.user.location = {};
+    }
+    // user location include other information
+    auth.user.location.latitude = location.latitude;
+    auth.user.location.latitude = location.longitude;
+  }
+
+  function onRegionChange(region) {
+    location.latitude = region.latitude;
+    location.longitude = region.longitude;
+  }
+
   return (
     <View style={styles.screen}>
       <CustomHeader title="Localização" />
       <View style={{flex: 1}}>
         <MapView
-          style={{height: '100%'}}
           rotateEnabled={false}
+          style={{height: '100%'}}
+          onRegionChange={onRegionChange}
           initialRegion={{
             longitude: -54.3,
             latitude: -14,
@@ -26,7 +45,7 @@ export function SelectLocationScreen() {
       </View>
 
       <View>
-        <ApplyButton />
+        <ApplyButton onPress={onPress} />
       </View>
     </View>
   );
