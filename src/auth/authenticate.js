@@ -19,5 +19,6 @@ export async function authenticate(idToken) {
     AsyncStorage.setItem('userInfo', JSON.stringify({token, user, email}));
   } catch (err) {
     console.error('Error', err);
+    console.error('Error', err.response);
   }
 }
