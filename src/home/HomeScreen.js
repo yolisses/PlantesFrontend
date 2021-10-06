@@ -89,9 +89,7 @@ export function HomeScreen() {
               </>
             }
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{
-              paddingBottom: !loadPlants.loading ? 60 : 0,
-            }}
+            contentContainerStyle={{paddingBottom: 60}}
             ListFooterComponent={loadPlants.loading && <LoadingScrollFooter />}
             renderItem={({item}) => <Card item={item} />}
           />
