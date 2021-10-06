@@ -12,17 +12,21 @@ export async function authenticate(idToken) {
     auth.token = token;
 
     OneSignal.setEmail(email, emailAuthToken, err => {
-      console.error(err);
+      if (err) {
+        console.error('set email error:', err);
+      }
     });
 
     OneSignal.setExternalUserId(user._id, idAuthToken, err => {
-      console.error(err);
+      if (err) {
+        console.error('set external user error:', err);
+      }
     });
 
     api.defaults.headers.common.auth = `Bearer ${token}`;
 
     AsyncStorage.setItem('userInfo', JSON.stringify({token, user, email}));
   } catch (err) {
-    console.error(err);
+    console.error('Error', err);
   }
 }
