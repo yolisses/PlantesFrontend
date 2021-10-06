@@ -25,8 +25,6 @@ function getInitialLocation() {
 const location = {};
 
 export function SelectLocationScreen() {
-  console.error(auth.user.location.coordinates);
-
   function onPress() {
     if (!auth.user.location) {
       auth.user.location = {};
