@@ -8,20 +8,24 @@ import MapView from 'react-native-maps';
 import {ApplyButton} from 'search/ApplyButton';
 import {MapTarget} from './MapTarget';
 
-function getUserCordinates() {
-  return {
-    latitude: auth.user.location.coordinates[1],
-    longitude: auth.user.location.coordinates[0],
-  };
-}
-
 function getInitialLocation() {
   const delta = 0.05;
-  return {
-    ...getUserCordinates(),
-    longitudeDelta: delta,
-    latitudeDelta: delta,
-  };
+
+  if (auth.user?.location?.coordinates) {
+    return {
+      latitude: auth.user?.location?.coordinates[1],
+      longitude: auth.user?.location?.coordinates[0],
+      longitudeDelta: delta,
+      latitudeDelta: delta,
+    };
+  } else {
+    return {
+      latitude: -15,
+      longitude: -54.3,
+      longitudeDelta: 40,
+      latitudeDelta: 40,
+    };
+  }
 }
 
 const location = {};
