@@ -12,7 +12,6 @@ export async function authenticate(idToken) {
     auth.token = token;
 
     OneSignal.setEmail(email, emailAuthToken);
-
     OneSignal.setExternalUserId(user._id, idAuthToken);
 
     api.defaults.headers.common.auth = `Bearer ${token}`;
