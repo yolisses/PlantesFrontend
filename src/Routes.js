@@ -24,6 +24,7 @@ import {PublishScreen} from 'publish/PublishScreen';
 import {UserRoundImage} from 'common/UserRoundImage';
 import {EditProfileScreen} from 'profile/EditProfileScreen';
 import {SelectImagesScreen} from 'publish/SelectImagesScreen';
+import {SelectLocationScreen} from 'map/SelectLocationScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -84,6 +85,11 @@ export function Routes() {
             <Stack.Screen name="ShowItem" component={ShowItemScreen} />
             <Stack.Screen name="Images" component={SelectImagesScreen} />
             <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+            <Stack.Screen
+              name="SelectLocation"
+              component={SelectLocationScreen}
+            />
+
             <Tab.Screen name="Profile" component={UserScreen} />
           </>
         )}

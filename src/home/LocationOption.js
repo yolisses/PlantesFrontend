@@ -1,22 +1,34 @@
 import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {useNavigation} from '@react-navigation/core';
 import {locationToString} from 'common/locationToString';
 import React from 'react';
 
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {searchOptions} from 'search/searchOptions';
 
 export function LocationOption({location}) {
+  const {navigate} = useNavigation();
+
+  function onPress() {
+    navigate('SelectLocation');
+  }
+
   return (
-    <View style={sytles.container}>
-      <FontAwesomeIcon
-        icon={faMapMarkerAlt}
-        color="green"
-        style={sytles.icon}
-      />
-      <Text style={sytles.text}>
-        {locationToString(searchOptions.location)}
-      </Text>
+    <View>
+      <TouchableOpacity
+        onPress={onPress}
+        activeOpacity={0.7}
+        style={sytles.container}>
+        <FontAwesomeIcon
+          color="green"
+          style={sytles.icon}
+          icon={faMapMarkerAlt}
+        />
+        <Text style={sytles.text}>
+          {locationToString(searchOptions.location)}
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }
