@@ -13,15 +13,17 @@ export function PublishScreen() {
   const {
     reset,
     control,
+    clearErrors,
     handleSubmit,
     formState: {errors, isDirty},
   } = useForm();
 
   //fica
   function onSubmit(item) {
-    pushSending(item);
-    navigate('Home');
     reset();
+    clearErrors();
+    navigate('Home');
+    pushSending(item);
   }
 
   return useObserver(() => (

@@ -75,13 +75,13 @@ export function ItemEdit({
           control={control}
           defaultValue={item?.images || {}}
           rules={{validate: validateImages}}
-          render={({field: {onChange, onBlur, value}}) => (
+          render={({field: {onChange, value}}) => (
             <SelectImagesField
               label="Fotos"
-              error={errors.images?.message}
               value={value}
               control={control}
               onChange={onChange}
+              error={errors.images?.message}
             />
           )}
         />
@@ -180,8 +180,8 @@ export function ItemEdit({
               optional
               multiline
               value={value}
-              maxLength={512}
               onBlur={onBlur}
+              maxLength={512}
               label="Descrição"
               onChangeText={onChange}
             />
