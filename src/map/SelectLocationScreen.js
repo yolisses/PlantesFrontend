@@ -28,7 +28,6 @@ export function SelectLocationScreen() {
   console.error(auth.user.location.coordinates);
 
   function onPress() {
-    console.error(location);
     if (!auth.user.location) {
       auth.user.location = {};
     }
