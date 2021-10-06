@@ -54,7 +54,7 @@ function getTabOptions({route}) {
     tabBarShowLabel: false,
     tabBarHideOnKeyboard: true,
     tabBarActiveTintColor: 'green',
-    tabBarInactiveTintColor: '#ddd',
+    tabBarInactiveTintColor: '#ccc',
   };
 }
 
