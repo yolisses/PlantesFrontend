@@ -10,6 +10,6 @@ export function LoadingScrollFooter() {
 
 const styles = StyleSheet.create({
   indicator: {
-    margin: 30,
+    margin: 10,
   },
 });
