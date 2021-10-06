@@ -46,6 +46,7 @@ export function FiltersModal({reset, control}) {
             value={value}
             options={tags}
             onBlur={onBlur}
+            showIcon={false}
             label="De preferência"
             onChange={onChange}
           />
