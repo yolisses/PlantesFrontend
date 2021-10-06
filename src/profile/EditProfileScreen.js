@@ -11,20 +11,26 @@ import {api} from 'api';
 import {useNavigation} from '@react-navigation/core';
 import {useUserById} from 'common/UsersByIdContext';
 import {Keyboard} from 'react-native';
+import {Controller, useForm} from 'react-hook-form';
 
 export function EditProfileScreen() {
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm();
   const [saving, setSaving] = useState(false);
   const {goBack} = useNavigation();
   const {setCurrentUser} = useUserById();
 
   const ref = createRef();
 
-  async function updateProfile() {
+  async function onSubmit(value) {
     Keyboard.dismiss();
     ref?.current?.focus();
     setSaving(true);
     api
-      .put('/update-profile', {})
+      .put('/update-profile', value)
       .then(res => {
         auth.user = res.data;
         setCurrentUser(res.data);
@@ -47,6 +53,8 @@ export function EditProfileScreen() {
     }
   }
 
+  console.error(errors);
+
   return (
     <>
       <CustomHeader
@@ -54,9 +62,9 @@ export function EditProfileScreen() {
         title="Editar perfil"
         right={
           <NextButton
-            ref={ref}
             hideIcon
-            onPress={updateProfile}
+            ref={ref}
+            onPress={handleSubmit(onSubmit)}
             text={saving ? 'Salvando...' : 'Salvar'}
           />
         }
@@ -67,23 +75,50 @@ export function EditProfileScreen() {
           style={styles.image}
           source={{uri: auth?.user?.image}}
         />
-        {/* <TouchableOpacity activeOpacity={0.7}>
-            <Text style={styles.link}>Alterar foto do perfil</Text>
-          </TouchableOpacity> */}
-        <TextInput
-          id="name"
-          label="Nome"
-          maxLength={32}
-          // blurValidate={validateName}
-          textValidate={validateName}
-          customGetInitialValue={() => auth?.user?.name}
+
+        <Controller
+          name="name"
+          control={control}
+          defaultValue={auth?.user?.name}
+          rules={{
+            required: {
+              value: true,
+              message: 'Por favor, nome com pelo menos 3 letras',
+            },
+            minLength: {
+              value: 3,
+              message: 'Por favor, nome com pelo menos 3 letras',
+            },
+          }}
+          render={({field: {onChange, onBlur, value}}) => (
+            <TextInput
+              label="Nome"
+              value={value}
+              maxLength={40}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              textValidate={validateName}
+              error={errors.name?.message}
+            />
+          )}
         />
-        <TextInput
-          optional
-          multiline
-          maxLength={400}
-          label="Descrição"
-          customGetInitialValue={() => auth?.user?.description}
+        <Controller
+          control={control}
+          name="description"
+          defaultValue={auth?.user?.description}
+          render={({field: {onChange, onBlur, value}}) => (
+            <TextInput
+              optional
+              multiline
+              value={value}
+              maxLength={400}
+              onBlur={onBlur}
+              label="Descrição"
+              onChangeText={onChange}
+              textValidate={validateName}
+              error={errors.price?.message}
+            />
+          )}
         />
       </ScrollView>
     </>
@@ -101,11 +136,5 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
     borderRadius: 100,
     alignSelf: 'center',
-  },
-  link: {
-    fontSize: 18,
-    alignSelf: 'center',
-    margin: 10,
-    color: 'dodgerblue',
   },
 });

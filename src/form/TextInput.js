@@ -46,13 +46,12 @@ export function TextInput({
           )}
           <react_native.TextInput
             {...rest}
-            value={isValueShowable ? value : ''}
             ref={inputRef}
             onBlur={onBlur}
             onFocus={onFocus}
             multiline={multiline}
+            value={isValueShowable ? value : ''}
             style={[styles.input, multiline && styles.multiline, style]}
-            // onChangeText={text => setValue(text)}
           />
         </View>
       </Fieldset>
