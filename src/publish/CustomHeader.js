@@ -1,10 +1,18 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {BackButton} from './BackButton';
 
-export function CustomHeader({title, left, center, right, style}) {
+export function CustomHeader({
+  title,
+  left,
+  center,
+  right,
+  style,
+  showBackButton = true,
+}) {
   return (
     <View style={[styles.container, style]}>
-      {left}
+      {left || (showBackButton && <BackButton />)}
       {center}
       <Text style={styles.title}>{title}</Text>
       {right}

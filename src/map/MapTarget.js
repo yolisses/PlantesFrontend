@@ -1,19 +1,19 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
-export function MapUserLocationButton({style}) {
+export function MapTarget({style}) {
   return (
     <TouchableOpacity style={[styles.button, style]}>
       <View style={styles.center}>
-        <View style={styles.square} />
+        <View style={styles.squareV} />
         <View style={[styles.center, styles.row]}>
-          <View style={styles.square} />
+          <View style={styles.squareH} />
           <View style={styles.outer}>
-            <View style={styles.inner} />
+            {/* <View style={styles.inner} /> */}
           </View>
-          <View style={styles.square} />
+          <View style={styles.squareH} />
         </View>
-        <View style={styles.square} />
+        <View style={styles.squareV} />
       </View>
     </TouchableOpacity>
   );
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 3,
     borderColor: color,
-    padding: 5,
+    padding: 10,
     aspectRatio: 1,
     borderRadius: 100,
   },
@@ -42,8 +42,14 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
   },
-  square: {
+  squareV: {
     padding: 1.5,
+    paddingTop: 6,
+    backgroundColor: color,
+  },
+  squareH: {
+    padding: 1.5,
+    paddingLeft: 6,
     backgroundColor: color,
   },
 });
