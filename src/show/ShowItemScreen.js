@@ -14,9 +14,7 @@ import {ImagesSwiper} from 'show/ImagesSwiper';
 import {FloatingButton} from 'show/FloatingButton';
 import {WhatsappButton} from 'messages/WhatsappButton';
 import {AvailabilityInfo} from 'show/AvailabilityInfo';
-import {SendMessageButton} from 'messages/SendMessageButton';
 import {InstagramButton} from 'messages/InstagramButton';
-import {EmailButton} from 'messages/EmailButton';
 
 export function ShowItemScreen({route}) {
   const {preImage, item} = route.params;
@@ -41,7 +39,6 @@ export function ShowItemScreen({route}) {
               <>
                 <WhatsappButton />
                 <InstagramButton />
-                <EmailButton />
               </>
             )}
           </Section>
