@@ -1,16 +1,11 @@
-import {openInWhatsapp} from 'messages/openInWhatsapp';
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
-export function CheckButton({phoneNumber}) {
-  function onPress() {
-    openInWhatsapp(phoneNumber);
-  }
-
+export function CheckButton({onPress}) {
   return (
     <TouchableOpacity
       onPress={onPress}
-      activeOpacity={0.6}
+      activeOpacity={0.5}
       style={styles.button}>
       <Text style={styles.text}>Conferir</Text>
     </TouchableOpacity>

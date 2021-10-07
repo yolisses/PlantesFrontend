@@ -2,17 +2,11 @@ import React from 'react';
 import {StyleSheet, Linking} from 'react-native';
 import {SendMessageButton} from './SendMessageButton';
 import {faInstagram} from '@fortawesome/free-brands-svg-icons';
+import {openInInstagram} from './openInInstagram';
 
-export function InstagramButton() {
+export function InstagramButton({instagramUser}) {
   async function onPress() {
-    const supported = await Linking.canOpenURL(
-      'instagram://user?username=zacefron',
-    );
-    if (supported) {
-      return Linking.openURL('instagram://user?username=zacefron');
-    } else {
-      return Linking.openURL('https://api.instagram.com/zacefron');
-    }
+    openInInstagram(instagramUser);
   }
 
   return (

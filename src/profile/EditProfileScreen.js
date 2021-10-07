@@ -1,6 +1,6 @@
 import React, {createRef, useState} from 'react';
 import FastImage from 'react-native-fast-image';
-import {ScrollView, StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet, Text} from 'react-native';
 
 import {auth} from 'auth/auth';
 import {TextInput} from 'form/TextInput';
@@ -12,10 +12,12 @@ import {useNavigation} from '@react-navigation/core';
 import {useUserById} from 'common/UsersByIdContext';
 import {Keyboard} from 'react-native';
 import {Controller, useForm} from 'react-hook-form';
-import {faWhatsapp} from '@fortawesome/free-brands-svg-icons';
+import {faInstagram, faWhatsapp} from '@fortawesome/free-brands-svg-icons';
 import {IconPlaceholder} from './IconPlaceholder';
 import {IntInput} from 'form/IntInput';
 import {CheckButton} from './CheckButton';
+import {openInInstagram} from 'messages/openInInstagram';
+import {openInWhatsapp} from 'messages/openInWhatsapp';
 
 export function EditProfileScreen() {
   const {
@@ -117,8 +119,32 @@ export function EditProfileScreen() {
               onChangeText={onChange}
               textValidate={validateName}
               error={errors.name?.message}
-              rightChild={<CheckButton phoneNumber={value} />}
+              rightChild={
+                !!value && <CheckButton onPress={() => openInWhatsapp(value)} />
+              }
               leftChild={<IconPlaceholder icon={faWhatsapp} />}
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="instagramUser"
+          defaultValue={auth?.user?.instagramUser}
+          render={({field: {onChange, onBlur, value}}) => (
+            <TextInput
+              value={value}
+              maxLength={30}
+              onBlur={onBlur}
+              label="Instagram"
+              onChangeText={onChange}
+              textValidate={validateName}
+              error={errors.name?.message}
+              rightChild={
+                !!value && (
+                  <CheckButton onPress={() => openInInstagram(value)} />
+                )
+              }
+              leftChild={<IconPlaceholder icon={faInstagram} />}
             />
           )}
         />
