@@ -1,17 +1,8 @@
 import React, {Fragment} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
-import {useAlert} from 'alert/AlertContext';
-import {StartConversationAlert} from './StartConversationAlert';
 import {LoadingAvailabilityInfo} from './LoadingAvailabilityInfo';
 
 export function AvailabilityInfo({item, onModalConfirmPress}) {
-  const {showAlert} = useAlert();
-  const onPress = () => {
-    showAlert(
-      <StartConversationAlert item={item} onSendPress={onModalConfirmPress} />,
-    );
-  };
-
   if (!item) {
     return <LoadingAvailabilityInfo />;
   }
@@ -42,7 +33,7 @@ export function AvailabilityInfo({item, onModalConfirmPress}) {
   };
 
   return (
-    <Pressable style={styles.container} onPress={onPress}>
+    <Pressable style={styles.container}>
       <View style={styles.line}>
         {Object.entries(options)
           .filter(oprion => oprion[1])
