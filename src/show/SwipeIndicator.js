@@ -3,7 +3,7 @@ import {StyleSheet, View} from 'react-native';
 
 export function SwipeIndicator({images, selected}) {
   return images.length > 1 ? (
-    <View style={styles.container}>
+    <View style={styles.container} pointerEvents="none">
       {images.map((item, index) =>
         selected === index ? (
           <View style={styles.active} key={index} />

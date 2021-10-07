@@ -15,6 +15,7 @@ import {FloatingButton} from 'show/FloatingButton';
 import {WhatsappButton} from 'messages/WhatsappButton';
 import {AvailabilityInfo} from 'show/AvailabilityInfo';
 import {InstagramButton} from 'messages/InstagramButton';
+import {LikeButton} from './LikeButton';
 
 export function ShowItemScreen({route}) {
   const {preImage, item} = route.params;
@@ -25,15 +26,16 @@ export function ShowItemScreen({route}) {
         showsVerticalScrollIndicator={false}
         style={{backgroundColor: '#fff'}}>
         <ImagesSwiper images={item?.images} preImage={preImage} />
+        {/* Must be there */}
+        {/* <View>
+          <View style={styles.likeWrapper}>
+            <LikeButton />
+          </View>
+        </View> */}
         <View style={{paddingHorizontal: 5}}>
           <Section>
             <Title text={item?.name} />
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}>
+            <View style={styles.line}>
               <AvailabilityInfo item={item} />
               {!!item.amount && (
                 <Secondary text={item.amount + ' disponível'} />
@@ -68,4 +70,18 @@ export function ShowItemScreen({route}) {
     </View>
   );
 }
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  line: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  likeWrapper: {
+    position: 'absolute',
+    right: 0,
+    paddingTop: 10,
+    paddingLeft: 50,
+    top: -23,
+    flexDirection: 'row-reverse',
+  },
+});
