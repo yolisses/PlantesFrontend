@@ -11,6 +11,10 @@ import {BackButton} from 'publish/BackButton';
 import {CustomHeader} from 'publish/CustomHeader';
 import {useUserById} from 'common/UsersByIdContext';
 import {FooterNavigation} from 'navigation/FooterNavigation';
+import {SendingList} from 'send/SendingList';
+import {useObserver} from 'mobx-react-lite';
+import {observe} from 'mobx';
+import {send} from 'send/sendings';
 
 const numberOfCollums = 3;
 
@@ -42,10 +46,11 @@ export function UserScreen({route}) {
   }
 
   useEffect(() => {
+    observe(send, getPlants());
     getPlants();
   }, []);
 
-  return (
+  return useObserver(() => (
     <>
       <View style={{flex: 1}}>
         <CustomHeader
@@ -59,10 +64,15 @@ export function UserScreen({route}) {
           keyExtractor={keyExtractor}
           numColumns={numberOfCollums}
           showsVerticalScrollIndicator={false}
-          ListHeaderComponent={<UserInfo user={user} />}
+          ListHeaderComponent={
+            <>
+              <UserInfo user={user} />
+              {userId === auth.userId && <SendingList />}
+            </>
+          }
         />
       </View>
       <FooterNavigation />
     </>
-  );
+  ));
 }
