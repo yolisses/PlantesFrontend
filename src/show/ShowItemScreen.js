@@ -28,13 +28,11 @@ export function ShowItemScreen({route}) {
       </ScrollView>
       <View style={styles.bottomWrapper}>
         <AvailabilityInfo onModalConfirmPress={onPress} item={item} />
-        <View style={{flex: 1, justifyContent: 'center'}}>
-          {item.userId !== auth.userId ? (
-            <EditItemButton item={item} style={styles.button} />
-          ) : (
-            <SendMessageButton />
-          )}
-        </View>
+        {item.userId !== auth.userId ? (
+          <EditItemButton item={item} style={styles.button} />
+        ) : (
+          <SendMessageButton />
+        )}
       </View>
     </View>
   );
@@ -49,9 +47,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   bottomWrapper: {
+    paddingHorizontal: 5,
     alignItems: 'center',
     flexDirection: 'row',
-    paddingHorizontal: 5,
     justifyContent: 'space-between',
   },
   padding: {

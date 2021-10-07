@@ -1,11 +1,12 @@
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, Linking} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, Linking, View} from 'react-native';
 import {faWhatsapp} from '@fortawesome/free-brands-svg-icons';
+import {width} from 'utils/width';
 
 export function SendMessageButton() {
   async function onPress() {
-    const phoneNumber = 5599259907;
+    const phoneNumber = 558399259907;
     const supported = await Linking.canOpenURL(
       `whatsapp://send?phone=${phoneNumber}`,
     );
@@ -25,29 +26,32 @@ export function SendMessageButton() {
       style={styles.button}>
       <FontAwesomeIcon
         icon={faWhatsapp}
-        color="white"
+        color="#fff"
         size={25}
         style={styles.icon}
       />
-      <Text style={styles.text}>Enviar mensagem</Text>
+      <Text style={styles.text}>Mensagem</Text>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  text: {
-    flexWrap: 'wrap',
-    color: 'white',
-    fontSize: 18,
-  },
   button: {
+    // width: width / 2,
+    flex: 1,
+    backgroundColor: 'green',
     alignItems: 'center',
     flexDirection: 'row',
-    backgroundColor: 'green',
     padding: 10,
     borderRadius: 10,
+    justifyContent: 'center',
+  },
+  text: {
+    marginHorizontal: 10,
+    color: '#fff',
+    fontSize: 18,
   },
   icon: {
-    marginRight: 5,
+    marginLeft: 10,
   },
 });

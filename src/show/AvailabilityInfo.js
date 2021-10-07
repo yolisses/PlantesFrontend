@@ -3,6 +3,7 @@ import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {useAlert} from 'alert/AlertContext';
 import {StartConversationAlert} from './StartConversationAlert';
 import {LoadingAvailabilityInfo} from './LoadingAvailabilityInfo';
+import {width} from 'utils/width';
 
 export function AvailabilityInfo({item, onModalConfirmPress}) {
   const {showAlert} = useAlert();
@@ -64,8 +65,8 @@ export function AvailabilityInfo({item, onModalConfirmPress}) {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     padding: 10,
-    flex: 0.9,
     color: 'green',
   },
   line: {
