@@ -12,6 +12,10 @@ import {useNavigation} from '@react-navigation/core';
 import {useUserById} from 'common/UsersByIdContext';
 import {Keyboard} from 'react-native';
 import {Controller, useForm} from 'react-hook-form';
+import {faWhatsapp} from '@fortawesome/free-brands-svg-icons';
+import {IconPlaceholder} from './IconPlaceholder';
+import {IntInput} from 'form/IntInput';
+import {CheckButton} from './CheckButton';
 
 export function EditProfileScreen() {
   const {
@@ -52,8 +56,6 @@ export function EditProfileScreen() {
       data.errors[id] = false;
     }
   }
-
-  console.error(errors);
 
   return (
     <>
@@ -99,6 +101,24 @@ export function EditProfileScreen() {
               onChangeText={onChange}
               textValidate={validateName}
               error={errors.name?.message}
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="whatsappNumber"
+          defaultValue={auth?.user?.whatsappNumber}
+          render={({field: {onChange, onBlur, value}}) => (
+            <IntInput
+              value={value}
+              maxLength={14}
+              onBlur={onBlur}
+              label="Whatsapp"
+              onChangeText={onChange}
+              textValidate={validateName}
+              error={errors.name?.message}
+              rightChild={<CheckButton phoneNumber={value} />}
+              leftChild={<IconPlaceholder icon={faWhatsapp} />}
             />
           )}
         />

@@ -1,21 +1,12 @@
 import React from 'react';
-import {StyleSheet, Linking} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {SendMessageButton} from './SendMessageButton';
 import {faWhatsapp} from '@fortawesome/free-brands-svg-icons';
+import {openInWhatsapp} from './openInWhatsapp';
 
-export function WhatsappButton() {
-  async function onPress() {
-    const phoneNumber = 558399259907;
-    const supported = await Linking.canOpenURL(
-      `whatsapp://send?phone=${phoneNumber}`,
-    );
-    if (supported) {
-      return Linking.openURL(`whatsapp://send?phone=${phoneNumber}`);
-    } else {
-      return Linking.openURL(
-        `https://api.whatsapp.com/send?phone=${phoneNumber}`,
-      );
-    }
+export function WhatsappButton({phoneNumber}) {
+  function onPress() {
+    openInWhatsapp(phoneNumber);
   }
 
   return (

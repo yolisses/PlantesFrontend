@@ -11,6 +11,7 @@ export function TextInput({
   optional,
   multiline,
   leftChild,
+  rightChild,
   ...rest
 }) {
   const [focused, setFocused] = useState(false);
@@ -53,6 +54,7 @@ export function TextInput({
             value={isValueShowable ? value : ''}
             style={[styles.input, multiline && styles.multiline, style]}
           />
+          {rightChild}
         </View>
       </Fieldset>
     </View>
@@ -61,7 +63,7 @@ export function TextInput({
 
 const styles = StyleSheet.create({
   input: {
-    width: '100%',
+    flex: 1,
     fontSize: 18,
   },
   fieldset: {
