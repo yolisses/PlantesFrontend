@@ -22,7 +22,7 @@ export function PublishScreen() {
   function onSubmit(item) {
     reset();
     clearErrors();
-    navigate('Home');
+    navigate('Profile');
     pushSending(item);
   }
 
