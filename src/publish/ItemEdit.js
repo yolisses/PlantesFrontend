@@ -103,7 +103,7 @@ export function ItemEdit({
             <TextInput
               label="Nome"
               value={value}
-              maxLength={32}
+              maxLength={128}
               onBlur={onBlur}
               onChangeText={onChange}
               error={errors.name?.message}
@@ -181,7 +181,7 @@ export function ItemEdit({
               multiline
               value={value}
               onBlur={onBlur}
-              maxLength={512}
+              maxLength={1024}
               label="Descrição"
               onChangeText={onChange}
             />
