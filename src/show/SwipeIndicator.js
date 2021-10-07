@@ -15,6 +15,9 @@ export function SwipeIndicator({images, selected}) {
   ) : null;
 }
 
+const size = 8;
+const activeSize = 9;
+
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
@@ -28,12 +31,14 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     backgroundColor: '#eee',
     borderRadius: 100,
-    padding: 3,
+    width: size,
+    height: size,
     margin: 2.5,
   },
   active: {
     borderRadius: 100,
-    padding: 4.2,
+    width: activeSize,
+    height: activeSize,
     margin: 2.5,
     aspectRatio: 1,
     backgroundColor: 'gray',
