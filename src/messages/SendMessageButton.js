@@ -4,7 +4,9 @@ import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 export function SendMessageButton({
   icon,
+  text,
   onPress,
+  iconSize,
   iconColor,
   textStyle,
   buttonStyle,
@@ -16,12 +18,12 @@ export function SendMessageButton({
       activeOpacity={activeOpacity}
       style={[styles.button, buttonStyle]}>
       <FontAwesomeIcon
-        size={25}
+        size={iconSize || 25}
         icon={icon}
         color={iconColor}
         style={styles.icon}
       />
-      <Text style={[styles.text, textStyle]}>Mensagem</Text>
+      <Text style={[styles.text, textStyle]}>{text || 'Mensagem'}</Text>
     </TouchableOpacity>
   );
 }
@@ -35,7 +37,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     elevation: 2,
     justifyContent: 'center',
-    marginBottom: 10,
+    marginBottom: 8,
   },
   text: {
     marginHorizontal: 10,
