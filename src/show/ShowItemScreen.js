@@ -15,7 +15,6 @@ import {FloatingButton} from 'show/FloatingButton';
 import {WhatsappButton} from 'messages/WhatsappButton';
 import {AvailabilityInfo} from 'show/AvailabilityInfo';
 import {InstagramButton} from 'messages/InstagramButton';
-import {LikeButton} from './LikeButton';
 
 export function ShowItemScreen({route}) {
   const {preImage, item} = route.params;
