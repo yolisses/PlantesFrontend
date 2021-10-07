@@ -1,12 +1,12 @@
 import React from 'react';
-import {StyleSheet, Linking} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {SendMessageButton} from './SendMessageButton';
 import {faInstagram} from '@fortawesome/free-brands-svg-icons';
 import {openInInstagram} from './openInInstagram';
 
-export function InstagramButton({instagramUser}) {
+export function InstagramButton({user}) {
   async function onPress() {
-    openInInstagram(instagramUser);
+    openInInstagram(user);
   }
 
   return (

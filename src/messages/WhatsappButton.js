@@ -4,9 +4,9 @@ import {SendMessageButton} from './SendMessageButton';
 import {faWhatsapp} from '@fortawesome/free-brands-svg-icons';
 import {openInWhatsapp} from './openInWhatsapp';
 
-export function WhatsappButton({phoneNumber}) {
+export function WhatsappButton({number}) {
   function onPress() {
-    openInWhatsapp(phoneNumber);
+    openInWhatsapp(number);
   }
 
   return (

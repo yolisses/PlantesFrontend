@@ -15,9 +15,14 @@ import {FloatingButton} from 'show/FloatingButton';
 import {WhatsappButton} from 'messages/WhatsappButton';
 import {AvailabilityInfo} from 'show/AvailabilityInfo';
 import {InstagramButton} from 'messages/InstagramButton';
+import {useUserById} from 'common/UsersByIdContext';
 
 export function ShowItemScreen({route}) {
   const {preImage, item} = route.params;
+
+  const {getUserById} = useUserById();
+  const user = getUserById(item?.userId);
+
   return (
     <View style={styles.screen}>
       <FloatingButton />
@@ -47,8 +52,12 @@ export function ShowItemScreen({route}) {
               <EditItemButton item={item} style={styles.button} />
             ) : (
               <>
-                <WhatsappButton />
-                <InstagramButton />
+                {!!user.whatsappNumber && (
+                  <WhatsappButton number={user.whatsappNumber} />
+                )}
+                {!!user.instagramUser && (
+                  <InstagramButton user={user.instagramUser} />
+                )}
               </>
             )}
           </Section>
