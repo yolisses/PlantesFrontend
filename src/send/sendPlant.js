@@ -1,6 +1,7 @@
 import {sendPlantInfo} from './sendPlantInfo';
 import {sendImage} from './sendImage';
 import {confirmSending} from './confirmSending';
+import {waitSomeTime} from './waitSomeTime';
 
 export async function sendPlant(sending, callback) {
   while (!sending.sent) {
@@ -16,9 +17,10 @@ export async function sendPlant(sending, callback) {
         sending.sent = true;
       }
     } catch (err) {
-      console.error(err.response);
-      if (err.response.status === 401 || err.response.status === 400) {
+      if (err?.response?.status === 401 || err?.response?.status === 400) {
         return;
+      } else {
+        await waitSomeTime();
       }
     }
   }
