@@ -8,5 +8,6 @@ export function Secondary({text}) {
 const styles = StyleSheet.create({
   text: {
     fontSize: 18,
+    color: 'gray',
   },
 });

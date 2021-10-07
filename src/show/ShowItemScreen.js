@@ -28,8 +28,17 @@ export function ShowItemScreen({route}) {
         <View style={{paddingHorizontal: 5}}>
           <Section>
             <Title text={item?.name} />
-            <AvailabilityInfo item={item} />
-            {!!item.amount && <Secondary text={item.amount + ' disponível'} />}
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}>
+              <AvailabilityInfo item={item} />
+              {!!item.amount && (
+                <Secondary text={item.amount + ' disponível'} />
+              )}
+            </View>
           </Section>
           <Section>
             <UserLink id={item?.userId} />
