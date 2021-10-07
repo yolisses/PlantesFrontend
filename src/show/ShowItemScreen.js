@@ -52,10 +52,10 @@ export function ShowItemScreen({route}) {
               <EditItemButton item={item} style={styles.button} />
             ) : (
               <>
-                {!!user.whatsappNumber && (
+                {!!user?.whatsappNumber && (
                   <WhatsappButton number={user.whatsappNumber} />
                 )}
-                {!!user.instagramUser && (
+                {!!user?.instagramUser && (
                   <InstagramButton user={user.instagramUser} />
                 )}
               </>
