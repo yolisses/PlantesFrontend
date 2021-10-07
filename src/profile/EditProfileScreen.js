@@ -112,7 +112,7 @@ export function EditProfileScreen() {
           defaultValue={auth?.user?.whatsappNumber}
           render={({field: {onChange, onBlur, value}}) => (
             <IntInput
-              value={value}
+              value={value ? '' + value : null}
               maxLength={14}
               onBlur={onBlur}
               label="Whatsapp"
