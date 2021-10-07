@@ -3,7 +3,6 @@ import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {useAlert} from 'alert/AlertContext';
 import {StartConversationAlert} from './StartConversationAlert';
 import {LoadingAvailabilityInfo} from './LoadingAvailabilityInfo';
-import {width} from 'utils/width';
 
 export function AvailabilityInfo({item, onModalConfirmPress}) {
   const {showAlert} = useAlert();
@@ -26,7 +25,7 @@ export function AvailabilityInfo({item, onModalConfirmPress}) {
   const translation = entry => {
     return {
       donate: 'Doação',
-      swap: 'Trocar',
+      swap: 'Troca',
       price: 'R$' + Number(entry[1]).toFixed(2),
     }[entry[0]];
   };
@@ -54,19 +53,12 @@ export function AvailabilityInfo({item, onModalConfirmPress}) {
             </Fragment>
           ))}
       </View>
-      <View style={styles.line}>
-        {!!item.amount && (
-          <Text style={styles.secondary}> {item.amount} disponível</Text>
-        )}
-      </View>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 10,
     color: 'green',
   },
   line: {
@@ -77,7 +69,6 @@ const styles = StyleSheet.create({
   emphasis: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#000',
   },
   secondary: {
     fontSize: 18,

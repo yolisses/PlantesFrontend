@@ -30,7 +30,7 @@ export function UserLink({id}) {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 8,
+    paddingBottom: 8,
     alignItems: 'center',
     flexDirection: 'row',
   },

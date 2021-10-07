@@ -22,7 +22,7 @@ export function SendMessageButton() {
   return (
     <TouchableOpacity
       onPress={onPress}
-      activeOpacity={0.7}
+      activeOpacity={0.85}
       style={styles.button}>
       <FontAwesomeIcon
         icon={faWhatsapp}
@@ -37,7 +37,6 @@ export function SendMessageButton() {
 
 const styles = StyleSheet.create({
   button: {
-    // width: width / 2,
     flex: 1,
     backgroundColor: 'green',
     alignItems: 'center',

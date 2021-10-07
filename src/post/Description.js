@@ -41,10 +41,9 @@ export function Description({
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 5,
     paddingHorizontal: 10,
   },
   text: {
-    fontSize: 16,
+    fontSize: 18,
   },
 });

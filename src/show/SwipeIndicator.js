@@ -15,8 +15,8 @@ export function SwipeIndicator({images, selected}) {
   ) : null;
 }
 
-const size = 8;
-const activeSize = 9;
+const size = 7;
+const activeSize = 8;
 
 const styles = StyleSheet.create({
   container: {

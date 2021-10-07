@@ -7,16 +7,16 @@ import {useObserver} from 'mobx-react-lite';
 import {api} from 'api';
 import {Card} from 'home/Card';
 import {loadPlants} from 'home/loadPlants';
-import {SearchCustomHeader} from 'search/SearchCustomHeader';
-import {searchOptions} from 'search/searchOptions';
-import {formatSearch} from 'search/formatSearch';
 import {SendingList} from 'send/SendingList';
+import {formatSearch} from 'search/formatSearch';
+import {searchOptions} from 'search/searchOptions';
+import {FooterNavigation} from 'navigation/FooterNavigation';
+import {SearchCustomHeader} from 'search/SearchCustomHeader';
 import {LoadingScrollFooter} from 'common/LoadingScrollFooter';
+
 import {NotFound} from './NotFound';
 import {NetworkError} from './NetworkError';
 import {LocationOption} from './LocationOption';
-import {FooterNavigation} from 'navigation/FooterNavigation';
-import {SendMessageButton} from 'messages/SendMessageButton';
 
 export function HomeScreen() {
   async function getPlants() {
@@ -76,27 +76,22 @@ export function HomeScreen() {
             <NotFound />
           </>
         ) : (
-          <>
-            <SendMessageButton />
-            <FlatList
-              numColumns={2}
-              data={loadPlants.plants}
-              onEndReached={onEndReached}
-              onEndReachedThreshold={0.5}
-              ListHeaderComponent={
-                <>
-                  <LocationOption />
-                  <SendingList />
-                </>
-              }
-              showsVerticalScrollIndicator={false}
-              contentContainerStyle={{paddingBottom: 60}}
-              ListFooterComponent={
-                loadPlants.loading && <LoadingScrollFooter />
-              }
-              renderItem={({item}) => <Card item={item} />}
-            />
-          </>
+          <FlatList
+            numColumns={2}
+            data={loadPlants.plants}
+            onEndReached={onEndReached}
+            onEndReachedThreshold={0.5}
+            ListHeaderComponent={
+              <>
+                <LocationOption />
+                <SendingList />
+              </>
+            }
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{paddingBottom: 60}}
+            ListFooterComponent={loadPlants.loading && <LoadingScrollFooter />}
+            renderItem={({item}) => <Card item={item} />}
+          />
         )}
       </View>
       <FooterNavigation selected="Home" />
