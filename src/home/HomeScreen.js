@@ -16,6 +16,7 @@ import {NotFound} from './NotFound';
 import {NetworkError} from './NetworkError';
 import {LocationOption} from './LocationOption';
 import {FooterNavigation} from 'navigation/FooterNavigation';
+import {SendMessageButton} from 'messages/SendMessageButton';
 
 export function HomeScreen() {
   async function getPlants() {
@@ -75,22 +76,27 @@ export function HomeScreen() {
             <NotFound />
           </>
         ) : (
-          <FlatList
-            numColumns={2}
-            data={loadPlants.plants}
-            onEndReached={onEndReached}
-            onEndReachedThreshold={0.5}
-            ListHeaderComponent={
-              <>
-                <LocationOption />
-                <SendingList />
-              </>
-            }
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={{paddingBottom: 60}}
-            ListFooterComponent={loadPlants.loading && <LoadingScrollFooter />}
-            renderItem={({item}) => <Card item={item} />}
-          />
+          <>
+            <SendMessageButton />
+            <FlatList
+              numColumns={2}
+              data={loadPlants.plants}
+              onEndReached={onEndReached}
+              onEndReachedThreshold={0.5}
+              ListHeaderComponent={
+                <>
+                  <LocationOption />
+                  <SendingList />
+                </>
+              }
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={{paddingBottom: 60}}
+              ListFooterComponent={
+                loadPlants.loading && <LoadingScrollFooter />
+              }
+              renderItem={({item}) => <Card item={item} />}
+            />
+          </>
         )}
       </View>
       <FooterNavigation selected="Home" />

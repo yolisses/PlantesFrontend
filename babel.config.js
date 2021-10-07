@@ -45,6 +45,7 @@ module.exports = {
           publish: './src/publish',
           storage: './src/storage',
           location: './src/location',
+          messages: './src/messages',
           permission: './src/permission',
           navigation: './src/navigation',
         },

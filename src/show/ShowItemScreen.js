@@ -4,9 +4,9 @@ import {ItemInfo} from 'show/ItemInfo';
 import {ImagesSwiper} from 'show/ImagesSwiper';
 import {FloatingButton} from 'show/FloatingButton';
 import {AvailabilityInfo} from 'show/AvailabilityInfo';
-import {StartConversetionButton} from 'show/StartConversationButton';
 import {EditItemButton} from './EditItemButton';
 import {auth} from 'auth/auth';
+import {SendMessageButton} from 'messages/SendMessageButton';
 
 export function ShowItemScreen({route}) {
   const {preImage, item} = route.params;
@@ -29,14 +29,10 @@ export function ShowItemScreen({route}) {
       <View style={styles.bottomWrapper}>
         <AvailabilityInfo onModalConfirmPress={onPress} item={item} />
         <View style={{flex: 1, justifyContent: 'center'}}>
-          {item.userId === auth.userId ? (
+          {item.userId !== auth.userId ? (
             <EditItemButton item={item} style={styles.button} />
           ) : (
-            <StartConversetionButton
-              onPress={onPress}
-              loading={!item}
-              style={styles.button}
-            />
+            <SendMessageButton />
           )}
         </View>
       </View>

@@ -31,6 +31,7 @@ module.exports = {
           ['profile', './src/profile'],
           ['publish', './src/publish'],
           ['location', './src/location'],
+          ['messages', './src/messages'],
           ['navigation', './src/navigation'],
         ],
         extensions: ['.ts', '.js', '.jsx', '.json'],
