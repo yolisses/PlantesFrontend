@@ -1,54 +1,23 @@
-import React, {Fragment, useRef} from 'react';
-import {Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
-import {ItemInfo} from 'show/ItemInfo';
-import {ImagesSwiper} from 'show/ImagesSwiper';
-import {FloatingButton} from 'show/FloatingButton';
-import {AvailabilityInfo} from 'show/AvailabilityInfo';
-import {EditItemButton} from './EditItemButton';
-import {auth} from 'auth/auth';
-import {SendMessageButton} from 'messages/SendMessageButton';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faChevronDown} from '@fortawesome/free-solid-svg-icons';
-import {width} from 'utils/width';
-import {TagsList} from './TagsList';
-import {UserLink} from './UserLink';
-import {StartConversationAlert} from './StartConversationAlert';
-import {LoadingAvailabilityInfo} from './LoadingAvailabilityInfo';
-import {useAlert} from 'alert/AlertContext';
-import {SectionMarker} from './SectionMarker';
+import React from 'react';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
+
 import {Title} from './Title';
 import {Section} from './Section';
+import {UserLink} from './UserLink';
+import {TagsList} from './TagsList';
 import {Secondary} from './Secondary';
+import {EditItemButton} from './EditItemButton';
+
+import {auth} from 'auth/auth';
 import {Description} from 'post/Description';
+import {ImagesSwiper} from 'show/ImagesSwiper';
+import {FloatingButton} from 'show/FloatingButton';
+import {WhatsappButton} from 'messages/WhatsappButton';
+import {AvailabilityInfo} from 'show/AvailabilityInfo';
+import {SendMessageButton} from 'messages/SendMessageButton';
 
 export function ShowItemScreen({route}) {
   const {preImage, item} = route.params;
-
-  const options = {
-    donate: item.donate,
-    swap: item.swap,
-    price: item.price,
-  };
-
-  const translation = entry => {
-    return {
-      donate: 'Doação',
-      swap: 'Trocar',
-      price: 'R$' + Number(entry[1]).toFixed(2),
-    }[entry[0]];
-  };
-
-  const getSeparator = (index, array) => {
-    switch (index) {
-      case 0:
-        return null;
-      case array.length - 1:
-        return <Text style={styles.secondary}> ou </Text>;
-      default:
-        return <Text style={styles.secondary}>, </Text>;
-    }
-  };
-
   return (
     <View style={styles.screen}>
       <FloatingButton />
@@ -67,7 +36,10 @@ export function ShowItemScreen({route}) {
             {item.userId !== auth.userId ? (
               <EditItemButton item={item} style={styles.button} />
             ) : (
-              <SendMessageButton />
+              <>
+                {/* <WhatsappButton /> */}
+                <SendMessageButton />
+              </>
             )}
           </Section>
           {!!(item?.tags && item.tags.length) && (
