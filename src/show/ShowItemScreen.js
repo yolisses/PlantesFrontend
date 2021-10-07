@@ -15,6 +15,7 @@ import {FloatingButton} from 'show/FloatingButton';
 import {WhatsappButton} from 'messages/WhatsappButton';
 import {AvailabilityInfo} from 'show/AvailabilityInfo';
 import {SendMessageButton} from 'messages/SendMessageButton';
+import {InstagramButton} from 'messages/InstagramButton';
 
 export function ShowItemScreen({route}) {
   const {preImage, item} = route.params;
@@ -37,8 +38,8 @@ export function ShowItemScreen({route}) {
               <EditItemButton item={item} style={styles.button} />
             ) : (
               <>
-                {/* <WhatsappButton /> */}
-                <SendMessageButton />
+                <WhatsappButton />
+                <InstagramButton />
               </>
             )}
           </Section>
