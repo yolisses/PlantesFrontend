@@ -2,7 +2,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
-export function SendMessageButton({
+export function TextIconButton({
   icon,
   text,
   onPress,
@@ -23,7 +23,7 @@ export function SendMessageButton({
         color={iconColor}
         style={styles.icon}
       />
-      <Text style={[styles.text, textStyle]}>{text || 'Mensagem'}</Text>
+      <Text style={[styles.text, textStyle]}>{text}</Text>
     </TouchableOpacity>
   );
 }

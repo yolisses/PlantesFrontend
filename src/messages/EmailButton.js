@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Linking} from 'react-native';
-import {SendMessageButton} from './SendMessageButton';
+import {TextIconButton} from '../comment/TextIconButton';
 import {faEnvelope} from '@fortawesome/free-regular-svg-icons';
 
 export function EmailButton() {
@@ -15,7 +15,7 @@ export function EmailButton() {
   }
 
   return (
-    <SendMessageButton
+    <TextIconButton
       text="Email"
       icon={faEnvelope}
       onPress={onPress}

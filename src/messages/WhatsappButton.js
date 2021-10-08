@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import {SendMessageButton} from './SendMessageButton';
+import {TextIconButton} from '../comment/TextIconButton';
 import {faWhatsapp} from '@fortawesome/free-brands-svg-icons';
 import {openInWhatsapp} from './openInWhatsapp';
 
@@ -10,7 +10,8 @@ export function WhatsappButton({number}) {
   }
 
   return (
-    <SendMessageButton
+    <TextIconButton
+      text="Mensagem"
       icon={faWhatsapp}
       onPress={onPress}
       iconColor={'#fff'}

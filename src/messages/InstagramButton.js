@@ -1,8 +1,10 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import {SendMessageButton} from './SendMessageButton';
+
 import {faInstagram} from '@fortawesome/free-brands-svg-icons';
+
 import {openInInstagram} from './openInInstagram';
+import {TextIconButton} from 'comment/TextIconButton';
 
 export function InstagramButton({user}) {
   async function onPress() {
@@ -10,7 +12,8 @@ export function InstagramButton({user}) {
   }
 
   return (
-    <SendMessageButton
+    <TextIconButton
+      text="Mensagem"
       icon={faInstagram}
       onPress={onPress}
       activeOpacity={0.97}
