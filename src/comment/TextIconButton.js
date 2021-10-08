@@ -6,7 +6,6 @@ export function TextIconButton({
   icon,
   text,
   style,
-  onPress,
   iconSize,
   iconColor,
   textStyle,
@@ -42,6 +41,7 @@ export function TextIconButton({
             marginBottom: 0,
           },
         ]}
+        {...rest}
         activeOpacity={activeOpacity || 0.7}>
         {!!icon && (
           <FontAwesomeIcon
