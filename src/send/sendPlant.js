@@ -17,6 +17,7 @@ export async function sendPlant(sending, callback) {
         sending.sent = true;
       }
     } catch (err) {
+      console.error(err.response || err);
       if (err?.response?.status === 401 || err?.response?.status === 400) {
         return;
       } else {

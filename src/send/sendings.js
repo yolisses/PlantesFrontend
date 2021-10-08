@@ -11,13 +11,9 @@ export function pushSending(item) {
   sending.localData = formatToPlant(item);
   send.sendings[id] = sending;
   sendPlant(sending, () => {
-    try {
-      send.sendings[id].sent = true;
-      console.error('acabou', id);
-      send.refresh = id;
-    } catch (err) {
-      console.error(err);
-    }
+    send.sendings[id].sent = true;
+    console.error('acabou', id);
+    send.refresh = id;
   });
 }
 
