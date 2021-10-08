@@ -6,7 +6,7 @@ import React from 'react';
 export function RemoveItemAlert({item}) {
   async function onRemovePress() {
     try {
-      const res = await api.delete('/plant/' + item?._id);
+      const res = await api.delete('plant/' + item?._id);
       console.error(res.data);
     } catch (err) {
       console.error(err);

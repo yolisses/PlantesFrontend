@@ -38,7 +38,7 @@ export function SelectLocationScreen() {
     if (!auth.user.location) {
       auth.user.location = {};
     }
-    const res = await api.put('/update-location-by-coordinates', location);
+    const res = await api.put('update-location-by-coordinates', location);
     auth.user = res.data;
     refreshPlants();
     navigate('Home');

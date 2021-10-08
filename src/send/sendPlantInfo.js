@@ -4,7 +4,7 @@ export async function sendPlantInfo(sending) {
   const plant = sending.localData;
   const getExtension = filename => filename.split('.').pop();
   plant.imagesTypes = plant.images.map(getExtension);
-  const res = await api.post('/plant', plant);
+  const res = await api.post('plant', plant);
   sending.plantId = res.data._id;
   sending.images = res.data.images.map((image, index) => {
     return {

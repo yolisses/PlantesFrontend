@@ -18,7 +18,7 @@ export function ChatReference({
   async function getData() {
     if (reference.type === 'plant') {
       try {
-        const res = await api.get('/plant/' + reference.id);
+        const res = await api.get('plant/' + reference.id);
         const plant = res.data;
         const newData = {
           main: plant?.name,

@@ -4,7 +4,7 @@ import {waitSomeTime} from './waitSomeTime';
 export async function confirmSending(plantId) {
   while (true) {
     try {
-      const res = await api.post('/confirm-plant-sending', {plantId});
+      const res = await api.post('confirm-plant-sending', {plantId});
       return res.data;
     } catch (err) {
       console.error('' + err);

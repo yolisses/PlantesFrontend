@@ -23,7 +23,7 @@ export function CommentsScreen() {
     setLoading(true);
 
     try {
-      const res = await api.get(`/comments?_page=${page}&_limit=${limit}`);
+      const res = await api.get(`comments?_page=${page}&_limit=${limit}`);
       setData([...data, ...res.data]);
       setLoading(false);
       setPage(page + 1);

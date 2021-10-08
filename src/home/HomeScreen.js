@@ -26,7 +26,7 @@ export function HomeScreen() {
       }
       loadPlants.loading = true;
       const res = await api.post(
-        '/plants/' + loadPlants.page,
+        'plants/' + loadPlants.page,
         formatSearch(searchOptions),
       );
       loadPlants.plants = loadPlants.plants.concat(res.data);
