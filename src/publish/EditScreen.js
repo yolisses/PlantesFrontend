@@ -8,6 +8,7 @@ import {formatToEdit} from './formatToEdit';
 import {EditBackAlert} from './EditBackAlert';
 import {useAlert} from 'alert/AlertContext';
 import {BackButton} from './BackButton';
+import {api} from 'api/api';
 
 export function EditScreen({route}) {
   const {navigate} = useNavigation();
@@ -22,10 +23,17 @@ export function EditScreen({route}) {
     formState: {errors, isDirty},
   } = useForm();
 
-  function onSubmit(item) {
-    // pushSending(item);
-    navigate('Home');
-    reset();
+  async function onSubmit(value) {
+    try {
+      const res = await api.patch('plant/' + item._id, {
+        value,
+      });
+      console.error(res.data);
+      navigate('Home');
+      reset();
+    } catch (err) {
+      console.error(err.response || err);
+    }
   }
 
   function onBackPress() {
