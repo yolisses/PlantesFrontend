@@ -61,7 +61,6 @@ export function Routes() {
             <Stack.Screen name="default" component={Main} />
             <Stack.Screen name="Edit" component={EditScreen} />
             <Stack.Screen name="Config" component={ConfigScreen} />
-            <Stack.Screen name="OwnItem" component={OwnItemScreen} />
             <Stack.Screen name="ShowItem" component={ShowItemScreen} />
             <Stack.Screen name="Images" component={SelectImagesScreen} />
             <Stack.Screen name="EditProfile" component={EditProfileScreen} />

@@ -14,6 +14,9 @@ import {WhatsappButton} from 'messages/WhatsappButton';
 import {AvailabilityInfo} from 'show/AvailabilityInfo';
 import {InstagramButton} from 'messages/InstagramButton';
 import {useUserById} from 'common/UsersByIdContext';
+import {auth} from 'auth/auth';
+import {TextIconButton} from 'comment/TextIconButton';
+import {faEdit, faTrashAlt} from '@fortawesome/free-regular-svg-icons';
 
 export function ShowItemScreen({route}) {
   const {preImage, item} = route.params;
@@ -46,6 +49,20 @@ export function ShowItemScreen({route}) {
           </Section>
           <Section>
             <UserLink id={item?.userId} />
+            {item?.userId === auth.userId && (
+              <View style={[styles.line, {paddingLeft: 5, marginVertical: 20}]}>
+                <TextIconButton
+                  text="Remover"
+                  icon={faTrashAlt}
+                  style={styles.button}
+                />
+                <TextIconButton
+                  text="Editar"
+                  icon={faEdit}
+                  style={styles.button}
+                />
+              </View>
+            )}
             {!!user?.whatsappNumber && (
               <WhatsappButton number={user.whatsappNumber} />
             )}
