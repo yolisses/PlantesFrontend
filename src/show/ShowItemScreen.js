@@ -50,7 +50,7 @@ export function ShowItemScreen({route}) {
           <Section>
             <UserLink id={item?.userId} />
             {item?.userId === auth.userId && (
-              <View style={[styles.line, {paddingLeft: 5, marginVertical: 20}]}>
+              <View style={[styles.line, styles.buttonsWrapper]}>
                 <TextIconButton
                   text="Remover"
                   icon={faTrashAlt}
@@ -100,5 +100,13 @@ const styles = StyleSheet.create({
     paddingLeft: 50,
     top: -23,
     flexDirection: 'row-reverse',
+  },
+  button: {
+    elevation: 2,
+    marginRight: 5,
+  },
+  buttonsWrapper: {
+    paddingLeft: 5,
+    marginVertical: 20,
   },
 });
