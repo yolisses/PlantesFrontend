@@ -15,9 +15,8 @@ import {AvailabilityInfo} from 'show/AvailabilityInfo';
 import {InstagramButton} from 'messages/InstagramButton';
 import {useUserById} from 'common/UsersByIdContext';
 import {auth} from 'auth/auth';
-import {TextIconButton} from 'common/TextIconButton';
-import {faEdit, faTrashAlt} from '@fortawesome/free-regular-svg-icons';
 import {EditButton} from './EditButton';
+import {RemoveButton} from './RemoveButton';
 
 export function ShowItemScreen({route}) {
   const {preImage, item} = route.params;
@@ -51,11 +50,7 @@ export function ShowItemScreen({route}) {
             <UserLink id={item?.userId} />
             {item?.userId === auth.userId && (
               <View style={[styles.line, styles.buttonsWrapper]}>
-                <TextIconButton
-                  text="Remover"
-                  icon={faTrashAlt}
-                  style={styles.button}
-                />
+                <RemoveButton style={styles.button} />
                 <EditButton style={styles.button} item={item} />
               </View>
             )}

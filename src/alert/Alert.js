@@ -15,7 +15,11 @@ export function Alert({title, description, children}) {
         <Pressable>
           <View style={styles.paddingContainer}>
             <Text style={styles.title}>{title}</Text>
-            <Text style={styles.description}>{description}</Text>
+            {description ? (
+              <Text style={styles.description}>{description}</Text>
+            ) : (
+              <View style={styles.spacer} />
+            )}
           </View>
           <View style={styles.horizontalWrapper}>
             {children && Array.isArray(children)
@@ -65,5 +69,8 @@ const styles = StyleSheet.create({
   verticalLine: {
     paddingStart: 1,
     backgroundColor: '#ddd',
+  },
+  spacer: {
+    paddingTop: 20,
   },
 });
