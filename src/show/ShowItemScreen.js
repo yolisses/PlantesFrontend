@@ -17,10 +17,10 @@ import {useUserById} from 'common/UsersByIdContext';
 import {auth} from 'auth/auth';
 import {TextIconButton} from 'common/TextIconButton';
 import {faEdit, faTrashAlt} from '@fortawesome/free-regular-svg-icons';
+import {EditButton} from './EditButton';
 
 export function ShowItemScreen({route}) {
   const {preImage, item} = route.params;
-
   const {getUserById} = useUserById();
   const user = getUserById(item?.userId);
 
@@ -56,11 +56,7 @@ export function ShowItemScreen({route}) {
                   icon={faTrashAlt}
                   style={styles.button}
                 />
-                <TextIconButton
-                  text="Editar"
-                  icon={faEdit}
-                  style={styles.button}
-                />
+                <EditButton style={styles.button} item={item} />
               </View>
             )}
             {!!user?.whatsappNumber && (
