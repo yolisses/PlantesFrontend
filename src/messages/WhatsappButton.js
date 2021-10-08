@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import {TextIconButton} from '../comment/TextIconButton';
+import {TextIconButton} from '../common/TextIconButton';
 import {faWhatsapp} from '@fortawesome/free-brands-svg-icons';
 import {openInWhatsapp} from './openInWhatsapp';
 

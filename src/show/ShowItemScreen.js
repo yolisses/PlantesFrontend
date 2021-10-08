@@ -15,7 +15,7 @@ import {AvailabilityInfo} from 'show/AvailabilityInfo';
 import {InstagramButton} from 'messages/InstagramButton';
 import {useUserById} from 'common/UsersByIdContext';
 import {auth} from 'auth/auth';
-import {TextIconButton} from 'comment/TextIconButton';
+import {TextIconButton} from 'common/TextIconButton';
 import {faEdit, faTrashAlt} from '@fortawesome/free-regular-svg-icons';
 
 export function ShowItemScreen({route}) {

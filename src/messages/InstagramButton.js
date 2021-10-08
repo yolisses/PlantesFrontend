@@ -4,7 +4,7 @@ import {StyleSheet} from 'react-native';
 import {faInstagram} from '@fortawesome/free-brands-svg-icons';
 
 import {openInInstagram} from './openInInstagram';
-import {TextIconButton} from 'comment/TextIconButton';
+import {TextIconButton} from 'common/TextIconButton';
 
 export function InstagramButton({user}) {
   async function onPress() {

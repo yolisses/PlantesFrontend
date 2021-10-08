@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Linking} from 'react-native';
-import {TextIconButton} from '../comment/TextIconButton';
+import {TextIconButton} from '../common/TextIconButton';
 import {faEnvelope} from '@fortawesome/free-regular-svg-icons';
 
 export function EmailButton() {

@@ -12,7 +12,7 @@ import {ImagesSwiper} from 'show/ImagesSwiper';
 import {FloatingButton} from 'show/FloatingButton';
 import {AvailabilityInfo} from 'show/AvailabilityInfo';
 import {useUserById} from 'common/UsersByIdContext';
-import {TextIconButton} from 'comment/TextIconButton';
+import {TextIconButton} from 'common/TextIconButton';
 import {faEdit, faTrashAlt} from '@fortawesome/free-regular-svg-icons';
 
 export function OwnItemScreen({route}) {
