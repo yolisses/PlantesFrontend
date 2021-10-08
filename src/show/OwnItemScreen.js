@@ -15,7 +15,7 @@ import {AvailabilityInfo} from 'show/AvailabilityInfo';
 import {InstagramButton} from 'messages/InstagramButton';
 import {useUserById} from 'common/UsersByIdContext';
 
-export function ShowItemScreen({route}) {
+export function OwnItemScreen({route}) {
   const {preImage, item} = route.params;
 
   const {getUserById} = useUserById();

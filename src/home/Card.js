@@ -4,13 +4,18 @@ import {SquareImage} from 'common/SquareImage';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {width} from 'utils/width';
+import {auth} from 'auth/auth';
 
 export function Card({item, fraction, postComponent}) {
   const {navigate} = useNavigation();
 
   const onPress = () => {
     if (item) {
-      navigate('ShowItem', {item: item, preImage: item?.card});
+      if (item.userId === auth.userId) {
+        navigate('OwnItem', {item, preImage: item?.card});
+      } else {
+        navigate('ShowItem', {item, preImage: item?.card});
+      }
     }
   };
 

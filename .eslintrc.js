@@ -12,6 +12,7 @@ module.exports = {
           ['map', './src/map'],
           ['auth', './src/auth'],
           ['chat', './src/chat'],
+          ['edit', './src/edit'],
           ['form', './src/form'],
           ['home', './src/home'],
           ['post', './src/post'],

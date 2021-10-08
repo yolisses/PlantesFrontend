@@ -19,6 +19,7 @@ import {HomeScreen} from 'home/HomeScreen';
 import {LoginScreen} from 'auth/LoginScreen';
 import {EditScreen} from 'publish/EditScreen';
 import {ConfigScreen} from 'config/ConfigScreen';
+import {OwnItemScreen} from 'show/OwnItemScreen';
 import {ShowItemScreen} from 'show/ShowItemScreen';
 import {PublishScreen} from 'publish/PublishScreen';
 import {EditProfileScreen} from 'profile/EditProfileScreen';
@@ -60,6 +61,7 @@ export function Routes() {
             <Stack.Screen name="default" component={Main} />
             <Stack.Screen name="Edit" component={EditScreen} />
             <Stack.Screen name="Config" component={ConfigScreen} />
+            <Stack.Screen name="OwnItem" component={OwnItemScreen} />
             <Stack.Screen name="ShowItem" component={ShowItemScreen} />
             <Stack.Screen name="Images" component={SelectImagesScreen} />
             <Stack.Screen name="EditProfile" component={EditProfileScreen} />
