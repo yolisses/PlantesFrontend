@@ -9,6 +9,7 @@ import {EditBackAlert} from './EditBackAlert';
 import {useAlert} from 'alert/AlertContext';
 import {BackButton} from './BackButton';
 import {api} from 'api/api';
+import {formatToPlant} from 'send/formatToPlant';
 
 export function EditScreen({route}) {
   const {navigate} = useNavigation();
@@ -25,14 +26,12 @@ export function EditScreen({route}) {
 
   async function onSubmit(value) {
     try {
-      const res = await api.patch('plant/' + item._id, {
-        value,
-      });
+      const res = await api.patch('plant/' + item._id, formatToPlant(value));
       console.error(res.data);
       navigate('Home');
       reset();
     } catch (err) {
-      console.error(err.response || err);
+      console.error(err.response);
     }
   }
 
