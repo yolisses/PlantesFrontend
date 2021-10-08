@@ -48,17 +48,11 @@ export function ShowItemScreen({route}) {
           </Section>
           <Section>
             <UserLink id={item?.userId} />
-            {item.userId !== auth.userId ? (
-              <EditItemButton item={item} style={styles.button} />
-            ) : (
-              <>
-                {!!user?.whatsappNumber && (
-                  <WhatsappButton number={user.whatsappNumber} />
-                )}
-                {!!user?.instagramUser && (
-                  <InstagramButton user={user.instagramUser} />
-                )}
-              </>
+            {!!user?.whatsappNumber && (
+              <WhatsappButton number={user.whatsappNumber} />
+            )}
+            {!!user?.instagramUser && (
+              <InstagramButton user={user.instagramUser} />
             )}
           </Section>
           {!!(item?.tags && item.tags.length) && (
