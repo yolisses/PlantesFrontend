@@ -25,11 +25,9 @@ export function WhatsappButton({number}) {
 const styles = StyleSheet.create({
   button: {
     backgroundColor: 'green',
+    elevation: 2,
   },
   text: {
     color: '#fff',
-  },
-  icon: {
-    marginLeft: 10,
   },
 });

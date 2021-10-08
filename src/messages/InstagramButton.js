@@ -24,9 +24,7 @@ export function InstagramButton({user}) {
 }
 
 const styles = StyleSheet.create({
-  button: {},
-  text: {},
-  icon: {
-    marginLeft: 10,
+  button: {
+    elevation: 2,
   },
 });

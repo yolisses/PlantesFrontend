@@ -21,6 +21,7 @@ export function TextIconButton({
         {
           backgroundColor: activeColor || '#ccc',
           borderRadius: style?.borderRadius || 10,
+          elevation: style?.elevation,
           margin: style?.margin,
           marginTop: style?.marginTop,
           marginBottom: style?.marginBottom || 10,
@@ -33,7 +34,13 @@ export function TextIconButton({
           styles.button,
           {backgroundColor: '#fff'},
           style,
-          {marginTop: 0, marginBottom: 0, marginLeft: 0, marginRight: 0},
+          {
+            elevation: 0,
+            marginTop: 0,
+            marginLeft: 0,
+            marginRight: 0,
+            marginBottom: 0,
+          },
         ]}
         activeOpacity={activeOpacity || 0.7}>
         {!!icon && (
@@ -61,7 +68,7 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     flex: 1,
-    elevation: 2,
+    elevation: 0,
     marginBottom: 8,
     borderRadius: 10,
   },
