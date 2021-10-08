@@ -141,7 +141,7 @@ android {
 
         multiDexEnabled true
 
-        applicationId "com.plantei"
+        applicationId "com.plantes"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
