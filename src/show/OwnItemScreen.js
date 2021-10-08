@@ -10,10 +10,10 @@ import {Secondary} from './Secondary';
 import {Description} from 'post/Description';
 import {ImagesSwiper} from 'show/ImagesSwiper';
 import {FloatingButton} from 'show/FloatingButton';
-import {WhatsappButton} from 'messages/WhatsappButton';
 import {AvailabilityInfo} from 'show/AvailabilityInfo';
-import {InstagramButton} from 'messages/InstagramButton';
 import {useUserById} from 'common/UsersByIdContext';
+import {TextIconButton} from 'comment/TextIconButton';
+import {faEdit, faTrashAlt} from '@fortawesome/free-regular-svg-icons';
 
 export function OwnItemScreen({route}) {
   const {preImage, item} = route.params;
@@ -46,12 +46,18 @@ export function OwnItemScreen({route}) {
           </Section>
           <Section>
             <UserLink id={item?.userId} />
-            {!!user?.whatsappNumber && (
-              <WhatsappButton number={user.whatsappNumber} />
-            )}
-            {!!user?.instagramUser && (
-              <InstagramButton user={user.instagramUser} />
-            )}
+            <View style={[styles.line, {paddingLeft: 5}]}>
+              <TextIconButton
+                text="Remover"
+                icon={faTrashAlt}
+                style={styles.button}
+              />
+              <TextIconButton
+                text="Editar"
+                icon={faEdit}
+                style={styles.button}
+              />
+            </View>
           </Section>
           {!!(item?.tags && item.tags.length) && (
             <Section name="Detalhes">
@@ -75,6 +81,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  button: {
+    marginTop: 10,
+    marginRight: 10,
   },
   likeWrapper: {
     position: 'absolute',

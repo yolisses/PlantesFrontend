@@ -14,12 +14,11 @@ export function InstagramButton({user}) {
   return (
     <TextIconButton
       text="Mensagem"
-      icon={faInstagram}
       onPress={onPress}
-      activeOpacity={0.97}
+      icon={faInstagram}
+      style={styles.button}
       iconColor={'#9620dd'}
       textStyle={styles.text}
-      buttonStyle={styles.button}
     />
   );
 }

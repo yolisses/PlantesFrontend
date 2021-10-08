@@ -15,9 +15,9 @@ export function WhatsappButton({number}) {
       icon={faWhatsapp}
       onPress={onPress}
       iconColor={'#fff'}
-      activeOpacity={0.85}
+      activeColor="#0b0"
+      style={styles.button}
       textStyle={styles.text}
-      buttonStyle={styles.button}
     />
   );
 }
