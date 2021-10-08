@@ -9,8 +9,8 @@ export function DiscardPublishAlert({reset}) {
 
   return (
     <Alert title="Descartar publicação?">
-      <AlertButton text="cancelar" />
-      <AlertButton text="descartar" onPress={onPress} destructive />
+      <AlertButton text="Cancelar" />
+      <AlertButton text="Descartar" onPress={onPress} destructive />
     </Alert>
   );
 }

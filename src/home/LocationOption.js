@@ -42,7 +42,7 @@ const sytles = StyleSheet.create({
     backgroundColor: 'white',
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 5,
+    padding: 8,
   },
   text: {
     color: 'green',

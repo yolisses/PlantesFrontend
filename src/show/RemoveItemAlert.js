@@ -5,8 +5,8 @@ import React from 'react';
 export function RemoveItemAlert() {
   return (
     <Alert title="Remover esse item?">
-      <AlertButton text="cancelar" />
-      <AlertButton destructive text="remover" />
+      <AlertButton text="Cancelar" />
+      <AlertButton destructive text="Remover" />
     </Alert>
   );
 }

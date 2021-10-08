@@ -7,18 +7,21 @@ import {ToggleButton} from './ToggleButton';
 export function TagsSelector({
   label,
   style,
-  value = {},
   labels,
   options,
   showIcon,
   onChange,
+  value = {},
   buttonStyle,
   ...rest
 }) {
-  function change(option, newValue) {
-    const copy = {...value};
-    copy[option] = newValue;
-    onChange(copy);
+  function change(getOption) {
+    onChange(old => {
+      const option = getOption();
+      const copy = {...old};
+      copy[option] = !copy[option];
+      return copy;
+    });
   }
 
   return useObserver(() => (
