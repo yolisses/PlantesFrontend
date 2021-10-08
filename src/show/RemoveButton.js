@@ -8,7 +8,7 @@ import {RemoveItemAlert} from './RemoveItemAlert';
 export function RemoveButton({onpress, item, ...rest}) {
   const {showAlert} = useAlert();
   function handlePress() {
-    showAlert(<RemoveItemAlert />);
+    showAlert(<RemoveItemAlert item={item} />);
   }
 
   return (

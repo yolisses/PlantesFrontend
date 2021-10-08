@@ -50,7 +50,7 @@ export function ShowItemScreen({route}) {
             <UserLink id={item?.userId} />
             {item?.userId === auth.userId && (
               <View style={[styles.line, styles.buttonsWrapper]}>
-                <RemoveButton style={styles.button} />
+                <RemoveButton style={styles.button} item={item} />
                 <EditButton style={styles.button} item={item} />
               </View>
             )}
