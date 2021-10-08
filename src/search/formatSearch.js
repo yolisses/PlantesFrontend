@@ -1,3 +1,5 @@
+import {auth} from 'auth/auth';
+
 export function formatSearch(data) {
   const result = {};
   const {tags, availabilities, text} = data;
@@ -10,6 +12,8 @@ export function formatSearch(data) {
     result.sell = availabilities.sell;
     result.swap = availabilities.swap;
   }
+
+  result.coordinates = auth.user.location.coordinates;
 
   if (tags) {
     result.tags = Object.entries(tags)

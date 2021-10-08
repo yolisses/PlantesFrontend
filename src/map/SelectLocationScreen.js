@@ -1,6 +1,7 @@
 import {useNavigation} from '@react-navigation/core';
 import {api} from 'api';
 import {auth} from 'auth/auth';
+import {refreshPlants} from 'home/loadPlants';
 import {CustomHeader} from 'publish/CustomHeader';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
@@ -39,6 +40,7 @@ export function SelectLocationScreen() {
     }
     const res = await api.put('/update-location-by-coordinates', location);
     auth.user = res.data;
+    refreshPlants();
     navigate('Home');
   }
 
