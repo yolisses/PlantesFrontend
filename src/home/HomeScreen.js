@@ -1,100 +1,81 @@
-import {FlatList, View} from 'react-native';
 import React, {useEffect} from 'react';
-
+import {FlatList, View} from 'react-native';
+import {useInfiniteQuery, useQueryClient} from 'react-query';
 import {observe} from 'mobx';
-import {useObserver} from 'mobx-react-lite';
 
-import {api} from 'api';
+import {api} from 'api/api';
 import {Card} from 'home/Card';
-import {loadPlants} from 'home/loadPlants';
-import {SendingList} from 'send/SendingList';
+import {NotFound} from 'home/NotFound';
+import {NetworkError} from 'home/NetworkError';
 import {formatSearch} from 'search/formatSearch';
 import {searchOptions} from 'search/searchOptions';
+import {LocationOption} from 'home/LocationOption';
 import {FooterNavigation} from 'navigation/FooterNavigation';
 import {SearchCustomHeader} from 'search/SearchCustomHeader';
 import {LoadingScrollFooter} from 'common/LoadingScrollFooter';
 
-import {NotFound} from './NotFound';
-import {NetworkError} from './NetworkError';
-import {LocationOption} from './LocationOption';
-
 export function HomeScreen() {
-  async function getPlants() {
-    try {
-      if (loadPlants.loading || loadPlants.ended) {
-        return;
-      }
-      loadPlants.loading = true;
-      const res = await api.post(
-        'plants/' + loadPlants.page,
-        formatSearch(searchOptions),
-      );
-      loadPlants.plants = loadPlants.plants.concat(res.data);
-      if (res.data.length === 0) {
-        loadPlants.ended = true;
-      }
-      loadPlants.loading = false;
-      loadPlants.page = loadPlants.page + 1;
-    } catch (err) {
-      loadPlants.networkError = true;
-      loadPlants.loading = false;
-      console.error('aqui', err);
-    }
+  async function fetchProjects({pageParam = 1}) {
+    const res = await api.post(
+      'plants/' + pageParam,
+      formatSearch(searchOptions),
+    );
+    return res.data;
   }
 
-  function retry() {
-    loadPlants.networkError = false;
-    getPlants();
+  const {
+    data,
+    error,
+    isFetching,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery('plants', fetchProjects, {
+    getNextPageParam: lastPage => lastPage.nextPage,
+    retry: 0,
+  });
+
+  function getFlatedArray(data) {
+    return data?.pages ? data.pages.flatMap(page => [...page.docs]) : [];
   }
 
   function onEndReached() {
-    getPlants();
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
   }
 
+  const queryClient = useQueryClient();
+
+  const isNotResultFound = data?.pages[0].totalDocs === 0;
+
   useEffect(() => {
-    observe(loadPlants, () => {
-      if (loadPlants.refresh) {
-        getPlants();
-        loadPlants.refresh = false;
-      }
+    observe(searchOptions, () => {
+      queryClient.resetQueries('plants');
     });
-    getPlants();
   }, []);
 
-  return useObserver(() => (
+  return (
     <>
       <View style={{flex: 1}}>
         <SearchCustomHeader />
-        {loadPlants.plants.length === 0 && loadPlants.networkError ? (
-          <>
-            <LocationOption />
-            <NetworkError retry={retry} />
-          </>
-        ) : loadPlants.plants.length === 0 && loadPlants.ended ? (
-          <>
-            <LocationOption />
-            <NotFound />
-          </>
-        ) : (
-          <FlatList
-            numColumns={2}
-            data={loadPlants.plants}
-            onEndReached={onEndReached}
-            onEndReachedThreshold={0.5}
-            ListHeaderComponent={
-              <>
-                <LocationOption />
-                <SendingList />
-              </>
-            }
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={{paddingBottom: 60}}
-            ListFooterComponent={loadPlants.loading && <LoadingScrollFooter />}
-            renderItem={({item}) => <Card item={item} />}
-          />
-        )}
+        <FlatList
+          numColumns={2}
+          data={getFlatedArray(data)}
+          renderItem={({item}) => <Card item={item} />}
+          onEndReached={onEndReached}
+          onEndReachedThreshold={0.4}
+          ListHeaderComponent={<LocationOption />}
+          ListFooterComponent={
+            <>
+              {!error && isFetching && <LoadingScrollFooter />}
+              {error && <NetworkError retry={onEndReached} />}
+              {!hasNextPage && isNotResultFound && <NotFound />}
+            </>
+          }
+        />
       </View>
       <FooterNavigation selected="Home" />
     </>
-  ));
+  );
 }

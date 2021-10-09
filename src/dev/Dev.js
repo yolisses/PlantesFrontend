@@ -1,66 +1,80 @@
 import {api} from 'api/api';
+import {LoadingScrollFooter} from 'common/LoadingScrollFooter';
 import {Card} from 'home/Card';
-import React from 'react';
-import {Fragment} from 'react';
-import {FlatList, ScrollView, Text, TouchableOpacity, View} from 'react-native';
-import {useInfiniteQuery} from 'react-query';
-import {RerenderTester} from './rerenderTester';
+import {LocationOption} from 'home/LocationOption';
+import {NetworkError} from 'home/NetworkError';
+import {NotFound} from 'home/NotFound';
+import {observe} from 'mobx';
+import {FooterNavigation} from 'navigation/FooterNavigation';
+import React, {useEffect} from 'react';
+import {FlatList, View} from 'react-native';
+import {useInfiniteQuery, useQueryClient} from 'react-query';
+import {formatSearch} from 'search/formatSearch';
+import {SearchCustomHeader} from 'search/SearchCustomHeader';
+import {searchOptions} from 'search/searchOptions';
 
 export function Dev() {
-  async function fetchProjects({pageParam = 0}) {
-    console.error('plants/' + pageParam);
-    const res = await api.post('plants/' + pageParam);
+  async function fetchProjects({pageParam = 1}) {
+    const res = await api.post(
+      'plants/' + pageParam,
+      formatSearch(searchOptions),
+    );
     return res.data;
   }
 
   const {
     data,
     error,
-    status,
     isFetching,
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
-  } = useInfiniteQuery('projects', fetchProjects, {
-    getNextPageParam: lastPage => {
-      console.error(lastPage);
-      return lastPage.nextPage;
-    },
+  } = useInfiniteQuery('plants', fetchProjects, {
+    getNextPageParam: lastPage => lastPage.nextPage,
+    retry: 0,
   });
 
-  return status === 'loading' ? (
-    <Text>Loading...</Text>
-  ) : status === 'error' ? (
-    <Text>Error: {error?.response || JSON.stringify(error)}</Text>
-  ) : (
-    <ScrollView>
-      <Text>{Object.keys(data.pages[0])}</Text>
+  function getFlatedArray(data) {
+    return data?.pages ? data.pages.flatMap(page => [...page.docs]) : [];
+  }
 
-      {data?.pages?.map(({docs: page}, i) => (
-        <Fragment key={i}>
-          {page?.map(item => (
-            // <Text key={project?.id}>{project?.name}</Text>
-            <Card item={item} />
-          ))}
-        </Fragment>
-      ))}
+  function onEndReached() {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }
 
-      <View>
-        <TouchableOpacity
-          title="refresh"
-          onPress={() => fetchNextPage()}
-          disabled={!hasNextPage || isFetchingNextPage}>
-          <Text>
-            {isFetchingNextPage
-              ? 'Loading more...'
-              : hasNextPage
-              ? 'Load More'
-              : 'Nothing more to load'}
-          </Text>
-        </TouchableOpacity>
+  const queryClient = useQueryClient();
+
+  const isNotResultFound = data?.pages[0].totalDocs === 0;
+
+  useEffect(() => {
+    observe(searchOptions, () => {
+      queryClient.resetQueries('plants');
+    });
+  }, []);
+
+  return (
+    <>
+      <View style={{flex: 1}}>
+        <SearchCustomHeader />
+        <FlatList
+          numColumns={2}
+          data={getFlatedArray(data)}
+          renderItem={({item}) => <Card item={item} />}
+          onEndReached={onEndReached}
+          onEndReachedThreshold={0.4}
+          ListHeaderComponent={<LocationOption />}
+          ListFooterComponent={
+            <>
+              {!error && isFetching && <LoadingScrollFooter />}
+              {error && <NetworkError retry={onEndReached} />}
+              {!hasNextPage && isNotResultFound && <NotFound />}
+            </>
+          }
+        />
       </View>
-      <Text>{isFetching && !isFetchingNextPage ? 'Fetching...' : null}</Text>
-      <RerenderTester />
-    </ScrollView>
+      <FooterNavigation selected="Home" />
+    </>
   );
 }
