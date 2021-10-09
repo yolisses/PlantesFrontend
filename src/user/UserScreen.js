@@ -1,34 +1,35 @@
+import React, {useEffect} from 'react';
 import {FlatList, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {useQuery} from 'react-query';
+import {observe} from 'mobx';
+import {useObserver} from 'mobx-react-lite';
 
+import {useUser} from './useUser';
 import {UserInfo} from './UserInfo';
 import {ConfigButton} from './ConfigButton';
 
 import {api} from 'api';
 import {auth} from 'auth/auth';
 import {Card} from 'home/Card';
+import {send} from 'send/sendings';
+import {SendingList} from 'send/SendingList';
 import {BackButton} from 'publish/BackButton';
 import {CustomHeader} from 'publish/CustomHeader';
 import {FooterNavigation} from 'navigation/FooterNavigation';
-import {SendingList} from 'send/SendingList';
-import {useObserver} from 'mobx-react-lite';
-import {observe} from 'mobx';
-import {send} from 'send/sendings';
-import {useUser} from './useUser';
 
 const numberOfCollums = 3;
 
 export function UserScreen({route}) {
-  const [plants, setPlants] = useState();
-
   const {userId: userIdParam} = route.params || {};
   const userId = userIdParam || auth.userId;
   const {data: user} = useUser(userId);
 
-  async function getPlants() {
+  async function getPlants(userId) {
     const res = await api.get('user-plants/' + userId);
-    setPlants(res.data);
+    return res.data;
   }
+
+  const {data} = useQuery(['user', 'plants', userId], () => getPlants(userId));
 
   function renderItem({item}) {
     return <Card item={item} fraction={3} />;
@@ -36,11 +37,6 @@ export function UserScreen({route}) {
 
   function keyExtractor(item) {
     return item?._id;
-  }
-
-  async function getPlants() {
-    const res = await api.get('user-plants/' + userId);
-    setPlants(res.data);
   }
 
   useEffect(() => {
@@ -57,7 +53,7 @@ export function UserScreen({route}) {
           right={userId === auth.userId && <ConfigButton />}
         />
         <FlatList
-          data={plants}
+          data={data}
           renderItem={renderItem}
           keyExtractor={keyExtractor}
           numColumns={numberOfCollums}

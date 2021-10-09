@@ -61,11 +61,11 @@ export function HomeScreen() {
         <SearchCustomHeader />
         <FlatList
           numColumns={2}
-          data={getFlatedArray(data)}
-          renderItem={({item}) => <Card item={item} />}
           onEndReached={onEndReached}
+          data={getFlatedArray(data)}
           onEndReachedThreshold={0.4}
           ListHeaderComponent={<LocationOption />}
+          renderItem={({item}) => <Card item={item} />}
           ListFooterComponent={
             <>
               {!error && isFetching && <LoadingScrollFooter />}
