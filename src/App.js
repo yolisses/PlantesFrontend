@@ -3,15 +3,14 @@ import 'auth/configureGoogleSignIn'; // self explanatory
 import 'auth/trySavedLogin'; // After this one ^^^
 
 import React from 'react';
-import {Routes} from './Routes';
-import {StatusBar} from 'react-native';
+import { Routes } from './Routes';
+import { StatusBar } from 'react-native';
 
-import {AlertContextProvider} from 'alert/AlertContext';
-import {ModalContextProvider} from 'modal/ModalContext';
-import {PermissionsContextProvider} from 'permission/PermissionsContext';
-import {CameraPreferencesProvider} from 'camera/contexts/CameraPreferencesContext';
+import { AlertContextProvider } from 'alert/AlertContext';
+import { ModalContextProvider } from 'modal/ModalContext';
+import { PermissionsContextProvider } from 'permission/PermissionsContext';
 import moment from 'moment/min/moment-with-locales';
-import {QueryClient, QueryClientProvider} from 'react-query';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 moment.locale('pt');
 
@@ -24,9 +23,7 @@ const App = () => (
       <PermissionsContextProvider>
         <AlertContextProvider>
           <ModalContextProvider>
-            <CameraPreferencesProvider>
-              <Routes />
-            </CameraPreferencesProvider>
+            <Routes />
           </ModalContextProvider>
         </AlertContextProvider>
       </PermissionsContextProvider>

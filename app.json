@@ -1,4 +1,11 @@
 {
-  "name": "Plantes",
-  "displayName": "Plantes"
+  "expo": {
+    "name": "Plantes",
+    "slug": "Plantes",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "Plantes"
 }
