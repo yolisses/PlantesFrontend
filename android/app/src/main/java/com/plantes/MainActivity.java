@@ -1,6 +1,9 @@
-package com.plantes;
+package com.plantes; // change package name // mudei
 
 import com.facebook.react.ReactActivity;
+
+import org.devio.rn.splashscreen.SplashScreen; // add this
+import android.os.Bundle; // add this
 
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
@@ -19,6 +22,11 @@ public class MainActivity extends ReactActivity {
     return "Plantes";
   }
 
+  @Override                                             // add this
+  protected void onCreate(Bundle savedInstanceState) {  // add this
+    SplashScreen.show(this);                            // add this
+    super.onCreate(savedInstanceState);                 // add this
+  }                                                     // add this
 
   @Override
   protected ReactActivityDelegate createReactActivityDelegate() {

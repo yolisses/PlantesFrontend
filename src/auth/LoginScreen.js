@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     fontSize: 28,
+    color: '#000',
     marginBottom: 5,
   },
   subtitle: {
