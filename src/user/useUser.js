@@ -1,10 +1,14 @@
 import {api} from 'api';
 import {useQuery} from 'react-query';
 
-export function useUser(userId) {
-  async function getUser(userId) {
+async function getUser(userId) {
+  try {
     const {data} = await api.get('user/' + userId);
     return data;
+  } catch (err) {
+    console.error(err.response);
   }
-  return useQuery(['user', userId], getUser);
+}
+export function useUser(userId) {
+  return useQuery(['user', userId], () => getUser(userId));
 }
