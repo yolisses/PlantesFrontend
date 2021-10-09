@@ -1,58 +1,66 @@
+import {api} from 'api/api';
+import {Card} from 'home/Card';
 import React from 'react';
-import {Button, Text, View} from 'react-native';
-import {useQuery, useQueryClient} from 'react-query';
-// import {ReactQueryDevtools} from 'react-query/devtools';
-
-// export function Dev() {
-//   const {isLoading, error, data, isFetching} = useQuery('repoData', () =>
-//     fetch('https://api.github.com/repos/tannerlinsley/react-query').then(res =>
-//       res.json(),
-//     ),
-//   );
-
-//   if (isLoading) {
-//     return 'Loading...';
-//   }
-
-//   if (error) {
-//     return 'An error has occurred: ' + error.message;
-//   }
-
-//   return (
-//     <View>
-//       {/* <Text>{data.name}</Text>
-//       <Text>{data.description}</Text>
-//       <Text>👀 {data.subscribers_count}</Text>
-//       <Text>✨ {data.stargazers_count}</Text>
-//       <Text>🍴 {data.forks_count}</Text>
-//       <Text>{isFetching ? 'Updating...' : ''}</Text> */}
-//       {/* <ReactQueryDevtools initialIsOpen /> */}
-//     </View>
-//   );
-// }
-
-async function getData() {
-  return await new Promise(resolve =>
-    setTimeout(
-      () => resolve({text: 'oi, eu sou o Goku!' + Math.random()}),
-      1000,
-    ),
-  );
-}
+import {Fragment} from 'react';
+import {FlatList, ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {useInfiniteQuery} from 'react-query';
+import {RerenderTester} from './rerenderTester';
 
 export function Dev() {
-  const queryClient = useQueryClient();
-  const {data, isLoading, isFetching} = useQuery('coisa', getData);
-
-  function onPress() {
-    queryClient.invalidateQueries('coisa');
+  async function fetchProjects({pageParam = 0}) {
+    console.error('plants/' + pageParam);
+    const res = await api.post('plants/' + pageParam);
+    return res.data;
   }
 
-  return (
-    <View>
-      <Text>{JSON.stringify(data)}</Text>
-      {isFetching && <Text>Loading...</Text>}
-      <Button title="invalidate" onPress={onPress} />
-    </View>
+  const {
+    data,
+    error,
+    status,
+    isFetching,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery('projects', fetchProjects, {
+    getNextPageParam: lastPage => {
+      console.error(lastPage);
+      return lastPage.nextPage;
+    },
+  });
+
+  return status === 'loading' ? (
+    <Text>Loading...</Text>
+  ) : status === 'error' ? (
+    <Text>Error: {error?.response || JSON.stringify(error)}</Text>
+  ) : (
+    <ScrollView>
+      <Text>{Object.keys(data.pages[0])}</Text>
+
+      {data?.pages?.map(({docs: page}, i) => (
+        <Fragment key={i}>
+          {page?.map(item => (
+            // <Text key={project?.id}>{project?.name}</Text>
+            <Card item={item} />
+          ))}
+        </Fragment>
+      ))}
+
+      <View>
+        <TouchableOpacity
+          title="refresh"
+          onPress={() => fetchNextPage()}
+          disabled={!hasNextPage || isFetchingNextPage}>
+          <Text>
+            {isFetchingNextPage
+              ? 'Loading more...'
+              : hasNextPage
+              ? 'Load More'
+              : 'Nothing more to load'}
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <Text>{isFetching && !isFetchingNextPage ? 'Fetching...' : null}</Text>
+      <RerenderTester />
+    </ScrollView>
   );
 }
