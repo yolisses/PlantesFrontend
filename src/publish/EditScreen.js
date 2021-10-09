@@ -10,10 +10,14 @@ import {useAlert} from 'alert/AlertContext';
 import {BackButton} from './BackButton';
 import {api} from 'api/api';
 import {formatToPlant} from 'send/formatToPlant';
+import {useQueryClient} from 'react-query';
+import {auth} from 'auth/auth';
 
 export function EditScreen({route}) {
   const {navigate} = useNavigation();
   const {showAlert} = useAlert();
+
+  const queryClient = useQueryClient();
 
   const {item} = route.params;
 
@@ -26,9 +30,10 @@ export function EditScreen({route}) {
 
   async function onSubmit(value) {
     try {
-      const res = await api.patch('plant/' + item._id, formatToPlant(value));
-      console.error(res.data);
+      await api.patch('plant/' + item._id, formatToPlant(value));
       navigate('Home');
+      queryClient.invalidateQueries('plants');
+      queryClient.invalidateQueries(['user', 'plants', auth.userId]);
       reset();
     } catch (err) {
       console.error(err.response);
