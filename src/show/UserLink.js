@@ -1,12 +1,16 @@
+import {api} from 'api';
 import {UserRoundImage} from 'common/UserRoundImage';
-import {useUserById} from 'common/UsersByIdContext';
 import {locationNameToString} from 'location/locationNameToString';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {useQuery} from 'react-query';
 
-export function UserLink({id}) {
-  const {getUserById} = useUserById();
-  const user = getUserById(id);
+export function UserLink({id, user}) {
+  // async function getUser() {
+  //   return await api.get('/user/' + id);
+  // }
+
+  // const {data: user} = useQuery({userId: id}, getUser);
 
   return (
     <View style={styles.container}>

@@ -13,15 +13,14 @@ import {FloatingButton} from 'show/FloatingButton';
 import {WhatsappButton} from 'messages/WhatsappButton';
 import {AvailabilityInfo} from 'show/AvailabilityInfo';
 import {InstagramButton} from 'messages/InstagramButton';
-import {useUserById} from 'common/UsersByIdContext';
 import {auth} from 'auth/auth';
 import {EditButton} from './EditButton';
 import {RemoveButton} from './RemoveButton';
+import {useUser} from 'user/useUser';
 
 export function ShowItemScreen({route}) {
   const {preImage, item} = route.params;
-  const {getUserById} = useUserById();
-  const user = getUserById(item?.userId);
+  const {data: user} = useUser(item?.userId);
 
   return (
     <View>
@@ -47,7 +46,7 @@ export function ShowItemScreen({route}) {
             </View>
           </Section>
           <Section>
-            <UserLink id={item?.userId} />
+            <UserLink user={user} />
             {item?.userId === auth.userId && (
               <View style={[styles.line, styles.buttonsWrapper]}>
                 <RemoveButton style={styles.button} item={item} />

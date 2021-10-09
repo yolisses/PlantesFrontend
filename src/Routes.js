@@ -3,9 +3,6 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faCamera, faHome, faUser} from '@fortawesome/free-solid-svg-icons';
-
 import {Dev} from './dev/Dev';
 
 import {auth} from 'auth/auth';
@@ -19,7 +16,6 @@ import {HomeScreen} from 'home/HomeScreen';
 import {LoginScreen} from 'auth/LoginScreen';
 import {EditScreen} from 'publish/EditScreen';
 import {ConfigScreen} from 'config/ConfigScreen';
-import {OwnItemScreen} from 'show/OwnItemScreen';
 import {ShowItemScreen} from 'show/ShowItemScreen';
 import {PublishScreen} from 'publish/PublishScreen';
 import {EditProfileScreen} from 'profile/EditProfileScreen';
@@ -56,8 +52,6 @@ export function Routes() {
           <Stack.Screen name="Login" component={LoginScreen} />
         ) : (
           <>
-            {/* <Stack.Screen name="dev" component={PublishScreen} /> */}
-
             <Stack.Screen name="default" component={Main} />
             <Stack.Screen name="Edit" component={EditScreen} />
             <Stack.Screen name="Config" component={ConfigScreen} />

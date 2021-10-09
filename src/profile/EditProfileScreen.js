@@ -1,6 +1,6 @@
 import React, {createRef, useState} from 'react';
 import FastImage from 'react-native-fast-image';
-import {ScrollView, StyleSheet, Text} from 'react-native';
+import {ScrollView, StyleSheet} from 'react-native';
 
 import {auth} from 'auth/auth';
 import {TextInput} from 'form/TextInput';
@@ -9,7 +9,6 @@ import {NextButton} from 'publish/NextButton';
 import {CustomHeader} from 'publish/CustomHeader';
 import {api} from 'api';
 import {useNavigation} from '@react-navigation/core';
-import {useUserById} from 'common/UsersByIdContext';
 import {Keyboard} from 'react-native';
 import {Controller, useForm} from 'react-hook-form';
 import {faInstagram, faWhatsapp} from '@fortawesome/free-brands-svg-icons';
@@ -27,7 +26,10 @@ export function EditProfileScreen() {
   } = useForm();
   const [saving, setSaving] = useState(false);
   const {goBack} = useNavigation();
-  const {setCurrentUser} = useUserById();
+
+  function setCurrentUser() {
+    // todo
+  }
 
   const ref = createRef();
 

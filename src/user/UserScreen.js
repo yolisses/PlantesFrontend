@@ -9,23 +9,21 @@ import {auth} from 'auth/auth';
 import {Card} from 'home/Card';
 import {BackButton} from 'publish/BackButton';
 import {CustomHeader} from 'publish/CustomHeader';
-import {useUserById} from 'common/UsersByIdContext';
 import {FooterNavigation} from 'navigation/FooterNavigation';
 import {SendingList} from 'send/SendingList';
 import {useObserver} from 'mobx-react-lite';
 import {observe} from 'mobx';
 import {send} from 'send/sendings';
+import {useUser} from './useUser';
 
 const numberOfCollums = 3;
 
 export function UserScreen({route}) {
   const [plants, setPlants] = useState();
 
-  const {getUserById} = useUserById();
-
   const {userId: userIdParam} = route.params || {};
   const userId = userIdParam || auth.userId;
-  const user = getUserById(userId);
+  const {data: user} = useUser(userId);
 
   async function getPlants() {
     const res = await api.get('user-plants/' + userId);
