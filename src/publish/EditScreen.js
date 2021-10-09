@@ -30,8 +30,8 @@ export function EditScreen({route}) {
 
   async function onSubmit(value) {
     try {
-      await api.patch('plant/' + item._id, formatToPlant(value));
-      navigate('Home');
+      const res = await api.patch('plant/' + item._id, formatToPlant(value));
+      navigate('ShowItem', {item: res.data});
       queryClient.invalidateQueries('plants');
       queryClient.invalidateQueries(['user', 'plants', auth.userId]);
       reset();
