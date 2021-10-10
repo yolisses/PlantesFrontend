@@ -1,80 +1,47 @@
-import {api} from 'api/api';
-import {LoadingScrollFooter} from 'common/LoadingScrollFooter';
-import {Card} from 'home/Card';
-import {LocationOption} from 'home/LocationOption';
-import {NetworkError} from 'home/NetworkError';
-import {NotFound} from 'home/NotFound';
-import {observe} from 'mobx';
-import {FooterNavigation} from 'navigation/FooterNavigation';
-import React, {useEffect} from 'react';
-import {FlatList, View} from 'react-native';
-import {useInfiniteQuery, useQueryClient} from 'react-query';
-import {formatSearch} from 'search/formatSearch';
-import {SearchCustomHeader} from 'search/SearchCustomHeader';
-import {searchOptions} from 'search/searchOptions';
+import React from 'react';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {width} from 'utils/width';
 
-export function Dev() {
-  async function fetchProjects({pageParam = 1}) {
-    const res = await api.post(
-      'plants/' + pageParam,
-      formatSearch(searchOptions),
-    );
-    return res.data;
-  }
+function getRandomValue() {
+  return Math.max(Math.floor(Math.random() * 10), 4);
+}
 
-  const {
-    data,
-    error,
-    isFetching,
-    hasNextPage,
-    fetchNextPage,
-    isFetchingNextPage,
-  } = useInfiniteQuery('plants', fetchProjects, {
-    getNextPageParam: lastPage => lastPage.nextPage,
-    retry: 0,
-  });
+function getRandomColor() {
+  return '#b' + getRandomValue() + getRandomValue() + getRandomValue();
+}
 
-  function getFlatedArray(data) {
-    return data?.pages ? data.pages.flatMap(page => [...page.docs]) : [];
-  }
-
-  function onEndReached() {
-    if (hasNextPage && !isFetchingNextPage) {
-      fetchNextPage();
-    }
-  }
-
-  const queryClient = useQueryClient();
-
-  const isNotResultFound = data?.pages[0].totalDocs === 0;
-
-  useEffect(() => {
-    observe(searchOptions, () => {
-      queryClient.resetQueries('plants');
-    });
-  }, []);
-
+function Card({item}) {
   return (
-    <>
-      <View style={{flex: 1}}>
-        <SearchCustomHeader />
-        <FlatList
-          numColumns={2}
-          data={getFlatedArray(data)}
-          renderItem={({item}) => <Card item={item} />}
-          onEndReached={onEndReached}
-          onEndReachedThreshold={0.4}
-          ListHeaderComponent={<LocationOption />}
-          ListFooterComponent={
-            <>
-              {!error && isFetching && <LoadingScrollFooter />}
-              {error && <NetworkError retry={onEndReached} />}
-              {!hasNextPage && isNotResultFound && <NotFound />}
-            </>
-          }
-        />
-      </View>
-      <FooterNavigation selected="Home" />
-    </>
+    <Text style={[styles.card, {backgroundColor: getRandomColor()}]}>
+      {item}
+    </Text>
   );
 }
+
+export function Dev() {
+  const data = [...Array(5)];
+
+  return (
+    <View>
+      <FlatList
+        data={data}
+        renderItem={({index}) => <Card item={index} />}
+        ListHeaderComponent={<Card item={'pre'} />}
+        ListHeaderComponentStyle={styles.pre}
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  card: {
+    width,
+    height: width,
+    fontSize: 100,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+  },
+  pre: {
+    position: 'absolute',
+  },
+});
