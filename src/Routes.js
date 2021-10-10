@@ -52,8 +52,6 @@ export function Routes() {
           <Stack.Screen name="Login" component={LoginScreen} />
         ) : (
           <>
-            <Stack.Screen name="dev" component={Dev} />
-
             <Stack.Screen name="default" component={Main} />
             <Stack.Screen name="Edit" component={EditScreen} />
             <Stack.Screen name="Config" component={ConfigScreen} />

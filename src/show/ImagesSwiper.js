@@ -27,10 +27,15 @@ export function ImagesSwiper({images, preImage}) {
         snapToInterval={width}
         disableIntervalMomentum
         initialNumToRender={images.length}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.container}
+        ListHeaderComponentStyle={styles.preImage}
         renderItem={({item}) => (
           <FastImage key={item} style={styles.image} source={{uri: item}} />
         )}
-        showsHorizontalScrollIndicator={false}
+        ListHeaderComponent={
+          <FastImage source={{uri: preImage}} style={styles.image} />
+        }
       />
       <SwipeIndicator images={images} selected={selected} />
     </View>
@@ -41,6 +46,12 @@ const styles = StyleSheet.create({
   image: {
     width,
     height: width,
+  },
+  container: {
     backgroundColor: '#ddd',
+  },
+  preImage: {
+    zIndex: -1,
+    position: 'absolute',
   },
 });
