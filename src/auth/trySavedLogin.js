@@ -1,6 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {api} from 'api';
 import {setAuthorizationHeader} from 'api/api';
 import {auth} from './auth';
 import {authenticate} from './authenticate';
@@ -12,8 +11,6 @@ AsyncStorage.getItem('userInfo').then(async res => {
     auth.userId = user._id;
     auth.token = token;
 
-    // console.error(token);
-
     const userInfo = await GoogleSignin.signInSilently();
     authenticate(userInfo.idToken);
 
@@ -21,5 +18,4 @@ AsyncStorage.getItem('userInfo').then(async res => {
   } catch (err) {
     console.error(err);
   }
-  // console.error(JSON.parse(res));
 });
