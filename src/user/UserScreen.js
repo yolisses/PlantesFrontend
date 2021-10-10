@@ -24,12 +24,16 @@ export function UserScreen({route}) {
   const userId = userIdParam || auth.userId;
   const {data: user} = useUser(userId);
 
-  async function getPlants(userId) {
-    const res = await api.get('user-plants/' + userId);
-    return res.data;
+  async function getPlants() {
+    try {
+      const res = await api.get('user-plants/' + userId);
+      return res.data;
+    } catch (err) {
+      console.error(err.response || err);
+    }
   }
 
-  const {data} = useQuery(['user', 'plants', userId], () => getPlants(userId));
+  const {data} = useQuery(['user', 'plants', userId], getPlants);
 
   function renderItem({item}) {
     return <Card item={item} fraction={3} />;
