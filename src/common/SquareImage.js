@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {width} from 'utils/width';
 
-export function SquareImage({uri, style, fraction}) {
+export function SquareImage({uri, style, fraction = 1}) {
   const size = width / fraction - (fraction - 1) / fraction;
   return (
     <FastImage
