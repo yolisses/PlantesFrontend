@@ -14,7 +14,7 @@ export function CustomHeader({
     <View style={[styles.container, style]}>
       {left || (showBackButton && <BackButton />)}
       {center}
-      <Text style={styles.title}>{title}</Text>
+      {<Text style={styles.title}>{title}</Text>}
       {right}
     </View>
   );

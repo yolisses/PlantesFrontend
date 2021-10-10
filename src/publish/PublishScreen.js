@@ -5,7 +5,7 @@ import {useObserver} from 'mobx-react-lite';
 import {ItemEdit} from './ItemEdit';
 import {useForm} from 'react-hook-form';
 import {FooterNavigation} from 'navigation/FooterNavigation';
-import { pushSending } from 'send/pushSending';
+import {pushSending} from 'send/pushSending';
 
 export function PublishScreen() {
   const {navigate} = useNavigation();

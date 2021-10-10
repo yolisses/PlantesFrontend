@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import CameraRoll from '@react-native-community/cameraroll';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {FlatList, View} from 'react-native';
 
 import {width} from 'utils/width';
 
@@ -13,10 +13,13 @@ import {BackButton} from './BackButton';
 import {ImagesLimitAlert} from './ImagesLimitAlert';
 import {imagesLimit} from './imagesLimit';
 import {useAlert} from 'alert/AlertContext';
+import {faTimes} from '@fortawesome/free-solid-svg-icons';
+import {CustomHeader} from './CustomHeader';
+import {NextButton} from './NextButton';
 
 const numberOfCollums = 3;
 
-export function ImagesPicker({value, onChange}) {
+export function ImagesPicker({value, onChange, onFinish}) {
   const [foundImages, setFoundImages] = useState([]);
 
   async function getPhotos() {
@@ -70,6 +73,10 @@ export function ImagesPicker({value, onChange}) {
     }
   }
 
+  function onFinishPress() {
+    onFinish();
+  }
+
   useEffect(() => {
     getPhotos();
   }, [selectedAlbum]);
@@ -77,10 +84,11 @@ export function ImagesPicker({value, onChange}) {
   return (
     <>
       <View style={{backgroundColor: 'white'}}>
-        <View style={styles.wrapper}>
-          <BackButton />
-          <SelectImageAlbumButton style={styles.button} />
-        </View>
+        <CustomHeader
+          left={<BackButton icon={faTimes} />}
+          center={<SelectImageAlbumButton />}
+          right={<NextButton text="Pronto" hideIcon onPress={onFinishPress} />}
+        />
       </View>
       <FlatList
         data={foundImages}
@@ -108,12 +116,3 @@ export function ImagesPicker({value, onChange}) {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  wrapper: {
-    alignItems: 'center',
-    paddingHorizontal: 10,
-    backgroundColor: 'white',
-    flexDirection: 'row',
-  },
-});
