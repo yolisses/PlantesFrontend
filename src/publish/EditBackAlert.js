@@ -14,7 +14,7 @@ export function EditBackAlert() {
   }
 
   return (
-    <Alert title="Descartar alterações?">
+    <Alert title="Descartar alterações?" disableOverlayScape>
       <AlertButton text="Cancelar" />
       <AlertButton text="Descartar" onPress={onPress} destructive />
     </Alert>

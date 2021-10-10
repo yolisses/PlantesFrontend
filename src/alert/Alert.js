@@ -3,14 +3,14 @@ import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {useAlert} from 'alert/AlertContext';
 import {AlertOverlay} from './AlertOverlay';
 
-export function Alert({title, description, children}) {
+export function Alert({title, description, children, disableOverlayScape}) {
   const {alertActive} = useAlert();
 
   if (!alertActive) {
     return null;
   }
   return (
-    <AlertOverlay>
+    <AlertOverlay disableScape={disableOverlayScape}>
       <View style={styles.container}>
         <Pressable>
           <View style={styles.paddingContainer}>
