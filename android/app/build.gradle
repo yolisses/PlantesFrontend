@@ -147,6 +147,8 @@ android {
         versionCode 1
         versionName "1.0"
 
+        vectorDrawables.useSupportLibrary = true // crop-picker
+
         missingDimensionStrategy 'react-native-camera', 'general' // <--- inserted this line
     }
     splits {
