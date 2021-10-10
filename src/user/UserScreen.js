@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {FlatList, View} from 'react-native';
-import {useQuery} from 'react-query';
+import {useQuery, useQueryClient} from 'react-query';
 import {observe} from 'mobx';
 import {useObserver} from 'mobx-react-lite';
 
@@ -24,6 +24,8 @@ export function UserScreen({route}) {
   const userId = userIdParam || auth.userId;
   const {data: user} = useUser(userId);
 
+  const queryClient = useQueryClient();
+
   async function getPlants() {
     try {
       const res = await api.get('user-plants/' + userId);
@@ -43,9 +45,13 @@ export function UserScreen({route}) {
     return item?._id;
   }
 
+  function invalidatePlants() {
+    queryClient.invalidateQueries('plants');
+    queryClient.invalidateQueries(['user', 'plants', auth.userId]);
+  }
+
   useEffect(() => {
-    observe(send, getPlants);
-    getPlants();
+    observe(send, invalidatePlants);
   }, []);
 
   return useObserver(() => (
