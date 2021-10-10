@@ -2,10 +2,10 @@ import React from 'react';
 import {useNavigation} from '@react-navigation/core';
 
 import {useObserver} from 'mobx-react-lite';
-import {pushSending} from 'send/sendings';
 import {ItemEdit} from './ItemEdit';
 import {useForm} from 'react-hook-form';
 import {FooterNavigation} from 'navigation/FooterNavigation';
+import { pushSending } from 'send/pushSending';
 
 export function PublishScreen() {
   const {navigate} = useNavigation();

@@ -4,8 +4,9 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {removeSending, send} from './sendings';
 import {useObserver} from 'mobx-react-lite';
+import {removeSending} from './removeSending';
+import {send} from './sendings';
 
 export function SendingWarn({id}) {
   function handleClosePress() {
