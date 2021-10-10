@@ -79,5 +79,9 @@
   },
   "jest": {
     "preset": "react-native"
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/yowlisses/Plantes.git",
+  "author": "Ulisses <m.stunik@gmail.com>",
+  "license": "UNLICENSED"
 }
