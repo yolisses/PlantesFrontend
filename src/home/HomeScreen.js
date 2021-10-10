@@ -51,7 +51,7 @@ export function HomeScreen() {
 
   useEffect(() => {
     observe(searchOptions, () => {
-      queryClient.invalidateQueries('plants');
+      queryClient.refetchQueries('plants');
     });
   }, []);
 
