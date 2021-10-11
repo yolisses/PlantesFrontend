@@ -2,7 +2,7 @@ import React, {useMemo} from 'react';
 import FastImage from 'react-native-fast-image';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
-import {SelectableImageNumber} from './SelectableImageNumber';
+import {SelectableImageNumber} from '../publish/SelectableImageNumber';
 
 import {width} from 'utils/width';
 

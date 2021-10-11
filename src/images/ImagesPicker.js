@@ -9,13 +9,13 @@ import {SelectableImage} from './SelectableImage';
 import {SelectImageAlbumButton} from './SelectImageAlbumButton';
 
 import {selectedAlbum} from 'publish/selectedAlbum';
-import {BackButton} from './BackButton';
-import {ImagesLimitAlert} from './ImagesLimitAlert';
-import {imagesLimit} from './imagesLimit';
+import {BackButton} from '../common/BackButton';
+import {ImagesLimitAlert} from '../publish/ImagesLimitAlert';
+import {imagesLimit} from '../publish/imagesLimit';
 import {useAlert} from 'alert/AlertContext';
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
-import {CustomHeader} from './CustomHeader';
-import {NextButton} from './NextButton';
+import {CustomHeader} from '../common/CustomHeader';
+import {NextButton} from '../common/NextButton';
 
 const numberOfCollums = 3;
 
@@ -29,6 +29,7 @@ export function ImagesPicker({value, onChange, onFinish}) {
       first: 78,
     })
       .then(res => {
+        
         setFoundImages(res.edges.map(edge => edge.node.image.uri));
       })
       .catch(err => console.error(err));

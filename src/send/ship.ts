@@ -9,7 +9,9 @@ import {associateLocalAndRemoteImages} from './associateLocalAndRemoteImages';
 export async function ship(itemFormData: ItemFormData) {
   const id = Math.random();
 
-  const images = Object.keys(itemFormData.images).map(getNewImageByLocalUri);
+  const images = await Promise.all(
+    Object.keys(itemFormData.images).map(getNewImageByLocalUri),
+  );
 
   const shipment: Shipment = {
     id,

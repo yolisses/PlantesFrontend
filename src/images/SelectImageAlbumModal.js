@@ -2,7 +2,7 @@ import CameraRoll from '@react-native-community/cameraroll';
 import {useObserver} from 'mobx-react-lite';
 import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet} from 'react-native';
-import {allPhotosAlbum} from './allPhotosAlbum';
+import {allPhotosAlbum} from '../images/allPhotosAlbum';
 import {SelectLocalImageAlbumModalButton} from './SelectImageAlbumModalButton';
 
 export function SelectLocalImageAlbumModal() {

@@ -6,11 +6,11 @@ import {ItemEdit} from './ItemEdit';
 import {useForm} from 'react-hook-form';
 import {EditBackAlert} from './EditBackAlert';
 import {useAlert} from 'alert/AlertContext';
-import {BackButton} from './BackButton';
+import {BackButton} from '../common/BackButton';
 import {api} from 'api/api';
 import {useQueryClient} from 'react-query';
 import {auth} from 'auth/auth';
-import {formatToImagesEdit} from './formatToImagesEdit';
+import {formatToImagesEdit} from '../images/formatToImagesEdit';
 import {formatToEdit} from './formatToEdit';
 
 export function EditScreen({route}) {

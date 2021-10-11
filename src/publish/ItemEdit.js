@@ -15,9 +15,9 @@ import {PriceInput} from 'form/PriceInput';
 import {TagsSelector} from 'form/TagsSelector';
 import {EmphasisButton} from 'common/EmphasisButton';
 import {hasSomeTrueValuedKey} from 'common/hasSomeTrueValuedKey';
-import {CustomHeader} from './CustomHeader';
+import {CustomHeader} from '../common/CustomHeader';
 import {DiscardButton} from './DiscardButton';
-import {NextButton} from './NextButton';
+import {NextButton} from '../common/NextButton';
 
 export function ItemEdit({
   item,
