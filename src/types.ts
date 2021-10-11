@@ -52,3 +52,14 @@ interface Image {
 type SavedItemId = string;
 
 type SendLink = string;
+
+interface ImageKeepOperation {
+  operation: ['keep'];
+  uri: string;
+}
+
+interface ImageNewOperation {
+  operation: ['new'];
+}
+
+type ImageEditOperation = ImageKeepOperation | ImageNewOperation;
