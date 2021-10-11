@@ -1,11 +1,12 @@
 import React from 'react';
+import {useForm} from 'react-hook-form';
 import {useNavigation} from '@react-navigation/core';
 
 import {useObserver} from 'mobx-react-lite';
+
+import {ship} from 'send/ship';
 import {ItemEdit} from './ItemEdit';
-import {useForm} from 'react-hook-form';
 import {FooterNavigation} from 'navigation/FooterNavigation';
-import {pushSending} from 'send/pushSending';
 
 export function PublishScreen() {
   const {navigate} = useNavigation();
@@ -23,7 +24,7 @@ export function PublishScreen() {
     reset();
     clearErrors();
     navigate('Profile');
-    pushSending(item);
+    ship(item);
   }
 
   return useObserver(() => (
