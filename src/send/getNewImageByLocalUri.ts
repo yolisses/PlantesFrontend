@@ -1,6 +1,6 @@
 export function getNewImageByLocalUri(localUri: string): Image {
-    return {
-        localUri,
-        sent: false,
-    }
+  return {
+    localUri,
+    sent: false,
+  };
 }
