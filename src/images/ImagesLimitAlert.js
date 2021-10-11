@@ -1,9 +1,9 @@
+import React from 'react';
+
 import {Alert} from 'alert/Alert';
 import {AlertButton} from 'alert/AlertButton';
-import React from 'react';
-import {imagesLimit} from './imagesLimit';
 
-export function ImagesLimitAlert() {
+export function ImagesLimitAlert({imagesLimit}) {
   return (
     <Alert
       title="Limite de imagens"
