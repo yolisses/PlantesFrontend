@@ -33,7 +33,7 @@ export async function ship(itemFormData: ItemFormData) {
             sendImage(image, shipment.savedItem._id),
           ),
         );
-        // await confirmSending(shipment.savedItem._id);
+        await confirmSending(shipment.savedItem._id);
         console.error('enviado com sucesso', shipment);
         shipment.sent = true;
       }
