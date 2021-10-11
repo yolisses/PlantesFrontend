@@ -6,7 +6,7 @@ import {getNewImageByLocalUri} from './getNewImageByLocalUri';
 import {sendItemCreationRequest} from './sendItemCreationRequest';
 import {associateLocalAndRemoteImages} from './associateLocalAndRemoteImages';
 
-export async function ship(itemFormData: ItemFormData) {
+export async function ship(itemFormData: ItemFormData, callback: () => any) {
   const id = Math.random();
 
   const images = await Promise.all(
@@ -27,7 +27,7 @@ export async function ship(itemFormData: ItemFormData) {
       if (!shipment.itemInfoSent) {
         shipment.savedItem = await sendItemCreationRequest(shipment);
         shipment.itemInfoSent = true;
-        console.error('item info saved', shipment.savedItem);
+        // console.error('item info saved', shipment.savedItem);
       } else {
         associateLocalAndRemoteImages(shipment);
         await Promise.all(
@@ -35,8 +35,9 @@ export async function ship(itemFormData: ItemFormData) {
             sendImage(image, shipment.savedItem._id),
           ),
         );
-        await confirmSending(shipment.savedItem._id);
-        console.error('enviado com sucesso', shipment);
+        const savedItem = await confirmSending(shipment.savedItem._id);
+        shipment.savedItem = savedItem;
+        // console.error('enviado com sucesso', shipment);
         shipment.sent = true;
       }
     } catch (err) {
@@ -50,5 +51,9 @@ export async function ship(itemFormData: ItemFormData) {
         await waitSomeTime();
       }
     }
+  }
+
+  if (callback) {
+    callback();
   }
 }

@@ -7,6 +7,8 @@ import {useObserver} from 'mobx-react-lite';
 import {ship} from 'send/ship';
 import {ItemEdit} from './ItemEdit';
 import {FooterNavigation} from 'navigation/FooterNavigation';
+import {useQueryClient} from 'react-query';
+import {auth} from '../auth/auth';
 
 export function PublishScreen() {
   const {navigate} = useNavigation();
@@ -19,12 +21,17 @@ export function PublishScreen() {
     formState: {errors, isDirty},
   } = useForm();
 
+  const queryClient = useQueryClient();
+
   //fica
   function onSubmit(item) {
     // reset();
     clearErrors();
-    // navigate('Profile');
-    ship(item);
+    navigate('Profile');
+    ship(item, () => {
+      queryClient.invalidateQueries('plants');
+      queryClient.invalidateQueries(['user', 'plants', auth.userId]);
+    });
   }
 
   return useObserver(() => (
