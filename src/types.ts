@@ -10,11 +10,11 @@ interface ItemFormData {
 interface ItemInfo {
     name: string,
     swap: boolean,
-    price: number,
     tags: string[],
     amount: number,
     donate: boolean,
     description: string,
+    price: number | null,
 }
 
 interface SavedItem extends ItemInfo {
