@@ -7,7 +7,7 @@ export async function sendImage(image: Image, plantId: SavedItemId) {
   // while (!image.sent) {
   if (!image.sendLink) {
     try {
-      image.sendLink = await getNewLink(plantId, image.remoteUri as string);
+      image.sendLink = await getNewLink(plantId, image.remoteFileName);
     } catch (err) {
       console.error('' + err);
       await waitSomeTime();

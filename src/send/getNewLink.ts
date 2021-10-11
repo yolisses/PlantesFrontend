@@ -1,6 +1,12 @@
-import { api } from "../api";
+import {api} from '../api';
 
-export async function getNewLink(plantId: SavedItemId, image: string): Promise<SendLink> {
-    const res = await api.post('plant-image-upload-link', { plantId, image });
-    return res.data;
+export async function getNewLink(
+  plantId: SavedItemId,
+  remoteFileName: string,
+): Promise<SendLink> {
+  const res = await api.post('plant-image-upload-link', {
+    plantId,
+    remoteFileName,
+  });
+  return res.data;
 }
