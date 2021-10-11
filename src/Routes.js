@@ -11,10 +11,10 @@ import {useObserver} from 'mobx-react-lite';
 import {AlertDisplay} from 'alert/AlertDisplay';
 import {ModalDisplay} from 'modal/ModalDisplay';
 
+import {EditScreen} from 'edit/EditScreen';
 import {UserScreen} from 'user/UserScreen';
 import {HomeScreen} from 'home/HomeScreen';
 import {LoginScreen} from 'auth/LoginScreen';
-import {EditScreen} from 'publish/EditScreen';
 import {ConfigScreen} from 'config/ConfigScreen';
 import {ShowItemScreen} from 'show/ShowItemScreen';
 import {PublishScreen} from 'publish/PublishScreen';

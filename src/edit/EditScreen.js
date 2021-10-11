@@ -1,17 +1,18 @@
 import React from 'react';
+import {useForm} from 'react-hook-form';
+import {useQueryClient} from 'react-query';
 import {useNavigation} from '@react-navigation/core';
 
 import {useObserver} from 'mobx-react-lite';
-import {ItemEdit} from './ItemEdit';
-import {useForm} from 'react-hook-form';
-import {EditBackAlert} from './EditBackAlert';
-import {useAlert} from 'alert/AlertContext';
-import {BackButton} from '../common/BackButton';
+
 import {api} from 'api/api';
-import {useQueryClient} from 'react-query';
 import {auth} from 'auth/auth';
-import {formatToImagesEdit} from '../images/formatToImagesEdit';
-import {formatToEdit} from './formatToEdit';
+import {ItemEdit} from 'publish/ItemEdit';
+import {useAlert} from 'alert/AlertContext';
+import {BackButton} from 'common/BackButton';
+import {formatToEdit} from 'edit/formatToEdit';
+import {EditBackAlert} from 'edit/EditBackAlert';
+import {formatToImagesEdit} from 'images/formatToImagesEdit';
 
 export function EditScreen({route}) {
   const {navigate} = useNavigation();
