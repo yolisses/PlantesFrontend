@@ -52,7 +52,7 @@ export function HomeScreen() {
 
   useEffect(() => {
     observe(searchOptions, () => {
-      queryClient.refetchQueries('plants');
+      queryClient.invalidateQueries('plants');
     });
   }, []);
 
