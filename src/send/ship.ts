@@ -56,6 +56,8 @@ export async function ship(itemFormData: ItemFormData, callback: () => any) {
     }
   }
 
+  send.sendings[id] = shipment;
+
   if (callback) {
     callback();
   }

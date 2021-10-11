@@ -6,10 +6,11 @@ import FastImage from 'react-native-fast-image';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useObserver} from 'mobx-react-lite';
 import {removeSending} from './removeSending';
+import {send} from './sendings';
 
-export function SendingWarn({shipment}: {shipment: Shipment}) {
+export function SendingWarn({id}) {
   function handleClosePress() {
-    removeSending(shipment.id);
+    removeSending(id);
   }
 
   return useObserver(() => (
@@ -17,16 +18,16 @@ export function SendingWarn({shipment}: {shipment: Shipment}) {
       <View style={styles.wrapper}>
         <FastImage
           style={styles.image}
-          source={{uri: Object.keys(shipment.itemFormData.images)[0]}}
+          source={{uri: Object.keys(send.sendings[id].itemFormData.images)[0]}}
         />
-        {!!shipment.sent && (
+        {!!send.sendings[id].sent && (
           <FontAwesomeIcon icon={faCheck} color="#0b0" style={styles.icon} />
         )}
         <Text style={styles.text}>
-          {shipment.sent ? 'Enviado' : 'Enviando'}
+          {send.sendings[id].sent ? 'Enviado' : 'Enviando'}
         </Text>
       </View>
-      {!!shipment.sent && (
+      {!!send.sendings[id].sent && (
         <TouchableOpacity activeOpacity={0.5} onPress={handleClosePress}>
           <Text style={styles.hideText}>fechar</Text>
         </TouchableOpacity>
