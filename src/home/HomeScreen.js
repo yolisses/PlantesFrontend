@@ -67,8 +67,8 @@ export function HomeScreen() {
           onEndReachedThreshold={0.4}
           ListHeaderComponent={
             <>
-              <SendingList />
               <LocationOption />
+              <SendingList />
             </>
           }
           renderItem={({item}) => <Card item={item} />}
