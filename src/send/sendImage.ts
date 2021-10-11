@@ -15,7 +15,6 @@ export async function sendImage(image: Image, plantId: SavedItemId) {
     }
   } else {
     try {
-      await waitSomeTime();
       await pushImage(image);
     } catch (err) {
       console.error('error sending image: ', image.localUri, err);
