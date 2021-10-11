@@ -3,7 +3,7 @@ import { getObjectLength } from "../utils/getObjectLength";
 
 export async function sendItemInfoAndImagesCount(shipment: Shipment) {
     const creationRequest: CreationRequest = {
-        itemInfo: shipment.itemInfo,
+        ...shipment.itemInfo,
         imagesCount: getObjectLength(shipment.images)
     }
     const res = await api.post('plant', creationRequest);

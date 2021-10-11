@@ -21,9 +21,9 @@ export function PublishScreen() {
 
   //fica
   function onSubmit(item) {
-    reset();
+    // reset();
     clearErrors();
-    navigate('Profile');
+    // navigate('Profile');
     ship(item);
   }
 

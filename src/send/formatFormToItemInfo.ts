@@ -8,11 +8,11 @@ export function formatFormToItemInfo(itemFormData: ItemFormData): ItemInfo {
     const result = {
         name,
         swap,
-        price,
-        donate,
         tags,
-        description,
         amount,
+        description,
+        price: price || null,
+        donate: donate ? true : false,
     }
     return result
 }

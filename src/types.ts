@@ -38,8 +38,7 @@ interface Shipment {
     itemInfoSent: boolean
 }
 
-interface CreationRequest {
-    itemInfo: ItemInfo
+interface CreationRequest extends ItemInfo {
     imagesCount: number
 }
 
