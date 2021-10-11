@@ -20,7 +20,6 @@ export function PublishScreen() {
 
   //fica
   function onSubmit(item) {
-    console.error(item);
     reset();
     clearErrors();
     navigate('Profile');
