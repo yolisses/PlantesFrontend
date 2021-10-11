@@ -4,7 +4,7 @@ import { waitSomeTime } from "./waitSomeTime";
 import { confirmSending } from "./confirmSending";
 import { formatFormToItemInfo } from "./formatFormToItemInfo";
 import { getNewImageByLocalUri } from "./getNewImageByLocalUri";
-import { sendItemInfoAndImagesCount } from "./sendItemInfoAndImagesCount";
+import { sendItemCreationRequest } from "./sendItemCreationRequest";
 
 
 export async function ship(itemFormData: ItemFormData) {
@@ -24,7 +24,7 @@ export async function ship(itemFormData: ItemFormData) {
     while (!shipment.sent) {
         try {
             if (!shipment.itemInfoSent) {
-                await sendItemInfoAndImagesCount(shipment);
+                await sendItemCreationRequest(shipment);
             } else {
                 await Promise.all(
                     shipment.images.map(image => sendImage(image, shipment.savedItem._id)),

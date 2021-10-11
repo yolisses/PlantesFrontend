@@ -1,7 +1,7 @@
 import { api } from "../api";
 import { getObjectLength } from "../utils/getObjectLength";
 
-export async function sendItemInfoAndImagesCount(shipment: Shipment) {
+export async function sendItemCreationRequest(shipment: Shipment) {
     const creationRequest: CreationRequest = {
         ...shipment.itemInfo,
         imagesCount: getObjectLength(shipment.images)
