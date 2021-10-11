@@ -1,5 +1,5 @@
 import {formatToPlant} from './formatToPlant';
-import {send} from './sendings';
+import {send} from '../sendings';
 import {sendPlant} from './sendPlant';
 
 export function pushSending(item) {

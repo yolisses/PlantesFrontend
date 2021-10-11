@@ -1,14 +1,14 @@
-import {faCheck} from '@fortawesome/free-solid-svg-icons';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {useObserver} from 'mobx-react-lite';
-import {removeSending} from './removeSending';
-import {send} from './sendings';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useObserver } from 'mobx-react-lite';
+import { removeSending } from './removeSending';
+import { send } from './sendings';
 
-export function SendingWarn({id}) {
+export function SendingWarn({ id }) {
   function handleClosePress() {
     removeSending(id);
   }
@@ -19,7 +19,7 @@ export function SendingWarn({id}) {
         {/* <Text>{JSON.stringify(item)}</Text> */}
         <FastImage
           fraction={8}
-          source={{uri: send.sendings[id]?.localData?.images[0]}}
+          source={{ uri: send.sendings[id]?.localData?.images[0] }}
           style={styles.image}
         />
         {!!send.sendings[id]?.sent && (

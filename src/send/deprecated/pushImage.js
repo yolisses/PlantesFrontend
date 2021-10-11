@@ -1,4 +1,4 @@
-import {brokenSendLink} from './brokenSendLink';
+import {brokenSendLink} from '../brokenSendLink';
 
 export async function pushImage(image) {
   const file = {

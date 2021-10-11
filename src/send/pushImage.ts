@@ -1,5 +1,5 @@
 import axios from "axios";
-import { brokenSendLink } from "./deprecated/brokenSendLink";
+import { brokenSendLink } from "./brokenSendLink";
 
 export async function pushImage(image: Image) {
     const file = { uri: image.localUri };
