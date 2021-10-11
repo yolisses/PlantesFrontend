@@ -1,4 +1,4 @@
-import { brokenSendLink } from "./brokenSendLink";
+import { brokenSendLink } from "./deprecated/brokenSendLink";
 import { getNewLink } from "./getNewLink";
 import { pushImage } from "./pushImage";
 import { waitSomeTime } from "./waitSomeTime";
