@@ -1,14 +1,14 @@
-import { useObserver } from 'mobx-react-lite';
+import {useObserver} from 'mobx-react-lite';
 import React from 'react';
-import { FlatList } from 'react-native';
-import { send } from './sendings';
-import { SendingWarn } from './SendingWarn';
+import {FlatList} from 'react-native';
+import {send} from './sendings';
+import {SendingWarn} from './SendingWarn';
 
 export function SendingList() {
   return useObserver(() => (
     <FlatList
-      data={Object.keys(send.sendings)}
-      renderItem={({ item }) => <SendingWarn id={item} />}
+      data={Object.values(send.sendings)}
+      renderItem={({item}) => <SendingWarn shipment={item} />}
     />
   ));
 }

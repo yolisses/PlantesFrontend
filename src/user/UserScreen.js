@@ -13,8 +13,8 @@ import {api} from 'api';
 import {auth} from 'auth/auth';
 import {Card} from 'home/Card';
 import {send} from 'send/sendings';
-import {SendingList} from 'send/SendingList';
 import {BackButton} from 'common/BackButton';
+import {SendingList} from 'send/SendingList';
 import {CustomHeader} from 'common/CustomHeader';
 import {FooterNavigation} from 'navigation/FooterNavigation';
 

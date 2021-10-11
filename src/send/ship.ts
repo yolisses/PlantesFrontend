@@ -5,22 +5,25 @@ import {formatFormToItemInfo} from './formatFormToItemInfo';
 import {getNewImageByLocalUri} from './getNewImageByLocalUri';
 import {sendItemCreationRequest} from './sendItemCreationRequest';
 import {associateLocalAndRemoteImages} from './associateLocalAndRemoteImages';
+import {send} from './sendings';
 
 export async function ship(itemFormData: ItemFormData, callback: () => any) {
   const id = Math.random();
 
-  const images = await Promise.all(
-    Object.keys(itemFormData.images).map(getNewImageByLocalUri),
-  );
-
   const shipment: Shipment = {
     id,
-    images,
+    images: [],
     sent: false,
     itemInfoSent: false,
     itemFormData: itemFormData,
     itemInfo: formatFormToItemInfo(itemFormData),
   };
+
+  send.sendings[id] = shipment;
+
+  shipment.images = await Promise.all(
+    Object.keys(itemFormData.images).map(getNewImageByLocalUri),
+  );
 
   while (!shipment.sent) {
     try {

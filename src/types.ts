@@ -34,8 +34,8 @@ interface Shipment {
   images: Image[];
   itemInfo: ItemInfo;
   savedItem?: SavedItem;
-  itemFormData: object;
   itemInfoSent: boolean;
+  itemFormData: ItemFormData;
 }
 
 interface CreationRequest extends ItemInfo {

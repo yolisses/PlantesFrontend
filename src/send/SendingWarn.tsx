@@ -1,35 +1,32 @@
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import {faCheck} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useObserver } from 'mobx-react-lite';
-import { removeSending } from './removeSending';
-import { send } from './sendings';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {useObserver} from 'mobx-react-lite';
+import {removeSending} from './removeSending';
 
-export function SendingWarn({ id }) {
+export function SendingWarn({shipment}: {shipment: Shipment}) {
   function handleClosePress() {
-    removeSending(id);
+    removeSending(shipment.id);
   }
 
   return useObserver(() => (
     <View style={[styles.container, styles.border]}>
       <View style={styles.wrapper}>
-        {/* <Text>{JSON.stringify(item)}</Text> */}
         <FastImage
-          fraction={8}
-          source={{ uri: send.sendings[id]?.localData?.images[0] }}
           style={styles.image}
+          source={{uri: Object.keys(shipment.itemFormData.images)[0]}}
         />
-        {!!send.sendings[id]?.sent && (
+        {!!shipment.sent && (
           <FontAwesomeIcon icon={faCheck} color="#0b0" style={styles.icon} />
         )}
         <Text style={styles.text}>
-          {send.sendings[id]?.sent ? 'Enviado' : 'Enviando'}
+          {shipment.sent ? 'Enviado' : 'Enviando'}
         </Text>
       </View>
-      {!!send.sendings[id]?.sent && (
+      {!!shipment.sent && (
         <TouchableOpacity activeOpacity={0.5} onPress={handleClosePress}>
           <Text style={styles.hideText}>fechar</Text>
         </TouchableOpacity>

@@ -1,11 +1,12 @@
 import React, {useEffect} from 'react';
-import {Button, FlatList, View} from 'react-native';
+import {FlatList, View} from 'react-native';
 import {useInfiniteQuery, useQueryClient} from 'react-query';
 import {observe} from 'mobx';
 
 import {api} from 'api/api';
 import {Card} from 'home/Card';
 import {NotFound} from 'home/NotFound';
+import {SendingList} from 'send/SendingList';
 import {NetworkError} from 'home/NetworkError';
 import {formatSearch} from 'search/formatSearch';
 import {searchOptions} from 'search/searchOptions';
@@ -64,7 +65,12 @@ export function HomeScreen() {
           onEndReached={onEndReached}
           data={getFlatedArray(data)}
           onEndReachedThreshold={0.4}
-          ListHeaderComponent={<LocationOption />}
+          ListHeaderComponent={
+            <>
+              <SendingList />
+              <LocationOption />
+            </>
+          }
           renderItem={({item}) => <Card item={item} />}
           ListFooterComponent={
             <>
