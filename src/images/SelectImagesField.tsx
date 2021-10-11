@@ -1,11 +1,12 @@
-import {hasSomeTrueValuedKey} from 'utils/hasSomeTrueValuedKey';
-import {Label} from 'form/Label';
-import {MiniMessage} from 'form/MiniMessage';
 import React from 'react';
 import {FlatList} from 'react-native';
 import {StyleSheet, View} from 'react-native';
-import {SelectImagesItem} from './SelectImageItem';
-import {SelectImagesButton} from './SelectImagesButton';
+
+import {Label} from 'form/Label';
+import {MiniMessage} from 'form/MiniMessage';
+import {SelectImagesItem} from 'images/SelectImageItem';
+import {SelectImagesButton} from 'images/SelectImagesButton';
+import {hasSomeTrueValuedKey} from 'utils/hasSomeTrueValuedKey';
 
 export function SelectImagesField({label, value, error, control, onChange}) {
   const renderItem = ({item: uri}) => (
@@ -16,7 +17,7 @@ export function SelectImagesField({label, value, error, control, onChange}) {
 
   return (
     <View style={styles.container}>
-      <Label text={label} style={styles.label} />
+      <Label text={label} />
       <View style={!!uris.length && styles.wrapper}>
         <FlatList
           horizontal
@@ -48,9 +49,6 @@ const styles = StyleSheet.create({
   container: {
     marginBottom: 10,
     alignItems: 'stretch',
-  },
-  label: {
-    // backgroundColor: 'white',
   },
   wrapper: {
     borderBottomWidth: 0,
