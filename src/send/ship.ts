@@ -15,8 +15,8 @@ export async function ship(itemFormData: ItemFormData) {
     id,
     images,
     sent: false,
-    itemFormData: itemFormData,
     itemInfoSent: false,
+    itemFormData: itemFormData,
     itemInfo: formatFormToItemInfo(itemFormData),
   };
 
@@ -25,20 +25,23 @@ export async function ship(itemFormData: ItemFormData) {
       if (!shipment.itemInfoSent) {
         shipment.savedItem = await sendItemCreationRequest(shipment);
         shipment.itemInfoSent = true;
+        console.error('item info saved', shipment.savedItem);
       } else {
-        await associateLocalAndRemoteImages(shipment);
-        console.error(shipment);
+        associateLocalAndRemoteImages(shipment);
         await Promise.all(
           shipment.images.map(image =>
             sendImage(image, shipment.savedItem._id),
           ),
         );
-        await confirmSending(shipment.savedItem._id);
-        console.error(shipment);
+        // await confirmSending(shipment.savedItem._id);
+        console.error('enviado com sucesso', shipment);
         shipment.sent = true;
       }
     } catch (err) {
-      console.error(JSON.stringify(err?.response) || err);
+      console.error(
+        'erro no primeiro loop',
+        JSON.stringify(err?.response) || err,
+      );
       if (err?.response?.status === 401 || err?.response?.status === 400) {
         return;
       } else {

@@ -6,7 +6,7 @@ export async function getNewLink(
 ): Promise<SendLink> {
   const res = await api.post('plant-image-upload-link', {
     plantId,
-    remoteFileName,
+    image: remoteFileName,
   });
   return res.data;
 }
