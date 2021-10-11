@@ -1,14 +1,14 @@
 import React from 'react';
 import {useForm} from 'react-hook-form';
+import {useQueryClient} from 'react-query';
 import {useNavigation} from '@react-navigation/core';
 
 import {useObserver} from 'mobx-react-lite';
 
+import {auth} from 'auth/auth';
 import {ship} from 'send/ship';
-import {ItemEdit} from './ItemEdit';
+import {ItemForm} from 'form/ItemForm';
 import {FooterNavigation} from 'navigation/FooterNavigation';
-import {useQueryClient} from 'react-query';
-import {auth} from '../auth/auth';
 
 export function PublishScreen() {
   const {navigate} = useNavigation();
@@ -36,7 +36,7 @@ export function PublishScreen() {
 
   return useObserver(() => (
     <>
-      <ItemEdit
+      <ItemForm
         reset={reset}
         errors={errors}
         title="Publicar"

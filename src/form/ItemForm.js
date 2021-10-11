@@ -4,28 +4,30 @@ import {ScrollView, StyleSheet, View} from 'react-native';
 
 import {useObserver} from 'mobx-react-lite';
 
-import {tags} from './data/tags';
-import {availabilities, availabilitiesLabels} from './data/availiabilities';
+import {tags} from '../publish/data/tags';
+import {
+  availabilities,
+  availabilitiesLabels,
+} from '../publish/data/availiabilities';
 
 import {IntInput} from 'form/IntInput';
 import {TextInput} from 'form/TextInput';
 import {PriceInput} from 'form/PriceInput';
 import {NextButton} from 'common/NextButton';
-import {DiscardButton} from './DiscardButton';
 import {TagsSelector} from 'form/TagsSelector';
 import {CustomHeader} from 'common/CustomHeader';
+import {DiscardButton} from 'publish/DiscardButton';
 import {EmphasisButton} from 'common/EmphasisButton';
 import {SelectImagesField} from 'images/SelectImagesField';
 import {hasSomeTrueValuedKey} from 'utils/hasSomeTrueValuedKey';
 
-export function ItemEdit({
+export function ItemForm({
   item,
   reset,
   title,
   errors,
   isDirty,
   control,
-  onError,
   onSubmit,
   headerLeft,
   handleSubmit,

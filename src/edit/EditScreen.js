@@ -7,7 +7,7 @@ import {useObserver} from 'mobx-react-lite';
 
 import {api} from 'api/api';
 import {auth} from 'auth/auth';
-import {ItemEdit} from 'publish/ItemEdit';
+import {ItemForm} from 'form/ItemForm';
 import {useAlert} from 'alert/AlertContext';
 import {BackButton} from 'common/BackButton';
 import {formatToEdit} from 'edit/formatToEdit';
@@ -49,7 +49,7 @@ export function EditScreen({route}) {
   }
 
   return useObserver(() => (
-    <ItemEdit
+    <ItemForm
       reset={reset}
       title="Editar"
       errors={errors}

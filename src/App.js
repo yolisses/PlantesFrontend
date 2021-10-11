@@ -5,13 +5,14 @@ import 'auth/trySavedLogin'; // After this one ^^^
 import React from 'react';
 import {Routes} from './Routes';
 import {StatusBar} from 'react-native';
+import {QueryClient, QueryClientProvider} from 'react-query';
+
+import moment from 'moment/min/moment-with-locales';
 
 import {AlertContextProvider} from 'alert/AlertContext';
 import {ModalContextProvider} from 'modal/ModalContext';
 import {PermissionsContextProvider} from 'permission/PermissionsContext';
 import {CameraPreferencesProvider} from 'camera/contexts/CameraPreferencesContext';
-import moment from 'moment/min/moment-with-locales';
-import {QueryClient, QueryClientProvider} from 'react-query';
 
 moment.locale('pt');
 
