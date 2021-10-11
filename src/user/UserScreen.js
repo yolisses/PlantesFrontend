@@ -14,8 +14,8 @@ import {auth} from 'auth/auth';
 import {Card} from 'home/Card';
 import {send} from 'send/sendings';
 import {SendingList} from 'send/SendingList';
-import {BackButton} from 'publish/BackButton';
-import {CustomHeader} from 'publish/CustomHeader';
+import {BackButton} from 'common/BackButton';
+import {CustomHeader} from 'common/CustomHeader';
 import {FooterNavigation} from 'navigation/FooterNavigation';
 
 const numberOfCollums = 3;

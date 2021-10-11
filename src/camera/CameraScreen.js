@@ -12,7 +12,7 @@ import {CameraSquareFocus} from './CameraFocusSquare';
 import {GoBackCameraButton} from './GoBackCameraButton';
 import {FlashSelectorButton} from './FlashSelectorButton';
 import {PictureConfirmButtons} from './PictureConfirmButtons';
-import {imagesLimit} from 'publish/imagesLimit';
+import {imagesLimit} from 'images/imagesLimit';
 
 import RNGRP from 'react-native-get-real-path';
 import {selectedImages} from 'publish/selectedImages';

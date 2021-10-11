@@ -2,7 +2,7 @@ import {useNavigation} from '@react-navigation/core';
 import {api} from 'api';
 import {auth} from 'auth/auth';
 import {refreshPlants} from 'home/loadPlants';
-import {CustomHeader} from 'publish/CustomHeader';
+import {CustomHeader} from 'common/CustomHeader';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import MapView from 'react-native-maps';

@@ -1,11 +1,13 @@
-import {faSearch, faTimes} from '@fortawesome/free-solid-svg-icons';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {basicHitSlop} from 'common/basicHitSlop';
-import {refreshPlants} from 'home/loadPlants';
+import {Text} from 'react-native';
 import React, {useRef, useState} from 'react';
 import {StyleSheet, TextInput, TouchableOpacity} from 'react-native';
-import {Text} from 'react-native';
-import {searchOptions} from './searchOptions';
+
+import {faSearch, faTimes} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+
+import {refreshPlants} from 'home/loadPlants';
+import {basicHitSlop} from 'utils/basicHitSlop';
+import {searchOptions} from 'search/searchOptions';
 
 export function SearchBox() {
   const [active, setActive] = useState(false);

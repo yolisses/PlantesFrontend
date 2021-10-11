@@ -1,9 +1,9 @@
 import {api} from 'api';
 import {Message} from 'chat/Message';
-import {BackButton} from 'publish/BackButton';
+import {BackButton} from 'common/BackButton';
 import {MessageInput} from 'chat/MessageInput';
 import React, {useEffect} from 'react';
-import {CustomHeader} from 'publish/CustomHeader';
+import {CustomHeader} from 'common/CustomHeader';
 import {FlatList} from 'react-native-gesture-handler';
 import {StyleSheet, View} from 'react-native';
 import {UserImageAndName} from 'user/UserImageAndName';

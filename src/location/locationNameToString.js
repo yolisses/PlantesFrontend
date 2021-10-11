@@ -1,4 +1,4 @@
-import {concatWithCommas} from 'common/concatWithCommas';
+import {concatWithCommas} from 'utils/concatWithCommas';
 
 export function locationNameToString(locationName) {
   if (!locationName) {

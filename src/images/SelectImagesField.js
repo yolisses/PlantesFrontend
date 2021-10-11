@@ -1,4 +1,4 @@
-import {hasSomeTrueValuedKey} from 'common/hasSomeTrueValuedKey';
+import {hasSomeTrueValuedKey} from 'utils/hasSomeTrueValuedKey';
 import {Label} from 'form/Label';
 import {MiniMessage} from 'form/MiniMessage';
 import React from 'react';

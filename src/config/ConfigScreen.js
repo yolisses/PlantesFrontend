@@ -1,8 +1,8 @@
 import {faStickyNote} from '@fortawesome/free-regular-svg-icons';
 import {faDoorOpen} from '@fortawesome/free-solid-svg-icons';
 import {signOut} from 'auth/signOut';
-import {BackButton} from 'publish/BackButton';
-import {CustomHeader} from 'publish/CustomHeader';
+import {BackButton} from 'common/BackButton';
+import {CustomHeader} from 'common/CustomHeader';
 import React from 'react';
 import {ScrollView, View} from 'react-native';
 import {ConfigButton} from './ConfigButton';

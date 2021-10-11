@@ -40,6 +40,7 @@ module.exports = {
           common: './src/common',
           config: './src/config',
           global: './src/global',
+          images: './src/images',
           search: './src/search',
           comment: './src/comment',
           profile: './src/profile',

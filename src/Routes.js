@@ -19,7 +19,7 @@ import {ConfigScreen} from 'config/ConfigScreen';
 import {ShowItemScreen} from 'show/ShowItemScreen';
 import {PublishScreen} from 'publish/PublishScreen';
 import {EditProfileScreen} from 'profile/EditProfileScreen';
-import {SelectImagesScreen} from 'publish/SelectImagesScreen';
+import {SelectImagesScreen} from 'images/SelectImagesScreen';
 import {SelectLocationScreen} from 'map/SelectLocationScreen';
 
 const Stack = createNativeStackNavigator();
@@ -52,7 +52,7 @@ export function Routes() {
           <Stack.Screen name="Login" component={LoginScreen} />
         ) : (
           <>
-            <Stack.Screen name="dev" component={Dev} />
+            {/* <Stack.Screen name="dev" component={Dev} /> */}
 
             <Stack.Screen name="default" component={Main} />
             <Stack.Screen name="Edit" component={EditScreen} />

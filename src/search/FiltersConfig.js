@@ -1,16 +1,17 @@
-import {concatWithCommas} from 'common/concatWithCommas';
-import {getTrueValuedKeys} from 'common/getTrueValuedKeys';
-import {refreshPlants} from 'home/loadPlants';
-import {OptionsButton} from 'home/OptionsButton';
-import {useModal} from 'modal/ModalContext';
-import {availabilitiesLabels} from 'publish/data/availiabilities';
 import React from 'react';
 import {useForm} from 'react-hook-form';
 import {ScrollView} from 'react-native';
 import {StyleSheet, Text, View} from 'react-native';
-import {ApplyButton} from './ApplyButton';
-import {FiltersModal} from './FiltersModal';
-import {searchOptions} from './searchOptions';
+
+import {useModal} from 'modal/ModalContext';
+import {refreshPlants} from 'home/loadPlants';
+import {ApplyButton} from 'search/ApplyButton';
+import {OptionsButton} from 'home/OptionsButton';
+import {FiltersModal} from 'search/FiltersModal';
+import {searchOptions} from 'search/searchOptions';
+import {concatWithCommas} from 'utils/concatWithCommas';
+import {getTrueValuedKeys} from 'utils/getTrueValuedKeys';
+import {availabilitiesLabels} from 'publish/data/availiabilities';
 
 export function FiltersConfig() {
   const {reset, control, handleSubmit} = useForm();

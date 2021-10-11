@@ -1,10 +1,12 @@
-import {faTimes} from '@fortawesome/free-solid-svg-icons';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {basicHitSlop} from 'common/basicHitSlop';
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import {StyleSheet, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
+
+import {faTimes} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+
+import {basicHitSlop} from 'utils/basicHitSlop';
 
 export function SelectImagesItem({uri, onChange}) {
   function removeImage({value, uri}) {

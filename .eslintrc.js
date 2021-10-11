@@ -27,6 +27,7 @@ module.exports = {
           ['config', './src/config'],
           ['common', './src/common'],
           ['global', './src/global'],
+          ['images', './src/images'],
           ['search', './src/search'],
           ['comment', './src/comment'],
           ['profile', './src/profile'],

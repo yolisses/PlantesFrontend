@@ -4,9 +4,9 @@ import {ScrollView, StyleSheet} from 'react-native';
 
 import {auth} from 'auth/auth';
 import {TextInput} from 'form/TextInput';
-import {BackButton} from 'publish/BackButton';
-import {NextButton} from 'publish/NextButton';
-import {CustomHeader} from 'publish/CustomHeader';
+import {BackButton} from 'common/BackButton';
+import {NextButton} from 'common/NextButton';
+import {CustomHeader} from 'common/CustomHeader';
 import {api} from 'api';
 import {useNavigation} from '@react-navigation/core';
 import {Keyboard} from 'react-native';

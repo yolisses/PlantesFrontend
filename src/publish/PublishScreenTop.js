@@ -2,8 +2,8 @@ import React from 'react';
 import {View} from 'react-native';
 
 import {ProgressBar} from 'publish/ProgressBar';
-import {CustomHeader} from 'publish/CustomHeader';
-import {BackButton} from 'publish/BackButton';
+import {CustomHeader} from 'common/CustomHeader';
+import {BackButton} from 'common/BackButton';
 
 export function PublishScreenTop({
   ratio,

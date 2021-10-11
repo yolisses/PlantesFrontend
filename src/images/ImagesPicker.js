@@ -2,20 +2,19 @@ import React, {useEffect, useState} from 'react';
 import CameraRoll from '@react-native-community/cameraroll';
 import {FlatList, View} from 'react-native';
 
-import {width} from 'utils/width';
-
-import {allPhotosAlbum} from './allPhotosAlbum';
-import {SelectableImage} from './SelectableImage';
-import {SelectImageAlbumButton} from './SelectImageAlbumButton';
-
-import {selectedAlbum} from 'publish/selectedAlbum';
-import {BackButton} from '../common/BackButton';
-import {ImagesLimitAlert} from '../publish/ImagesLimitAlert';
-import {imagesLimit} from '../publish/imagesLimit';
-import {useAlert} from 'alert/AlertContext';
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
-import {CustomHeader} from '../common/CustomHeader';
-import {NextButton} from '../common/NextButton';
+
+import {width} from 'utils/width';
+import {useAlert} from 'alert/AlertContext';
+import {BackButton} from 'common/BackButton';
+import {NextButton} from 'common/NextButton';
+import {imagesLimit} from 'images/imagesLimit';
+import {CustomHeader} from 'common/CustomHeader';
+import {selectedAlbum} from 'images/selectedAlbum';
+import {allPhotosAlbum} from 'images/allPhotosAlbum';
+import {SelectableImage} from 'images/SelectableImage';
+import {ImagesLimitAlert} from 'images/ImagesLimitAlert';
+import {SelectImageAlbumButton} from 'images/SelectImageAlbumButton';
 
 const numberOfCollums = 3;
 
@@ -29,7 +28,6 @@ export function ImagesPicker({value, onChange, onFinish}) {
       first: 78,
     })
       .then(res => {
-        
         setFoundImages(res.edges.map(edge => edge.node.image.uri));
       })
       .catch(err => console.error(err));

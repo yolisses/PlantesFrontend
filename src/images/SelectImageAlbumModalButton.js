@@ -2,10 +2,10 @@ import React from 'react';
 import {StyleSheet, Text} from 'react-native';
 import {TouchableOpacity} from 'react-native';
 
-import {useModal} from 'modal/ModalContext';
-
-import {selectedAlbum} from './selectedAlbum';
 import {useObserver} from 'mobx-react-lite';
+
+import {useModal} from 'modal/ModalContext';
+import {selectedAlbum} from 'images/selectedAlbum';
 
 export function SelectLocalImageAlbumModalButton({album}) {
   const {closeModal} = useModal();
