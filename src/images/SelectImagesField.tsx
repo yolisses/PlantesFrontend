@@ -8,6 +8,7 @@ import {openImagePicker} from 'images/openImagePicker';
 import {SelectImagesItem} from 'images/SelectImageItem';
 import {SelectImagesButton} from 'images/SelectImagesButton';
 import {hasSomeTrueValuedKey} from 'utils/hasSomeTrueValuedKey';
+import {convertImagesObjToListObj} from './convertImagesObjToListObj';
 
 interface Props {
   label?: string;
@@ -24,7 +25,7 @@ export function SelectImagesField({label, value, error, onChange}: Props) {
   const uris = typeof value === 'object' ? Object.keys(value) : [];
 
   function onSelectPress() {
-    openImagePicker(value, onChange);
+    openImagePicker(convertImagesObjToListObj(value), onChange);
   }
 
   return (
