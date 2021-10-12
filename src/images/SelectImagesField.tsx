@@ -11,19 +11,15 @@ import {hasSomeTrueValuedKey} from 'utils/hasSomeTrueValuedKey';
 import {getUri} from './getUri';
 
 interface Props {
+  value: Image[];
   label?: string;
   error?: string;
-  onChange: (value: ListObj) => void;
-  value: Image[];
+  onChange: (value: Image[]) => void;
 }
 
 export function SelectImagesField({label, value, error, onChange}: Props) {
   function onSelectPress() {
-    openImagePicker(
-      {},
-      // convertImagesObjToListObj(value)
-      onChange,
-    );
+    openImagePicker(value, onChange);
   }
 
   console.error(value);

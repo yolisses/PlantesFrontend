@@ -14,14 +14,29 @@ import {selectedAlbum} from 'images/selectedAlbum';
 import {SelectableImage} from 'images/SelectableImage';
 import {getSelectedAlbumPhotos} from 'images/getSelectedAlbumPhotos';
 import {SelectImageAlbumButton} from 'images/SelectImageAlbumButton';
+import {getUri} from './getUri';
 
 const numberOfCollums = 3;
 
+function getSelectionImagesObject(images: Image[] | undefined) {
+  const result: SelectionImagesObject = {};
+  if (!images) {
+    return result;
+  }
+  images.forEach(image => {
+    result[getUri(image)] = image;
+  });
+  return result;
+}
+
 export function SelectImagesScreen({route}) {
   const [foundImages, setFoundImages] = useState<string[]>([]);
-  const [imagesObj, setImagesObj] = useState<SelectionImagesObject>({
-    ...route.params?.initialValue,
-  });
+
+  const initialImagesArray: Image[] | undefined = route.params?.initialValue;
+
+  const [imagesObj, setImagesObj] = useState<SelectionImagesObject>(
+    getSelectionImagesObject(initialImagesArray),
+  );
 
   async function getPhotos() {
     const found = await getSelectedAlbumPhotos();
