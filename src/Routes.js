@@ -18,6 +18,7 @@ import {LoginScreen} from 'auth/LoginScreen';
 import {ConfigScreen} from 'config/ConfigScreen';
 import {ShowItemScreen} from 'show/ShowItemScreen';
 import {PublishScreen} from 'publish/PublishScreen';
+import {navigationRef} from 'navigation/RootNavigation';
 import {EditProfileScreen} from 'profile/EditProfileScreen';
 import {SelectImagesScreen} from 'images/SelectImagesScreen';
 import {SelectLocationScreen} from 'map/SelectLocationScreen';
@@ -46,7 +47,7 @@ function Main() {
 
 export function Routes() {
   return useObserver(() => (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator screenOptions={{headerShown: false}}>
         {!auth.token ? (
           <Stack.Screen name="Login" component={LoginScreen} />

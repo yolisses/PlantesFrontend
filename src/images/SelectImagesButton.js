@@ -1,22 +1,22 @@
-import {faImage} from '@fortawesome/free-solid-svg-icons';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {useNavigation} from '@react-navigation/core';
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import {StyleSheet, Text} from 'react-native';
 
-export function SelectImagesButton({value, reduced, onChange}) {
-  const {navigate} = useNavigation();
+import {faImage} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 
+import {openImagePicker} from 'images/openImagePicker';
+
+export function SelectImagesButton({value, reduced, onChange}) {
   function onPress() {
-    navigate('Images');
+    openImagePicker(onChange);
   }
 
   return (
     <TouchableOpacity
+      onPress={onPress}
       activeOpacity={0.7}
-      style={[styles.select, reduced ? styles.reduced : styles.expanded]}
-      onPress={onPress}>
+      style={[styles.select, reduced ? styles.reduced : styles.expanded]}>
       <FontAwesomeIcon icon={faImage} size={20} style={styles.icon} />
       <Text style={styles.text}>Selecionar</Text>
     </TouchableOpacity>

@@ -7,6 +7,7 @@ import {faTimes} from '@fortawesome/free-solid-svg-icons';
 import {width} from 'utils/width';
 import {BackButton} from 'common/BackButton';
 import {NextButton} from 'common/NextButton';
+import {imagesAux} from 'images/openImagePicker';
 import {CustomHeader} from 'common/CustomHeader';
 import {selectedAlbum} from 'images/selectedAlbum';
 import {SelectableImage} from 'images/SelectableImage';
@@ -33,7 +34,7 @@ export function SelectImagesScreen() {
   const {goBack} = useNavigation();
 
   function onFinishPress() {
-    onFinishParam();
+    imagesAux.onFinish(imagesObj);
     goBack();
   }
 
