@@ -25,10 +25,10 @@ export function SelectImagesField({label, value, error, onChange}: Props) {
   return (
     <View style={styles.container}>
       <Label text={label} />
-      <View style={!!value.length && styles.wrapper}>
+      <View style={!!value?.length && styles.wrapper}>
         <FlatList
           horizontal
-          data={value}
+          data={value || []}
           contentContainerStyle={[styles.inner]}
           showsHorizontalScrollIndicator={false}
           renderItem={({item}: {item: Image}) => (
@@ -40,7 +40,7 @@ export function SelectImagesField({label, value, error, onChange}: Props) {
           )}
         />
       </View>
-      <SelectImagesButton onPress={onSelectPress} reduced={!!value.length} />
+      <SelectImagesButton onPress={onSelectPress} reduced={!!value?.length} />
       {error && !hasSomeTrueValuedKey(value) && (
         <MiniMessage isError text={error} />
       )}
