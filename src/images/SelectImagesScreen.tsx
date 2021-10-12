@@ -23,8 +23,11 @@ function getSelectionImagesObject(images: Image[] | undefined) {
   if (!images) {
     return result;
   }
-  images.forEach(image => {
-    result[getUri(image)] = image;
+  images.forEach((image, index) => {
+    result[getUri(image)] = {
+      index: index + 1,
+      image: image,
+    };
   });
   return result;
 }

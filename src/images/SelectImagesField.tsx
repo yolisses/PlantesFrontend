@@ -22,8 +22,6 @@ export function SelectImagesField({label, value, error, onChange}: Props) {
     openImagePicker(value, onChange);
   }
 
-  console.error(value);
-
   return (
     <View style={styles.container}>
       <Label text={label} />
