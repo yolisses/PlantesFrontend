@@ -7,7 +7,10 @@ interface Props {
   label: string;
   value: string;
   error: string;
+  optional: boolean;
   multiline: boolean;
+  leftChild: JSX.Element;
+  rightChild: JSX.Element;
 }
 
 export function TextInput({
