@@ -18,7 +18,7 @@ export async function sendImage(image: Image, plantId: SavedItemId) {
         await pushImage(image);
         image.sent = true;
       } catch (err) {
-        console.error('error sending image: ', image.localUri, err);
+        console.error('error sending image: ', image, err);
         if (err === brokenSendLink) {
           image.sendLink = undefined;
         } else {

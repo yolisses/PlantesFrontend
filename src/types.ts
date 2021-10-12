@@ -36,7 +36,6 @@ interface Shipment {
   images: Image[];
   itemInfo: ItemInfo;
   savedItem?: SavedItem;
-  itemInfoSent: boolean;
   itemFormData: ItemFormData;
 }
 
@@ -50,6 +49,7 @@ interface Image {
   sendLink?: SendLink;
   localUri: string | null;
   remoteFileName?: string;
+  localUriCompressed?: string;
 }
 
 interface ImageKeepOperation {

@@ -3,7 +3,7 @@ import {brokenSendLink} from './brokenSendLink';
 export async function pushImage(image: Image) {
   const res = await fetch(image.sendLink, {
     method: 'PUT',
-    body: {uri: image.localUri},
+    body: {uri: image.localUriCompressed},
     headers: {'Content-Type': 'multipart/form-data'},
   });
   // console.error('s3 res', res);

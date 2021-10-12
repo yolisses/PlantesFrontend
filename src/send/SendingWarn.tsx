@@ -7,10 +7,15 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useObserver} from 'mobx-react-lite';
 import {removeSending} from './removeSending';
 import {send} from './sendings';
+import {getUri} from 'images/getUri';
 
 export function SendingWarn({id}) {
   function handleClosePress() {
     removeSending(id);
+  }
+
+  function getFirstImageUri(images: Image[]) {
+    return getUri(images[0]);
   }
 
   return useObserver(() => (
@@ -18,7 +23,7 @@ export function SendingWarn({id}) {
       <View style={styles.wrapper}>
         <FastImage
           style={styles.image}
-          source={{uri: Object.keys(send.sendings[id].itemFormData.images)[0]}}
+          source={{uri: getFirstImageUri(send.sendings[id].images)}}
         />
         {!!send.sendings[id].sent && (
           <FontAwesomeIcon icon={faCheck} color="#0b0" style={styles.icon} />
