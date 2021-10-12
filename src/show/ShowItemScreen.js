@@ -46,13 +46,13 @@ export function ShowItemScreen({route}) {
             </View>
           </Section>
           <Section>
-            <UserLink user={user} />
             {item?.userId === auth.userId && (
               <View style={[styles.line, styles.buttonsWrapper]}>
                 <RemoveButton style={styles.button} item={item} />
                 <EditButton style={styles.button} item={item} />
               </View>
             )}
+            <UserLink user={user} />
             {!!user?.whatsappNumber && (
               <WhatsappButton number={user.whatsappNumber} />
             )}
@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
   },
   buttonsWrapper: {
     paddingLeft: 5,
-    marginVertical: 20,
+    marginTop: 10,
+    marginBottom: 30,
   },
 });
