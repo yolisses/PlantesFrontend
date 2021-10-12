@@ -8,6 +8,7 @@ import {openImagePicker} from 'images/openImagePicker';
 import {SelectImagesItem} from 'images/SelectImageItem';
 import {SelectImagesButton} from 'images/SelectImagesButton';
 import {hasSomeTrueValuedKey} from 'utils/hasSomeTrueValuedKey';
+import {getUri} from './getUri';
 
 interface Props {
   label?: string;
@@ -17,14 +18,8 @@ interface Props {
 }
 
 export function SelectImagesField({label, value, error, onChange}: Props) {
-  console.error(value);
-
   function onSelectPress() {
     openImagePicker(convertImagesObjToListObj(value), onChange);
-  }
-
-  function getUri(image: Image) {
-    return image.localUri || image.remoteUri;
   }
 
   return (

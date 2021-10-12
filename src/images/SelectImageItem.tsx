@@ -7,26 +7,21 @@ import {faTimes} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 
 import {basicHitSlop} from 'utils/basicHitSlop';
+import {getUri} from './getUri';
 
-export function SelectImagesItem({uri, onChange}) {
-  function removeImage({value, uri}) {
-    const newValue = {...value};
-    delete newValue[uri];
-    let counter = 1;
-    for (let key in newValue) {
-      newValue[key] = counter;
-      counter += 1;
-    }
-    return newValue;
-  }
+interface Props {
+  uri: string;
+}
 
+export function SelectImagesItem({uri, onChange}: Props) {
   function onRemovePress() {
-    onChange(value => removeImage({uri, value}));
+    onChange(value => value.filter(item => getUri(item) !== uri));
   }
 
   return (
     <View style={styles.container}>
       <TouchableOpacity
+        activeOpacity={0.5}
         hitSlop={basicHitSlop}
         onPress={onRemovePress}
         style={styles.closeButton}>
