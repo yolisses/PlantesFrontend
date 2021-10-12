@@ -70,3 +70,12 @@ type BooleansObj = {[key: string]: boolean};
 type SavedItemId = string;
 
 type SendLink = string;
+
+interface SelectionImage {
+  index: number;
+  image: Image;
+}
+
+type SelectionImagesObject = {
+  [key: string]: SelectionImage;
+};

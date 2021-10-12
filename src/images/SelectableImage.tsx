@@ -14,7 +14,7 @@ interface Props {
   uri: string;
   index?: number;
   imagesLimit: number;
-  setImagesObj: React.Dispatch<React.SetStateAction<ListObj>>;
+  setImagesObj: React.Dispatch<React.SetStateAction<SelectionImagesObject>>;
 }
 
 export function SelectableImage({
@@ -24,23 +24,29 @@ export function SelectableImage({
   setImagesObj,
 }: Props) {
   const {showAlert} = useAlert();
-  function pushImage(old) {
+  function pushImage(old: SelectionImagesObject) {
     let counter = getObjectLength(old) + 1;
     if (imagesLimit && counter > imagesLimit) {
       showAlert(<ImagesLimitAlert imagesLimit={imagesLimit} />);
       return old;
     }
     const newValue = {...old};
-    newValue[uri] = counter;
+    newValue[uri] = {
+      image: {
+        sent: false,
+        localUri: uri,
+      },
+      index: counter,
+    };
     return newValue;
   }
 
-  function removeImage(old) {
+  function removeImage(old: SelectionImagesObject) {
     const newValue = {...old};
     delete newValue[uri];
     let counter = 1;
     for (let key in newValue) {
-      newValue[key] = counter;
+      newValue[key].index = counter;
       counter += 1;
     }
     return newValue;

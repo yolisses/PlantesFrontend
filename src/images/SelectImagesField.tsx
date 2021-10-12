@@ -19,8 +19,14 @@ interface Props {
 
 export function SelectImagesField({label, value, error, onChange}: Props) {
   function onSelectPress() {
-    openImagePicker(convertImagesObjToListObj(value), onChange);
+    openImagePicker(
+      {},
+      // convertImagesObjToListObj(value)
+      onChange,
+    );
   }
+
+  console.error(value);
 
   return (
     <View style={styles.container}>

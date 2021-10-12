@@ -19,7 +19,7 @@ const numberOfCollums = 3;
 
 export function SelectImagesScreen({route}) {
   const [foundImages, setFoundImages] = useState<string[]>([]);
-  const [imagesObj, setImagesObj] = useState<ListObj>({
+  const [imagesObj, setImagesObj] = useState<SelectionImagesObject>({
     ...route.params?.initialValue,
   });
 
@@ -36,7 +36,7 @@ export function SelectImagesScreen({route}) {
   const {goBack} = useNavigation();
 
   function onFinishPress() {
-    imagesAux.onFinish(imagesObj);
+    imagesAux.onFinish(Object.values(imagesObj).map(item => item.image));
     goBack();
   }
 
@@ -67,8 +67,8 @@ export function SelectImagesScreen({route}) {
             key={uri}
             uri={uri}
             imagesLimit={10}
-            index={imagesObj[uri]}
             setImagesObj={setImagesObj}
+            index={imagesObj[uri]?.index}
           />
         )}
       />
