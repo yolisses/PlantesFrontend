@@ -23,7 +23,6 @@ export function PublishScreen() {
 
   const queryClient = useQueryClient();
 
-  //fica
   function onSubmit(item) {
     // reset();
     clearErrors();
