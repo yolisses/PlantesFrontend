@@ -1,7 +1,13 @@
 import {observable} from 'mobx';
 import {navigate} from '../navigation/RootNavigation';
 
-export const imagesAux = observable({onFinish: () => {}});
+interface ImagesAux {
+  onFinish?: (value: ListObj) => void;
+}
+
+const value: ImagesAux = {};
+
+export const imagesAux = observable(value);
 
 export function openImagePicker(
   value: ListObj,
