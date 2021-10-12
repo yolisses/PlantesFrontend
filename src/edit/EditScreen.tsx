@@ -30,8 +30,8 @@ export function EditScreen({route}) {
 
   async function onSubmit(value: ItemFormData) {
     try {
-      const res = await updatePlantInfo(item._id, value);
-      console.error(res);
+      // const res = await updatePlantInfo(item._id, value);
+      // console.error(res);
       // navigate('ShowItem', {item: res.data});
       queryClient.invalidateQueries('plants');
       queryClient.invalidateQueries(['user', 'plants', auth.userId]);
