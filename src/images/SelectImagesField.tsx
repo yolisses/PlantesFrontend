@@ -9,6 +9,7 @@ import {SelectImagesItem} from 'images/SelectImageItem';
 import {SelectImagesButton} from 'images/SelectImagesButton';
 import {hasSomeTrueValuedKey} from 'utils/hasSomeTrueValuedKey';
 import {getUri} from './getUri';
+import {compressImage} from 'send/compressImage';
 
 interface Props {
   value: Image[];
@@ -18,8 +19,19 @@ interface Props {
 }
 
 export function SelectImagesField({label, value, error, onChange}: Props) {
-  function onSelectPress() {
-    openImagePicker(value, onChange);
+  async function onSelectPress() {
+    openImagePicker(value, async (newValue: Image[]) => {
+      onChange(newValue);
+      try {
+        await Promise.all(
+          newValue.map(async image => {
+            image.localUriCompressed = await compressImage(image.localUri);
+          }),
+        );
+      } catch (err) {
+        console.error(err);
+      }
+    });
   }
 
   return (
