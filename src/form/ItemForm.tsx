@@ -80,7 +80,6 @@ export function ItemForm({
             <SelectImagesField
               label="Fotos"
               value={value}
-              control={control}
               onChange={onChange}
               error={errors.images?.message}
             />

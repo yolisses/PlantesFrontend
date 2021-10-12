@@ -5,11 +5,11 @@ import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import {StyleSheet, Text} from 'react-native';
 
-export function SelectImagesButton({value, control, reduced, onChange}) {
+export function SelectImagesButton({value, reduced, onChange}) {
   const {navigate} = useNavigation();
 
   function onPress() {
-    navigate('Images', {value, control, onChange});
+    navigate('Images');
   }
 
   return (

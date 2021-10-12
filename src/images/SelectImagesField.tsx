@@ -8,7 +8,7 @@ import {SelectImagesItem} from 'images/SelectImageItem';
 import {SelectImagesButton} from 'images/SelectImagesButton';
 import {hasSomeTrueValuedKey} from 'utils/hasSomeTrueValuedKey';
 
-export function SelectImagesField({label, value, error, control, onChange}) {
+export function SelectImagesField({label, value, error, onChange}) {
   const renderItem = ({item: uri}) => (
     <SelectImagesItem uri={uri} key={uri} onChange={onChange} />
   );
@@ -29,7 +29,6 @@ export function SelectImagesField({label, value, error, control, onChange}) {
       </View>
       <SelectImagesButton
         value={value}
-        control={control}
         onChange={onChange}
         reduced={!!uris.length}
       />

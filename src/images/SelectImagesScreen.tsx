@@ -12,6 +12,7 @@ import {selectedAlbum} from 'images/selectedAlbum';
 import {SelectableImage} from 'images/SelectableImage';
 import {getSelectedAlbumPhotos} from 'images/getSelectedAlbumPhotos';
 import {SelectImageAlbumButton} from 'images/SelectImageAlbumButton';
+import {useNavigation} from '@react-navigation/core';
 
 const numberOfCollums = 3;
 
@@ -29,13 +30,20 @@ export function SelectImagesScreen() {
     getPhotos();
   }, []);
 
+  const {goBack} = useNavigation();
+
+  function onFinishPress() {
+    onFinishParam();
+    goBack();
+  }
+
   return (
     <>
       <View style={{backgroundColor: 'white'}}>
         <CustomHeader
           left={<BackButton icon={faTimes} />}
           center={<SelectImageAlbumButton />}
-          right={<NextButton text="Pronto" hideIcon />}
+          right={<NextButton hideIcon text="Pronto" onPress={onFinishPress} />}
         />
       </View>
       <FlatList
