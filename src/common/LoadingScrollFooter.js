@@ -1,15 +1,21 @@
 import React from 'react';
-import {ActivityIndicator} from 'react-native';
+import {ActivityIndicator, View} from 'react-native';
 import {StyleSheet} from 'react-native';
 
-export function LoadingScrollFooter() {
+export function LoadingScrollFooter({active}) {
   return (
-    <ActivityIndicator size="large" color="#0b0" style={styles.indicator} />
+    <View style={styles.wrapper}>
+      {active && (
+        <ActivityIndicator size="large" color="#0b0" style={styles.indicator} />
+      )}
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  indicator: {
-    margin: 10,
+  wrapper: {
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

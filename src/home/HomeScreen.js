@@ -74,7 +74,7 @@ export function HomeScreen() {
           renderItem={({item}) => <Card item={item} />}
           ListFooterComponent={
             <>
-              {!error && isFetching && <LoadingScrollFooter />}
+              <LoadingScrollFooter active={!error && isFetching} />
               {error && <NetworkError retry={onEndReached} />}
               {!hasNextPage && isNotResultFound && <NotFound />}
             </>
