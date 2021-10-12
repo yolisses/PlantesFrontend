@@ -46,8 +46,9 @@ interface CreationRequest extends ItemInfo {
 
 interface Image {
   sent: boolean;
-  localUri: string;
+  remoteUri?: string;
   sendLink?: SendLink;
+  localUri: string | null;
   remoteFileName?: string;
 }
 

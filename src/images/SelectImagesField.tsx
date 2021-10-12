@@ -8,39 +8,44 @@ import {openImagePicker} from 'images/openImagePicker';
 import {SelectImagesItem} from 'images/SelectImageItem';
 import {SelectImagesButton} from 'images/SelectImagesButton';
 import {hasSomeTrueValuedKey} from 'utils/hasSomeTrueValuedKey';
-import {convertImagesObjToListObj} from './convertImagesObjToListObj';
 
 interface Props {
   label?: string;
   error?: string;
   onChange: (value: ListObj) => void;
-  value: {[key: string]: Image};
+  value: Image[];
 }
 
 export function SelectImagesField({label, value, error, onChange}: Props) {
-  const renderItem = ({item: uri}) => (
-    <SelectImagesItem uri={uri} key={uri} onChange={onChange} />
-  );
-
-  const uris = typeof value === 'object' ? Object.keys(value) : [];
+  console.error(value);
 
   function onSelectPress() {
     openImagePicker(convertImagesObjToListObj(value), onChange);
   }
 
+  function getUri(image: Image) {
+    return image.localUri || image.remoteUri;
+  }
+
   return (
     <View style={styles.container}>
       <Label text={label} />
-      <View style={!!uris.length && styles.wrapper}>
+      <View style={!!value.length && styles.wrapper}>
         <FlatList
           horizontal
-          data={uris}
-          renderItem={renderItem}
+          data={value}
           contentContainerStyle={[styles.inner]}
           showsHorizontalScrollIndicator={false}
+          renderItem={({item}: {item: Image}) => (
+            <SelectImagesItem
+              key={getUri(item)}
+              uri={getUri(item)}
+              onChange={onChange}
+            />
+          )}
         />
       </View>
-      <SelectImagesButton onPress={onSelectPress} reduced={!!uris.length} />
+      <SelectImagesButton onPress={onSelectPress} reduced={!!value.length} />
       {error && !hasSomeTrueValuedKey(value) && (
         <MiniMessage isError text={error} />
       )}

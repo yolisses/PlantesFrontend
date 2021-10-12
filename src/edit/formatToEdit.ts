@@ -6,14 +6,12 @@ function convertToIdentityObject(array: string[]): BooleansObj {
   return result;
 }
 
-function convertToIndexesObject(array: string[]): ListObj {
-  const result = {};
-  let counter = 1;
-  for (let item of array) {
-    result[item] = counter;
-    counter++;
-  }
-  return result;
+function convertRemoteUriToImage(remoteUri: string): Image {
+  return {
+    remoteUri,
+    sent: true,
+    localUri: null,
+  };
 }
 
 export function formatToEdit(item: SavedItem): ItemFormData {
@@ -29,7 +27,7 @@ export function formatToEdit(item: SavedItem): ItemFormData {
   } = item;
 
   const tags = convertToIdentityObject(tagsArray);
-  const images = convertToIndexesObject(imagesArray);
+  const images = imagesArray.map(convertRemoteUriToImage);
   const price = priceNumber ? '' + priceNumber : undefined;
   const amount = amountNumber ? '' + amountNumber : undefined;
 

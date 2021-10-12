@@ -1,4 +1,4 @@
-export function convertImagesObjToListObj(imagesObj: {
+export function convertImagesArrayToListObj(imagesObj: {
   [key: string]: Image;
 }): ListObj {
   const result: ListObj = {};
