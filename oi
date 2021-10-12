@@ -1,0 +1,75 @@
+
+        "paths": {
+            "alert/*": [
+                "alert/*"
+            ],
+            "api/*": [
+                "api/*"
+            ],
+            "auth/*": [
+                "auth/*"
+            ],
+            "camera/*": [
+                "camera/*"
+            ],
+            "common/*": [
+                "common/*"
+            ],
+            "config/*": [
+                "config/*"
+            ],
+            "dev/*": [
+                "dev/*"
+            ],
+            "edit/*": [
+                "edit/*"
+            ],
+            "form/*": [
+                "form/*"
+            ],
+            "home/*": [
+                "home/*"
+            ],
+            "images/*": [
+                "images/*"
+            ],
+            "location/*": [
+                "location/*"
+            ],
+            "map/*": [
+                "map/*"
+            ],
+            "modal/*": [
+                "modal/*"
+            ],
+            "navigation/*": [
+                "navigation/*"
+            ],
+            "permission/*": [
+                "permission/*"
+            ],
+            "profile/*": [
+                "profile/*"
+            ],
+            "publish/*": [
+                "publish/*"
+            ],
+            "search/*": [
+                "search/*"
+            ],
+            "send/*": [
+                "send/*"
+            ],
+            "show/*": [
+                "show/*"
+            ],
+            "storage/*": [
+                "storage/*"
+            ],
+            "user/*": [
+                "user/*"
+            ],
+            "utils/*": [
+                "utils/*"
+            ],
+        }
