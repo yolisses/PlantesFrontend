@@ -4,6 +4,7 @@ import {StyleSheet, View} from 'react-native';
 
 import {Label} from 'form/Label';
 import {MiniMessage} from 'form/MiniMessage';
+import {openImagePicker} from 'images/openImagePicker';
 import {SelectImagesItem} from 'images/SelectImageItem';
 import {SelectImagesButton} from 'images/SelectImagesButton';
 import {hasSomeTrueValuedKey} from 'utils/hasSomeTrueValuedKey';
@@ -14,6 +15,10 @@ export function SelectImagesField({label, value, error, onChange}) {
   );
 
   const uris = typeof value === 'object' ? Object.keys(value) : [];
+
+  function onSelectPress() {
+    openImagePicker(value, onChange);
+  }
 
   return (
     <View style={styles.container}>
@@ -27,11 +32,7 @@ export function SelectImagesField({label, value, error, onChange}) {
           showsHorizontalScrollIndicator={false}
         />
       </View>
-      <SelectImagesButton
-        value={value}
-        onChange={onChange}
-        reduced={!!uris.length}
-      />
+      <SelectImagesButton onPress={onSelectPress} reduced={!!uris.length} />
       {error && !hasSomeTrueValuedKey(value) && (
         <MiniMessage isError text={error} />
       )}

@@ -5,13 +5,7 @@ import {StyleSheet, Text} from 'react-native';
 import {faImage} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 
-import {openImagePicker} from 'images/openImagePicker';
-
-export function SelectImagesButton({value, reduced, onChange}) {
-  function onPress() {
-    openImagePicker(onChange);
-  }
-
+export function SelectImagesButton({onPress, reduced}) {
   return (
     <TouchableOpacity
       onPress={onPress}

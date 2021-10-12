@@ -17,9 +17,11 @@ import {useNavigation} from '@react-navigation/core';
 
 const numberOfCollums = 3;
 
-export function SelectImagesScreen() {
+export function SelectImagesScreen({route}) {
   const [foundImages, setFoundImages] = useState<string[]>([]);
-  const [imagesObj, setImagesObj] = useState<ListObj>({});
+  const [imagesObj, setImagesObj] = useState<ListObj>({
+    ...route.params?.initialValue,
+  });
 
   async function getPhotos() {
     const found = await getSelectedAlbumPhotos();
