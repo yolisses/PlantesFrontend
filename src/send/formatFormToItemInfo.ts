@@ -13,11 +13,11 @@ export function formatFormToItemInfo(itemFormData: ItemFormData): ItemInfo {
 
   const result = {
     name,
-    swap,
     tags,
     amount,
     description,
     price: price || null,
+    swap: swap ? true : false,
     donate: donate ? true : false,
   };
   return result;
