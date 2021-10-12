@@ -99,4 +99,11 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     marginBottom: 30,
   },
+  notProvided: {
+    fontSize: 16,
+    color: 'gray',
+    marginBottom: 30,
+    textAlign: 'center',
+    paddingHorizontal: 10,
+  },
 });
