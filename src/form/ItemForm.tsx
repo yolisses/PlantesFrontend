@@ -60,7 +60,7 @@ export function ItemForm({
   const scrollRef = useRef();
 
   function onError() {
-    scrollRef.current.scrollTo({y: 0, animated: true});
+    scrollRef.current.scrollTo({y: 100, animated: true});
   }
 
   return useObserver(() => (
