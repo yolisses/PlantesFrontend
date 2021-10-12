@@ -2,7 +2,7 @@ interface ItemFormData {
   name: string;
   price?: string;
   amount?: string;
-  images: ListObj;
+  images: Image[];
   tags: BooleansObj;
   description: string;
   availabilities: FormAvailabilities;
@@ -24,9 +24,9 @@ interface SavedItem extends ItemInfo {
 }
 
 interface FormAvailabilities {
-  swap: boolean;
-  sell: boolean;
-  donate: boolean;
+  swap?: boolean;
+  sell?: boolean;
+  donate?: boolean;
   price?: string;
 }
 
