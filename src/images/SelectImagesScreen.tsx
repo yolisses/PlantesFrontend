@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from 'react';
 import {FlatList, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {useNavigation} from '@react-navigation/core';
 
 import {observe} from 'mobx';
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
@@ -13,7 +14,6 @@ import {selectedAlbum} from 'images/selectedAlbum';
 import {SelectableImage} from 'images/SelectableImage';
 import {getSelectedAlbumPhotos} from 'images/getSelectedAlbumPhotos';
 import {SelectImageAlbumButton} from 'images/SelectImageAlbumButton';
-import {useNavigation} from '@react-navigation/core';
 
 const numberOfCollums = 3;
 

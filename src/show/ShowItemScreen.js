@@ -97,7 +97,6 @@ const styles = StyleSheet.create({
   },
   buttonsWrapper: {
     paddingLeft: 5,
-    marginTop: 5,
     marginBottom: 30,
   },
 });
