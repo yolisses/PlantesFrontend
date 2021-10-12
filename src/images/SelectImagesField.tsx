@@ -9,7 +9,14 @@ import {SelectImagesItem} from 'images/SelectImageItem';
 import {SelectImagesButton} from 'images/SelectImagesButton';
 import {hasSomeTrueValuedKey} from 'utils/hasSomeTrueValuedKey';
 
-export function SelectImagesField({label, value, error, onChange}) {
+interface Props {
+  label?: string;
+  error?: string;
+  onChange: (value: ListObj) => void;
+  value: {[key: string]: Image};
+}
+
+export function SelectImagesField({label, value, error, onChange}: Props) {
   const renderItem = ({item: uri}) => (
     <SelectImagesItem uri={uri} key={uri} onChange={onChange} />
   );

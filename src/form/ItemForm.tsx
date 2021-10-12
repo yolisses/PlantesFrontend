@@ -21,6 +21,12 @@ import {EmphasisButton} from 'common/EmphasisButton';
 import {SelectImagesField} from 'images/SelectImagesField';
 import {hasSomeTrueValuedKey} from 'utils/hasSomeTrueValuedKey';
 
+interface Props {
+  title: string;
+  errors: object;
+  item?: ItemFormData;
+}
+
 export function ItemForm({
   item,
   reset,
@@ -32,7 +38,7 @@ export function ItemForm({
   headerLeft,
   handleSubmit,
   showBackButton,
-}) {
+}: Props) {
   function validateAvailabilities(obj) {
     if (!hasSomeTrueValuedKey(obj)) {
       return 'Por favor marque pelo menos uma disponibilidade';
@@ -133,7 +139,7 @@ export function ItemForm({
               {availabillitesValue?.sell && (
                 <Controller
                   name="price"
-                  defaultValue={item?.price || ''}
+                  defaultValue={item?.availabilities?.price || ''}
                   control={control}
                   rules={{
                     validate: price =>

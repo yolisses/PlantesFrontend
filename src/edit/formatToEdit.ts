@@ -1,4 +1,4 @@
-function convertToIdentityObject(array) {
+function convertToIdentityObject(array: string[]): BooleansObj {
   const result = {};
   for (let item of array) {
     result[item] = true;
@@ -6,7 +6,7 @@ function convertToIdentityObject(array) {
   return result;
 }
 
-function convertToIndexesObject(array) {
+function convertToIndexesObject(array: string[]): ListObj {
   const result = {};
   let counter = 1;
   for (let item of array) {
@@ -16,22 +16,22 @@ function convertToIndexesObject(array) {
   return result;
 }
 
-export function formatToEdit(item) {
+export function formatToEdit(item: SavedItem): ItemFormData {
   const {
     name,
     swap,
     donate,
     description,
     tags: tagsArray,
-    amount: amountNumber,
     price: priceNumber,
     images: imagesArray,
+    amount: amountNumber,
   } = item;
 
   const tags = convertToIdentityObject(tagsArray);
   const images = convertToIndexesObject(imagesArray);
-  const price = priceNumber ? '' + priceNumber : null;
-  const amount = amountNumber ? '' + amountNumber : null;
+  const price = priceNumber ? '' + priceNumber : undefined;
+  const amount = amountNumber ? '' + amountNumber : undefined;
 
   const availabilities = {
     swap,
