@@ -7,6 +7,8 @@ export const api = axios.create({
   baseURL: SERVER_URL,
 });
 
+console.error(SERVER_URL);
+
 export function setAuthorizationHeader(token) {
   api.defaults.headers.common.Authorization = `Bearer ${token}`;
 }
