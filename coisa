@@ -1,1 +1,0 @@
- @hookform/resolvers @react-native-firebase/app @react-native-firebase/auth @react-native-picker/picker aws-sdk axios-cache-adapter base64-arraybuffer dotenv graphql mobx-react path react-native-dotenv react-native-draggable-grid react-native-fs react-native-get-location react-native-image-crop-picker s3 uuid
