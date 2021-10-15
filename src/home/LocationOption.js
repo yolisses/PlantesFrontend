@@ -7,6 +7,7 @@ import {useObserver} from 'mobx-react-lite';
 import React from 'react';
 
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {concatWithCommas} from 'utils/concatWithCommas';
 
 export function LocationOption() {
   const {navigate} = useNavigation();
@@ -27,7 +28,7 @@ export function LocationOption() {
           icon={faMapMarkerAlt}
         />
         <Text style={sytles.text}>
-          {locationNameToString(auth.user.locationName)}
+          {concatWithCommas([auth.user.city, auth.user.state])}
         </Text>
       </TouchableOpacity>
     </View>
