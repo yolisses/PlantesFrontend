@@ -1,8 +1,8 @@
-import {auth} from 'auth/auth';
+import { auth } from 'auth/auth';
 
 export function formatSearch(data) {
   const result = {};
-  const {tags, availabilities, text} = data;
+  const { tags, availabilities, text } = data;
 
   if (text) {
     result.text = text;

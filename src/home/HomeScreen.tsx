@@ -17,7 +17,7 @@ import {LoadingScrollFooter} from 'common/LoadingScrollFooter';
 
 export function HomeScreen() {
   async function fetchProjects({pageParam = 1}) {
-    const res = await api.post(
+    const res = await api.get(
       'plants/' + pageParam,
       formatSearch(searchOptions),
     );

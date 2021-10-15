@@ -3,7 +3,6 @@ import axios from 'axios';
 import {SERVER_URL} from '@env';
 
 export const api = axios.create({
-  // adapter: cache.adapter,
   baseURL: SERVER_URL,
 });
 
