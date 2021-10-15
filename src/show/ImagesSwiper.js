@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import {Dimensions, StyleSheet, View} from 'react-native';
+import {Dimensions, StyleSheet, Text, View} from 'react-native';
 
 import {SwipeIndicator} from './SwipeIndicator';
 import FastImage from 'react-native-fast-image';
 import {FlatList} from 'react-native';
+import {MissingImages} from './MissingImages';
 
 const {width} = Dimensions.get('window');
 
@@ -16,6 +17,10 @@ export function ImagesSwiper({images, preImage}) {
 
   if (!images) {
     return <FastImage style={styles.image} source={{uri: preImage}} />;
+  }
+
+  if (!images.length) {
+    return <MissingImages style={styles.image} />;
   }
 
   return (

@@ -102,4 +102,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
+  notProvided: {
+    fontSize: 16,
+    color: 'gray',
+  },
 });
