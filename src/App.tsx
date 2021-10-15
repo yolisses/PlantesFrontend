@@ -11,7 +11,6 @@ import moment from 'moment/min/moment-with-locales';
 
 import {AlertContextProvider} from 'alert/AlertContext';
 import {ModalContextProvider} from 'modal/ModalContext';
-import {PermissionsContextProvider} from 'permission/PermissionsContext';
 import {CameraPreferencesProvider} from 'camera/contexts/CameraPreferencesContext';
 
 moment.locale('pt');
@@ -22,15 +21,13 @@ const App = () => (
   <>
     <StatusBar barStyle={'default'} hidden={true} />
     <QueryClientProvider client={queryClient}>
-      <PermissionsContextProvider>
-        <AlertContextProvider>
-          <ModalContextProvider>
-            <CameraPreferencesProvider>
-              <Routes />
-            </CameraPreferencesProvider>
-          </ModalContextProvider>
-        </AlertContextProvider>
-      </PermissionsContextProvider>
+      <AlertContextProvider>
+        <ModalContextProvider>
+          <CameraPreferencesProvider>
+            <Routes />
+          </CameraPreferencesProvider>
+        </ModalContextProvider>
+      </AlertContextProvider>
     </QueryClientProvider>
   </>
 );
