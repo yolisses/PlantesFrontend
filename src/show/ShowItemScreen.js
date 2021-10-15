@@ -25,9 +25,7 @@ export function ShowItemScreen({route}) {
   return (
     <View>
       <FloatingButton />
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={{backgroundColor: '#fff'}}>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <ImagesSwiper images={item?.images} preImage={preImage} />
         {/* Must be there */}
         {/* <View>
