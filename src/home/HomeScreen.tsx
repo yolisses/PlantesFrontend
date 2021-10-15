@@ -1,19 +1,14 @@
 import React, {useEffect} from 'react';
-import {Button, FlatList, View} from 'react-native';
-import {useInfiniteQuery, useQueryClient} from 'react-query';
+import {View} from 'react-native';
+import {useQueryClient} from 'react-query';
 import {observe} from 'mobx';
 
 import {api} from 'api/api';
-import {Card} from 'home/Card';
-import {NotFound} from 'home/NotFound';
-import {SendingList} from 'send/SendingList';
-import {NetworkError} from 'home/NetworkError';
 import {formatSearch} from 'search/formatSearch';
 import {searchOptions} from 'search/searchOptions';
-import {LocationOption} from 'home/LocationOption';
 import {FooterNavigation} from 'navigation/FooterNavigation';
 import {SearchCustomHeader} from 'search/SearchCustomHeader';
-import {LoadingScrollFooter} from 'common/LoadingScrollFooter';
+import {InfiniteScroll} from 'common/InfiniteScroll';
 
 export function HomeScreen() {
   async function getPlants({pageParam = 0}) {
@@ -23,33 +18,7 @@ export function HomeScreen() {
     return res.data;
   }
 
-  const {
-    data,
-    error,
-    isFetching,
-    hasNextPage,
-    fetchNextPage,
-    isFetchingNextPage,
-  } = useInfiniteQuery('plants', getPlants, {
-    getNextPageParam: lastPage => {
-      return lastPage.nextPage;
-    },
-    retry: 0,
-  });
-
-  function getFlatedArray(data) {
-    return data?.pages ? data.pages.flatMap(page => [...page.content]) : [];
-  }
-
-  function onEndReached() {
-    if (hasNextPage && !isFetchingNextPage) {
-      fetchNextPage();
-    }
-  }
-
   const queryClient = useQueryClient();
-
-  const isNotResultFound = data?.pages[0].totalCount === 0;
 
   useEffect(() => {
     observe(searchOptions, () => {
@@ -61,27 +30,7 @@ export function HomeScreen() {
     <>
       <View style={{flex: 1, backgroundColor: 'white'}}>
         <SearchCustomHeader />
-        <FlatList
-          numColumns={2}
-          onEndReached={onEndReached}
-          data={getFlatedArray(data)}
-          onEndReachedThreshold={0.4}
-          renderItem={({item}) => <Card item={item} />}
-          ListHeaderComponent={
-            <>
-              <LocationOption />
-              <SendingList />
-            </>
-          }
-          ListFooterComponent={
-            <>
-              <LoadingScrollFooter active={!error && isFetching} />
-              {error && <NetworkError retry={onEndReached} />}
-              {!hasNextPage && isNotResultFound && <NotFound />}
-            </>
-          }
-        />
-        {/* <Button title="fetch" onPress={fetchNextPage} /> */}
+        <InfiniteScroll getData={getPlants} />
       </View>
       <FooterNavigation selected="Home" />
     </>
