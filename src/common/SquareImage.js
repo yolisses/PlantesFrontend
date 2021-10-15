@@ -24,6 +24,6 @@ const styles = StyleSheet.create({
   image: {
     marginRight: 1,
     marginBottom: 1,
-    backgroundColor: '#ddd',
+    backgroundColor: '#e5e5e5',
   },
 });

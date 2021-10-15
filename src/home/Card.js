@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {SquareImage} from 'common/SquareImage';
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {width} from 'utils/width';
 
@@ -27,6 +27,7 @@ export function Card({item, fraction, postComponent}) {
         <Text style={styles.text}>{item.swap ? 'Troca ' : ''}</Text>
         <Text style={styles.text}>{item.price ? 'R$' + item.price : ''}</Text>
       </View> */}
+      <Text>{item.id}</Text>
     </TouchableOpacity>
   );
 }

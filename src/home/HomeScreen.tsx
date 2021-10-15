@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {FlatList, View} from 'react-native';
+import {Button, FlatList, View} from 'react-native';
 import {useInfiniteQuery, useQueryClient} from 'react-query';
 import {observe} from 'mobx';
 
@@ -16,11 +16,10 @@ import {SearchCustomHeader} from 'search/SearchCustomHeader';
 import {LoadingScrollFooter} from 'common/LoadingScrollFooter';
 
 export function HomeScreen() {
-  async function fetchProjects({pageParam = 1}) {
-    const res = await api.post(
-      'plants/' + pageParam,
-      formatSearch(searchOptions),
-    );
+  async function getPlants({pageParam = 0}) {
+    const res = await api.get('plants/' + pageParam, {
+      params: formatSearch(searchOptions),
+    });
     return res.data;
   }
 
@@ -31,13 +30,15 @@ export function HomeScreen() {
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
-  } = useInfiniteQuery('plants', fetchProjects, {
-    getNextPageParam: lastPage => lastPage.nextPage,
+  } = useInfiniteQuery('plants', getPlants, {
+    getNextPageParam: lastPage => {
+      return lastPage.nextPage;
+    },
     retry: 0,
   });
 
   function getFlatedArray(data) {
-    return data?.pages ? data.pages.flatMap(page => [...page.docs]) : [];
+    return data?.pages ? data.pages.flatMap(page => [...page.content]) : [];
   }
 
   function onEndReached() {
@@ -48,7 +49,7 @@ export function HomeScreen() {
 
   const queryClient = useQueryClient();
 
-  const isNotResultFound = data?.pages[0].totalDocs === 0;
+  const isNotResultFound = data?.pages[0].totalCount === 0;
 
   useEffect(() => {
     observe(searchOptions, () => {
@@ -58,7 +59,7 @@ export function HomeScreen() {
 
   return (
     <>
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, backgroundColor: 'white'}}>
         <SearchCustomHeader />
         <FlatList
           numColumns={2}
@@ -80,6 +81,7 @@ export function HomeScreen() {
             </>
           }
         />
+        {/* <Button title="fetch" onPress={fetchNextPage} /> */}
       </View>
       <FooterNavigation selected="Home" />
     </>
