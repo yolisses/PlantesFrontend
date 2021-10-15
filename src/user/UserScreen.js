@@ -55,6 +55,8 @@ export function UserScreen({route}) {
     observe(send, invalidatePlants);
   }, []);
 
+  console.error(auth.user);
+
   return useObserver(() => (
     <>
       <View style={{flex: 1}}>
