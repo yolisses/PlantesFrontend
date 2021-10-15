@@ -1,4 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
+import {auth} from 'auth/auth';
 import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
@@ -8,8 +9,10 @@ export function UserRoundImage({userId, image, size, style, ownUser}) {
   size = size || 35;
 
   function onPress() {
-    if (userId) {
-      navigate(ownUser ? 'UserScreen' : 'Profile', {userId});
+    if (ownUser) {
+      navigate('UserScreen', {userId: auth.userId});
+    } else if (userId) {
+      navigate('Profile', {userId});
     }
   }
 
