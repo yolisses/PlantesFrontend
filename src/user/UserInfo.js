@@ -5,7 +5,7 @@ import {EditProfileButton} from 'profile/EditProfileButton';
 import {UserDescription} from './UserDescription';
 import {auth} from 'auth/auth';
 import moment from 'moment/min/moment-with-locales';
-import {locationNameToString} from 'location/locationNameToString';
+import {concatWithCommas} from 'utils/concatWithCommas';
 
 export function UserInfo({user}) {
   return (
@@ -15,8 +15,8 @@ export function UserInfo({user}) {
         <View style={styles.dataWrapper}>
           {!!user && (
             <Text style={styles.location}>
-              {user.locationName
-                ? locationNameToString(user.locationName)
+              {user.state
+                ? concatWithCommas([user.state, user.city])
                 : 'Sem localização'}
             </Text>
           )}
