@@ -29,7 +29,7 @@ export function UserScreen({route}) {
 
   async function getPlants() {
     try {
-      const res = await api.get('user-plants/' + userId);
+      const res = await api.get(`users/${userId}/plants`);
       return res.data;
     } catch (err) {
       console.error(err.response || err);
@@ -39,7 +39,7 @@ export function UserScreen({route}) {
   const {data} = useQuery(['user', 'plants', userId], getPlants);
 
   function renderItem({item}) {
-    return <Card item={item} fraction={3} />;
+    return <Card key={item.id} item={item} fraction={3} />;
   }
 
   function keyExtractor(item) {

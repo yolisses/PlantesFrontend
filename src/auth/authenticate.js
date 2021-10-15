@@ -10,8 +10,8 @@ export async function authenticate(idToken) {
     const res = await api.post('auth/sign-in', {googleToken: idToken});
     const {token, user, email, emailAuthToken, idAuthToken} = res.data;
     auth.user = user;
-    auth.userId = user._id;
     auth.token = token;
+    auth.userId = user.id;
 
     OneSignal.setEmail(email, emailAuthToken);
     OneSignal.setExternalUserId(user._id, idAuthToken);
