@@ -23,7 +23,7 @@ export function ShowItemScreen({route}) {
   const {data: user} = useUser(item?.userId);
 
   return (
-    <View>
+    <View style={styles.screen}>
       <FloatingButton />
       <ScrollView showsVerticalScrollIndicator={false}>
         <ImagesSwiper images={item?.images} preImage={preImage} />
@@ -97,5 +97,9 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     marginTop: 5,
     marginBottom: 30,
+  },
+  screen: {
+    flex: 1,
+    backgroundColor: 'white',
   },
 });
