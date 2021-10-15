@@ -66,13 +66,13 @@ export function HomeScreen() {
           onEndReached={onEndReached}
           data={getFlatedArray(data)}
           onEndReachedThreshold={0.4}
+          renderItem={({item}) => <Card item={item} />}
           ListHeaderComponent={
             <>
               <LocationOption />
               <SendingList />
             </>
           }
-          renderItem={({item}) => <Card item={item} />}
           ListFooterComponent={
             <>
               <LoadingScrollFooter active={!error && isFetching} />

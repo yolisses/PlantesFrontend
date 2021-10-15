@@ -20,7 +20,7 @@ import {useUser} from 'user/useUser';
 
 export function ShowItemScreen({route}) {
   const {preImage, item} = route.params;
-  const {data: user} = useUser(item?.userId);
+  const {data: user} = useUser(item?.user);
 
   return (
     <View style={styles.screen}>
