@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import OneSignal from 'react-native-onesignal';
 
-import {api} from 'api';
+import {api} from 'api/api';
 import {auth} from './auth';
 import {setAuthorizationHeader} from 'api/api';
 

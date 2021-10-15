@@ -1,4 +1,4 @@
-import {api} from '../api';
+import {api} from '../api/api';
 import {getObjectLength} from '../utils/getObjectLength';
 
 export async function sendItemCreationRequest(shipment: Shipment) {

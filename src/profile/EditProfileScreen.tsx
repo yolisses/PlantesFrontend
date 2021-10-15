@@ -7,7 +7,7 @@ import {TextInput} from 'form/TextInput';
 import {BackButton} from 'common/BackButton';
 import {NextButton} from 'common/NextButton';
 import {CustomHeader} from 'common/CustomHeader';
-import {api} from 'api';
+import {api} from 'api/api';
 import {useNavigation} from '@react-navigation/core';
 import {Keyboard} from 'react-native';
 import {Controller, useForm} from 'react-hook-form';

@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/core';
-import {api} from 'api';
+import {api} from 'api/api';
 import {auth} from 'auth/auth';
 import {refreshPlants} from 'home/loadPlants';
 import {CustomHeader} from 'common/CustomHeader';

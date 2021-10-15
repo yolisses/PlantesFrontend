@@ -9,7 +9,7 @@ import {useUser} from './useUser';
 import {UserInfo} from './UserInfo';
 import {ConfigButton} from './ConfigButton';
 
-import {api} from 'api';
+import {api} from 'api/api';
 import {auth} from 'auth/auth';
 import {Card} from 'home/Card';
 import {send} from 'send/sendings';
