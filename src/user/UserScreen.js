@@ -42,10 +42,6 @@ export function UserScreen({route}) {
     return <Card key={item.id} item={item} fraction={3} />;
   }
 
-  function keyExtractor(item) {
-    return item?._id;
-  }
-
   function invalidatePlants() {
     queryClient.invalidateQueries('plants');
     queryClient.invalidateQueries(['user', 'plants', auth.userId]);
@@ -54,8 +50,6 @@ export function UserScreen({route}) {
   useEffect(() => {
     observe(send, invalidatePlants);
   }, []);
-
-  console.error(auth.user);
 
   return useObserver(() => (
     <>
@@ -68,7 +62,6 @@ export function UserScreen({route}) {
         <FlatList
           data={data}
           renderItem={renderItem}
-          keyExtractor={keyExtractor}
           numColumns={numberOfCollums}
           showsVerticalScrollIndicator={false}
           ListHeaderComponent={
