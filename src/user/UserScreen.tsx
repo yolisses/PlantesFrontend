@@ -59,18 +59,6 @@ export function UserScreen({route}) {
           title={user?.name}
           right={userId === auth.userId && <ConfigButton />}
         />
-        <FlatList
-          data={data}
-          renderItem={renderItem}
-          numColumns={numberOfCollums}
-          showsVerticalScrollIndicator={false}
-          ListHeaderComponent={
-            <>
-              <UserInfo user={user} />
-              {userId === auth.userId && <SendingList />}
-            </>
-          }
-        />
       </View>
       <FooterNavigation />
     </>

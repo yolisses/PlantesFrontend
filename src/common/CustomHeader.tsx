@@ -2,6 +2,15 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {BackButton} from './BackButton';
 
+interface CustomHeaderProps {
+  title?: string;
+  left?: JSX.Element;
+  center?: JSX.Element;
+  right?: JSX.Element;
+  style?: any;
+  showBackButton: boolean;
+}
+
 export function CustomHeader({
   title,
   left,
@@ -9,7 +18,7 @@ export function CustomHeader({
   right,
   style,
   showBackButton = true,
-}) {
+}: CustomHeaderProps) {
   return (
     <View style={[styles.container, style]}>
       {left || (showBackButton && <BackButton />)}
