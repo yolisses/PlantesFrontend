@@ -17,7 +17,6 @@ export function HomeScreen() {
   async function getPlants() {
     const res = await api.get('plants/' + 1, formatSearch(searchOptions));
     setData(res.data);
-    return res.data;
   }
 
   useEffect(() => {
@@ -26,12 +25,12 @@ export function HomeScreen() {
   }, []);
 
   return (
-    <>
-      <View style={{flex: 1, backgroundColor: 'white'}}>
+    <View style={{flex: 1, backgroundColor: 'white'}}>
+      <View style={{flex: 1}}>
         <SearchCustomHeader />
         <FlatList
-          numColumns={2}
           data={data}
+          numColumns={2}
           onEndReachedThreshold={0.4}
           ListHeaderComponent={
             <>
@@ -39,10 +38,11 @@ export function HomeScreen() {
               <SendingList />
             </>
           }
+          keyExtractor={({item}) => item?.id}
           renderItem={({item}) => <Card item={item} />}
         />
       </View>
       <FooterNavigation selected="Home" />
-    </>
+    </View>
   );
 }
