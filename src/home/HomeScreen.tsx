@@ -13,15 +13,27 @@ import {observe} from 'mobx';
 
 export function HomeScreen() {
   const [data, setData] = useState([]);
+  const [page, setPage] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   async function getPlants() {
-    const res = await api.get('plants/' + 1, formatSearch(searchOptions));
-    setData(res.data);
+    const res = await api.get('plants/' + page, formatSearch(searchOptions));
+    setData(old => [...old, ...res.data]);
+  }
+
+  async function getNextPage() {
+    if (loading) {
+      return;
+    }
+    setLoading(true);
+    setPage(old => old + 1);
+    await getPlants();
+    setLoading(false);
   }
 
   useEffect(() => {
-    observe(searchOptions, getPlants);
-    getPlants();
+    observe(searchOptions, getNextPage);
+    getNextPage();
   }, []);
 
   return (
@@ -31,7 +43,8 @@ export function HomeScreen() {
         <FlatList
           data={data}
           numColumns={2}
-          onEndReachedThreshold={0.4}
+          onEndReached={getNextPage}
+          onEndReachedThreshold={0.3}
           ListHeaderComponent={
             <>
               <LocationOption />
