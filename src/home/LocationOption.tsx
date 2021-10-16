@@ -28,7 +28,7 @@ export function LocationOption() {
           icon={faMapMarkerAlt}
         />
         <Text style={sytles.text}>
-          {concatWithCommas([auth.user.city, auth.user.state])}
+          {concatWithCommas([auth?.user?.city, auth?.user?.state])}
         </Text>
       </TouchableOpacity>
     </View>

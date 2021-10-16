@@ -1,5 +1,4 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import OneSignal from 'react-native-onesignal';
 
 import {api} from 'api/api';
 import {auth} from './auth';
@@ -12,9 +11,6 @@ export async function authenticate(idToken) {
     auth.user = user;
     auth.token = token;
     auth.userId = user.id;
-
-    OneSignal.setEmail(email, emailAuthToken);
-    OneSignal.setExternalUserId(user._id, idAuthToken);
 
     setAuthorizationHeader(token);
 

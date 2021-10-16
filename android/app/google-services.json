@@ -1,20 +1,20 @@
 {
   "project_info": {
-    "project_number": "870876078379",
-    "project_id": "plantei-690e3",
-    "storage_bucket": "plantei-690e3.appspot.com"
+    "project_number": "447311244739",
+    "project_id": "plantes-328600",
+    "storage_bucket": "plantes-328600.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:870876078379:android:6bbdfd2862b6766f7aa56e",
+        "mobilesdk_app_id": "1:447311244739:android:2ad825b6788dd587aba176",
         "android_client_info": {
           "package_name": "com.plantes"
         }
       },
       "oauth_client": [
         {
-          "client_id": "870876078379-j6p3ahqjkvfbf6v98m1i4b81hhdr2757.apps.googleusercontent.com",
+          "client_id": "447311244739-n2415i5rnjagh244shgllphb33m8liou.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.plantes",
@@ -22,20 +22,20 @@
           }
         },
         {
-          "client_id": "870876078379-fbcve7jhhn9udg1e37vpn0olekmr9bau.apps.googleusercontent.com",
+          "client_id": "447311244739-2qgjduj7konsq98nksm45ah0agl8olt8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBwJIWG0iStSBBvHI9rWihGpCNn-ije-Yo"
+          "current_key": "AIzaSyAc2KFFnUfq1y20VY65JGpTCQt_duDWIfk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "870876078379-fbcve7jhhn9udg1e37vpn0olekmr9bau.apps.googleusercontent.com",
+              "client_id": "447311244739-2qgjduj7konsq98nksm45ah0agl8olt8.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
