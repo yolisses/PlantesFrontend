@@ -1,19 +1,13 @@
 import React from 'react';
 import {useForm} from 'react-hook-form';
-import {useQueryClient} from 'react-query';
-import {useNavigation} from '@react-navigation/core';
 
 import {useObserver} from 'mobx-react-lite';
 
-import {auth} from 'auth/auth';
-import {ship} from 'send/ship';
 import {ItemForm} from 'form/ItemForm';
 import {FooterNavigation} from 'navigation/FooterNavigation';
 import {publish} from './publish';
 
 export function PublishScreen() {
-  const {navigate} = useNavigation();
-
   const {
     reset,
     control,
@@ -22,9 +16,6 @@ export function PublishScreen() {
     formState: {errors, isDirty},
   } = useForm();
 
-  const queryClient = useQueryClient();
-
-  //fica
   function onSubmit(item) {
     // reset();
     clearErrors();
