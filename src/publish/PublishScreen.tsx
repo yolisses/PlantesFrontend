@@ -9,6 +9,7 @@ import {auth} from 'auth/auth';
 import {ship} from 'send/ship';
 import {ItemForm} from 'form/ItemForm';
 import {FooterNavigation} from 'navigation/FooterNavigation';
+import {publish} from './publish';
 
 export function PublishScreen() {
   const {navigate} = useNavigation();
@@ -27,11 +28,8 @@ export function PublishScreen() {
   function onSubmit(item) {
     // reset();
     clearErrors();
-    navigate('Profile');
-    ship(item, () => {
-      queryClient.invalidateQueries('plants');
-      queryClient.invalidateQueries(['user', 'plants', auth.userId]);
-    });
+    // navigate('Profile');
+    publish(item);
   }
 
   return useObserver(() => (
