@@ -80,7 +80,7 @@ export function UserScreen({route}) {
           numColumns={3}
           onEndReached={onEndReached}
           data={getFlatedArray(data)}
-          onEndReachedThreshold={0.4}
+          onEndReachedThreshold={0.1}
           renderItem={({item}) => <Card item={item} fraction={3} />}
           ListHeaderComponent={<UserInfo user={user} />}
           ListFooterComponent={
