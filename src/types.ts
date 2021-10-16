@@ -65,3 +65,5 @@ interface ImageNewOperation {
 type ImageEditOperation = ImageKeepOperation | ImageNewOperation;
 
 type ListObj = {[key: string]: number};
+
+type ImagesObj = {[key: string]: Image};

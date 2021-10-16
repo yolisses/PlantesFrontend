@@ -1,7 +1,7 @@
 import React from 'react';
 import {useForm} from 'react-hook-form';
 
-import {useObserver} from 'mobx-react-lite';
+import {Observer, useObserver} from 'mobx-react-lite';
 
 import {ItemForm} from 'form/ItemForm';
 import {FooterNavigation} from 'navigation/FooterNavigation';
@@ -23,19 +23,23 @@ export function PublishScreen() {
     publish(item);
   }
 
-  return useObserver(() => (
-    <>
-      <ItemForm
-        reset={reset}
-        errors={errors}
-        title="Publicar"
-        control={control}
-        isDirty={isDirty}
-        onSubmit={onSubmit}
-        showBackButton={false}
-        handleSubmit={handleSubmit}
-      />
-      <FooterNavigation selected="Publish" />
-    </>
-  ));
+  return (
+    <Observer>
+      {() => (
+        <>
+          <ItemForm
+            reset={reset}
+            errors={errors}
+            title="Publicar"
+            control={control}
+            isDirty={isDirty}
+            onSubmit={onSubmit}
+            showBackButton={false}
+            handleSubmit={handleSubmit}
+          />
+          <FooterNavigation selected="Publish" />
+        </>
+      )}
+    </Observer>
+  );
 }

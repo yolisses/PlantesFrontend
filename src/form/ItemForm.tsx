@@ -92,7 +92,7 @@ export function ItemForm({
             <Controller
               name="images"
               control={control}
-              defaultValue={item?.images || {}}
+              defaultValue={item?.images || []}
               rules={{validate: validateImages}}
               render={({field: {onChange, value}}) => (
                 <SelectImagesField

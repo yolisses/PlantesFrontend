@@ -19,8 +19,8 @@ const numberOfCollums = 3;
 
 export function SelectImagesScreen({route}) {
   const [foundImages, setFoundImages] = useState<string[]>([]);
-  const [imagesObj, setImagesObj] = useState<ListObj>({
-    ...route.params?.initialValue,
+  const [imagesObj, setImagesObj] = useState<ImagesObj>({
+    // ...route.params?.initialValue,
   });
 
   async function getPhotos() {
