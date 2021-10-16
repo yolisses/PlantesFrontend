@@ -44,11 +44,11 @@ interface CreationRequest extends ItemInfo {
 }
 
 interface Image {
+  key: string;
   sent: boolean;
   index: number;
   localUri: string;
   sendLink?: string;
-  remoteUri?: string;
 }
 
 type SavedItemId = string;
@@ -72,5 +72,5 @@ type ImagesObj = {[key: string]: Image};
 
 interface UploadInfo {
   sendLink: string;
-  remoteUri: string;
+  key: string;
 }

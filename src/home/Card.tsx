@@ -27,7 +27,6 @@ export function Card({item, fraction, postComponent}) {
         <Text style={styles.text}>{item.swap ? 'Troca ' : ''}</Text>
         <Text style={styles.text}>{item.price ? 'R$' + item.price : ''}</Text>
       </View> */}
-      <Text>{item.id}</Text>
     </TouchableOpacity>
   );
 }

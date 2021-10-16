@@ -9,7 +9,7 @@ export async function sendImage(image: Image) {
       try {
         const uploadInfo: UploadInfo = await getUploadInfo();
         image.sendLink = uploadInfo.sendLink;
-        image.remoteUri = uploadInfo.remoteUri;
+        image.key = uploadInfo.key;
         console.error('send link got', image.sendLink);
       } catch (err) {
         console.error('error getting send link', err.response || err);

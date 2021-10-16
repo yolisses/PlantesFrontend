@@ -13,7 +13,7 @@ export function formatFormToItemInfo(itemFormData: ItemFormData): ItemInfo {
   const tags = getTrueValuedKeys(tagsObj);
   const images = Object.values(imagesParam)
     .sort((a, b) => a.index - b.index)
-    .map(image => image.remoteUri!);
+    .map(image => image.key!);
 
   const result = {
     name,
