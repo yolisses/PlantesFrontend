@@ -1,8 +1,8 @@
 import {auth} from 'auth/auth';
 
-export function formatSearch(data) {
+export function formatSearch(searchOptions) {
   const result = {};
-  const {tags, availabilities, text} = data;
+  const {tags, availabilities, text} = searchOptions;
 
   if (text) {
     result.text = text;

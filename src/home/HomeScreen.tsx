@@ -14,11 +14,15 @@ import {LoadingScrollFooter} from 'common/LoadingScrollFooter';
 import {NetworkError} from './NetworkError';
 import {NotFound} from './NotFound';
 import {getFlatedArray} from 'common/getFlatedArray';
+import {Card} from './Card';
 
 export function HomeScreen() {
   async function getPlants({pageParam = 0}) {
-    const res = await api.get('plants/' + pageParam, {
-      params: formatSearch(searchOptions),
+    const res = await api.get('plants/', {
+      params: {
+        ...formatSearch(searchOptions),
+        page: pageParam,
+      },
     });
     return res.data;
   }
@@ -30,6 +34,7 @@ export function HomeScreen() {
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
+    refetch,
   } = useInfiniteQuery('plants', getPlants, {
     getNextPageParam: lastPage => {
       return lastPage.nextPage;
@@ -72,7 +77,7 @@ export function HomeScreen() {
           ListFooterComponent={
             <>
               <LoadingScrollFooter active={!error && isFetching} />
-              {error && <NetworkError retry={onEndReached} />}
+              {error && <NetworkError retry={refetch} />}
               {!hasNextPage && isNotResultFound && <NotFound />}
             </>
           }

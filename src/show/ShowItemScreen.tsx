@@ -33,7 +33,7 @@ export function ShowItemScreen({route}) {
             <LikeButton />
           </View>
         </View> */}
-        <View style={{paddingHorizontal: 5}}>
+        <View style={{paddingHorizontal: 10}}>
           <Section>
             <Title text={item?.name} />
             <View style={styles.line}>
