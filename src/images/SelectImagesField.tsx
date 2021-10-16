@@ -9,7 +9,19 @@ import {SelectImagesItem} from 'images/SelectImageItem';
 import {SelectImagesButton} from 'images/SelectImagesButton';
 import {hasSomeTrueValuedKey} from 'utils/hasSomeTrueValuedKey';
 
-export function SelectImagesField({label, value, error, onChange}) {
+interface SelectImagesFieldProps {
+  label: string;
+  value: Image[];
+  error?: string;
+  onChange: (value: any) => void;
+}
+
+export function SelectImagesField({
+  label,
+  value,
+  error,
+  onChange,
+}: SelectImagesFieldProps) {
   const renderItem = ({item: uri}) => (
     <SelectImagesItem uri={uri} key={uri} onChange={onChange} />
   );

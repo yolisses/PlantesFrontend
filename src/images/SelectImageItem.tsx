@@ -8,7 +8,12 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 
 import {basicHitSlop} from 'utils/basicHitSlop';
 
-export function SelectImagesItem({uri, onChange}) {
+interface SelectImagesItem {
+  uri: string;
+  onChange: (value: any) => void;
+}
+
+export function SelectImagesItem({uri, onChange}: SelectImagesItem) {
   function removeImage({value, uri}) {
     const newValue = {...value};
     delete newValue[uri];
@@ -32,7 +37,7 @@ export function SelectImagesItem({uri, onChange}) {
         style={styles.closeButton}>
         <FontAwesomeIcon icon={faTimes} size={18} color="#fff" />
       </TouchableOpacity>
-      <FastImage source={{uri}} fraction={4} style={styles.image} key={uri} />
+      <FastImage source={{uri}} style={styles.image} key={uri} />
     </View>
   );
 }
