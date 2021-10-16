@@ -16,7 +16,7 @@ export function UserInfo({user}) {
           {!!user && (
             <Text style={styles.location}>
               {user.state
-                ? concatWithCommas([user.state, user.city])
+                ? concatWithCommas([user.city, user.state])
                 : 'Sem localização'}
             </Text>
           )}

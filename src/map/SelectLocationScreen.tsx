@@ -8,7 +8,8 @@ import MapView, {Region} from 'react-native-maps';
 import {ApplyButton} from 'search/ApplyButton';
 import {MapTarget} from './MapTarget';
 import {auth} from 'auth/auth';
-import {getLocationFromPoint} from 'location/getLocationFromGeoJson';
+import {Location} from 'location/Location';
+import {User} from 'types/User';
 
 function getInitialLocation() {
   const delta = 0.05;
@@ -30,16 +31,32 @@ function getInitialLocation() {
   }
 }
 
-const location: Location = {};
+interface Response {
+  data: {
+    user: User;
+    locationFound: boolean;
+  };
+}
 
-export function SelectLocationScreen({route}) {
+const {latitude, longitude} = getInitialLocation();
+const location: Location = {latitude, longitude};
+
+export function SelectLocationScreen() {
   const {navigate} = useNavigation();
 
   async function onPress() {
-    const res = await api.put('update-location-by-coordinates', location);
-    auth.user = res.data;
-    refreshPlants();
-    navigate('Home');
+    try {
+      console.error(location);
+      const res: Response = await api.patch('users/edit-location', location);
+      if (res.data.locationFound) {
+        auth.user = res.data.user;
+        refreshPlants();
+      } else {
+      }
+      navigate('Home');
+    } catch (err) {
+      console.error(err.response);
+    }
   }
 
   function onRegionChange(region: Region) {
