@@ -68,7 +68,6 @@ export function UserScreen({route}) {
 
   const isNotResultFound = data?.pages[0].totalCount === 0;
 
-  console.error(data);
   return (
     <>
       <View style={{flex: 1}}>
