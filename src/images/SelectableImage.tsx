@@ -5,8 +5,8 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {width} from 'utils/width';
 import {getObjectLength} from 'utils/getObjectLength';
 import {SelectableImageNumber} from 'images/SelectableImageNumber';
-import {useAlert} from '../alert/AlertContext';
 import {ImagesLimitAlert} from './ImagesLimitAlert';
+import {alert} from 'alert/alert';
 
 const numberOfCollums = 3;
 
@@ -23,11 +23,10 @@ export function SelectableImage({
   imagesLimit,
   setImagesObj,
 }: Props) {
-  const {showAlert} = useAlert();
   function pushImage(old) {
     let counter = getObjectLength(old) + 1;
     if (imagesLimit && counter > imagesLimit) {
-      showAlert(<ImagesLimitAlert imagesLimit={imagesLimit} />);
+      alert.showAlert(<ImagesLimitAlert imagesLimit={imagesLimit} />);
       return old;
     }
     const newValue = {...old};

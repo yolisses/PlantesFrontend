@@ -1,14 +1,13 @@
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
-import {useAlert} from 'alert/AlertContext';
 import {DiscardPublishAlert} from './DiscardPublishAlert';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
+import {alert} from 'alert/alert';
 
 export function DiscardButton({reset}) {
-  const {showAlert} = useAlert();
   const onPress = () => {
-    showAlert(<DiscardPublishAlert reset={reset} />);
+    alert.showAlert(<DiscardPublishAlert reset={reset} />);
   };
 
   return (

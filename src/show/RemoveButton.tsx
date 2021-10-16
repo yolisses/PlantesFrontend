@@ -2,13 +2,12 @@ import React from 'react';
 import {TextIconButton} from 'common/TextIconButton';
 import {faTrashAlt} from '@fortawesome/free-regular-svg-icons';
 
-import {useAlert} from 'alert/AlertContext';
 import {RemoveItemAlert} from './RemoveItemAlert';
+import {alert} from 'alert/alert';
 
 export function RemoveButton({onpress, item, ...rest}) {
-  const {showAlert} = useAlert();
   function handlePress() {
-    showAlert(<RemoveItemAlert item={item} />);
+    alert.showAlert(<RemoveItemAlert item={item} />);
   }
 
   return (

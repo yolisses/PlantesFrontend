@@ -1,12 +1,11 @@
 import React from 'react';
 import {Dimensions, Pressable, StyleSheet} from 'react-native';
-import {useAlert} from 'alert/AlertContext';
+import {alert} from './alert';
 
 export function AlertOverlay({children, disableScape}) {
-  const {setAlertActive} = useAlert();
   const onPress = () => {
     if (!disableScape) {
-      setAlertActive(false);
+      alert.closeAlert();
     }
   };
   return (

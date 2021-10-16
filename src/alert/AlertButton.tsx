@@ -1,15 +1,13 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {useAlert} from './AlertContext';
+import {alert} from './alert';
 
 export function AlertButton({text, destructive, onPress, ...rest}) {
-  const {closeAlert} = useAlert();
-
   const onPressAndClose = () => {
     if (onPress) {
       onPress();
     }
-    closeAlert();
+    alert.closeAlert();
   };
 
   return (

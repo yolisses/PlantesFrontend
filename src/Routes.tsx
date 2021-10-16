@@ -20,6 +20,7 @@ import {EditProfileScreen} from 'profile/EditProfileScreen';
 import {SelectImagesScreen} from 'images/SelectImagesScreen';
 import {SelectLocationScreen} from 'map/SelectLocationScreen';
 import {auth} from 'auth/auth';
+import {alert} from 'alert/alert';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,35 +46,36 @@ export function Routes() {
   return (
     <Observer>
       {() => (
-        <NavigationContainer ref={navigationRef}>
-          <Stack.Navigator screenOptions={{headerShown: false}}>
-            {!auth.token ? (
-              <Stack.Screen name="Login" component={LoginScreen} />
-            ) : (
-              <>
-                {/* <Stack.Screen name="dev" component={SelectImagesScreen} /> */}
+        <>
+          <NavigationContainer ref={navigationRef}>
+            <Stack.Navigator screenOptions={{headerShown: false}}>
+              {!auth.token ? (
+                <Stack.Screen name="Login" component={LoginScreen} />
+              ) : (
+                <>
+                  {/* <Stack.Screen name="dev" component={SelectImagesScreen} /> */}
 
-                <Stack.Screen name="default" component={Main} />
-                <Stack.Screen name="Edit" component={EditScreen} />
-                <Stack.Screen name="Config" component={ConfigScreen} />
-                <Stack.Screen name="ShowItem" component={ShowItemScreen} />
-                <Stack.Screen name="Images" component={SelectImagesScreen} />
-                <Stack.Screen
-                  name="EditProfile"
-                  component={EditProfileScreen}
-                />
-                <Stack.Screen
-                  name="SelectLocation"
-                  component={SelectLocationScreen}
-                />
+                  <Stack.Screen name="default" component={Main} />
+                  <Stack.Screen name="Edit" component={EditScreen} />
+                  <Stack.Screen name="Config" component={ConfigScreen} />
+                  <Stack.Screen name="ShowItem" component={ShowItemScreen} />
+                  <Stack.Screen name="Images" component={SelectImagesScreen} />
+                  <Stack.Screen
+                    name="EditProfile"
+                    component={EditProfileScreen}
+                  />
+                  <Stack.Screen
+                    name="SelectLocation"
+                    component={SelectLocationScreen}
+                  />
 
-                <Tab.Screen name="Profile" component={UserScreen} />
-              </>
-            )}
-          </Stack.Navigator>
-          <AlertDisplay />
-          <ModalDisplay />
-        </NavigationContainer>
+                  <Tab.Screen name="Profile" component={UserScreen} />
+                </>
+              )}
+            </Stack.Navigator>
+            <ModalDisplay />
+          </NavigationContainer>
+        </>
       )}
     </Observer>
   );

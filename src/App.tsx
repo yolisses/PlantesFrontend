@@ -9,24 +9,28 @@ import {QueryClient, QueryClientProvider} from 'react-query';
 
 import moment from 'moment/min/moment-with-locales';
 
-import {AlertContextProvider} from 'alert/AlertContext';
 import {ModalContextProvider} from 'modal/ModalContext';
+import {Observer} from 'mobx-react-lite';
 
 moment.locale('pt');
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <>
-    <StatusBar barStyle={'default'} hidden={true} />
-    <QueryClientProvider client={queryClient}>
-      <AlertContextProvider>
-        <ModalContextProvider>
-          <Routes />
-        </ModalContextProvider>
-      </AlertContextProvider>
-    </QueryClientProvider>
-  </>
-);
+function App() {
+  return (
+    <Observer>
+      {() => (
+        <>
+          <StatusBar barStyle={'default'} hidden={true} />
+          <QueryClientProvider client={queryClient}>
+            <ModalContextProvider>
+              <Routes />
+            </ModalContextProvider>
+          </QueryClientProvider>
+        </>
+      )}
+    </Observer>
+  );
+}
 
 export default App;

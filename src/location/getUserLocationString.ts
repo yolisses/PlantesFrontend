@@ -2,7 +2,7 @@ import {User} from 'types/User';
 import {concatWithCommas} from 'utils/concatWithCommas';
 
 export function getUserLocationString(user: User) {
-  return user.state
+  return user?.state && user?.city
     ? concatWithCommas([user.city, user.state])
     : 'Sem localização';
 }

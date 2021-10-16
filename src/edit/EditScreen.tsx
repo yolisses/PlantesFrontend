@@ -1,21 +1,17 @@
 import React from 'react';
 import {useForm} from 'react-hook-form';
 import {useQueryClient} from 'react-query';
-import {useNavigation} from '@react-navigation/core';
 
 import {auth} from 'auth/auth';
 import {ItemForm} from 'form/ItemForm';
-import {useAlert} from 'alert/AlertContext';
 import {BackButton} from 'common/BackButton';
 import {formatToEdit} from 'edit/formatToEdit';
 import {EditBackAlert} from 'edit/EditBackAlert';
 import {updatePlantInfo} from './updatePlantInfo';
 import {Observer} from 'mobx-react-lite';
+import {alert} from 'alert/alert';
 
 export function EditScreen({route}) {
-  const {navigate} = useNavigation();
-  const {showAlert} = useAlert();
-
   const queryClient = useQueryClient();
 
   const {item} = route.params;
@@ -41,7 +37,7 @@ export function EditScreen({route}) {
   }
 
   function onBackPress() {
-    showAlert(<EditBackAlert />);
+    alert.showAlert(<EditBackAlert />);
   }
 
   return (
