@@ -44,9 +44,10 @@ interface CreationRequest extends ItemInfo {
 
 interface Image {
   sent: boolean;
+  index: number;
   localUri: string;
-  sendLink?: SendLink;
-  remoteFileName?: string;
+  sendLink?: string;
+  remoteUri?: string;
 }
 
 type SavedItemId = string;

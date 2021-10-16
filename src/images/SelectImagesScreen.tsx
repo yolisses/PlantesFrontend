@@ -67,8 +67,8 @@ export function SelectImagesScreen({route}) {
             key={uri}
             uri={uri}
             imagesLimit={10}
-            index={imagesObj[uri]}
             setImagesObj={setImagesObj}
+            index={imagesObj[uri]?.index}
           />
         )}
       />

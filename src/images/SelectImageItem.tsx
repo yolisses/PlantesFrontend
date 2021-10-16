@@ -7,6 +7,7 @@ import {faTimes} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 
 import {basicHitSlop} from 'utils/basicHitSlop';
+import {removeImageInObject} from './removeImageInObject';
 
 interface SelectImagesItem {
   uri: string;
@@ -14,23 +15,12 @@ interface SelectImagesItem {
 }
 
 export function SelectImagesItem({uri, onChange}: SelectImagesItem) {
-  function removeImage({value, uri}) {
-    const newValue = {...value};
-    delete newValue[uri];
-    let counter = 1;
-    for (let key in newValue) {
-      newValue[key] = counter;
-      counter += 1;
-    }
-    return newValue;
-  }
-
   function onRemovePress() {
-    onChange(value => removeImage({uri, value}));
+    onChange(old => removeImageInObject(old, uri));
   }
 
   return (
-    <View style={styles.container}>
+    <View>
       <TouchableOpacity
         hitSlop={basicHitSlop}
         onPress={onRemovePress}

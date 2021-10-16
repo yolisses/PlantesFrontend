@@ -1,7 +1,7 @@
 import React from 'react';
 import {useForm} from 'react-hook-form';
 
-import {Observer, useObserver} from 'mobx-react-lite';
+import {Observer} from 'mobx-react-lite';
 
 import {ItemForm} from 'form/ItemForm';
 import {FooterNavigation} from 'navigation/FooterNavigation';
