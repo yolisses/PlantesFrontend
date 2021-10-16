@@ -14,6 +14,7 @@ export function ModalContextProvider({children}) {
   };
 
   const closeModal = () => {
+    console.error('aqui');
     setModalActive(false);
   };
 
