@@ -1,15 +1,20 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {GestureResponderEvent, StyleSheet, View} from 'react-native';
 import {Text, TouchableOpacity} from 'react-native';
 
-export function ApplyButton({onPress}) {
+interface ApplyButton {
+  onPress?: ((event: GestureResponderEvent) => void) | undefined;
+  text?: string;
+}
+
+export function ApplyButton({onPress, text}: ApplyButton) {
   return (
     <View style={styles.facade}>
       <TouchableOpacity
         style={styles.button}
         onPress={onPress}
         activeOpacity={0.9}>
-        <Text style={styles.text}>Aplicar</Text>
+        <Text style={styles.text}>{text || 'Aplicar'}</Text>
       </TouchableOpacity>
     </View>
   );

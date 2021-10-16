@@ -65,7 +65,7 @@ export function SelectLocationScreen() {
       </View>
 
       <View>
-        <ApplyButton onPress={onPress} />
+        <ApplyButton onPress={onPress} text="Salvar" />
       </View>
     </View>
   );
