@@ -12,10 +12,8 @@ import {concatWithCommas} from 'utils/concatWithCommas';
 export function LocationOption() {
   const {navigate} = useNavigation();
 
-  const {latitude, longitude} = getLocationFromPoint(auth.user?.location!);
-
   function onPress() {
-    navigate('SelectLocation', {latitude, longitude});
+    navigate('SelectLocation');
   }
 
   return useObserver(() => (

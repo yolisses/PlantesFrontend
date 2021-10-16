@@ -1,21 +1,22 @@
 import {useNavigation} from '@react-navigation/core';
 import {api} from 'api/api';
-import {auth} from 'auth/auth';
 import {refreshPlants} from 'home/loadPlants';
 import {CustomHeader} from 'common/CustomHeader';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import MapView from 'react-native-maps';
+import MapView, {Region} from 'react-native-maps';
 import {ApplyButton} from 'search/ApplyButton';
 import {MapTarget} from './MapTarget';
+import {auth} from 'auth/auth';
+import {getLocationFromPoint} from 'location/getLocationFromGeoJson';
 
 function getInitialLocation() {
   const delta = 0.05;
 
-  if (auth.user?.location?.coordinates) {
+  if (auth.user?.location) {
     return {
-      latitude: auth.user?.location?.coordinates[1],
-      longitude: auth.user?.location?.coordinates[0],
+      latitude: auth.user?.location.coordinates[0],
+      longitude: auth.user?.location.coordinates[1],
       longitudeDelta: delta,
       latitudeDelta: delta,
     };
@@ -29,22 +30,19 @@ function getInitialLocation() {
   }
 }
 
-const location = {};
+const location: Location = {};
 
-export function SelectLocationScreen() {
+export function SelectLocationScreen({route}) {
   const {navigate} = useNavigation();
 
   async function onPress() {
-    if (!auth.user.location) {
-      auth.user.location = {};
-    }
     const res = await api.put('update-location-by-coordinates', location);
     auth.user = res.data;
     refreshPlants();
     navigate('Home');
   }
 
-  function onRegionChange(region) {
+  function onRegionChange(region: Region) {
     location.latitude = region.latitude;
     location.longitude = region.longitude;
   }
@@ -63,7 +61,6 @@ export function SelectLocationScreen() {
           <MapTarget />
         </View>
       </View>
-
       <View>
         <ApplyButton onPress={onPress} text="Salvar" />
       </View>

@@ -9,7 +9,6 @@ import {UserInfo} from './UserInfo';
 import {ConfigButton} from './ConfigButton';
 
 import {api} from 'api/api';
-import {auth} from 'auth/auth';
 import {Card} from 'home/Card';
 import {send} from 'send/sendings';
 import {BackButton} from 'common/BackButton';
@@ -19,10 +18,11 @@ import {getFlatedArray} from 'common/getFlatedArray';
 import {LoadingScrollFooter} from 'common/LoadingScrollFooter';
 import {NetworkError} from 'home/NetworkError';
 import {NotFound} from 'home/NotFound';
+import {auth} from 'auth/auth';
 
 export function UserScreen({route}) {
   const {userId: userIdParam} = route.params || {};
-  const userId = userIdParam || auth.userId;
+  const userId = userIdParam || auth?.user?.id;
   const {data: user} = useUser(userId);
   const queryClient = useQueryClient();
 
@@ -40,7 +40,7 @@ export function UserScreen({route}) {
 
   function invalidatePlants() {
     queryClient.invalidateQueries('plants');
-    queryClient.invalidateQueries(['user', 'plants', auth.userId]);
+    queryClient.invalidateQueries(['user', 'plants', auth.user?.id]);
   }
   useEffect(() => {
     observe(send, invalidatePlants);
@@ -75,7 +75,7 @@ export function UserScreen({route}) {
         <CustomHeader
           left={<BackButton />}
           title={user?.name}
-          right={userId === auth.userId && <ConfigButton />}
+          right={userId === auth.user?.id && <ConfigButton />}
         />
         <FlatList
           numColumns={3}
