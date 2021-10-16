@@ -17,7 +17,7 @@ export function LocationOption() {
   }
 
   return useObserver(() => (
-    <View>
+    <View style={sytles.preventFlex}>
       <TouchableOpacity
         onPress={onPress}
         activeOpacity={0.7}
@@ -39,11 +39,13 @@ const sytles = StyleSheet.create({
   icon: {
     marginRight: 2,
   },
-  container: {
-    backgroundColor: 'white',
+  preventFlex: {
     flexDirection: 'row',
-    alignItems: 'center',
+  },
+  container: {
     padding: 5,
+    alignItems: 'center',
+    flexDirection: 'row',
   },
   text: {
     color: 'green',
