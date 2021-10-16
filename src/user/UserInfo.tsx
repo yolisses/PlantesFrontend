@@ -5,7 +5,7 @@ import {EditProfileButton} from 'profile/EditProfileButton';
 import {UserDescription} from './UserDescription';
 import {auth} from 'auth/auth';
 import moment from 'moment/min/moment-with-locales';
-import {concatWithCommas} from 'utils/concatWithCommas';
+import {getUserLocationString} from 'location/getUserLocationString';
 
 export function UserInfo({user}) {
   return (
@@ -14,11 +14,7 @@ export function UserInfo({user}) {
         <FastImage style={styles.image} source={{uri: user?.image}} />
         <View style={styles.dataWrapper}>
           {!!user && (
-            <Text style={styles.location}>
-              {user.state
-                ? concatWithCommas([user.city, user.state])
-                : 'Sem localização'}
-            </Text>
+            <Text style={styles.location}>{getUserLocationString(user)}</Text>
           )}
           {user?.createdAt ? (
             <Text style={styles.location}>

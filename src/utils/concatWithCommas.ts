@@ -1,4 +1,4 @@
-export function concatWithCommas(array: [string]) {
+export function concatWithCommas(array: string[]) {
   let result = '';
   for (let i = 0; i < array.length; i++) {
     result += array[i] ? array[i] + ', ' : '';

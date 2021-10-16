@@ -3,6 +3,7 @@ import {StyleSheet, Text, View} from 'react-native';
 
 import {UserRoundImage} from 'common/UserRoundImage';
 import {locationNameToString} from 'location/locationNameToString';
+import {getUserLocationString} from 'location/getUserLocationString';
 
 export function UserLink({user}) {
   return (
@@ -15,11 +16,7 @@ export function UserLink({user}) {
       />
       <View>
         {!!user?.name && <Text style={styles.name}>{user?.name}</Text>}
-        {!!user?.locationName && (
-          <Text style={styles.local}>
-            {locationNameToString(user.locationName)}
-          </Text>
-        )}
+        <Text style={styles.local}>{getUserLocationString(user)}</Text>
       </View>
     </View>
   );

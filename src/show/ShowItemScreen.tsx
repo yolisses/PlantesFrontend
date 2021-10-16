@@ -95,8 +95,8 @@ const styles = StyleSheet.create({
   },
   buttonsWrapper: {
     paddingLeft: 5,
-    marginTop: 5,
-    marginBottom: 30,
+    marginTop: 0,
+    marginBottom: 20,
   },
   screen: {
     flex: 1,
@@ -105,5 +105,6 @@ const styles = StyleSheet.create({
   notProvided: {
     fontSize: 16,
     color: 'gray',
+    marginBottom: 20,
   },
 });
