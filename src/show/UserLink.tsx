@@ -2,7 +2,6 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
 import {UserRoundImage} from 'common/UserRoundImage';
-import {locationNameToString} from 'location/locationNameToString';
 import {getUserLocationString} from 'location/getUserLocationString';
 
 export function UserLink({user}) {
