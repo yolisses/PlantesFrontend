@@ -4,6 +4,7 @@ import {StyleSheet, View} from 'react-native';
 
 import {Label} from 'form/Label';
 import {MiniMessage} from 'form/MiniMessage';
+import {sendImagesInObj} from 'send/sendImagesInObj';
 import {openImagePicker} from 'images/openImagePicker';
 import {SelectImagesItem} from 'images/SelectImageItem';
 import {SelectImagesButton} from 'images/SelectImagesButton';
@@ -28,8 +29,13 @@ export function SelectImagesField({
 
   const uris = typeof value === 'object' ? Object.keys(value) : [];
 
+  function onSelectionFinish(value) {
+    sendImagesInObj(value);
+    onChange(value);
+  }
+
   function onSelectPress() {
-    openImagePicker(value, onChange);
+    openImagePicker(value, onSelectionFinish);
   }
 
   return (

@@ -9,7 +9,6 @@ import {searchOptions} from 'search/searchOptions';
 import {FooterNavigation} from 'navigation/FooterNavigation';
 import {SearchCustomHeader} from 'search/SearchCustomHeader';
 import {LocationOption} from './LocationOption';
-import {SendingList} from 'send/SendingList';
 import {LoadingScrollFooter} from 'common/LoadingScrollFooter';
 import {NetworkError} from './NetworkError';
 import {NotFound} from './NotFound';
@@ -71,7 +70,6 @@ export function HomeScreen() {
           ListHeaderComponent={
             <>
               <LocationOption />
-              <SendingList />
             </>
           }
           ListFooterComponent={
