@@ -2,7 +2,7 @@ import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {useNavigation} from '@react-navigation/core';
 import {auth} from 'auth/auth';
-import {locationNameToString} from 'location/locationNameToString';
+import {getLocationFromPoint} from 'location/getLocationFromGeoJson';
 import {useObserver} from 'mobx-react-lite';
 import React from 'react';
 
@@ -12,8 +12,10 @@ import {concatWithCommas} from 'utils/concatWithCommas';
 export function LocationOption() {
   const {navigate} = useNavigation();
 
+  const {latitude, longitude} = getLocationFromPoint(auth.user?.location!);
+
   function onPress() {
-    navigate('SelectLocation');
+    navigate('SelectLocation', {latitude, longitude});
   }
 
   return useObserver(() => (

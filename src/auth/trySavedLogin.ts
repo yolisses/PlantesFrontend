@@ -8,7 +8,6 @@ AsyncStorage.getItem('userInfo').then(async res => {
   try {
     const {token, user} = JSON.parse(res);
     auth.user = user;
-    auth.userId = user._id;
     auth.token = token;
 
     const userInfo = await GoogleSignin.signInSilently();

@@ -6,7 +6,6 @@ export type UserId = number;
 export interface User {
   id: UserId;
   name: string;
-  email: string;
   image: string;
   description?: string;
   instagramUsername?: string;

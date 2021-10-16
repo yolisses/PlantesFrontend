@@ -3,10 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import {Dev} from './dev/Dev';
-
-import {auth} from 'auth/auth';
-import {useObserver} from 'mobx-react-lite';
+import {Observer} from 'mobx-react-lite';
 
 import {AlertDisplay} from 'alert/AlertDisplay';
 import {ModalDisplay} from 'modal/ModalDisplay';
@@ -22,14 +19,13 @@ import {navigationRef} from 'navigation/RootNavigation';
 import {EditProfileScreen} from 'profile/EditProfileScreen';
 import {SelectImagesScreen} from 'images/SelectImagesScreen';
 import {SelectLocationScreen} from 'map/SelectLocationScreen';
+import {auth} from 'auth/auth';
 
 const Stack = createNativeStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
-function Purge() {
-  return <></>;
-}
+const Purge = () => <></>;
 
 function Main() {
   return (
@@ -46,32 +42,39 @@ function Main() {
 }
 
 export function Routes() {
-  return useObserver(() => (
-    <NavigationContainer ref={navigationRef}>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-        {!auth.token ? (
-          <Stack.Screen name="Login" component={LoginScreen} />
-        ) : (
-          <>
-            {/* <Stack.Screen name="dev" component={SelectImagesScreen} /> */}
+  return (
+    <Observer>
+      {() => (
+        <NavigationContainer ref={navigationRef}>
+          <Stack.Navigator screenOptions={{headerShown: false}}>
+            {!auth.token ? (
+              <Stack.Screen name="Login" component={LoginScreen} />
+            ) : (
+              <>
+                {/* <Stack.Screen name="dev" component={SelectImagesScreen} /> */}
 
-            <Stack.Screen name="default" component={Main} />
-            <Stack.Screen name="Edit" component={EditScreen} />
-            <Stack.Screen name="Config" component={ConfigScreen} />
-            <Stack.Screen name="ShowItem" component={ShowItemScreen} />
-            <Stack.Screen name="Images" component={SelectImagesScreen} />
-            <Stack.Screen name="EditProfile" component={EditProfileScreen} />
-            <Stack.Screen
-              name="SelectLocation"
-              component={SelectLocationScreen}
-            />
+                <Stack.Screen name="default" component={Main} />
+                <Stack.Screen name="Edit" component={EditScreen} />
+                <Stack.Screen name="Config" component={ConfigScreen} />
+                <Stack.Screen name="ShowItem" component={ShowItemScreen} />
+                <Stack.Screen name="Images" component={SelectImagesScreen} />
+                <Stack.Screen
+                  name="EditProfile"
+                  component={EditProfileScreen}
+                />
+                <Stack.Screen
+                  name="SelectLocation"
+                  component={SelectLocationScreen}
+                />
 
-            <Tab.Screen name="Profile" component={UserScreen} />
-          </>
-        )}
-      </Stack.Navigator>
-      <AlertDisplay />
-      <ModalDisplay />
-    </NavigationContainer>
-  ));
+                <Tab.Screen name="Profile" component={UserScreen} />
+              </>
+            )}
+          </Stack.Navigator>
+          <AlertDisplay />
+          <ModalDisplay />
+        </NavigationContainer>
+      )}
+    </Observer>
+  );
 }

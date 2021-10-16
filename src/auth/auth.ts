@@ -1,7 +1,13 @@
-import {observable} from 'mobx';
+import {makeObservable, observable} from 'mobx';
+import {User} from 'types/User';
 
-export const auth = observable({
-  user: null,
-  token: null,
-  userId: null,
-});
+class Auth {
+  @observable user?: User;
+  @observable token?: string;
+
+  constructor() {
+    makeObservable(this);
+  }
+}
+
+export const auth = new Auth();

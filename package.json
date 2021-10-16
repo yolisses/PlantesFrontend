@@ -22,6 +22,7 @@
     "@react-navigation/bottom-tabs": "^6.0.7",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.1.0",
+    "@types/geojson": "^7946.0.8",
     "axios": "^0.21.1",
     "mobx": "^6.3.3",
     "mobx-react-lite": "^3.2.1",
@@ -45,6 +46,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.15.0",
+    "@babel/plugin-proposal-decorators": "^7.15.8",
     "@babel/runtime": "7.15.3",
     "@react-native-community/eslint-config": "2.0.0",
     "@types/jest": "^27.0.2",

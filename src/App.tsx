@@ -11,7 +11,6 @@ import moment from 'moment/min/moment-with-locales';
 
 import {AlertContextProvider} from 'alert/AlertContext';
 import {ModalContextProvider} from 'modal/ModalContext';
-import {CameraPreferencesProvider} from 'camera/contexts/CameraPreferencesContext';
 
 moment.locale('pt');
 
@@ -23,9 +22,7 @@ const App = () => (
     <QueryClientProvider client={queryClient}>
       <AlertContextProvider>
         <ModalContextProvider>
-          <CameraPreferencesProvider>
-            <Routes />
-          </CameraPreferencesProvider>
+          <Routes />
         </ModalContextProvider>
       </AlertContextProvider>
     </QueryClientProvider>
