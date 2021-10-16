@@ -12,6 +12,7 @@ export function MissingImages({style}) {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#eee',
     alignItems: 'center',
     justifyContent: 'center',
   },
