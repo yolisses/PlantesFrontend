@@ -1,5 +1,5 @@
 import {brokenSendLink} from './legacy/brokenSendLink';
-import {getNewLink} from './legacy/getNewLink';
+import {getUploadInfo} from './legacy/getUploadInfo';
 import {pushImage} from './legacy/pushImage';
 import {waitSomeTime} from './legacy/waitSomeTime';
 
@@ -7,7 +7,9 @@ export async function sendImage(image: Image) {
   while (!image.sent) {
     if (!image.sendLink) {
       try {
-        image.sendLink = await getNewLink();
+        const uploadInfo: UploadInfo = await getUploadInfo();
+        image.sendLink = uploadInfo.sendLink;
+        image.remoteUri = uploadInfo.remoteUri;
         console.error('send link got', image.sendLink);
       } catch (err) {
         console.error('error getting send link', err.response || err);

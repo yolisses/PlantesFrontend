@@ -1,4 +1,7 @@
-export function publish(itemFormData: ItemFormData) {
+import {formatFormToItemInfo} from './formatFormToItemInfo';
+
+export async function publish(itemFormData: ItemFormData) {
   console.error(itemFormData);
-  /* to do */
+  const itemInfo = formatFormToItemInfo(itemFormData);
+  console.error(itemInfo);
 }
