@@ -14,7 +14,7 @@ export function Alert({title, description, children, disableOverlayScape}) {
       <View style={styles.container}>
         <Pressable>
           <View style={styles.paddingContainer}>
-            <Text style={styles.title}>{title}</Text>
+            {!!title && <Text style={styles.title}>{title}</Text>}
             {description ? (
               <Text style={styles.description}>{description}</Text>
             ) : (
