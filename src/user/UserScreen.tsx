@@ -16,6 +16,8 @@ import {LoadingScrollFooter} from 'common/LoadingScrollFooter';
 import {NetworkError} from 'home/NetworkError';
 import {NotFound} from 'home/NotFound';
 import {auth} from 'auth/auth';
+import {send} from 'send/send';
+import {SendingList} from 'send/SendingList';
 
 export function UserScreen({route}) {
   const {userId: userIdParam} = route.params || {};
@@ -54,6 +56,8 @@ export function UserScreen({route}) {
     }
   }
 
+  console.error(send.sendings);
+
   const isNotResultFound = data?.pages[0].totalCount === 0;
 
   return (
@@ -70,7 +74,12 @@ export function UserScreen({route}) {
           data={getFlatedArray(data)}
           onEndReachedThreshold={0.4}
           renderItem={({item}) => <Card item={item} fraction={3} />}
-          ListHeaderComponent={<UserInfo user={user} />}
+          ListHeaderComponent={
+            <>
+              <UserInfo user={user} />
+              {userId === auth.user?.id && <SendingList />}
+            </>
+          }
           ListFooterComponent={
             <>
               <LoadingScrollFooter active={!error && isFetching} />

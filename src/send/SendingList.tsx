@@ -1,8 +1,8 @@
 import {useObserver} from 'mobx-react-lite';
 import React from 'react';
 import {FlatList} from 'react-native';
-import {send} from '../send';
-import {SendingWarn} from './SendingWarn';
+import {send} from './send';
+import {SendingWarn} from './legacy/SendingWarn';
 
 export function SendingList() {
   return useObserver(() => (
