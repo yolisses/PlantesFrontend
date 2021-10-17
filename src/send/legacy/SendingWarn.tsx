@@ -23,11 +23,15 @@ export function SendingWarn({id}) {
         {!!send.sendings[id].sent && (
           <FontAwesomeIcon icon={faCheck} color="#0b0" style={styles.icon} />
         )}
-        <Text style={styles.text}>
-          {send.sendings[id].sent ? 'Enviado' : 'Enviando'}
-        </Text>
+        {send.sendings[id].error ? (
+          <Text style={[styles.text, styles.error]}>Falha no envio</Text>
+        ) : (
+          <Text style={styles.text}>
+            {send.sendings[id].sent ? 'Enviado' : 'Enviando'}
+          </Text>
+        )}
       </View>
-      {!!send.sendings[id].sent && (
+      {!!(send.sendings[id].sent || send.sendings[id].error) && (
         <TouchableOpacity activeOpacity={0.5} onPress={handleClosePress}>
           <Text style={styles.hideText}>fechar</Text>
         </TouchableOpacity>
@@ -65,6 +69,9 @@ const styles = StyleSheet.create({
     borderTopWidth: 2,
     borderColor: '#eee',
     borderStyle: 'solid',
+  },
+  error: {
+    color: '#a00',
   },
   hideText: {
     fontSize: 16,

@@ -3,6 +3,7 @@ import {makeObservable, observable} from 'mobx';
 interface Sending {
   id: number;
   sent: boolean;
+  error?: boolean;
   itemFormData: ItemFormData;
 }
 

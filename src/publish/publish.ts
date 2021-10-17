@@ -4,10 +4,10 @@ import {formatFormToItemInfo} from './formatFormToItemInfo';
 
 export async function publish(itemFormData: ItemFormData) {
   // console.error(itemFormData);
+  const id = Math.random();
   try {
     const itemInfo = formatFormToItemInfo(itemFormData);
     console.error(itemInfo);
-    const id = Math.random();
     send.sendings[id] = {
       id,
       sent: false,
@@ -17,6 +17,7 @@ export async function publish(itemFormData: ItemFormData) {
     console.error(res.data);
     send.sendings[id].sent = true;
   } catch (err) {
+    send.sendings[id].error = true;
     console.error(err.response || err);
   }
 }
