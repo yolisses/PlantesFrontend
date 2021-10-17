@@ -1,4 +1,8 @@
-import {Text} from 'react-native';
+import {
+  NativeSyntheticEvent,
+  Text,
+  TextInputSubmitEditingEventData,
+} from 'react-native';
 import React, {useRef, useState} from 'react';
 import {StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 
@@ -28,8 +32,8 @@ export function SearchBox() {
     setActive(false);
   }
 
-  function onSubmit(e) {
-    searchOptions.text = e.nativeEvent.text;
+  function onSubmit(e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) {
+    searchOptions.text = e.nativeEvent.text.trim();
     refreshPlants();
   }
 
