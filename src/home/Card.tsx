@@ -1,11 +1,18 @@
 import React from 'react';
+import {TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+
+import {Plant} from 'types/Plant';
 
 import {SquareImage} from 'common/SquareImage';
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {width} from 'utils/width';
 
-export function Card({item, fraction, postComponent}) {
+interface CardProps {
+  item: Plant;
+  fraction?: number;
+  postComponent?: JSX.Element;
+}
+
+export function Card({item, fraction = 2, postComponent}: CardProps) {
   const {navigate} = useNavigation();
 
   const onPress = () => {
@@ -16,33 +23,8 @@ export function Card({item, fraction, postComponent}) {
 
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.9}>
-      <SquareImage
-        uri={item?.card}
-        fraction={fraction || 2}
-        // style={styles.card}
-      />
+      <SquareImage uri={item?.card} fraction={fraction} />
       {postComponent}
-      {/* <View style={styles.textContainer}>
-        <Text style={styles.text}>{item.donate ? 'Doação ' : ''}</Text>
-        <Text style={styles.text}>{item.swap ? 'Troca ' : ''}</Text>
-        <Text style={styles.text}>{item.price ? 'R$' + item.price : ''}</Text>
-      </View> */}
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  // card: {
-  //   borderRadius: 10,
-  // },
-  textContainer: {
-    width: width / 2,
-    justifyContent: 'center',
-    flexDirection: 'row',
-    paddingLeft: 10,
-    paddingBottom: 10,
-  },
-  text: {
-    fontSize: 16,
-  },
-});
