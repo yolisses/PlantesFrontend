@@ -19,9 +19,10 @@ import {EmphasisButton} from 'common/EmphasisButton';
 import {SelectImagesField} from 'images/SelectImagesField';
 import {hasSomeTrueValuedKey} from 'utils/hasSomeTrueValuedKey';
 import {Observer} from 'mobx-react-lite';
+import {Plant} from 'types/Plant';
 
 interface ItemFormProps {
-  item: any;
+  item?: Plant;
   reset: any;
   title?: string;
   errors: object;
@@ -91,7 +92,7 @@ export function ItemForm({
             <Controller
               name="images"
               control={control}
-              defaultValue={item?.images || {}}
+              defaultValue={item?.images || []}
               rules={{validate: validateImages}}
               render={({field: {onChange, value}}) => (
                 <SelectImagesField

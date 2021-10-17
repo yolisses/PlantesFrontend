@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from 'react';
 import {FlatList, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {useNavigation} from '@react-navigation/core';
 
 import {observe} from 'mobx';
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
@@ -13,13 +14,11 @@ import {selectedAlbum} from 'images/selectedAlbum';
 import {SelectableImage} from 'images/SelectableImage';
 import {getSelectedAlbumPhotos} from 'images/getSelectedAlbumPhotos';
 import {SelectImageAlbumButton} from 'images/SelectImageAlbumButton';
-import {useNavigation} from '@react-navigation/core';
-
 const numberOfCollums = 3;
 
 export function SelectImagesScreen({route}) {
   const [foundImages, setFoundImages] = useState<string[]>([]);
-  const [imagesObj, setImagesObj] = useState<ListObj>({
+  const [imagesObj, setImagesObj] = useState<ImagesObj>({
     ...route.params?.initialValue,
   });
 
@@ -67,8 +66,8 @@ export function SelectImagesScreen({route}) {
             key={uri}
             uri={uri}
             imagesLimit={10}
-            index={imagesObj[uri]}
             setImagesObj={setImagesObj}
+            index={imagesObj[uri]?.index}
           />
         )}
       />

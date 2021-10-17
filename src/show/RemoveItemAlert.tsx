@@ -13,12 +13,12 @@ export function RemoveItemAlert({item}) {
 
   async function onRemovePress() {
     try {
-      await api.delete('plant/' + item?._id);
+      await api.delete('plants/' + item?.id);
       queryClient.invalidateQueries('plants');
       queryClient.invalidateQueries(['user', 'plants', auth.userId]);
       goBack();
     } catch (err) {
-      console.error(err);
+      console.error(err.response || err);
     }
   }
 

@@ -11,6 +11,7 @@
     "mock": "json-server ./mock/db.json --host 192.168.10.23 --watch -p 5000 --static ./mock/public"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.37.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
     "@fortawesome/free-regular-svg-icons": "^5.15.4",

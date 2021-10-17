@@ -1,9 +1,9 @@
 interface ItemFormData {
   name: string;
-  amount: number;
+  amount: string;
   description: string;
   tags: {string: boolean};
-  images: {string: number};
+  images: {[key: string]: Image};
   availabilities: FormAvailabilities;
 }
 
@@ -11,10 +11,11 @@ interface ItemInfo {
   name: string;
   swap: boolean;
   tags: string[];
-  amount: number;
   donate: boolean;
-  description: string;
+  images: string[];
   price: number | null;
+  amount: number | null;
+  description: string | null;
 }
 
 interface SavedItem extends ItemInfo {
@@ -43,10 +44,11 @@ interface CreationRequest extends ItemInfo {
 }
 
 interface Image {
+  key: string;
   sent: boolean;
+  index: number;
   localUri: string;
-  sendLink?: SendLink;
-  remoteFileName?: string;
+  sendLink?: string;
 }
 
 type SavedItemId = string;
@@ -65,3 +67,10 @@ interface ImageNewOperation {
 type ImageEditOperation = ImageKeepOperation | ImageNewOperation;
 
 type ListObj = {[key: string]: number};
+
+type ImagesObj = {[key: string]: Image};
+
+interface UploadInfo {
+  sendLink: string;
+  key: string;
+}

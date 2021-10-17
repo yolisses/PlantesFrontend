@@ -3,10 +3,11 @@ import FastImage from 'react-native-fast-image';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 
 import {width} from 'utils/width';
-import {getObjectLength} from 'utils/getObjectLength';
-import {SelectableImageNumber} from 'images/SelectableImageNumber';
 import {useAlert} from '../alert/AlertContext';
 import {ImagesLimitAlert} from './ImagesLimitAlert';
+import {pushImageInObject} from './pushImageInObject';
+import {removeImageInObject} from './removeImageInObject';
+import {SelectableImageNumber} from 'images/SelectableImageNumber';
 
 const numberOfCollums = 3;
 
@@ -14,7 +15,7 @@ interface Props {
   uri: string;
   index?: number;
   imagesLimit: number;
-  setImagesObj: React.Dispatch<React.SetStateAction<ListObj>>;
+  setImagesObj: React.Dispatch<React.SetStateAction<ImagesObj>>;
 }
 
 export function SelectableImage({
@@ -24,36 +25,20 @@ export function SelectableImage({
   setImagesObj,
 }: Props) {
   const {showAlert} = useAlert();
-  function pushImage(old) {
-    let counter = getObjectLength(old) + 1;
-    if (imagesLimit && counter > imagesLimit) {
-      showAlert(<ImagesLimitAlert imagesLimit={imagesLimit} />);
-      return old;
-    }
-    const newValue = {...old};
-    newValue[uri] = counter;
-    return newValue;
+  function limitCallback() {
+    showAlert(<ImagesLimitAlert imagesLimit={imagesLimit} />);
   }
 
-  function removeImage(old) {
-    const newValue = {...old};
-    delete newValue[uri];
-    let counter = 1;
-    for (let key in newValue) {
-      newValue[key] = counter;
-      counter += 1;
+  function togleSelection(old) {
+    if (!old[uri]) {
+      return pushImageInObject(old, uri, imagesLimit, limitCallback);
+    } else {
+      return removeImageInObject(old, uri);
     }
-    return newValue;
   }
 
   function onPress() {
-    setImagesObj(old => {
-      if (!old[uri]) {
-        return pushImage(old);
-      } else {
-        return removeImage(old);
-      }
-    });
+    setImagesObj(togleSelection);
   }
 
   return useMemo(

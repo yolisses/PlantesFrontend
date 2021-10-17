@@ -1,14 +1,16 @@
-import {brokenSendLink} from './brokenSendLink';
-import {getNewLink} from './getNewLink';
-import {pushImage} from './pushImage';
-import {waitSomeTime} from './waitSomeTime';
+import {brokenSendLink} from './legacy/brokenSendLink';
+import {getUploadInfo} from './legacy/getUploadInfo';
+import {pushImage} from './legacy/pushImage';
+import {waitSomeTime} from './legacy/waitSomeTime';
 
-export async function sendImage(image: Image, plantId: SavedItemId) {
+export async function sendImage(image: Image) {
   while (!image.sent) {
     if (!image.sendLink) {
       try {
-        image.sendLink = await getNewLink(plantId, image.remoteFileName);
-        // console.error('send link got', image.sendLink);
+        const uploadInfo: UploadInfo = await getUploadInfo();
+        image.sendLink = uploadInfo.sendLink;
+        image.key = uploadInfo.key;
+        console.error('send link got', image.sendLink);
       } catch (err) {
         console.error('error getting send link', err.response || err);
         await waitSomeTime();
@@ -21,10 +23,13 @@ export async function sendImage(image: Image, plantId: SavedItemId) {
         console.error('error sending image: ', image.localUri, err);
         if (err === brokenSendLink) {
           image.sendLink = undefined;
+        } else if (err?.status === 400) {
+          return;
         } else {
           await waitSomeTime();
         }
       }
     }
   }
+  console.error('image sent ' + image.localUri);
 }

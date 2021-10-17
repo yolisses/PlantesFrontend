@@ -1,13 +1,18 @@
 import {brokenSendLink} from './brokenSendLink';
+import {auth} from 'auth/auth';
 
 export async function pushImage(image: Image) {
   const res = await fetch(image.sendLink, {
     method: 'PUT',
     body: {uri: image.localUri},
-    headers: {'Content-Type': 'multipart/form-data'},
+    headers: {
+      'Content-Type': 'image/webp',
+      'x-amz-meta-userId': '' + auth.user?.id,
+    },
   });
   // console.error('s3 res', res);
   if (res.status === 200) {
+    console.error(res);
     return;
   } else if (res.status === 403) {
     throw brokenSendLink;
