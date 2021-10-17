@@ -44,7 +44,7 @@ export function ShowItemScreen({route}) {
             </View>
           </Section>
           <Section>
-            {item?.userId === auth.user?.id && (
+            {item?.user === auth.user?.id && (
               <View style={[styles.line, styles.buttonsWrapper]}>
                 <RemoveButton style={styles.button} item={item} />
                 <EditButton style={styles.button} item={item} />
