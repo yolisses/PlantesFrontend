@@ -3,7 +3,10 @@ import {send} from 'send/send';
 import {sendImagesInObj} from 'send/sendImagesInObj';
 import {formatFormToItemInfo} from './formatFormToItemInfo';
 
-export async function publish(itemFormData: ItemFormData) {
+export async function publish(
+  itemFormData: ItemFormData,
+  callback?: () => void,
+) {
   // console.error(itemFormData);
   const id = Math.random();
   try {
@@ -15,9 +18,12 @@ export async function publish(itemFormData: ItemFormData) {
       itemFormData,
     };
     await sendImagesInObj(itemFormData.images);
-    const res = await api.post('/plants', itemInfo);
-    console.error(res.data);
+    await api.post('/plants', itemInfo);
+    console.error('enviado');
     send.sendings[id].sent = true;
+    if (callback) {
+      callback();
+    }
   } catch (err) {
     send.sendings[id].error = true;
     console.error(err.response || err);

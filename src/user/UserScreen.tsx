@@ -43,7 +43,7 @@ export function UserScreen({route}) {
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
-  } = useInfiniteQuery('user-plants', getPlants, {
+  } = useInfiniteQuery(['user', 'plants', auth.user?.id], getPlants, {
     getNextPageParam: lastPage => {
       return lastPage.nextPage;
     },
