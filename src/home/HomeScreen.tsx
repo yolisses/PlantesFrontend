@@ -66,6 +66,7 @@ export function HomeScreen() {
           onEndReached={onEndReached}
           data={getFlatedArray(data)}
           onEndReachedThreshold={0.4}
+          keyExtractor={item => item.id}
           renderItem={({item}) => <Card item={item} />}
           ListHeaderComponent={
             <>
