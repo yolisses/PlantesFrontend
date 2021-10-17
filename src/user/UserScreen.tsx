@@ -56,8 +56,6 @@ export function UserScreen({route}) {
     }
   }
 
-  console.error(send.sendings);
-
   const isNotResultFound = data?.pages[0].totalCount === 0;
 
   return (

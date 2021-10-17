@@ -6,6 +6,7 @@ import {Observer} from 'mobx-react-lite';
 import {ItemForm} from 'form/ItemForm';
 import {FooterNavigation} from 'navigation/FooterNavigation';
 import {publish} from './publish';
+import {useNavigation} from '@react-navigation/core';
 
 export function PublishScreen() {
   const {
@@ -16,10 +17,12 @@ export function PublishScreen() {
     formState: {errors, isDirty},
   } = useForm();
 
-  function onSubmit(item) {
-    // reset();
+  const {navigate} = useNavigation();
+
+  function onSubmit(item: ItemFormData) {
+    reset();
     clearErrors();
-    // navigate('Profile');
+    navigate('Profile');
     publish(item);
   }
 
