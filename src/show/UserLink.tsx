@@ -10,7 +10,7 @@ export function UserLink({user}) {
       <UserRoundImage
         style={styles.image}
         size={40}
-        userId={user?._id}
+        userId={user?.id}
         image={user?.image}
       />
       <View>

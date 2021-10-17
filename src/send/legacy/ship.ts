@@ -34,11 +34,9 @@ export async function ship(itemFormData: ItemFormData, callback: () => any) {
       } else {
         associateLocalAndRemoteImages(shipment);
         await Promise.all(
-          shipment.images.map(image =>
-            sendImage(image, shipment.savedItem._id),
-          ),
+          shipment.images.map(image => sendImage(image, shipment.savedItem.id)),
         );
-        const savedItem = await confirmSending(shipment.savedItem._id);
+        const savedItem = await confirmSending(shipment.savedItem.id);
         shipment.savedItem = savedItem;
         // console.error('enviado com sucesso', shipment);
         shipment.sent = true;
