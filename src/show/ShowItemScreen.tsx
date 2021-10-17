@@ -19,7 +19,7 @@ import {RemoveButton} from './RemoveButton';
 import {useUser} from 'user/useUser';
 import {Plant} from 'types/Plant';
 
-interface Params {
+interface ShowItemScreen {
   preImage: string;
   item: Plant;
 }
@@ -60,8 +60,8 @@ export function ShowItemScreen({route}) {
             {!!user?.whatsappNumber && (
               <WhatsappButton number={user.whatsappNumber} />
             )}
-            {!!user?.instagramUser && (
-              <InstagramButton user={user.instagramUser} />
+            {!!user?.instagramUsername && (
+              <InstagramButton user={user.instagramUsername} />
             )}
           </Section>
           {!!(item?.tags && item.tags.length) && (
