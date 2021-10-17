@@ -17,7 +17,7 @@ export function FooterNavigation({selected}) {
       <UserRoundImage
         ownUser
         size={25}
-        userId={auth.userId}
+        userId={auth.user?.id}
         image={auth.user?.image}
       />
     </View>

@@ -15,7 +15,7 @@ export function RemoveItemAlert({item}) {
     try {
       await api.delete('plants/' + item?.id);
       queryClient.invalidateQueries('plants');
-      queryClient.invalidateQueries(['user', 'plants', auth.userId]);
+      queryClient.invalidateQueries(['user', 'plants', auth.user?.id]);
       goBack();
     } catch (err) {
       console.error(err.response || err);

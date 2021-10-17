@@ -5,9 +5,8 @@ import {auth} from './auth';
 export function signOut() {
   AsyncStorage.setItem('userInfo', '').then(res => {
     try {
-      auth.token = null;
-      auth.user = null;
-      auth.userId = null;
+      auth.token = undefined;
+      auth.user = undefined;
       resetAuthorizationHeader();
     } catch (err) {
       console.error(err);

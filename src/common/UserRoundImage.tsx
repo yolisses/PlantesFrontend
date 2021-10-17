@@ -10,7 +10,7 @@ export function UserRoundImage({userId, image, size, style, ownUser}) {
 
   function onPress() {
     if (ownUser) {
-      navigate('UserScreen', {userId: auth.userId});
+      navigate('UserScreen', {userId: auth.user?.id});
     } else if (userId) {
       navigate('Profile', {userId});
     }

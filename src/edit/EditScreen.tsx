@@ -33,7 +33,7 @@ export function EditScreen({route}) {
       console.error(res);
       // navigate('ShowItem', {item: res.data});
       queryClient.invalidateQueries('plants');
-      queryClient.invalidateQueries(['user', 'plants', auth.userId]);
+      queryClient.invalidateQueries(['user', 'plants', auth.user?.id]);
       // reset();
     } catch (err) {
       console.error(err?.response || err);
