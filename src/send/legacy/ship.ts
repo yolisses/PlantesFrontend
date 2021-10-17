@@ -5,7 +5,7 @@ import {formatFormToItemInfo} from '../../publish/formatFormToItemInfo';
 import {getNewImageByLocalUri} from './getNewImageByLocalUri';
 import {sendItemCreationRequest} from './sendItemCreationRequest';
 import {associateLocalAndRemoteImages} from './associateLocalAndRemoteImages';
-import {send} from './sendings';
+import {send} from '../send';
 
 export async function ship(itemFormData: ItemFormData, callback: () => any) {
   const id = Math.random();

@@ -1,7 +1,7 @@
 import {useObserver} from 'mobx-react-lite';
 import React from 'react';
 import {FlatList} from 'react-native';
-import {send} from './sendings';
+import {send} from '../send';
 import {SendingWarn} from './SendingWarn';
 
 export function SendingList() {
