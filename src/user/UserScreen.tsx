@@ -76,6 +76,7 @@ export function UserScreen({route}: UserScreenProps) {
           onEndReached={onEndReached}
           data={getFlatedArray(data)}
           onEndReachedThreshold={0.4}
+          keyExtractor={item => item.id}
           renderItem={({item}) => <Card item={item} fraction={3} />}
           ListHeaderComponent={
             <>
