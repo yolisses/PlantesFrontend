@@ -1,9 +1,15 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
-import FastImage from 'react-native-fast-image';
+import {StyleProp, StyleSheet} from 'react-native';
+import FastImage, {ImageStyle} from 'react-native-fast-image';
 import {width} from 'utils/width';
 
-export function SquareImage({uri, style, fraction = 1}) {
+interface SquareImageProps {
+  uri: string;
+  style?: StyleProp<ImageStyle>;
+  fraction?: number;
+}
+
+export function SquareImage({uri, style, fraction = 1}: SquareImageProps) {
   const size = width / fraction - (fraction - 1) / fraction;
   return (
     <FastImage

@@ -4,12 +4,17 @@ import {pushImage} from './legacy/pushImage';
 import {waitSomeTime} from './legacy/waitSomeTime';
 
 export async function sendImage(image: Image) {
+  //handle concurrency
+  let key: string;
+  let sendLink: string;
   while (!image.sent) {
     if (!image.sendLink) {
       try {
         const uploadInfo: UploadInfo = await getUploadInfo();
-        image.sendLink = uploadInfo.sendLink;
-        image.key = uploadInfo.key;
+        sendLink = uploadInfo.sendLink;
+        key = uploadInfo.key;
+        image.sendLink = sendLink;
+        image.key = key;
         console.error('send link got', image.sendLink);
       } catch (err) {
         console.error('error getting send link', err.response || err);
@@ -18,6 +23,8 @@ export async function sendImage(image: Image) {
     } else {
       try {
         await pushImage(image);
+        image.sendLink = sendLink;
+        image.key = key;
         image.sent = true;
       } catch (err) {
         console.error('error sending image: ', image.localUri, err);

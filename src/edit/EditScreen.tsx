@@ -29,11 +29,11 @@ export function EditScreen({route}) {
 
   async function onSubmit(value: ItemFormData) {
     try {
-      const res = await updatePlantInfo(item._id, value);
+      const res = await updatePlantInfo(item.id, value);
       console.error(res);
       // navigate('ShowItem', {item: res.data});
       queryClient.invalidateQueries('plants');
-      queryClient.invalidateQueries(['user', 'plants', auth.userId]);
+      queryClient.invalidateQueries(['user', 'plants', auth.user?.id]);
       // reset();
     } catch (err) {
       console.error(err?.response || err);

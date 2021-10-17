@@ -19,7 +19,7 @@ interface ItemInfo {
 }
 
 interface SavedItem extends ItemInfo {
-  _id: string;
+  id: string;
   images: [string];
 }
 

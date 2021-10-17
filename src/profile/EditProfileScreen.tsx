@@ -1,22 +1,24 @@
-import React, {createRef, useState} from 'react';
+import {Keyboard} from 'react-native';
+import {useQueryClient} from 'react-query';
 import FastImage from 'react-native-fast-image';
+import React, {createRef, useState} from 'react';
 import {ScrollView, StyleSheet} from 'react-native';
+import {useNavigation} from '@react-navigation/core';
+import {faInstagram, faWhatsapp} from '@fortawesome/free-brands-svg-icons';
 
+import {api} from 'api/api';
 import {auth} from 'auth/auth';
+import {IntInput} from 'form/IntInput';
 import {TextInput} from 'form/TextInput';
+import {CheckButton} from './CheckButton';
 import {BackButton} from 'common/BackButton';
 import {NextButton} from 'common/NextButton';
 import {CustomHeader} from 'common/CustomHeader';
-import {api} from 'api/api';
-import {useNavigation} from '@react-navigation/core';
-import {Keyboard} from 'react-native';
-import {Controller, useForm} from 'react-hook-form';
-import {faInstagram, faWhatsapp} from '@fortawesome/free-brands-svg-icons';
 import {IconPlaceholder} from './IconPlaceholder';
-import {IntInput} from 'form/IntInput';
-import {CheckButton} from './CheckButton';
-import {openInInstagram} from 'messages/openInInstagram';
+import {Controller, useForm} from 'react-hook-form';
 import {openInWhatsapp} from 'messages/openInWhatsapp';
+import {openInInstagram} from 'messages/openInInstagram';
+import {formatProfileEdit} from './formatProfileEdit';
 
 export function EditProfileScreen() {
   const {
@@ -27,28 +29,24 @@ export function EditProfileScreen() {
   const [saving, setSaving] = useState(false);
   const {goBack} = useNavigation();
 
-  function setCurrentUser() {
-    // todo
-  }
-
   const ref = createRef();
 
+  const queryClient = useQueryClient();
+
   async function onSubmit(value) {
+    setSaving(true);
     Keyboard.dismiss();
     ref?.current?.focus();
-    setSaving(true);
-    api
-      .put('/update-profile', value)
-      .then(res => {
-        auth.user = res.data;
-        setCurrentUser(res.data);
-        setSaving(false);
-        goBack();
-      })
-      .catch(err => {
-        setSaving(false);
-        console.error(err.response);
-      });
+    try {
+      const res = await api.patch('/users', formatProfileEdit(value));
+      auth.user = res.data;
+      queryClient.invalidateQueries(['user', auth.user?.id]);
+      setSaving(false);
+      goBack();
+    } catch (err) {
+      setSaving(false);
+      console.error(err.response);
+    }
   }
 
   function validateName({setError, id, data, text}) {
@@ -130,8 +128,8 @@ export function EditProfileScreen() {
         />
         <Controller
           control={control}
-          name="instagramUser"
-          defaultValue={auth?.user?.instagramUser}
+          name="instagramUsername"
+          defaultValue={auth?.user?.instagramUsername}
           render={({field: {onChange, onBlur, value}}) => (
             <TextInput
               value={value}

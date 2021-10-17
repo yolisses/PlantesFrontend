@@ -1,8 +1,13 @@
 import React, {Fragment} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Plant} from 'types/Plant';
 import {LoadingAvailabilityInfo} from './LoadingAvailabilityInfo';
 
-export function AvailabilityInfo({item, onModalConfirmPress}) {
+interface AvailabilityInfoProps {
+  item: Plant;
+}
+
+export function AvailabilityInfo({item}: AvailabilityInfoProps) {
   if (!item) {
     return <LoadingAvailabilityInfo />;
   }
@@ -13,11 +18,11 @@ export function AvailabilityInfo({item, onModalConfirmPress}) {
     price: item.price,
   };
 
-  const translation = entry => {
+  const translation = (entry: string) => {
     return {
       donate: 'Doação',
       swap: 'Troca',
-      price: 'R$' + Number(entry[1]).toFixed(2),
+      price: 'R$ ' + Number(entry[1]).toFixed(2).replace('.00', ''),
     }[entry[0]];
   };
 
@@ -33,7 +38,7 @@ export function AvailabilityInfo({item, onModalConfirmPress}) {
   };
 
   return (
-    <Pressable style={styles.container}>
+    <Pressable>
       <View style={styles.line}>
         {Object.entries(options)
           .filter(oprion => oprion[1])
@@ -49,9 +54,6 @@ export function AvailabilityInfo({item, onModalConfirmPress}) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    color: 'green',
-  },
   line: {
     flexDirection: 'row',
     flexWrap: 'wrap',

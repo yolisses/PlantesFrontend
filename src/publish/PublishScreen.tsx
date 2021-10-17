@@ -6,6 +6,9 @@ import {Observer} from 'mobx-react-lite';
 import {ItemForm} from 'form/ItemForm';
 import {FooterNavigation} from 'navigation/FooterNavigation';
 import {publish} from './publish';
+import {useNavigation} from '@react-navigation/core';
+import {useQueryClient} from 'react-query';
+import {auth} from 'auth/auth';
 
 export function PublishScreen() {
   const {
@@ -16,11 +19,20 @@ export function PublishScreen() {
     formState: {errors, isDirty},
   } = useForm();
 
-  function onSubmit(item) {
-    // reset();
+  const queryClient = useQueryClient();
+  const {navigate} = useNavigation();
+
+  function invalidatePlants() {
+    console.error('invalidate');
+    queryClient.invalidateQueries('plants');
+    queryClient.invalidateQueries(['user', 'plants', auth.user?.id]);
+  }
+
+  function onSubmit(item: ItemFormData) {
+    navigate('Profile');
+    reset();
     clearErrors();
-    // navigate('Profile');
-    publish(item);
+    publish(item, invalidatePlants);
   }
 
   return (

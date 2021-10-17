@@ -17,7 +17,7 @@ export function FooterNavigation({selected}) {
       <UserRoundImage
         ownUser
         size={25}
-        userId={auth.userId}
+        userId={auth.user?.id}
         image={auth.user?.image}
       />
     </View>
@@ -26,7 +26,7 @@ export function FooterNavigation({selected}) {
 
 const styles = StyleSheet.create({
   container: {
-    height: 50,
+    height: 45,
     elevation: 3,
     width: '100%',
     alignItems: 'center',

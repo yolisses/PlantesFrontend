@@ -5,7 +5,7 @@ import {formatFormToItemInfo} from '../../publish/formatFormToItemInfo';
 import {getNewImageByLocalUri} from './getNewImageByLocalUri';
 import {sendItemCreationRequest} from './sendItemCreationRequest';
 import {associateLocalAndRemoteImages} from './associateLocalAndRemoteImages';
-import {send} from './sendings';
+import {send} from '../send';
 
 export async function ship(itemFormData: ItemFormData, callback: () => any) {
   const id = Math.random();
@@ -34,11 +34,9 @@ export async function ship(itemFormData: ItemFormData, callback: () => any) {
       } else {
         associateLocalAndRemoteImages(shipment);
         await Promise.all(
-          shipment.images.map(image =>
-            sendImage(image, shipment.savedItem._id),
-          ),
+          shipment.images.map(image => sendImage(image, shipment.savedItem.id)),
         );
-        const savedItem = await confirmSending(shipment.savedItem._id);
+        const savedItem = await confirmSending(shipment.savedItem.id);
         shipment.savedItem = savedItem;
         // console.error('enviado com sucesso', shipment);
         shipment.sent = true;

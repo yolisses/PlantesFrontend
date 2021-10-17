@@ -29,11 +29,11 @@ export function HomeScreen() {
   const {
     data,
     error,
+    refetch,
     isFetching,
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
-    refetch,
   } = useInfiniteQuery('plants', getPlants, {
     getNextPageParam: lastPage => {
       return lastPage.nextPage;
@@ -53,7 +53,7 @@ export function HomeScreen() {
 
   useEffect(() => {
     observe(searchOptions, () => {
-      queryClient.invalidateQueries('plants');
+      queryClient.resetQueries('plants');
     });
   }, []);
 
@@ -66,6 +66,7 @@ export function HomeScreen() {
           onEndReached={onEndReached}
           data={getFlatedArray(data)}
           onEndReachedThreshold={0.4}
+          keyExtractor={item => item.id}
           renderItem={({item}) => <Card item={item} />}
           ListHeaderComponent={
             <>

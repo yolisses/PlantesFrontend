@@ -1,4 +1,3 @@
-import {User} from '@react-native-google-signin/google-signin';
 import {Point} from 'geojson';
 import {PlantImage} from './PlantImage';
 import {Tag} from './Tag';
@@ -19,6 +18,7 @@ export interface Plant {
   location: Point;
   deletedAt?: Date;
   tags: Tag[];
-  user: User | UserId;
+  userId: UserId;
+  card: string;
   images: PlantImage[];
 }

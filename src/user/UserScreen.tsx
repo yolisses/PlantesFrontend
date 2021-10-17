@@ -8,16 +8,23 @@ import {ConfigButton} from './ConfigButton';
 
 import {api} from 'api/api';
 import {Card} from 'home/Card';
+import {auth} from 'auth/auth';
 import {BackButton} from 'common/BackButton';
 import {CustomHeader} from 'common/CustomHeader';
 import {FooterNavigation} from 'navigation/FooterNavigation';
 import {getFlatedArray} from 'common/getFlatedArray';
 import {LoadingScrollFooter} from 'common/LoadingScrollFooter';
 import {NetworkError} from 'home/NetworkError';
-import {NotFound} from 'home/NotFound';
-import {auth} from 'auth/auth';
+import {SendingList} from 'send/SendingList';
+import {UserWithoutItems} from './UserWithoutItems';
+import {Route} from '@react-navigation/routers';
+import {UserId} from 'types/User';
 
-export function UserScreen({route}) {
+interface UserScreenProps {
+  route: Route<'UserScreen', {userId: UserId}>;
+}
+
+export function UserScreen({route}: UserScreenProps) {
   const {userId: userIdParam} = route.params || {};
   const userId = userIdParam || auth?.user?.id;
   const {data: user} = useUser(userId);
@@ -41,7 +48,7 @@ export function UserScreen({route}) {
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
-  } = useInfiniteQuery('user-plants', getPlants, {
+  } = useInfiniteQuery(['user', 'plants', auth.user?.id], getPlants, {
     getNextPageParam: lastPage => {
       return lastPage.nextPage;
     },
@@ -54,7 +61,7 @@ export function UserScreen({route}) {
     }
   }
 
-  const isNotResultFound = data?.pages[0].totalCount === 0;
+  const someResultFound = data?.pages[0].totalCount !== 0;
 
   return (
     <>
@@ -68,14 +75,20 @@ export function UserScreen({route}) {
           numColumns={3}
           onEndReached={onEndReached}
           data={getFlatedArray(data)}
-          onEndReachedThreshold={0.1}
+          onEndReachedThreshold={0.4}
+          keyExtractor={item => item.id}
           renderItem={({item}) => <Card item={item} fraction={3} />}
-          ListHeaderComponent={<UserInfo user={user} />}
+          ListHeaderComponent={
+            <>
+              <UserInfo user={user} />
+              {userId === auth.user?.id && <SendingList />}
+            </>
+          }
           ListFooterComponent={
             <>
               <LoadingScrollFooter active={!error && isFetching} />
               {error && <NetworkError retry={onEndReached} />}
-              {!hasNextPage && isNotResultFound && <NotFound />}
+              {!hasNextPage && !someResultFound && <UserWithoutItems />}
             </>
           }
         />

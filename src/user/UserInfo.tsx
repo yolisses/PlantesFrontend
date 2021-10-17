@@ -24,7 +24,7 @@ export function UserInfo({user}) {
         </View>
       </View>
       {!!user && <UserDescription text={user?.description} />}
-      {user?._id === auth.userId && <EditProfileButton />}
+      {user?.id === auth.user?.id && <EditProfileButton />}
     </View>
   );
 }

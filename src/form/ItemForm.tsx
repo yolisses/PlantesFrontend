@@ -20,6 +20,7 @@ import {SelectImagesField} from 'images/SelectImagesField';
 import {hasSomeTrueValuedKey} from 'utils/hasSomeTrueValuedKey';
 import {Observer} from 'mobx-react-lite';
 import {Plant} from 'types/Plant';
+import {send} from 'send/send';
 
 interface ItemFormProps {
   item?: Plant;
@@ -46,6 +47,7 @@ export function ItemForm({
   handleSubmit,
   showBackButton,
 }: ItemFormProps) {
+  const id = Math.random();
   function validateAvailabilities(obj) {
     if (!hasSomeTrueValuedKey(obj)) {
       return 'Por favor marque pelo menos uma disponibilidade';
