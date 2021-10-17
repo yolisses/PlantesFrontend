@@ -22,7 +22,7 @@ export function AvailabilityInfo({item}: AvailabilityInfoProps) {
     return {
       donate: 'Doação',
       swap: 'Troca',
-      price: 'R$ ' + Number(entry[1]),
+      price: 'R$ ' + Number(entry[1]).toFixed(2).replace('.00', ''),
     }[entry[0]];
   };
 
