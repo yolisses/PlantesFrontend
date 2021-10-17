@@ -17,10 +17,16 @@ import {auth} from 'auth/auth';
 import {EditButton} from './EditButton';
 import {RemoveButton} from './RemoveButton';
 import {useUser} from 'user/useUser';
+import {Plant} from 'types/Plant';
+
+interface Params {
+  preImage: string;
+  item: Plant;
+}
 
 export function ShowItemScreen({route}) {
-  const {preImage, item} = route.params;
-  const {data: user} = useUser(item?.user);
+  const {preImage, item} = route.params as Params;
+  const {data: user} = useUser(item?.userId);
 
   return (
     <View style={styles.screen}>
@@ -44,7 +50,7 @@ export function ShowItemScreen({route}) {
             </View>
           </Section>
           <Section>
-            {item?.user === auth.user?.id && (
+            {item?.userId === auth.user?.id && (
               <View style={[styles.line, styles.buttonsWrapper]}>
                 <RemoveButton style={styles.button} item={item} />
                 <EditButton style={styles.button} item={item} />

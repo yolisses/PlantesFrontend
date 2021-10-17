@@ -19,6 +19,6 @@ export interface Plant {
   location: Point;
   deletedAt?: Date;
   tags: Tag[];
-  user: User | UserId;
+  userId: UserId;
   images: PlantImage[];
 }
