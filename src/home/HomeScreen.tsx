@@ -29,11 +29,11 @@ export function HomeScreen() {
   const {
     data,
     error,
+    refetch,
     isFetching,
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
-    refetch,
   } = useInfiniteQuery('plants', getPlants, {
     getNextPageParam: lastPage => {
       return lastPage.nextPage;
