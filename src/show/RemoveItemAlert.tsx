@@ -14,12 +14,12 @@ export function RemoveItemAlert({item}) {
   async function onRemovePress() {
     try {
       await api.delete('plants/' + item?.id);
-      queryClient.resetQueries('plants');
-      queryClient.resetQueries(['user', 'plants', auth.user?.id]);
-      goBack();
     } catch (err) {
       console.error(err.response || err);
     }
+    queryClient.resetQueries('plants');
+    queryClient.resetQueries(['user', 'plants', auth.user?.id]);
+    goBack();
   }
 
   return (
