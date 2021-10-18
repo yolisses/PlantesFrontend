@@ -1,7 +1,6 @@
 import React from 'react';
 import {useForm} from 'react-hook-form';
 import {useQueryClient} from 'react-query';
-import {useNavigation} from '@react-navigation/core';
 
 import {auth} from 'auth/auth';
 import {ItemForm} from 'form/ItemForm';
@@ -13,7 +12,6 @@ import {updatePlantInfo} from './updatePlantInfo';
 import {Observer} from 'mobx-react-lite';
 
 export function EditScreen({route}) {
-  const {navigate} = useNavigation();
   const {showAlert} = useAlert();
 
   const queryClient = useQueryClient();
