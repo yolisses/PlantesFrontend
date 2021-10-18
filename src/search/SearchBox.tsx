@@ -44,7 +44,7 @@ export function SearchBox() {
       activeOpacity={0.8}>
       {!active ? (
         <>
-          <Text style={styles.title}>Plantei</Text>
+          <Text style={styles.title}>Plantes</Text>
           <FontAwesomeIcon icon={faSearch} color="gray" size={20} />
         </>
       ) : (

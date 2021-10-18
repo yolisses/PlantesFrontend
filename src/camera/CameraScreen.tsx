@@ -34,7 +34,7 @@ export function CameraScreen() {
   async function approve() {
     const savedUri = await CameraRoll.save(uri, {
       type: 'photo',
-      album: 'Plantei',
+      album: 'Plantes',
     });
     const filePath = await RNGRP.getRealPathFromURI(savedUri);
     const newUri = 'file://' + filePath;

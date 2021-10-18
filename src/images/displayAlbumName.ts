@@ -1,6 +1,6 @@
 export function displayAlbumTitle(title) {
   switch (title) {
-    case 'Plantei':
+    case 'Plantes':
       return 'Fotos tiradas';
     default:
       return title;
