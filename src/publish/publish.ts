@@ -11,7 +11,6 @@ export async function publish(
   const id = Math.random();
   try {
     const itemInfo = formatFormToItemInfo(itemFormData);
-    console.error(itemInfo);
     send.sendings[id] = {
       id,
       sent: false,
