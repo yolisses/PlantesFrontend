@@ -5,23 +5,21 @@ import {auth} from './auth';
 import {authenticate} from './authenticate';
 
 export async function trySavedLogin() {
-  const res = await AsyncStorage.getItem('userInfo');
-  const {token, user} = JSON.parse(res);
   try {
+    const res = await AsyncStorage.getItem('userInfo');
+    const {token, user} = JSON.parse(res);
     auth.token = token;
     auth.user = user;
     SplashScreen.hide();
+    try {
+      const userInfo = await GoogleSignin.signInSilently();
+      authenticate(userInfo.idToken);
+      SplashScreen.hide();
+    } catch (err) {
+      console.error(err);
+    }
   } catch (err) {
     console.error(err);
   }
-
-  try {
-    const userInfo = await GoogleSignin.signInSilently();
-    authenticate(userInfo.idToken);
-    SplashScreen.hide();
-  } catch (err) {
-    console.error(err);
-  }
-
   SplashScreen.hide();
 }
