@@ -29,9 +29,9 @@ export function PublishScreen() {
   }
 
   function onSubmit(item: ItemFormData) {
-    navigate('Profile');
     reset();
     clearErrors();
+    navigate('Profile');
     publish(item, invalidatePlants);
   }
 
