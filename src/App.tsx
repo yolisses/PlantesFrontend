@@ -16,17 +16,19 @@ moment.locale('pt');
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <>
-    <StatusBar barStyle={'default'} hidden={true} />
-    <QueryClientProvider client={queryClient}>
-      <AlertContextProvider>
-        <ModalContextProvider>
-          <Routes />
-        </ModalContextProvider>
-      </AlertContextProvider>
-    </QueryClientProvider>
-  </>
-);
+const App = () => {
+  return (
+    <>
+      <StatusBar barStyle={'default'} hidden={true} />
+      <QueryClientProvider client={queryClient}>
+        <AlertContextProvider>
+          <ModalContextProvider>
+            <Routes />
+          </ModalContextProvider>
+        </AlertContextProvider>
+      </QueryClientProvider>
+    </>
+  );
+};
 
 export default App;
