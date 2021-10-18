@@ -180,20 +180,6 @@ export function ItemForm({
               )}
             />
             <Controller
-              name="tags"
-              control={control}
-              defaultValue={item?.tags || {}}
-              render={({field: {onChange, onBlur, value}}) => (
-                <TagsSelector
-                  value={value}
-                  options={tags}
-                  onBlur={onBlur}
-                  label="Marcar como"
-                  onChange={onChange}
-                />
-              )}
-            />
-            <Controller
               control={control}
               name="description"
               defaultValue={item?.description || ''}
@@ -206,6 +192,20 @@ export function ItemForm({
                   maxLength={1024}
                   label="Descrição"
                   onChangeText={onChange}
+                />
+              )}
+            />
+            <Controller
+              name="tags"
+              control={control}
+              defaultValue={item?.tags || {}}
+              render={({field: {onChange, onBlur, value}}) => (
+                <TagsSelector
+                  value={value}
+                  options={tags}
+                  onBlur={onBlur}
+                  label="Marcar como"
+                  onChange={onChange}
                 />
               )}
             />
