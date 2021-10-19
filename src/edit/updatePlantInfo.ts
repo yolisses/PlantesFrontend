@@ -1,5 +1,9 @@
 import {api} from 'api/api';
 
-export async function updatePlantInfo(id: string, itemFormData: ItemFormData) {
-  return await api.patch('plant-info/' + id);
+import {PlantId} from 'types/Plant';
+import {formatFormToItemInfo} from 'publish/formatFormToItemInfo';
+
+export async function updatePlantInfo(id: PlantId, itemFormData: ItemFormData) {
+  const item = formatFormToItemInfo(itemFormData);
+  return await api.patch('plants/' + id, item);
 }
