@@ -1,7 +1,6 @@
 import {faThumbsUp as faThumbsUpRegular} from '@fortawesome/free-regular-svg-icons';
 import {faThumbsUp as faThumbsUpSolid} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {RerenderTester} from 'dev/rerenderTester';
 import React, {useState} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 
@@ -31,7 +30,7 @@ export function LikeButton() {
         size={30}
         color={'green'}
         style={styles.icon}
-        icon={active ? faThumbsUpRegular : faThumbsUpSolid}
+        icon={active ? faThumbsUpSolid : faThumbsUpRegular}
       />
     </TouchableOpacity>
   );
