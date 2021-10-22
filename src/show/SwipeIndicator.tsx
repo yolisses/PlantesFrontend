@@ -21,7 +21,7 @@ const activeSize = 8;
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    bottom: -13,
+    bottom: -18,
     right: 0,
     left: 0,
     alignItems: 'center',
