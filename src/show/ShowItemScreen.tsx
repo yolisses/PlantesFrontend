@@ -18,6 +18,7 @@ import {EditButton} from './EditButton';
 import {RemoveButton} from './RemoveButton';
 import {useUser} from 'user/useUser';
 import {Plant} from 'types/Plant';
+import {LikeButton} from './LikeButton';
 
 interface ShowItemScreen {
   preImage: string;
@@ -33,12 +34,11 @@ export function ShowItemScreen({route}) {
       <FloatingButton />
       <ScrollView showsVerticalScrollIndicator={false}>
         <ImagesSwiper images={item?.images} preImage={preImage} />
-        {/* Must be there */}
-        {/* <View>
+        <View>
           <View style={styles.likeWrapper}>
             <LikeButton />
           </View>
-        </View> */}
+        </View>
         <View style={{paddingHorizontal: 10}}>
           <Section>
             <Title text={item?.name} />
@@ -90,9 +90,9 @@ const styles = StyleSheet.create({
   likeWrapper: {
     position: 'absolute',
     right: 0,
-    paddingTop: 10,
+    top: -15,
+    paddingTop: 0,
     paddingLeft: 50,
-    top: -23,
     flexDirection: 'row-reverse',
   },
   button: {

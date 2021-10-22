@@ -1,7 +1,6 @@
-import {faHeart as faHeartRegular} from '@fortawesome/free-regular-svg-icons';
-import {faHeart as faHeartSolid} from '@fortawesome/free-solid-svg-icons';
+import {faThumbsUp as faThumbsUpRegular} from '@fortawesome/free-regular-svg-icons';
+import {faThumbsUp as faThumbsUpSolid} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {basicHitSlop} from 'common/basicHitSlop';
 import React, {useState} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 
@@ -12,17 +11,26 @@ export function LikeButton() {
     setActive(!active);
   }
 
+  const hitSlopSize = 30;
+
+  const hitSlop = {
+    top: hitSlopSize,
+    left: hitSlopSize,
+    right: hitSlopSize,
+    bottom: hitSlopSize,
+  };
+
   return (
     <TouchableOpacity
       onPress={onPress}
       style={styles.button}
       activeOpacity={0.9}
-      hitSlop={basicHitSlop}>
+      hitSlop={hitSlop}>
       <FontAwesomeIcon
-        icon={active ? faHeartRegular : faHeartSolid}
         size={30}
         color={'green'}
         style={styles.icon}
+        icon={active ? faThumbsUpRegular : faThumbsUpSolid}
       />
     </TouchableOpacity>
   );
