@@ -34,14 +34,12 @@ export function ShowItemScreen({route}) {
       <FloatingButton />
       <ScrollView showsVerticalScrollIndicator={false}>
         <ImagesSwiper images={item?.images} preImage={preImage} />
-        <View>
-          <View style={styles.likeWrapper}>
-            <LikeButton />
-          </View>
-        </View>
         <View style={{paddingHorizontal: 10}}>
           <Section>
-            <Title text={item?.name} />
+            <View style={styles.likeWrapper}>
+              <Title text={item?.name} />
+              <LikeButton />
+            </View>
             <View style={styles.line}>
               <AvailabilityInfo item={item} />
               {!!item.amount && (
@@ -88,12 +86,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   likeWrapper: {
-    position: 'absolute',
-    right: 0,
-    top: -15,
-    paddingTop: 0,
-    paddingLeft: 50,
-    flexDirection: 'row-reverse',
+    paddingTop: 12,
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    paddingRight: 40,
   },
   button: {
     elevation: 2,

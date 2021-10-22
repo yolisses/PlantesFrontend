@@ -20,6 +20,10 @@ const activeSize = 8;
 
 const styles = StyleSheet.create({
   container: {
+    position: 'absolute',
+    bottom: -13,
+    right: 0,
+    left: 0,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 10,
