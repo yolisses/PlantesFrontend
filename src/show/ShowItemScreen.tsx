@@ -40,12 +40,10 @@ export function ShowItemScreen({route}) {
               <Title text={item?.name} />
               <LikeButton />
             </View>
-            <View style={styles.line}>
-              <AvailabilityInfo item={item} />
-              {!!item.amount && (
-                <Secondary text={item.amount + ' disponível'} />
-              )}
-            </View>
+            {/* <View style={styles.line}> */}
+            <AvailabilityInfo item={item} />
+            {!!item.amount && <Secondary text={item.amount + ' disponível'} />}
+            {/* </View> */}
           </Section>
           <Section>
             {item?.userId === auth.user?.id && (
